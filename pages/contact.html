@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact StyleHub for styling consultations, support, and partnerships">
+    <title>Contact - StyleHub</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white dark:bg-dark-surface shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16">
+                <a href="../index.html" class="flex items-center space-x-2">
+                    <span class="font-rufina text-2xl font-bold text-primary-600 dark:text-primary-400">StyleHub</span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="services.html" class="nav-link">Services</a>
+                    <a href="digital-outfit.html" class="nav-link">Digital Outfit</a>
+                    <a href="outfit-generator.html" class="nav-link">Outfit Generator</a>
+                    <a href="model-preview.html" class="nav-link">Model Preview</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <a href="contact.html" class="nav-link nav-link-active">Contact</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                        </span>
+                    </button>
+
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-neutral-200 dark:border-dark-border mt-2">
+                <div class="flex flex-col space-y-2 pt-4">
+                    <a href="../index.html" class="nav-link px-4 py-2">Home</a>
+                    <a href="about.html" class="nav-link px-4 py-2">About</a>
+                    <a href="services.html" class="nav-link px-4 py-2">Services</a>
+                    <a href="digital-outfit.html" class="nav-link px-4 py-2">Digital Outfit</a>
+                    <a href="outfit-generator.html" class="nav-link px-4 py-2">Outfit Generator</a>
+                    <a href="model-preview.html" class="nav-link px-4 py-2">Model Preview</a>
+                    <a href="shop-browsing.html" class="nav-link px-4 py-2">Shop</a>
+                    <a href="contact.html" class="nav-link nav-link-active px-4 py-2">Contact</a>
+                    <a href="login.html" class="nav-link px-4 py-2">Login</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-r from-primary-500 to-accent-500 text-white py-16 md:py-24">
+        <div class="container-custom text-center max-w-3xl mx-auto" data-aos="fade-up">
+            <p class="text-xs uppercase tracking-[0.4em] text-white/70 mb-3">Contact us</p>
+            <h1 class="font-rufina text-3xl md:text-5xl font-bold leading-tight mb-4">Let’s build your signature look</h1>
+            <p class="text-white/80 text-base md:text-lg">
+                Whether you need a full wardrobe revamp, quick grooming advice, or partnership info—our team responds within 24 hours.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Details & Form -->
+    <main class="py-12 md:py-16">
+        <div class="container-custom grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <!-- Contact Info -->
+            <div class="space-y-6" data-aos="fade-right">
+                <div class="product-card p-6">
+                    <h3 class="font-rufina text-2xl font-semibold mb-4">Reach the team</h3>
+                    <div class="space-y-4 text-sm text-neutral-600 dark:text-neutral-400">
+                        <div>
+                            <p class="font-semibold text-neutral-900 dark:text-dark-text">Email</p>
+                            <a href="mailto:hello@stylehub.com" class="text-primary-600 dark:text-primary-400">hello@stylehub.com</a>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-neutral-900 dark:text-dark-text">Phone / WhatsApp</p>
+                            <p>+65 8000 1234</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-neutral-900 dark:text-dark-text">Studio hours</p>
+                            <p>Mon - Sat · 9:00 AM – 7:00 PM (GMT+8)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card p-6">
+                    <h3 class="font-rufina text-2xl font-semibold mb-4">Visit us</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                        27 Fashion Walk, Level 9<br>
+                        Singapore 238881
+                    </p>
+                    <div class="rounded-2xl overflow-hidden bg-neutral-200 h-48 flex items-center justify-center text-neutral-600">
+                        <span>Map placeholder</span>
+                    </div>
+                </div>
+                <div class="product-card p-6">
+                    <h3 class="font-rufina text-2xl font-semibold mb-4">Collaboration & press</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                        We partner with designers, grooming brands, and content creators to launch limited drops and events.
+                    </p>
+                    <a href="mailto:press@stylehub.com" class="btn btn-secondary w-full">Email the team</a>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="lg:col-span-2 bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark p-8 md:p-10" data-aos="fade-left">
+                <h2 class="font-rufina text-3xl font-bold mb-6">Send us a message</h2>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-8">Tell us what you’re working on and we’ll match you with the right stylist or specialist.</p>
+                <form class="space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="contact-name" class="form-label">Full Name</label>
+                            <input type="text" id="contact-name" class="form-input" placeholder="Your name" required>
+                        </div>
+                        <div>
+                            <label for="contact-email" class="form-label">Email address</label>
+                            <input type="email" id="contact-email" class="form-input" placeholder="you@email.com" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="contact-topic" class="form-label">Topic</label>
+                        <select id="contact-topic" class="form-input">
+                            <option>Styling Consultation</option>
+                            <option>Grooming Advice</option>
+                            <option>Partnerships</option>
+                            <option>Support</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="contact-message" class="form-label">Message</label>
+                        <textarea id="contact-message" rows="4" class="form-input" placeholder="Share details about your request..." required></textarea>
+                    </div>
+                    <div class="flex items-start space-x-3 text-sm text-neutral-600 dark:text-neutral-400">
+                        <input type="checkbox" id="subscribe" class="filter-checkbox mt-1">
+                        <label for="subscribe">Keep me updated with styling newsletters and exclusive drops.</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full">Submit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
+        <div class="container-custom text-center text-sm text-neutral-400 dark:text-neutral-500">
+            <p>&copy; 2025 StyleHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>
+
