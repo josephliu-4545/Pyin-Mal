@@ -73,40 +73,79 @@ class ThemeManager {
 // Navigation Management
 class NavigationManager {
   constructor() {
+    this.dropdownSelectors = ['features', 'more'];
     this.init();
   }
 
   init() {
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
-
-    if (mobileMenuBtn && mobileMenu) {
-      mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        document.body.classList.toggle('overflow-hidden');
-      });
-    }
-
-    if (mobileMenuClose && mobileMenu) {
-      mobileMenuClose.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-      });
-    }
-
-    // Active nav link highlighting
+    this.setupMobileMenu();
+    this.setupDropdowns();
     this.updateActiveNavLink();
   }
 
+  setupMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        mobileMenuBtn.setAttribute('aria-expanded', String(isHidden));
+        document.body.classList.toggle('overflow-hidden', isHidden);
+      });
+    }
+  }
+
+  setupDropdowns() {
+    this.dropdownSelectors.forEach((key) => {
+      const toggle = document.querySelector(`[data-dropdown-toggle="${key}-menu"]`);
+      const menu = document.getElementById(`${key}-menu`);
+
+      if (toggle && menu) {
+        toggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = menu.classList.contains('hidden');
+          this.closeAllDropdowns();
+          if (isOpen) {
+            menu.classList.remove('hidden');
+            menu.classList.add('animate-fade-in');
+            toggle.setAttribute('aria-expanded', 'true');
+          }
+        });
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('[data-dropdown]')) {
+        this.closeAllDropdowns();
+      }
+    });
+  }
+
+  closeAllDropdowns() {
+    this.dropdownSelectors.forEach((key) => {
+      const menu = document.getElementById(`${key}-menu`);
+      const toggle = document.querySelector(`[data-dropdown-toggle="${key}-menu"]`);
+      if (menu && toggle) {
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   updateActiveNavLink() {
-    const currentPath = window.location.pathname;
+    const currentPath = window.location.pathname.replace(/\\/g, '/');
     const navLinks = document.querySelectorAll('.nav-link');
 
     navLinks.forEach(link => {
-      const linkPath = link.getAttribute('href');
-      if (linkPath === currentPath || (currentPath === '/' && linkPath === '/index.html')) {
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      const target = new URL(href, window.location.origin).pathname;
+      const isHome = (target.endsWith('index.html') && (currentPath.endsWith('/') || currentPath.endsWith('index.html')));
+
+      if (target === currentPath || isHome) {
         link.classList.add('nav-link-active');
       } else {
         link.classList.remove('nav-link-active');
