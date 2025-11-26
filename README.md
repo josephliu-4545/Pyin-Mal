@@ -9,7 +9,7 @@ This is a front-end only project built for a design contest. It features:
 - Outfit generation and recommendations
 - Model preview system for outfits and hairstyles
 - Product browsing with advanced filtering
-- Responsive design inspired by Zalora and Made by Fade
+- Responsive design
 
 ## Technology Stack
 
