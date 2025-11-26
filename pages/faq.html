@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Frequently asked questions about Pyin Mal styling, grooming, and digital preview services.">
+    <title>FAQ - Pyin Mal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="model-preview.html#hair" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="../index.html#reviews" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="model-preview.html#hair" class="nav-link">Hair Recommendations</a>
+                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="../index.html#reviews" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="faq.html" class="nav-link nav-link-active">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-10 sm:py-14 md:py-16 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div data-aos="fade-right">
+                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">FAQ</p>
+                <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Answers about the Pyin Mal styling lab</h1>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-6">Look through common questions about wardrobe planning, hair simulations, pricing, and client flows. Need a deeper dive? Book a 15-minute call and we’ll tailor the process to your studio or personal wardrobe.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="contact.html" class="btn btn-primary">Talk to our team</a>
+                    <a href="../index.html#wish-list" class="btn btn-secondary">Explore lookbook</a>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark p-8" data-aos="fade-left">
+                <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-3">Quick facts</p>
+                <ul class="space-y-4 text-sm text-neutral-600 dark:text-neutral-400">
+                    <li class="flex items-start gap-3"><span class="w-2 h-2 rounded-full bg-primary-500 mt-2"></span>Styling sprints run between 5 and 10 days, including model preview approvals.</li>
+                    <li class="flex items-start gap-3"><span class="w-2 h-2 rounded-full bg-primary-500 mt-2"></span>Digital fittings can be attended remotely; we ship curated wardrobes in garment bags or digital lists.</li>
+                    <li class="flex items-start gap-3"><span class="w-2 h-2 rounded-full bg-primary-500 mt-2"></span>MediaPipe FaceMesh try-ons are available for premium grooming plans.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter tabs -->
+    <section class="py-6">
+        <div class="container-custom" data-aos="fade-up">
+            <div class="product-card p-3 sm:p-4 flex flex-wrap gap-3 sm:gap-4 text-sm">
+                <button class="faq-filter active">General</button>
+                <button class="faq-filter">Styling & Grooming</button>
+                <button class="faq-filter">Digital Preview</button>
+                <button class="faq-filter">Membership</button>
+                <button class="faq-filter">Support</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ accordion -->
+    <section class="py-10 sm:py-14">
+        <div class="container-custom grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-4" data-aos="fade-right">
+                <!-- Each item -->
+                <article class="accordion-card">
+                    <button class="accordion-trigger">
+                        <div>
+                            <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">General</p>
+                            <h3>What’s included in a standard styling sprint?</h3>
+                        </div>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>We gather your wardrobe goals, body/face data, and calendar. Then stylists prep mood boards, outfit stacks, grooming plans, and a model preview session. You receive shoppable links or ready-to-wear deliveries at the end.</p>
+                    </div>
+                </article>
+                <article class="accordion-card">
+                    <button class="accordion-trigger">
+                        <div>
+                            <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Digital preview</p>
+                            <h3>How accurate is the Model Preview try-on?</h3>
+                        </div>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>We work with calibrated silhouettes and layered PNGs. Outfits are scaled 1:1 to your measurements. Haircuts use MediaPipe data to place overlays so you can sign off before we book salon time.</p>
+                    </div>
+                </article>
+                <article class="accordion-card">
+                    <button class="accordion-trigger">
+                        <div>
+                            <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Styling & grooming</p>
+                            <h3>Can you collaborate with my existing salon or tailor?</h3>
+                        </div>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>Absolutely. We send lookbooks and technical drawings to your preferred partners. Our team can also attend fittings virtually to ensure proportions and textures match the preview.</p>
+                    </div>
+                </article>
+                <article class="accordion-card">
+                    <button class="accordion-trigger">
+                        <div>
+                            <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Membership</p>
+                            <h3>Do you offer retainers for ongoing wardrobe drops?</h3>
+                        </div>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>Yes. Our Capsule Membership includes quarterly wardrobe drops, monthly haircut refresh plans, and unlimited digital previews. Custom retainers are available for studios or content teams.</p>
+                    </div>
+                </article>
+                <article class="accordion-card">
+                    <button class="accordion-trigger">
+                        <div>
+                            <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Support</p>
+                            <h3>What if I need revisions after approving a look?</h3>
+                        </div>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-panel">
+                        <p>Every sprint includes two revision windows. If you need further changes, we simply add another micro-sprint focusing on the looks or grooming rituals you want to adjust.</p>
+                    </div>
+                </article>
+            </div>
+            <aside class="space-y-6" data-aos="fade-left">
+                <div class="product-card p-6">
+                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Need more?</p>
+                    <h3 class="font-rufina text-2xl mb-3">Send us your scenario</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-5">Not seeing your answer? Drop your styling challenge and we’ll respond within one business day.</p>
+                    <a href="contact.html" class="btn btn-primary w-full">Ask a question</a>
+                </div>
+                <div class="product-card p-6 space-y-4">
+                    <h4 class="font-rufina text-xl">Quick links</h4>
+                    <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
+                        <li><a href="pricing.html" class="hover:text-primary-600 dark:hover:text-primary-300">Pricing plans</a></li>
+                        <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300">Haircut recommendations</a></li>
+                        <li><a href="curated-sets.html" class="hover:text-primary-600 dark:hover:text-primary-300">Curated fashion sets</a></li>
+                        <li><a href="face-scan.html" class="hover:text-primary-600 dark:hover:text-primary-300">Face scan preview</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- Contact strip -->
+    <section class="py-12 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom">
+            <div class="rounded-[32px] bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-8 md:p-12 flex flex-col lg:flex-row gap-6">
+                <div class="lg:w-1/2 space-y-3" data-aos="fade-right">
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Still curious?</p>
+                    <h2 class="font-rufina text-3xl font-bold">We can walk you through the full workflow on a live call.</h2>
+                    <p class="text-neutral-600 dark:text-neutral-400">Share your wardrobe needs, upcoming events, or brand shoot details. We’ll prep a quick plan with outfits, grooming options, and digital preview steps.</p>
+                </div>
+                <form class="lg:w-1/2 space-y-4" data-aos="fade-left">
+                    <div>
+                        <label for="faq-name" class="form-label">Full name</label>
+                        <input type="text" id="faq-name" class="form-input" placeholder="Your name">
+                    </div>
+                    <div>
+                        <label for="faq-email" class="form-label">Email</label>
+                        <input type="email" id="faq-email" class="form-input" placeholder="you@email.com">
+                    </div>
+                    <div>
+                        <label for="faq-question" class="form-label">Question</label>
+                        <textarea id="faq-question" rows="3" class="form-input" placeholder="Tell us what you need help with"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full">Send message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
+        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between text-sm">
+            <div>
+                <p class="font-rufina text-2xl">Pyin Mal</p>
+                <p class="text-neutral-400 dark:text-neutral-500">Wardrobe & grooming intelligence.</p>
+            </div>
+            <div class="flex flex-wrap gap-6 text-neutral-400 dark:text-neutral-500">
+                <a href="privacy.html" class="hover:text-white">Privacy</a>
+                <a href="terms.html" class="hover:text-white">Terms</a>
+                <a href="contact.html" class="hover:text-white">Contact</a>
+            </div>
+            <div class="text-neutral-500 dark:text-neutral-400 text-xs">© 2025 Pyin Mal. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse curated outfits, grooming kits, and shop-ready looks from Pyin Mal studio partners.">
+    <title>Shop Browsing - Pyin Mal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="model-preview.html#hair" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link nav-link-active">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="../index.html#reviews" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover;text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover;text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="model-preview.html#hair" class="nav-link">Hair Recommendations</a>
+                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link nav-link-active">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="../index.html#reviews" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-10 sm:py-14 md:py-16 bg-gradient-to-br from-neutral-900 via-slate-900 to-neutral-900 text-white">
+        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div class="max-w-2xl space-y-4" data-aos="fade-right">
+                <p class="text-xs uppercase tracking-[0.4em] text-white/60">Shop</p>
+                <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">Search curated outfits, studio capsules, and grooming kits</h1>
+                <p class="text-sm sm:text-base text-white/80">Each piece is vetted by our stylists for fit, fabrication, and how well it layers with Model Preview looks. Toggle filters, save to your library, or request full styling drops.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="../index.html#wish-list" class="btn btn-primary bg-white text-primary-600 hover:bg-neutral-100">View saved looks</a>
+                    <a href="curated-sets.html" class="btn btn-ghost border-white text-white hover:bg-white/10">Curated sets</a>
+                </div>
+            </div>
+            <div class="bg-white/10 border border-white/10 rounded-3xl p-6 shadow-2xl w-full md:max-w-sm" data-aos="fade-left">
+                <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Fresh drops</p>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span>Kyoto minimal set</span>
+                        <span class="text-sm text-white/70">Stock: 12</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span>Soft tailoring pack</span>
+                        <span class="text-sm text-white/70">Stock: 9</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span>Hair reset kit</span>
+                        <span class="text-sm text-white/70">Stock: 18</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlighted categories -->
+    <section class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Browse by mood</p>
+                    <h2 class="font-rufina text-3xl font-bold">Capsules built for the week ahead</h2>
+                </div>
+                <div class="flex flex-wrap gap-3 text-sm">
+                    <button class="filter-chip active">All</button>
+                    <button class="filter-chip">Work Luxe</button>
+                    <button class="filter-chip">Weekend</button>
+                    <button class="filter-chip">Evening</button>
+                    <button class="filter-chip">Grooming</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <article class="product-card p-0 overflow-hidden" data-aos="fade-up">
+                    <div class="aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80" alt="Work luxe outfits" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Work luxe</p>
+                        <h3 class="font-rufina text-2xl">Soft-tailored commute set</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Structured blazer, crepe trouser, and modular heels styled for hybrid offices.</p>
+                        <div class="flex items-center justify-between text-sm">
+                            <span>3-piece capsule</span>
+                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Add to preview</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="50">
+                    <div class="aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1200&q=80" alt="Weekend set" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Weekend ease</p>
+                        <h3 class="font-rufina text-2xl">Laid-back denim & mesh</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Relaxed denim jumpsuit + mesh base layers and sandals for rooftop hangs.</p>
+                        <div class="flex items-center justify-between text-sm">
+                            <span>4-piece capsule</span>
+                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Add to preview</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aspect-[4/3]">
+                        <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1200&q=80&sat=-25" alt="Evening set" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Evening</p>
+                        <h3 class="font-rufina text-2xl">Chrome hour wardrobe</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Slip dress, chrome accessories, and hair sculpting kit curated for night shoots.</p>
+                        <div class="flex items-center justify-between text-sm">
+                            <span>5-piece capsule</span>
+                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Add to preview</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="py-8">
+        <div class="container-custom" data-aos="fade-up">
+            <div class="product-card p-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex flex-wrap gap-3 text-sm">
+                    <div class="filter-field">
+                        <label class="text-xs uppercase tracking-[0.4em] text-neutral-400 block mb-1">Price range</label>
+                        <select class="form-input">
+                            <option>All</option>
+                            <option>$100 - $250</option>
+                            <option>$250 - $500</option>
+                            <option>$500+</option>
+                        </select>
+                    </div>
+                    <div class="filter-field">
+                        <label class="text-xs uppercase tracking-[0.4em] text-neutral-400 block mb-1">Category</label>
+                        <select class="form-input">
+                            <option>All</option>
+                            <option>Wardrobe</option>
+                            <option>Grooming</option>
+                            <option>Accessories</option>
+                        </select>
+                    </div>
+                    <div class="filter-field">
+                        <label class="text-xs uppercase tracking-[0.4em] text-neutral-400 block mb-1">Sort by</label>
+                        <select class="form-input">
+                            <option>Newest</option>
+                            <option>Most saved</option>
+                            <option>Price: low to high</option>
+                            <option>Price: high to low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <input type="search" class="form-input" placeholder="Search item, designer, texture">
+                    <button class="btn btn-primary px-4">Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product grid -->
+    <section class="py-10 sm:py-14">
+        <div class="container-custom space-y-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card template x8 -->
+                <!-- We'll reuse classes defined in main.css -->
+                <article class="shop-card" data-aos="fade-up">
+                    <div class="shop-card-media">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Suit set">
+                        <button class="shop-favorite" aria-label="Save look">
+                            <span>♡</span>
+                        </button>
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Wardrobe</p>
+                            <h3>Contour suit + mesh base</h3>
+                            <p class="shop-card-desc">Matte blazer, mesh top, and curved pant ready for fittings.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span>$640</span>
+                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="shop-card" data-aos="fade-up" data-aos-delay="50">
+                    <div class="shop-card-media">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Dress set">
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Wardrobe</p>
+                            <h3>Lunar silk wrap</h3>
+                            <p class="shop-card-desc">Bias-cut slip with sculptural earrings and sustainable pumps.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span>$420</span>
+                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="shop-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="shop-card-media">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Grooming kit">
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Grooming</p>
+                            <h3>Hair reset ritual kit</h3>
+                            <p class="shop-card-desc">Clarifying wash, bonding mask, and styling cream curated by our grooming lead.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span>$160</span>
+                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="shop-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="shop-card-media">
+                        <img src="https://images.unsplash.com/photo-1495872298367-3cf511eb3cfe?auto=format&fit=crop&w=800&q=80" alt="Accessory set">
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Accessories</p>
+                            <h3>Chrome essentials</h3>
+                            <p class="shop-card-desc">Necklace, cuff, and convertible belt bag for evening shoots.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span>$210</span>
+                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
+                        </div>
+                    </div>
+                </article>
+                <!-- second row -->
+                <article class="shop-card" data-aos="fade-up">
+                    <div class="shop-card-media">
+                        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80" alt="Another outfit">
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Wardrobe</p>
+                            <h3>Modern utility co-ord</h3>
+                            <p class="shop-card-desc">Sand set with removable sleeves inspired by editorial styling.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span>$350</span>
+                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="shop-card" data-aos="fade-up" data-aos-delay="50">
+                    <div class="shop-card-media">
+                        <img src="https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=800&q=80" alt="Shoes">
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Footwear</p>
+                            <h3>Structural ankle heels</h3>
+                            <p class="shop-card-desc">Architectural heels with flex straps for both fittings and shoots.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span>$280</span>
+                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="shop-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="shop-card-media">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80&sat=-40" alt="Beauty">
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Beauty</p>
+                            <h3>Dewy skin set</h3>
+                            <p class="shop-card-desc">Illuminating primer, skin tint, and gloss balm curated for minimal shoots.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span>$140</span>
+                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="shop-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="shop-card-media">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80&sat=15" alt="Bag">
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Accessories</p>
+                            <h3>Studio edit tote</h3>
+                            <p class="shop-card-desc">Structured leather tote with compartments for tablets and grooming kits.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span>$220</span>
+                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-secondary">Load more</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grooming carousel -->
+    <section class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-2">Grooming</p>
+                    <h2 class="font-rufina text-3xl font-bold">Hair and skin kits we can ship with your wardrobe</h2>
+                </div>
+                <div class="flex gap-3">
+                    <button class="carousel-prev btn btn-secondary px-3">Prev</button>
+                    <button class="carousel-next btn btn-primary px-3">Next</button>
+                </div>
+            </div>
+            <div class="swiper shop-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <article class="product-card p-0 overflow-hidden">
+                            <div class="aspect-[4/3]">
+                                <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=1000&q=80" alt="Hair duo" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6 space-y-2">
+                                <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Hair</p>
+                                <h3 class="font-rufina text-xl">Glass hair duo</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Gloss serum + heat shield spray used in our editorial prep.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="product-card p-0 overflow-hidden">
+                            <div class="aspect-[4/3]">
+                                <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=80" alt="Skin kit" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6 space-y-2">
+                                <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Skin</p>
+                                <h3 class="font-rufina text-xl">Editorial skin prep</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Ice globes, mist, and moisturizer kit for on-set refresh.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="product-card p-0 overflow-hidden">
+                            <div class="aspect-[4/3]">
+                                <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1000&q=80&sat=10" alt="Curl set" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6 space-y-2">
+                                <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Texture</p>
+                                <h3 class="font-rufina text-xl">Curl definition trio</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Hydrating wash, leave-in cream, and diffuser attachments.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12 md:py-16">
+        <div class="container-custom">
+            <div class="rounded-[32px] bg-neutral-900 text-white p-8 md:p-12 flex flex-col lg:flex-row gap-6 items-center">
+                <div class="space-y-3 lg:w-2/3">
+                    <p class="text-xs uppercase tracking-[0.4em] text-white/60">Need it kitted?</p>
+                    <h2 class="font-rufina text-3xl font-bold">We’ll turn your saved looks into a shippable wardrobe or grooming case.</h2>
+                    <p class="text-white/70">Select items, send us your measurements, and our team will ship a ready-to-wear trunk or provide affiliate links for local pickup.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                    <a href="saved-fashion.html" class="btn btn-secondary w-full sm:w-auto">View saved fashion</a>
+                    <a href="contact.html" class="btn btn-primary w-full sm:w-auto bg-white text-neutral-900 hover:bg-neutral-100">Book styling drop</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
+        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between text-sm">
+            <div>
+                <p class="font-rufina text-2xl">Pyin Mal</p>
+                <p class="text-neutral-400 dark:text-neutral-500">Wardrobe & grooming intelligence.</p>
+            </div>
+            <div class="flex flex-wrap gap-6 text-neutral-400 dark:text-neutral-500">
+                <a href="privacy.html" class="hover:text-white">Privacy</a>
+                <a href="terms.html" class="hover:text-white">Terms</a>
+                <a href="contact.html" class="hover:text-white">Contact</a>
+            </div>
+            <div class="text-neutral-500 dark:text-neutral-400 text-xs">© 2025 Pyin Mal. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const swiper = new Swiper('.shop-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 16,
+                breakpoints: {
+                    640: { slidesPerView: 1.5 },
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                },
+                navigation: {
+                    nextEl: '.carousel-next',
+                    prevEl: '.carousel-prev'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

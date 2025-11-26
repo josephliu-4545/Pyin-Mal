@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about Pyin Mal, the fashion and grooming studio behind the virtual styling experience.">
+    <title>About - Pyin Mal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="model-preview.html#hair" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="../index.html#reviews" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="model-preview.html#hair" class="nav-link">Hair Recommendations</a>
+                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="../index.html#reviews" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link nav-link-active">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-12 md:py-16 bg-gradient-to-br from-primary-500 via-accent-500 to-primary-600 text-white">
+        <div class="container-custom grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div data-aos="fade-right">
+                <p class="text-xs uppercase tracking-[0.4em] text-white/70 mb-3">Our story</p>
+                <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Designing wardrobes & grooming journeys that feel personal</h1>
+                <p class="text-sm sm:text-base text-white/80 mb-6">Pyin Mal started as a studio challenge to deliver Zalora-level styling with beauty-lab precision. Today our stylists pair premium wardrobes, haircut science, and AI to help you try on possibilities before stepping into the mirror.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="contact.html" class="btn btn-primary bg-white text-primary-600 hover:bg-neutral-100">Book a discovery call</a>
+                    <a href="#team" class="btn btn-ghost border-white text-white hover:bg-white/10">Meet the team</a>
+                </div>
+            </div>
+            <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-2xl backdrop-blur" data-aos="fade-left">
+                <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 flex items-center justify-center">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80" alt="Stylists collaborating" class="w-full h-full object-cover">
+                </div>
+                <div class="mt-6 grid grid-cols-3 gap-4 text-center text-sm">
+                    <div>
+                        <p class="font-rufina text-3xl font-semibold">120+</p>
+                        <p class="text-white/70 text-xs uppercase tracking-widest">Wardrobes built</p>
+                    </div>
+                    <div>
+                        <p class="font-rufina text-3xl font-semibold">48h</p>
+                        <p class="text-white/70 text-xs uppercase tracking-widest">Average turnaround</p>
+                    </div>
+                    <div>
+                        <p class="font-rufina text-3xl font-semibold">5/5</p>
+                        <p class="text-white/70 text-xs uppercase tracking-widest">Client rating</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story -->
+    <section class="py-12 md:py-16">
+        <div class="container-custom grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="order-2 lg:order-1 space-y-5" data-aos="fade-right">
+                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Behind the brand</p>
+                <h2 class="font-rufina text-3xl font-bold">From Yangon photo studios to virtual dressing rooms</h2>
+                <p class="text-neutral-600 dark:text-neutral-400">Our founders built Pyin Mal after supporting emerging creators who needed curated outfits, haircut fixes, and camera-ready looks on impossible timelines. We layered stylist expertise with tech so every look can be rehearsed digitally before a single fitting.</p>
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <div class="product-card p-5">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Style POV</p>
+                        <p class="font-rufina text-xl mb-1">Asia-meets-global</p>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">We combine tailored silhouettes, streetwear ease, and culturally-rooted grooming.</p>
+                    </div>
+                    <div class="product-card p-5">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Approach</p>
+                        <p class="font-rufina text-xl mb-1">Try-on intelligence</p>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Visualize outfits, accessories, and hair through our rule-based AI rec engine.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2" data-aos="fade-left">
+                <div class="rounded-[32px] overflow-hidden shadow-soft dark:shadow-soft-dark">
+                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80" alt="Studio mood board" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights grid -->
+    <section class="py-12 md:py-16 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom space-y-12">
+            <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">What we build</p>
+                <h2 class="font-rufina text-3xl font-bold mb-4">Fashion lab meets grooming atelier</h2>
+                <p class="text-neutral-600 dark:text-neutral-400">Every experience is modular so we can nest new services—digital closets, curated drops, or grooming residencies—without breaking consistency.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-card p-6">
+                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Digital studio</p>
+                    <h3 class="font-rufina text-2xl font-semibold mb-3">Model Preview Lab</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Layer outfits, hairstyles, and accessories on responsive models to approve fits before shipping.</p>
+                </div>
+                <div class="product-card p-6">
+                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Curation</p>
+                    <h3 class="font-rufina text-2xl font-semibold mb-3">Private wardrobe drops</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">We pair Southeast Asian designers with luxe staples to create made-to-order capsule wardrobes.</p>
+                </div>
+                <div class="product-card p-6">
+                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Careers</p>
+                    <h3 class="font-rufina text-2xl font-semibold mb-3">Stylists & beauty pros</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">We train stylists to read face shape, texture, and lifestyle—then script entire looks for each channel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="py-12 md:py-16">
+        <div class="container-custom space-y-10">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                <div data-aos="fade-right">
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Team</p>
+                    <h2 class="font-rufina text-3xl font-bold">Strategists, stylists & technologists</h2>
+                    <p class="text-neutral-600 dark:text-neutral-400 mt-2">The Pyin Mal crew mixes editorial stylists, beauty partners, and creative technologists.</p>
+                </div>
+                <a href="contact.html" class="btn btn-secondary self-start md:self-end" data-aos="fade-left">Partner with us</a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <article class="product-card p-6" data-aos="fade-up">
+                    <div class="h-48 rounded-2xl overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=800&q=80" alt="Creative Director" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-rufina text-xl">Mya Thandar</p>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-3">Creative Director & Co-founder</p>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Architects every lookbook and ensures the styling feels aspirational yet wearable.</p>
+                </article>
+                <article class="product-card p-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="h-48 rounded-2xl overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80" alt="Tech lead" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-rufina text-xl">Leo Naing</p>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-3">Experience Technologist</p>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Owns the model preview system, MediaPipe integrations, and AI rec flows.</p>
+                </article>
+                <article class="product-card p-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 rounded-2xl overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1544723795-432537dc3d60?auto=format&fit=crop&w=800&q=80" alt="Grooming lead" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-rufina text-xl">Rina Kyaw</p>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-3">Lead Grooming Architect</p>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Specializes in face-shape diagnostics & haircut simulations to digitize salon consults.</p>
+                </article>
+                <article class="product-card p-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="h-48 rounded-2xl overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Client success" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-rufina text-xl">Aeri Lynn</p>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-3">Client Playbooks</p>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Ensures each member session ends with wardrobes, product links, and grooming maps.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey timeline -->
+    <section class="py-12 md:py-16 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom space-y-10">
+            <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Timeline</p>
+                <h2 class="font-rufina text-3xl font-bold mb-4">How we craft every styling experience</h2>
+                <p class="text-neutral-600 dark:text-neutral-400">Pyin Mal works like a fashion sprint: define, prototype, preview, and deliver.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="product-card p-5 relative" data-aos="fade-up">
+                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">01</p>
+                    <h3 class="font-rufina text-xl mb-2">Discovery</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Style intake, face-shape scans, and wardrobe goals set the brief.</p>
+                </div>
+                <div class="product-card p-5 relative" data-aos="fade-up" data-aos-delay="50">
+                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">02</p>
+                    <h3 class="font-rufina text-xl mb-2">Curation</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Our stylists source looks, grooming rituals, and accessories from partner labs.</p>
+                </div>
+                <div class="product-card p-5 relative" data-aos="fade-up" data-aos-delay="100">
+                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">03</p>
+                    <h3 class="font-rufina text-xl mb-2">Preview</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Everything is layered inside the model preview system for instant approvals.</p>
+                </div>
+                <div class="product-card p-5 relative" data-aos="fade-up" data-aos-delay="150">
+                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">04</p>
+                    <h3 class="font-rufina text-xl mb-2">Launch plan</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">You get a wardrobe playbook, grooming cadence, and shop links in one hub.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global trust -->
+    <section class="py-12 md:py-16">
+        <div class="container-custom grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div data-aos="fade-right">
+                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Community</p>
+                <h2 class="font-rufina text-3xl font-bold mb-4">Trusted by founders, creators & studio teams</h2>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-6">We work remotely with clients across Singapore, Bangkok, Yangon, and Sydney—layering virtual try-ons with bespoke deliveries.</p>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="product-card p-5">
+                        <p class="font-rufina text-2xl mb-1">18</p>
+                        <p class="text-neutral-500 dark:text-neutral-400">Partner boutiques</p>
+                    </div>
+                    <div class="product-card p-5">
+                        <p class="font-rufina text-2xl mb-1">6</p>
+                        <p class="text-neutral-500 dark:text-neutral-400">In-house stylists</p>
+                    </div>
+                    <div class="product-card p-5">
+                        <p class="font-rufina text-2xl mb-1">240+</p>
+                        <p class="text-neutral-500 dark:text-neutral-400">Looks previewed monthly</p>
+                    </div>
+                    <div class="product-card p-5">
+                        <p class="font-rufina text-2xl mb-1">12</p>
+                        <p class="text-neutral-500 dark:text-neutral-400">City drops each year</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-neutral-900 dark:bg-dark-card text-white rounded-3xl p-8 space-y-6" data-aos="fade-left">
+                <div class="space-y-4">
+                    <p class="text-sm uppercase tracking-[0.4em] text-white/50">Client words</p>
+                    <p class="font-rufina text-2xl">“Pyin Mal digitized fittings for our Bangkok pop-up. Every model looked ready before stepping on location.”</p>
+                    <p class="text-sm text-white/70">— Liyana, Creative Producer</p>
+                </div>
+                <div class="space-y-4">
+                    <p class="font-rufina text-2xl">“They map hairstyles like architects. We approved five cuts in one evening with their MediaPipe demo.”</p>
+                    <p class="text-sm text-white/70">— Ko Aung, Grooming Partner</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12 md:py-16">
+        <div class="container-custom">
+            <div class="rounded-[32px] bg-gradient-to-r from-primary-600 via-accent-500 to-primary-500 text-white p-10 md:p-14 flex flex-col md:flex-row md:items-center md:justify-between gap-6" data-aos="fade-up">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.4em] text-white/70 mb-2">Work with us</p>
+                    <h2 class="font-rufina text-3xl font-bold mb-3">Need a styling lab that keeps up with your shoots?</h2>
+                    <p class="text-white/80 text-sm sm:text-base">Book a 30-minute virtual review. We’ll share a collaborative mood board, sample wardrobe plan, and grooming flow.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="contact.html" class="btn btn-primary bg-white text-primary-600 hover:bg-neutral-100">Schedule a session</a>
+                    <a href="../index.html#wish-list" class="btn btn-ghost border-white text-white hover:bg-white/10">See our looks</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
+        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between text-sm">
+            <div>
+                <p class="font-rufina text-2xl">Pyin Mal</p>
+                <p class="text-neutral-400 dark:text-neutral-500">Wardrobe & grooming intelligence.</p>
+            </div>
+            <div class="flex flex-wrap gap-6 text-neutral-400 dark:text-neutral-500">
+                <a href="privacy.html" class="hover:text-white">Privacy</a>
+                <a href="terms.html" class="hover:text-white">Terms</a>
+                <a href="contact.html" class="hover:text-white">Contact</a>
+            </div>
+            <div class="text-neutral-500 dark:text-neutral-400 text-xs">© 2025 Pyin Mal. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>
+
