@@ -1,0 +1,23 @@
+{
+  "name": "fashion-styling-platform",
+  "version": "1.0.0",
+  "description": "Fashion and grooming styling platform with AI recommendations",
+  "main": "index.html",
+  "scripts": {
+    "build-css": "tailwindcss -i ./css/main.css -o ./css/tailwind.css --config ./config/tailwind.config.js --watch",
+    "build-css-prod": "tailwindcss -i ./css/main.css -o ./css/tailwind.css --config ./config/tailwind.config.js --minify"
+  },
+  "keywords": [
+    "fashion",
+    "styling",
+    "grooming",
+    "outfit-generator"
+  ],
+  "author": "Team Pyin Mal",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  },
+  "dependencies": {}
+}
+

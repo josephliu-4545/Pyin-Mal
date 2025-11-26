@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fashion and grooming styling platform with AI-powered outfit recommendations">
+    <title>Fashion Styling Platform - Home</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="./css/tailwind.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/main.css">
+    
+    <!-- Swiper CSS (CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
+    <!-- AOS CSS (CDN) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="index.html" class="nav-link nav-link-active">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="pages/model-preview.html#hair" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="pages/digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="pages/model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="#wish-list" class="nav-link">Favorites</a>
+                    <a href="pages/shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="#reviews" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="pages/contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="pages/about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="pages/faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pages/pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="pages/testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="pages/blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="pages/locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="pages/login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="pages/signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="index.html" class="block nav-link nav-link-active">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="pages/model-preview.html#hair" class="nav-link">Hair Recommendations</a>
+                            <a href="pages/digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="pages/model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="#wish-list" class="block nav-link">Favorites</a>
+                    <a href="pages/shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="#reviews" class="nav-link">Reviews</a>
+                            <a href="pages/contact.html" class="nav-link">Contact</a>
+                            <a href="pages/about.html" class="nav-link">About us</a>
+                            <a href="pages/faq.html" class="nav-link">FAQ</a>
+                            <a href="pages/pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="pages/testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="pages/blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="pages/locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="pages/login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="pages/signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Banner Section -->
+        <section class="relative bg-gradient-to-r from-primary-500 to-accent-500 text-white py-16 sm:py-20 md:py-32">
+            <div class="container-custom">
+                <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
+                    <h1 class="font-rufina text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                        Discover Your Perfect Style
+                    </h1>
+                    <p class="font-orbit text-base sm:text-lg md:text-xl mb-8 text-white/90 px-2">
+                        AI-powered outfit recommendations and grooming suggestions tailored just for you
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="pages/outfit-generator.html" class="btn btn-primary bg-white text-primary-600 hover:bg-neutral-100 w-full sm:w-auto">
+                            Generate Outfit
+                        </a>
+                        <a href="pages/shop-browsing.html" class="btn btn-ghost border-white text-white hover:bg-white/10 w-full sm:w-auto">
+                            Browse Shop
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Banner Section -->
+        <section id="new-banner" class="py-12 bg-neutral-50 dark:bg-dark-surface">
+            <div class="container-custom">
+                <h2 class="font-rufina text-3xl font-bold text-center mb-8">New Arrivals</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Banner items would go here -->
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="product-card-image bg-neutral-200 dark:bg-dark-card h-64"></div>
+                        <div class="product-card-content">
+                            <h3 class="product-card-title">New Collection</h3>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-card-image bg-neutral-200 dark:bg-dark-card h-64"></div>
+                        <div class="product-card-content">
+                            <h3 class="product-card-title">Trending Now</h3>
+                        </div>
+                    </div>
+                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-card-image bg-neutral-200 dark:bg-dark-card h-64"></div>
+                        <div class="product-card-content">
+                            <h3 class="product-card-title">Featured Styles</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wish List Section -->
+        <section id="wish-list" class="py-12">
+            <div class="container-custom">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+                    <h2 class="font-rufina text-3xl font-bold text-center sm:text-left">My Wish List</h2>
+                    <a href="#wishlist" class="text-primary-600 dark:text-primary-400 hover:underline text-center sm:text-right">View All</a>
+                </div>
+                <div class="product-grid">
+                    <!-- Wishlist items would be dynamically loaded here -->
+                    <div class="text-center py-12 text-neutral-500 dark:text-neutral-400">
+                        <p>Your wishlist is empty. Start adding items you love!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Account Section -->
+        <section id="my-account" class="py-12 bg-neutral-50 dark:bg-dark-surface">
+            <div class="container-custom">
+                <h2 class="font-rufina text-3xl font-bold text-center mb-8">My Account</h2>
+                <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <a href="pages/style-profile.html" class="product-card p-6 text-center hover:scale-105 transition-transform">
+                        <div class="text-4xl mb-4">👤</div>
+                        <h3 class="font-rufina text-xl font-semibold mb-2">Style Profile</h3>
+                        <p class="text-neutral-600 dark:text-neutral-400">Manage your preferences</p>
+                    </a>
+                    <a href="pages/saved-fashion.html" class="product-card p-6 text-center hover:scale-105 transition-transform">
+                        <div class="text-4xl mb-4">💾</div>
+                        <h3 class="font-rufina text-xl font-semibold mb-2">Saved Fashion</h3>
+                        <p class="text-neutral-600 dark:text-neutral-400">View saved outfits</p>
+                    </a>
+                    <a href="pages/style-dashboard.html" class="product-card p-6 text-center hover:scale-105 transition-transform">
+                        <div class="text-4xl mb-4">📊</div>
+                        <h3 class="font-rufina text-xl font-semibold mb-2">Style Dashboard</h3>
+                        <p class="text-neutral-600 dark:text-neutral-400">Track your style</p>
+                    </a>
+                    <a href="pages/pricing.html" class="product-card p-6 text-center hover:scale-105 transition-transform">
+                        <div class="text-4xl mb-4">💳</div>
+                        <h3 class="font-rufina text-xl font-semibold mb-2">Pricing & Plans</h3>
+                        <p class="text-neutral-600 dark:text-neutral-400">View subscription options</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-12 mt-20">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center md:text-left">
+                    <h3 class="font-rufina text-xl font-bold mb-4">StyleHub</h3>
+                    <p class="text-neutral-400 dark:text-neutral-500 text-sm">
+                        Your personal fashion and grooming assistant
+                    </p>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="pages/about.html" class="hover:text-white dark:hover:text-dark-text">About</a></li>
+                        <li><a href="pages/services.html" class="hover:text-white dark:hover:text-dark-text">Services</a></li>
+                        <li><a href="pages/faq.html" class="hover:text-white dark:hover:text-dark-text">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="pages/privacy.html" class="hover:text-white dark:hover:text-dark-text">Privacy Policy</a></li>
+                        <li><a href="pages/terms.html" class="hover:text-white dark:hover:text-dark-text">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="pages/contact.html" class="hover:text-white dark:hover:text-dark-text">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-neutral-800 dark:border-dark-border mt-8 pt-8 text-center text-sm text-neutral-400 dark:text-neutral-500">
+                <p>&copy; 2025 StyleHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/animations.js"></script>
+</body>
+</html>
+

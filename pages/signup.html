@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create your StyleHub account to unlock personalized styling tools">
+    <title>Sign Up - StyleHub</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="model-preview.html#hair" class="hover:text-primary-600 dark:hover:text-primary-300">Hair Recommendations</a></li>
+                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="../index.html#reviews" class="hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="login.html" class="nav-link">Login</a>
+                    <a href="signup.html" class="nav-link nav-link-active">Sign Up</a>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button class="theme-toggle p-1.5 sm:p-2" id="theme-toggle" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="model-preview.html#hair" class="nav-link">Hair Recommendations</a>
+                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="../index.html#reviews" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sign Up Section -->
+    <main class="min-h-[calc(100vh-10rem)] flex items-center justify-center py-16 px-4 bg-gradient-to-b from-neutral-50 via-white to-neutral-50 dark:from-dark-bg dark:via-dark-surface dark:to-dark-bg">
+        <div class="container-custom max-w-6xl mx-auto" data-aos="fade-up">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden border border-neutral-100 dark:border-dark-border">
+                <!-- Form -->
+                <div class="p-8 sm:p-10 lg:p-12">
+                    <div class="mb-8 text-center lg:text-left">
+                        <p class="text-xs sm:text-sm uppercase tracking-[0.3em] text-primary-500 dark:text-primary-300 mb-3">Join the Collective</p>
+                        <h1 class="font-rufina text-3xl sm:text-4xl font-bold leading-tight mb-2">Create your StyleHub account</h1>
+                        <p class="text-neutral-500 dark:text-neutral-400 text-sm sm:text-base">Unlock personalized outfits, AI recommendations, and exclusive drops.</p>
+                    </div>
+                    <form class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="first-name" class="form-label">First Name</label>
+                                <input type="text" id="first-name" class="form-input" placeholder="Aye" required>
+                            </div>
+                            <div>
+                                <label for="last-name" class="form-label">Last Name</label>
+                                <input type="text" id="last-name" class="form-input" placeholder="Chan" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="email-signup" class="form-label">Email address</label>
+                            <input type="email" id="email-signup" class="form-input" placeholder="you@email.com" required>
+                        </div>
+                        <div>
+                            <label for="password-signup" class="form-label">Password</label>
+                            <input type="password" id="password-signup" class="form-input" placeholder="Create a strong password" required>
+                        </div>
+                        <div>
+                            <label for="confirm-password" class="form-label">Confirm Password</label>
+                            <input type="password" id="confirm-password" class="form-input" placeholder="Re-enter password" required>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm">
+                            <label class="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400">
+                                <input type="checkbox" class="filter-checkbox" required>
+                                <span>I agree to the <a href="terms.html" class="text-primary-600 dark:text-primary-400 underline">Terms & Conditions</a></span>
+                            </label>
+                            <a href="privacy.html" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Privacy Policy</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-full">Create Account</button>
+                    </form>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-6 text-center lg:text-left">
+                        Already have an account?
+                        <a href="login.html" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Log in</a>
+                    </p>
+                </div>
+
+                <!-- Highlights Panel -->
+                <div class="bg-gradient-to-br from-primary-500 via-primary-600 to-accent-500 text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <div>
+                            <p class="uppercase text-xs tracking-[0.4em] text-white/70 mb-3">Benefits</p>
+                            <h2 class="font-rufina text-2xl sm:text-3xl font-bold leading-snug">Why join StyleHub?</h2>
+                        </div>
+                        <ul class="space-y-4 text-sm sm:text-base text-white/90">
+                            <li class="flex items-start space-x-3">
+                                <span class="text-2xl">✨</span>
+                                <span>Personalized outfit recommendations based on your style profile.</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-2xl">🧠</span>
+                                <span>AI-powered grooming and look suggestions updated weekly.</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-2xl">🛍️</span>
+                                <span>Shop curated looks and save your favorites for later.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-10">
+                        <div class="bg-white/10 border border-white/30 rounded-2xl p-5 backdrop-blur">
+                            <p class="text-sm uppercase tracking-[0.3em] text-white/70 mb-2">Exclusive</p>
+                            <p class="font-rufina text-lg mb-3">Get 15% off your first curated look</p>
+                            <button class="btn btn-ghost border-white text-white w-full">Unlock Offer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
+        <div class="container-custom text-center text-sm text-neutral-400 dark:text-neutral-500">
+            <p>&copy; 2025 StyleHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Preview outfits and hairstyles on a virtual model">
+    <title>Model Preview - Fashion Styling Platform</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <!-- Swiper CSS (CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
+    <!-- AOS CSS (CDN) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="model-preview.html#hair" class="hover:text-primary-600 dark:hover:text-primary-300">Hair Recommendations</a></li>
+                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="../index.html#reviews" class="hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button class="theme-toggle p-1.5 sm:p-2" id="theme-toggle" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="model-preview.html#hair" class="nav-link">Hair Recommendations</a>
+                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link nav-link-active">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="../index.html#reviews" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-8 md:py-12">
+        <div class="container-custom">
+            <!-- Page Header -->
+            <div class="text-center mb-8 px-2" data-aos="fade-up">
+                <h1 class="font-rufina text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Model Preview</h1>
+                <p class="font-orbit text-base sm:text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                    Try on different outfits and hairstyles on our virtual model. Mix and match to create your perfect look!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Sidebar - Outfit Selection -->
+                <div class="lg:col-span-1 space-y-6 order-2 lg:order-1" data-aos="fade-right">
+                    <!-- Outfit Categories -->
+                    <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
+                        <h2 class="font-rufina text-2xl font-bold mb-6">Outfit Selection</h2>
+                        
+                        <!-- Tops Section -->
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-lg mb-3 text-neutral-900 dark:text-dark-text">Tops</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="top-1"
+                                    data-outfit-image="../assets/images/outfits/top-1.png"
+                                    data-category="top">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">T-Shirt</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="top-2"
+                                    data-outfit-image="../assets/images/outfits/top-2.png"
+                                    data-category="top">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Hoodie</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="top-3"
+                                    data-outfit-image="../assets/images/outfits/top-3.png"
+                                    data-category="top">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Shirt</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="top-4"
+                                    data-outfit-image="../assets/images/outfits/top-4.png"
+                                    data-category="top">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Blazer</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Bottoms Section -->
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-lg mb-3 text-neutral-900 dark:text-dark-text">Bottoms</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="bottom-1"
+                                    data-outfit-image="../assets/images/outfits/bottom-1.png"
+                                    data-category="bottom">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Jeans</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="bottom-2"
+                                    data-outfit-image="../assets/images/outfits/bottom-2.png"
+                                    data-category="bottom">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Joggers</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="bottom-3"
+                                    data-outfit-image="../assets/images/outfits/bottom-3.png"
+                                    data-category="bottom">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Shorts</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="bottom-4"
+                                    data-outfit-image="../assets/images/outfits/bottom-4.png"
+                                    data-category="bottom">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Pants</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Shoes Section -->
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-lg mb-3 text-neutral-900 dark:text-dark-text">Shoes</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="shoes-1"
+                                    data-outfit-image="../assets/images/outfits/shoes-1.png"
+                                    data-category="shoes">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Sneakers</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="shoes-2"
+                                    data-outfit-image="../assets/images/outfits/shoes-2.png"
+                                    data-category="shoes">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Boots</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="shoes-3"
+                                    data-outfit-image="../assets/images/outfits/shoes-3.png"
+                                    data-category="shoes">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Loafers</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="shoes-4"
+                                    data-outfit-image="../assets/images/outfits/shoes-4.png"
+                                    data-category="shoes">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Sandals</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Accessories Section -->
+                        <div>
+                            <h3 class="font-semibold text-lg mb-3 text-neutral-900 dark:text-dark-text">Accessories</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="acc-1"
+                                    data-outfit-image="../assets/images/outfits/acc-1.png"
+                                    data-category="accessories">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Watch</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="acc-2"
+                                    data-outfit-image="../assets/images/outfits/acc-2.png"
+                                    data-category="accessories">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Bag</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="acc-3"
+                                    data-outfit-image="../assets/images/outfits/acc-3.png"
+                                    data-category="accessories">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Hat</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="acc-4"
+                                    data-outfit-image="../assets/images/outfits/acc-4.png"
+                                    data-category="accessories">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Sunglasses</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hairstyle Selection -->
+                    <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
+                        <h2 class="font-rufina text-2xl font-bold mb-6">Hairstyles</h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-1"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-1.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Short</span>
+                            </button>
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-2"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-2.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Medium</span>
+                            </button>
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-3"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-3.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Long</span>
+                            </button>
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-4"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-4.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Curly</span>
+                            </button>
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-5"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-5.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Wavy</span>
+                            </button>
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-6"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-6.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Fade</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center - Model Preview -->
+                <div class="lg:col-span-1 order-1 lg:order-2" data-aos="fade-up">
+                    <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark lg:sticky top-24">
+                        <h2 class="font-rufina text-2xl font-bold mb-6 text-center">Preview</h2>
+                        
+                        <!-- Model Preview Container -->
+                        <div id="model-preview-container" class="preview-container relative">
+                            <!-- Base Model -->
+                            <img 
+                                src="../assets/images/models/base-model.png" 
+                                alt="Base Model" 
+                                class="model-base w-full h-auto"
+                                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'600\'%3E%3Crect fill=\'%23f3f4f6\' width=\'400\' height=\'600\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' fill=\'%239ca3af\' font-size=\'20\'%3EBase Model%3C/text%3E%3C/svg%3E'"
+                            >
+                            <!-- Outfit layers will be added here dynamically -->
+                            <!-- Hairstyle layers will be added here dynamically -->
+                        </div>
+
+                        <!-- Control Buttons -->
+                        <div class="flex flex-col sm:flex-row lg:flex-col gap-3 mt-6">
+                            <button id="reset-preview" class="btn btn-secondary w-full">
+                                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                                Reset
+                            </button>
+                            <button id="save-screenshot" class="btn btn-primary w-full">
+                                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                                </svg>
+                                Save Screenshot
+                            </button>
+                            <button id="save-to-favorites" class="btn btn-accent w-full">
+                                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                                Save to Favorites
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar - Selected Items & Info -->
+                <div class="lg:col-span-1 space-y-6 order-3" data-aos="fade-left">
+                    <!-- Selected Items Display -->
+                    <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
+                        <h2 class="font-rufina text-2xl font-bold mb-6">Selected Items</h2>
+                        <div id="selected-items-display" class="space-y-4">
+                            <div class="text-center py-8 text-neutral-400 dark:text-neutral-600">
+                                <p>No items selected</p>
+                                <p class="text-sm mt-2">Click items to add them to the model</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tips & Info -->
+                    <div class="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
+                        <h3 class="font-rufina text-xl font-bold mb-4">Tips</h3>
+                        <ul class="space-y-3 text-sm text-neutral-700 dark:text-neutral-300">
+                            <li class="flex items-start">
+                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
+                                <span>Mix and match different items to create unique looks</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
+                                <span>Try different hairstyles to see what suits you best</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
+                                <span>Save your favorite combinations to your favorites</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
+                                <span>Use the reset button to start over anytime</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-12 mt-20">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-rufina text-xl font-bold mb-4">StyleHub</h3>
+                    <p class="text-neutral-400 dark:text-neutral-500 text-sm">
+                        Your personal fashion and grooming assistant
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="about.html" class="hover:text-white dark:hover:text-dark-text">About</a></li>
+                        <li><a href="services.html" class="hover:text-white dark:hover:text-dark-text">Services</a></li>
+                        <li><a href="faq.html" class="hover:text-white dark:hover:text-dark-text">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="privacy.html" class="hover:text-white dark:hover:text-dark-text">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white dark:hover:text-dark-text">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="contact.html" class="hover:text-white dark:hover:text-dark-text">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-neutral-800 dark:border-dark-border mt-8 pt-8 text-center text-sm text-neutral-400 dark:text-neutral-500">
+                <p>&copy; 2025 StyleHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/model-preview.js"></script>
+    <script src="../js/animations.js"></script>
+    
+    <!-- Model Preview Page Specific Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize model preview if not already done
+            if (!window.modelPreview) {
+                window.modelPreview = new ModelPreview();
+            }
+
+            // Reset button
+            const resetBtn = document.getElementById('reset-preview');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    if (window.modelPreview) {
+                        window.modelPreview.reset();
+                        updateSelectedItemsDisplay();
+                    }
+                });
+            }
+
+            // Save screenshot button
+            const saveScreenshotBtn = document.getElementById('save-screenshot');
+            if (saveScreenshotBtn) {
+                saveScreenshotBtn.addEventListener('click', () => {
+                    if (window.modelPreview) {
+                        window.modelPreview.saveScreenshot();
+                        showNotification('Screenshot saved!', 'success');
+                    }
+                });
+            }
+
+            // Save to favorites button
+            const saveFavoritesBtn = document.getElementById('save-to-favorites');
+            if (saveFavoritesBtn) {
+                saveFavoritesBtn.addEventListener('click', () => {
+                    saveCurrentLook();
+                });
+            }
+
+            // Update selected items display when items are selected
+            function updateSelectedItemsDisplay() {
+                const display = document.getElementById('selected-items-display');
+                if (!display) return;
+
+                const selectedItems = {
+                    top: window.modelPreview?.currentOutfit?.top || null,
+                    bottom: window.modelPreview?.currentOutfit?.bottom || null,
+                    shoes: window.modelPreview?.currentOutfit?.shoes || null,
+                    accessories: window.modelPreview?.currentOutfit?.accessories || null,
+                    hairstyle: window.modelPreview?.currentHairstyle || null
+                };
+
+                const hasItems = Object.values(selectedItems).some(item => item !== null);
+
+                if (!hasItems) {
+                    display.innerHTML = `
+                        <div class="text-center py-8 text-neutral-400 dark:text-neutral-600">
+                            <p>No items selected</p>
+                            <p class="text-sm mt-2">Click items to add them to the model</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                display.innerHTML = Object.entries(selectedItems)
+                    .filter(([key, value]) => value !== null)
+                    .map(([key, value]) => {
+                        const label = key.charAt(0).toUpperCase() + key.slice(1);
+                        return `
+                            <div class="flex items-center justify-between p-3 bg-neutral-50 dark:bg-dark-surface rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-neutral-200 dark:bg-dark-card rounded-lg"></div>
+                                    <div>
+                                        <div class="font-medium text-sm">${label}</div>
+                                        <div class="text-xs text-neutral-500 dark:text-neutral-400">Selected</div>
+                                    </div>
+                                </div>
+                                <button class="text-red-500 hover:text-red-600" onclick="removeItem('${key}')">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        `;
+                    }).join('');
+            }
+
+            // Remove item function
+            window.removeItem = function(category) {
+                if (window.modelPreview) {
+                    if (category === 'hairstyle') {
+                        const hairstyleLayer = document.querySelector('.hairstyle-layer');
+                        if (hairstyleLayer) {
+                            hairstyleLayer.remove();
+                        }
+                        window.modelPreview.currentHairstyle = null;
+                    } else {
+                        const outfitLayer = document.querySelector(`.outfit-${category}`);
+                        if (outfitLayer) {
+                            outfitLayer.remove();
+                        }
+                    }
+                    updateSelectedItemsDisplay();
+                }
+            };
+
+            // Save current look
+            function saveCurrentLook() {
+                const look = {
+                    id: `look-${Date.now()}`,
+                    outfit: window.modelPreview?.currentOutfit || {},
+                    hairstyle: window.modelPreview?.currentHairstyle || null,
+                    timestamp: new Date().toISOString()
+                };
+
+                let favorites = JSON.parse(localStorage.getItem('favoriteLooks') || '[]');
+                favorites.push(look);
+                localStorage.setItem('favoriteLooks', JSON.stringify(favorites));
+
+                showNotification('Look saved to favorites!', 'success');
+            }
+
+            // Notification function
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
+                    type === 'success' ? 'bg-green-500' : 
+                    type === 'warning' ? 'bg-yellow-500' : 
+                    'bg-blue-500'
+                } text-white`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+
+            // Listen for outfit/hairstyle changes
+            const originalUpdateOutfit = window.modelPreview?.updateOutfit;
+            if (window.modelPreview && originalUpdateOutfit) {
+                window.modelPreview.updateOutfit = function(...args) {
+                    originalUpdateOutfit.apply(this, args);
+                    updateSelectedItemsDisplay();
+                };
+            }
+
+            const originalUpdateHairstyle = window.modelPreview?.updateHairstyle;
+            if (window.modelPreview && originalUpdateHairstyle) {
+                window.modelPreview.updateHairstyle = function(...args) {
+                    originalUpdateHairstyle.apply(this, args);
+                    updateSelectedItemsDisplay();
+                };
+            }
+
+            // Initial display update
+            setTimeout(updateSelectedItemsDisplay, 500);
+        });
+    </script>
+</body>
+</html>
+

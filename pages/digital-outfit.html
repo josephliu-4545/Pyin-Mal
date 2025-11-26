@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse curated digital outfits grouped by occasion and style.">
+    <title>Digital Outfit Library - StyleHub</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="model-preview.html#hair" class="hover:text-primary-600 dark:hover:text-primary-300">Hair Recommendations</a></li>
+                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="../index.html#reviews" class="hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button class="theme-toggle p-1.5 sm:p-2" id="theme-toggle" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="model-preview.html#hair" class="nav-link">Hair Recommendations</a>
+                            <a href="digital-outfit.html" class="nav-link nav-link-active">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="../index.html#reviews" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero / Intro -->
+    <section class="py-12 md:py-16 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div data-aos="fade-right">
+                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Digital wardrobe</p>
+                <h1 class="font-rufina text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">Browse curated outfits for every occasion</h1>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-6">
+                    Tap any look to preview it on the model, swap pieces, or send to your stylist. Filters help you find event-ready combos in seconds.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#collection" class="btn btn-primary w-full sm:w-auto">Explore Looks</a>
+                    <a href="outfit-generator.html" class="btn btn-secondary w-full sm:w-auto">Generate Outfit</a>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-dark-card rounded-3xl p-6 shadow-soft dark:shadow-soft-dark" data-aos="fade-left">
+                <h3 class="font-rufina text-2xl font-semibold mb-4">Quick filters</h3>
+                <div class="grid grid-cols-2 gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+                    <div>
+                        <p class="font-semibold text-neutral-900 dark:text-dark-text mb-2">Occasion</p>
+                        <ul class="space-y-1">
+                            <li>• Work smart</li>
+                            <li>• Weekend</li>
+                            <li>• Evening</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-neutral-900 dark:text-dark-text mb-2">Style</p>
+                        <ul class="space-y-1">
+                            <li>• Minimal</li>
+                            <li>• Street</li>
+                            <li>• Bold</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-neutral-900 dark:text-dark-text mb-2">Climate</p>
+                        <ul class="space-y-1">
+                            <li>• Tropical</li>
+                            <li>• Mild</li>
+                            <li>• Cold</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-neutral-900 dark:text-dark-text mb-2">Mood</p>
+                        <ul class="space-y-1">
+                            <li>• Elevated</li>
+                            <li>• Relaxed</li>
+                            <li>• Sporty</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <section class="py-6 border-t border-b border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card">
+        <div class="container-custom flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm">
+            <div class="flex flex-wrap gap-3">
+                <button class="btn btn-secondary text-sm px-4 py-2">All</button>
+                <button class="btn btn-ghost text-sm px-4 py-2">Work</button>
+                <button class="btn btn-ghost text-sm px-4 py-2">Weekend</button>
+                <button class="btn btn-ghost text-sm px-4 py-2">Formal</button>
+                <button class="btn btn-ghost text-sm px-4 py-2">Travel</button>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <select class="form-input w-full md:w-auto">
+                    <option>Sort by: Latest</option>
+                    <option>Most saved</option>
+                    <option>Color palette</option>
+                </select>
+                <button class="btn btn-primary w-full md:w-auto">Save filter</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outfit Collection -->
+    <section id="collection" class="py-12 md:py-16">
+        <div class="container-custom space-y-10">
+            <!-- Section -->
+            <div>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">01</p>
+                        <h2 class="font-rufina text-3xl font-bold">Smart Work Staples</h2>
+                        <p class="text-sm text-neutral-500 dark:text-neutral-400">Polished silhouettes designed for hybrid offices.</p>
+                    </div>
+                    <a href="#" class="text-primary-600 dark:text-primary-400 text-sm hover:underline mt-4 sm:mt-0">View all</a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <article class="product-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="product-card-image bg-neutral-200 dark:bg-dark-surface"></div>
+                        <div class="product-card-content space-y-2">
+                            <h3 class="product-card-title">Monochrome Layer</h3>
+                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Blazer, knit top, tailored culottes.</p>
+                            <button class="btn btn-secondary w-full text-sm">Preview Look</button>
+                        </div>
+                    </article>
+                    <article class="product-card" data-aos="fade-up" data-aos-delay="50">
+                        <div class="product-card-image bg-neutral-200 dark:bg-dark-surface"></div>
+                        <div class="product-card-content space-y-2">
+                            <h3 class="product-card-title">Soft Power Suit</h3>
+                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Pistachio suit + silk cami.</p>
+                            <button class="btn btn-secondary w-full text-sm">Preview Look</button>
+                        </div>
+                    </article>
+                    <article class="product-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-card-image bg-neutral-200 dark:bg-dark-surface"></div>
+                        <div class="product-card-content space-y-2">
+                            <h3 class="product-card-title">Desk-to-dinner</h3>
+                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Wrap dress with sculpted blazer.</p>
+                            <button class="btn btn-secondary w-full text-sm">Preview Look</button>
+                        </div>
+                    </article>
+                    <article class="product-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="product-card-image bg-neutral-200 dark:bg-dark-surface"></div>
+                        <div class="product-card-content space-y-2">
+                            <h3 class="product-card-title">Creative Studio</h3>
+                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Structured vest, wide-leg denim.</p>
+                            <button class="btn btn-secondary w-full text-sm">Preview Look</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">02</p>
+                        <h2 class="font-rufina text-3xl font-bold">Weekend Ease</h2>
+                        <p class="text-sm text-neutral-500 dark:text-neutral-400">Low-effort fits with elevated texture play.</p>
+                    </div>
+                    <a href="#" class="text-primary-600 dark:text-primary-400 text-sm hover:underline mt-4 sm:mt-0">View all</a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- repeating cards similar to above, placeholders -->
+                    <article class="product-card">
+                        <div class="product-card-image bg-neutral-200 dark:bg-dark-surface"></div>
+                        <div class="product-card-content space-y-2">
+                            <h3 class="product-card-title">City stroll</h3>
+                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Oversized shirt, relaxed shorts.</p>
+                            <button class="btn btn-secondary w-full text-sm">Preview Look</button>
+                        </div>
+                    </article>
+                    <article class="product-card">
+                        <div class="product-card-image bg-neutral-200 dark:bg-dark-surface"></div>
+                        <div class="product-card-content space-y-2">
+                            <h3 class="product-card-title">Coffee run</h3>
+                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Crochet vest, wide-leg denim.</p>
+                            <button class="btn btn-secondary w-full text-sm">Preview Look</button>
+                        </div>
+                    </article>
+                    <article class="product-card">
+                        <div class="product-card-image bg-neutral-200 dark:bg-dark-surface"></div>
+                        <div class="product-card-content space-y-2">
+                            <h3 class="product-card-title">Brunch set</h3>
+                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Matching knit set + slides.</p>
+                            <button class="btn btn-secondary w-full text-sm">Preview Look</button>
+                        </div>
+                    </article>
+                    <article class="product-card">
+                        <div class="product-card-image bg-neutral-200 dark:bg-dark-surface"></div>
+                        <div class="product-card-content space-y-2">
+                            <h3 class="product-card-title">Off-duty mono</h3>
+                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Cream tee, pleated trouser.</p>
+                            <button class="btn btn-secondary w-full text-sm">Preview Look</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12 md:py-16 bg-gradient-to-r from-primary-500 to-accent-500 text-white">
+        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div>
+                <h2 class="font-rufina text-3xl font-bold mb-2">Need an outfit ASAP?</h2>
+                <p class="text-white/80 max-w-2xl text-sm sm:text-base">Send us the event, mood, and dress code. We’ll build 3 shoppable looks and drop them into your dashboard within 24 hours.</p>
+            </div>
+            <a href="contact.html" class="btn btn-ghost border-white text-white w-full md:w-auto text-center">Request Stylist Help</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
+        <div class="container-custom text-center text-sm text-neutral-400 dark:text-neutral-500">
+            <p>&copy; 2025 StyleHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>
+
