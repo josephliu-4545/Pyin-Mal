@@ -25,9 +25,9 @@
     <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
         <nav class="container-custom">
             <div class="flex items-center justify-between h-16 gap-6">
-                <a href="../index.html" class="flex items-center space-x-2">
-                    <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-primary-600 text-white font-semibold">PM</span>
-                    <span class="font-rufina text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
                 </a>
 
                 <div class="hidden lg:flex items-center space-x-6">
@@ -39,9 +39,9 @@
                         </button>
                         <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
                             <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
-                                <li><a href="model-preview.html#hair" class="hover:text-primary-600 dark:hover:text-primary-300">Hair Recommendations</a></li>
-                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300">Curated Fashion Sets</a></li>
-                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300">Model Preview</a></li>
+                                <li><a href="model-preview.html#hair" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
                             </ul>
                         </div>
                     </div>
@@ -54,34 +54,33 @@
                         </button>
                         <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
                             <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
-                                <a href="../index.html#reviews" class="hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
-                                <a href="contact.html" class="hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
-                                <a href="about.html" class="hover:text-primary-600 dark:hover:text-primary-300">About us</a>
-                                <a href="faq.html" class="hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <a href="../index.html#reviews" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
                                 <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
-                                <a href="pricing.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
-                                <a href="testimonials.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
-                                <a href="blog.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
-                                <a href="locations.html" class="text-neutral-500 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
                             </div>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-link nav-link-active">Contact</a>
                 </div>
 
-                <div class="flex items-center space-x-3">
-                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
                         <span id="theme-icon">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                         </span>
                     </button>
-                    <button class="theme-toggle" aria-label="Cart">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
                     </button>
-                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-5 py-2">Sign In</a>
-                    <a href="signup.html" class="btn btn-primary px-5 py-2">Get Started</a>
-                    <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
                 </div>
             </div>
@@ -122,24 +121,24 @@
     </header>
 
     <!-- Hero -->
-    <section class="bg-gradient-to-r from-primary-500 to-accent-500 text-white py-16 md:py-24">
-        <div class="container-custom text-center max-w-3xl mx-auto" data-aos="fade-up">
-            <p class="text-xs uppercase tracking-[0.4em] text-white/70 mb-3">Contact us</p>
-            <h1 class="font-rufina text-3xl md:text-5xl font-bold leading-tight mb-4">Let’s build your signature look</h1>
-            <p class="text-white/80 text-base md:text-lg">
+    <section class="bg-gradient-to-r from-primary-500 to-accent-500 text-white py-6 sm:py-12 md:py-16 lg:py-24">
+        <div class="container-custom text-center max-w-3xl mx-auto px-4 sm:px-6" data-aos="fade-up">
+            <p class="text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.4em] text-white/70 mb-2 sm:mb-3">Contact us</p>
+            <h1 class="font-rufina text-lg sm:text-2xl md:text-3xl lg:text-5xl font-bold leading-tight mb-2 sm:mb-4">Let's build your signature look</h1>
+            <p class="text-white/80 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-2 sm:px-0">
                 Whether you need a full wardrobe revamp, quick grooming advice, or partnership info—our team responds within 24 hours.
             </p>
         </div>
     </section>
 
     <!-- Contact Details & Form -->
-    <main class="py-12 md:py-16">
-        <div class="container-custom grid grid-cols-1 lg:grid-cols-3 gap-10">
+    <main class="py-6 sm:py-8 md:py-12 lg:py-16">
+        <div class="container-custom grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 px-4 sm:px-6">
             <!-- Contact Info -->
-            <div class="space-y-6" data-aos="fade-right">
-                <div class="product-card p-6">
-                    <h3 class="font-rufina text-2xl font-semibold mb-4">Reach the team</h3>
-                    <div class="space-y-4 text-sm text-neutral-600 dark:text-neutral-400">
+            <div class="space-y-4 sm:space-y-6" data-aos="fade-right">
+                <div class="product-card p-4 sm:p-6">
+                    <h3 class="font-rufina text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Reach the team</h3>
+                    <div class="space-y-3 sm:space-y-4 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
                         <div>
                             <p class="font-semibold text-neutral-900 dark:text-dark-text">Email</p>
                             <a href="mailto:hello@stylehub.com" class="text-primary-600 dark:text-primary-400">hello@stylehub.com</a>
@@ -154,43 +153,43 @@
                         </div>
                     </div>
                 </div>
-                <div class="product-card p-6">
-                    <h3 class="font-rufina text-2xl font-semibold mb-4">Visit us</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                <div class="product-card p-4 sm:p-6">
+                    <h3 class="font-rufina text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Visit us</h3>
+                    <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4">
                         27 Fashion Walk, Level 9<br>
                         Singapore 238881
                     </p>
-                    <div class="rounded-2xl overflow-hidden bg-neutral-200 h-48 flex items-center justify-center text-neutral-600">
+                    <div class="rounded-2xl overflow-hidden bg-neutral-200 dark:bg-dark-surface h-32 sm:h-48 flex items-center justify-center text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm">
                         <span>Map placeholder</span>
                     </div>
                 </div>
-                <div class="product-card p-6">
-                    <h3 class="font-rufina text-2xl font-semibold mb-4">Collaboration & press</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                <div class="product-card p-4 sm:p-6">
+                    <h3 class="font-rufina text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Collaboration & press</h3>
+                    <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4">
                         We partner with designers, grooming brands, and content creators to launch limited drops and events.
                     </p>
-                    <a href="mailto:press@stylehub.com" class="btn btn-secondary w-full">Email the team</a>
+                    <a href="mailto:press@stylehub.com" class="btn btn-secondary w-full text-sm sm:text-base py-2 sm:py-3">Email the team</a>
                 </div>
             </div>
 
             <!-- Form -->
-            <div class="lg:col-span-2 bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark p-8 md:p-10" data-aos="fade-left">
-                <h2 class="font-rufina text-3xl font-bold mb-6">Send us a message</h2>
-                <p class="text-neutral-600 dark:text-neutral-400 mb-8">Tell us what you’re working on and we’ll match you with the right stylist or specialist.</p>
-                <form class="space-y-5">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="lg:col-span-2 bg-white dark:bg-dark-card rounded-2xl sm:rounded-3xl shadow-soft dark:shadow-soft-dark p-4 sm:p-6 md:p-8 lg:p-10" data-aos="fade-left">
+                <h2 class="font-rufina text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 md:mb-6">Send us a message</h2>
+                <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-4 sm:mb-6 md:mb-8">Tell us what you're working on and we'll match you with the right stylist or specialist.</p>
+                <form class="space-y-4 sm:space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                         <div>
-                            <label for="contact-name" class="form-label">Full Name</label>
-                            <input type="text" id="contact-name" class="form-input" placeholder="Your name" required>
+                            <label for="contact-name" class="form-label text-xs sm:text-sm">Full Name</label>
+                            <input type="text" id="contact-name" class="form-input text-sm sm:text-base py-2 sm:py-3" placeholder="Your name" required>
                         </div>
                         <div>
-                            <label for="contact-email" class="form-label">Email address</label>
-                            <input type="email" id="contact-email" class="form-input" placeholder="you@email.com" required>
+                            <label for="contact-email" class="form-label text-xs sm:text-sm">Email address</label>
+                            <input type="email" id="contact-email" class="form-input text-sm sm:text-base py-2 sm:py-3" placeholder="you@email.com" required>
                         </div>
                     </div>
                     <div>
-                        <label for="contact-topic" class="form-label">Topic</label>
-                        <select id="contact-topic" class="form-input">
+                        <label for="contact-topic" class="form-label text-xs sm:text-sm">Topic</label>
+                        <select id="contact-topic" class="form-input text-sm sm:text-base py-2 sm:py-3">
                             <option>Styling Consultation</option>
                             <option>Grooming Advice</option>
                             <option>Partnerships</option>
@@ -198,14 +197,14 @@
                         </select>
                     </div>
                     <div>
-                        <label for="contact-message" class="form-label">Message</label>
-                        <textarea id="contact-message" rows="4" class="form-input" placeholder="Share details about your request..." required></textarea>
+                        <label for="contact-message" class="form-label text-xs sm:text-sm">Message</label>
+                        <textarea id="contact-message" rows="4" class="form-input text-sm sm:text-base py-2 sm:py-3" placeholder="Share details about your request..." required></textarea>
                     </div>
-                    <div class="flex items-start space-x-3 text-sm text-neutral-600 dark:text-neutral-400">
-                        <input type="checkbox" id="subscribe" class="filter-checkbox mt-1">
-                        <label for="subscribe">Keep me updated with styling newsletters and exclusive drops.</label>
+                    <div class="flex items-start space-x-2 sm:space-x-3 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
+                        <input type="checkbox" id="subscribe" class="filter-checkbox mt-0.5 sm:mt-1 flex-shrink-0">
+                        <label for="subscribe" class="leading-relaxed">Keep me updated with styling newsletters and exclusive drops.</label>
                     </div>
-                    <button type="submit" class="btn btn-primary w-full">Submit</button>
+                    <button type="submit" class="btn btn-primary w-full text-sm sm:text-base py-2.5 sm:py-3">Submit</button>
                 </form>
             </div>
         </div>
