@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sample privacy policy for the Pyin Mal styling platform (front-end contest build).">
+    <title>Privacy Policy - Pyin Mal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="curated-sets.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
+                            <a href="curated-sets.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="reviews.html" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link">Pricing</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-10 sm:py-14 md:py-16 bg-neutral-900 text-white">
+        <div class="container-custom space-y-6">
+            <div class="max-w-3xl" data-aos="fade-up">
+                <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Privacy policy</p>
+                <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">How Pyin Mal handles data in this contest build.</h1>
+                <p class="text-sm sm:text-base text-white/80">This project is a front-end only prototype for a design contest. That means there is no backend, no database, and we are not storing any personal data from visitors.</p>
+            </div>
+            <div class="product-card bg-white/5 border-white/10 text-sm text-white/80 p-4 sm:p-5 max-w-2xl" data-aos="fade-up" data-aos-delay="50">
+                <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-2">Important</p>
+                <ul class="space-y-1">
+                    <li>• We do not store or transmit any camera, image, or form data in this demo.</li>
+                    <li>• There are no cookies, analytics scripts, or trackers enabled right now.</li>
+                    <li>• Future real-world versions may add analytics and storage, which will require an updated policy.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <main class="py-10 sm:py-14">
+        <div class="container-custom space-y-10 text-sm text-neutral-700 dark:text-neutral-300">
+            <!-- Section 1 -->
+            <section data-aos="fade-up">
+                <h2 class="font-rufina text-2xl mb-3">1. Scope of this policy</h2>
+                <p class="mb-3">This privacy policy applies to the contest version of the Pyin Mal styling platform. The goal of this build is to demonstrate UI/UX, not to handle real customer data.</p>
+                <p>Any references to “we”, “our”, or “Pyin Mal” in this document refer to the project team building this prototype.</p>
+            </section>
+
+            <!-- Section 2 -->
+            <section data-aos="fade-up">
+                <h2 class="font-rufina text-2xl mb-3">2. What data we collect in this demo</h2>
+                <p class="mb-3">In this contest version, the website runs entirely in your browser. We do <span class="font-semibold">not</span> send any of the following to a server:</p>
+                <ul class="list-disc pl-5 space-y-1 mb-3">
+                    <li>Camera feed or uploaded photos from the Face Scan page.</li>
+                    <li>Any text typed into forms (Contact, FAQ teaser, pricing interest forms).</li>
+                    <li>Any selections made in filters, generators, or Saved Fashion.</li>
+                </ul>
+                <p>All interactions stay on your device and are cleared when you refresh or close the page.</p>
+            </section>
+
+            <!-- Section 3 -->
+            <section data-aos="fade-up">
+                <h2 class="font-rufina text-2xl mb-3">3. Face scan & MediaPipe (future state)</h2>
+                <p class="mb-3">The Face Scan page is currently a UI shell that simulates the flow but does not actually run MediaPipe. In a real-world implementation we plan to:</p>
+                <ul class="list-disc pl-5 space-y-1 mb-3">
+                    <li>Process camera and image data locally in your browser using MediaPipe Face Mesh.</li>
+                    <li>Avoid sending raw face images to our servers unless you explicitly agree.</li>
+                    <li>Optionally store anonymised measurements (for example, face shape classification) to improve recommendations.</li>
+                </ul>
+                <p>Before launching a real service, we would update this policy with clear details and consent options.</p>
+            </section>
+
+            <!-- Section 4 -->
+            <section data-aos="fade-up">
+                <h2 class="font-rufina text-2xl mb-3">4. Cookies and analytics</h2>
+                <p class="mb-3">Right now, this prototype does not use any cookies, analytics tools, or third-party trackers such as Google Analytics, Meta Pixel, or session replay services.</p>
+                <p class="mb-3">For a future production version, we may integrate:</p>
+                <ul class="list-disc pl-5 space-y-1 mb-3">
+                    <li>Basic analytics to understand which pages are visited the most.</li>
+                    <li>Conversion tracking to see which styling plans are popular.</li>
+                </ul>
+                <p>If we add these, we will:</p>
+                <ul class="list-disc pl-5 space-y-1 mb-3">
+                    <li>Provide a cookie banner or settings panel.</li>
+                    <li>Explain what data is collected and why.</li>
+                    <li>Offer an easy way to opt out of non-essential cookies.</li>
+                </ul>
+            </section>
+
+            <!-- Section 5 -->
+            <section data-aos="fade-up">
+                <h2 class="font-rufina text-2xl mb-3">5. Forms & contact</h2>
+                <p class="mb-3">The contact and question forms in this contest build are purely visual. Submissions are not actually sent anywhere.</p>
+                <p>In a real deployment, we would connect these forms to an email inbox or CRM. At that point we would explain:</p>
+                <ul class="list-disc pl-5 space-y-1 mb-3">
+                    <li>What fields are required (name, email, styling goals, etc.).</li>
+                    <li>How long we keep messages.</li>
+                    <li>How you can request deletion of your information.</li>
+                </ul>
+            </section>
+
+            <!-- Section 6 -->
+            <section data-aos="fade-up">
+                <h2 class="font-rufina text-2xl mb-3">6. Your rights</h2>
+                <p class="mb-3">Because this prototype doesn’t store personal data, there is nothing for us to access, export, or delete on your behalf.</p>
+                <p>For a real product, you should expect rights such as:</p>
+                <ul class="list-disc pl-5 space-y-1 mb-3">
+                    <li>Access to the personal data we hold about you.</li>
+                    <li>Correction of inaccurate data.</li>
+                    <li>Deletion of your data on request, where applicable.</li>
+                </ul>
+            </section>
+
+            <!-- Section 7 -->
+            <section data-aos="fade-up">
+                <h2 class="font-rufina text-2xl mb-3">7. Contact</h2>
+                <p class="mb-3">If you have questions about how this prototype handles privacy, or if you want help adapting this policy for a real deployment, you can reach the project team via the Contact page.</p>
+                <a href="contact.html" class="btn btn-secondary mt-2">Go to Contact</a>
+            </section>
+
+            <section data-aos="fade-up">
+                <p class="text-xs text-neutral-500 dark:text-neutral-500">This privacy policy is a sample document created for a design contest and is not legal advice. For a production deployment, please have a lawyer review and localize this text.</p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
+        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between text-sm">
+            <div>
+                <p class="font-rufina text-2xl">Pyin Mal</p>
+                <p class="text-neutral-400 dark:text-neutral-500">Wardrobe & grooming intelligence.</p>
+            </div>
+            <div class="flex flex-wrap gap-6 text-neutral-400 dark:text-neutral-500">
+                <a href="privacy.html" class="hover:text-white">Privacy</a>
+                <a href="terms.html" class="hover:text-white">Terms</a>
+                <a href="contact.html" class="hover:text-white">Contact</a>
+            </div>
+            <div class="text-neutral-500 dark:text-neutral-400 text-xs">© 2025 Pyin Mal. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>
+
+

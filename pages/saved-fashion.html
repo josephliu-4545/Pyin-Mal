@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your saved Pyin Mal outfits and grooming combinations in one place.">
+    <title>Saved Fashion - Pyin Mal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="curated-sets.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
+                            <a href="curated-sets.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="reviews.html" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-10 sm:py-14 md:py-16 bg-neutral-900 text-white">
+        <div class="container-custom space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div data-aos="fade-right">
+                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Saved fashion</p>
+                    <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Your approved outfits and grooming combos, all in one clipboard.</h1>
+                    <p class="text-sm sm:text-base text-white/80">Everything you’ve favorited from the generator, shop, and curated sets lands here—ready for re-use, styling tweaks, or sending to your stylist.</p>
+                </div>
+                <div class="product-card bg-white/5 border-white/10 text-sm w-full md:max-w-sm" data-aos="fade-left">
+                    <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-3">Overview</p>
+                    <div class="grid grid-cols-3 gap-3 text-center text-white/80">
+                        <div>
+                            <p class="font-rufina text-2xl">09</p>
+                            <p class="text-[11px] uppercase tracking-[0.2em] text-white/60 mt-1">Saved looks</p>
+                        </div>
+                        <div>
+                            <p class="font-rufina text-2xl">04</p>
+                            <p class="text-[11px] uppercase tracking-[0.2em] text-white/60 mt-1">Hair presets</p>
+                        </div>
+                        <div>
+                            <p class="font-rufina text-2xl">03</p>
+                            <p class="text-[11px] uppercase tracking-[0.2em] text-white/60 mt-1">Grooming kits</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card p-4 bg-white/5 border-white/10 flex flex-wrap gap-3 text-xs text-white/80" data-aos="fade-up">
+                <span class="px-3 py-1 rounded-full bg-white/10">Work</span>
+                <span class="px-3 py-1 rounded-full bg-white/10">Weekend</span>
+                <span class="px-3 py-1 rounded-full bg-white/10">Events</span>
+                <span class="px-3 py-1 rounded-full bg-white/10">Hair</span>
+                <span class="px-3 py-1 rounded-full bg-white/10">Grooming</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="py-8 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom" data-aos="fade-up">
+            <div class="product-card p-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                <div class="flex flex-wrap gap-3 text-sm">
+                    <button class="filter-chip active" data-filter="all">All</button>
+                    <button class="filter-chip" data-filter="work">Work</button>
+                    <button class="filter-chip" data-filter="weekend">Weekend</button>
+                    <button class="filter-chip" data-filter="event">Event</button>
+                    <button class="filter-chip" data-filter="hair">Hair</button>
+                    <button class="filter-chip" data-filter="grooming">Grooming</button>
+                </div>
+                <div class="flex gap-3 w-full lg:w-auto">
+                    <input type="search" id="saved-search" class="form-input flex-1" placeholder="Search saved looks by name or tag">
+                    <button class="btn btn-secondary px-4" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Saved looks grid -->
+    <section class="py-10 sm:py-14">
+        <div class="container-custom space-y-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <article class="shop-card" data-saved-card data-category="work" data-aos="fade-up">
+                    <div class="shop-card-media">
+                        <img src="../assets/images/looks/saved-look-work-01.jpg" alt="Saved work look 1">
+                        <button class="shop-favorite saved" aria-label="Saved look">
+                            <span>♥</span>
+                        </button>
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Work</p>
+                            <h3>Boardroom soft suit</h3>
+                            <p class="shop-card-desc">Tailored blazer, pleated trouser, knit tank, and glass hair preset.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Work capsule</span>
+                            <a href="model-preview.html" class="btn btn-secondary px-3 py-1.5 text-xs">Open in preview</a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Card 2 -->
+                <article class="shop-card" data-saved-card data-category="weekend" data-aos="fade-up" data-aos-delay="50">
+                    <div class="shop-card-media">
+                        <img src="../assets/images/looks/saved-look-weekend-01.jpg" alt="Saved weekend look 1">
+                        <button class="shop-favorite saved" aria-label="Saved look">
+                            <span>♥</span>
+                        </button>
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Weekend</p>
+                            <h3>Denim + knit cafe set</h3>
+                            <p class="shop-card-desc">Relaxed denim, ribbed knit, sneakers, and air-dry wave hair preset.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Weekend capsule</span>
+                            <a href="model-preview.html" class="btn btn-secondary px-3 py-1.5 text-xs">Open in preview</a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Card 3 -->
+                <article class="shop-card" data-saved-card data-category="event" data-aos="fade-up" data-aos-delay="100">
+                    <div class="shop-card-media">
+                        <img src="../assets/images/looks/saved-look-event-01.jpg" alt="Saved event look 1">
+                        <button class="shop-favorite saved" aria-label="Saved look">
+                            <span>♥</span>
+                        </button>
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Event</p>
+                            <h3>Chrome hour launch look</h3>
+                            <p class="shop-card-desc">Statement dress, chrome accessories, and evening grooming kit.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Event capsule</span>
+                            <a href="model-preview.html" class="btn btn-secondary px-3 py-1.5 text-xs">Open in preview</a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Card 4 -->
+                <article class="shop-card" data-saved-card data-category="hair" data-aos="fade-up">
+                    <div class="shop-card-media">
+                        <img src="../assets/images/looks/saved-look-hair-01.jpg" alt="Saved haircut preset 1">
+                        <button class="shop-favorite saved" aria-label="Saved look">
+                            <span>♥</span>
+                        </button>
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Hair</p>
+                            <h3>Fluid long layers preset</h3>
+                            <p class="shop-card-desc">Cut notes and product combo saved from Haircut Recommendations.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Haircut recs</span>
+                            <a href="haircut-recommendations.html" class="btn btn-secondary px-3 py-1.5 text-xs">View cut notes</a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Card 5 -->
+                <article class="shop-card" data-saved-card data-category="grooming" data-aos="fade-up" data-aos-delay="50">
+                    <div class="shop-card-media">
+                        <img src="../assets/images/looks/saved-look-grooming-01.jpg" alt="Saved grooming kit 1">
+                        <button class="shop-favorite saved" aria-label="Saved look">
+                            <span>♥</span>
+                        </button>
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Grooming</p>
+                            <h3>Reset ritual kit</h3>
+                            <p class="shop-card-desc">Clarifying wash + mask combo that anchors your weekly reset.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Grooming packages</span>
+                            <a href="curated-sets.html#events" class="btn btn-secondary px-3 py-1.5 text-xs">See package</a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Card 6 -->
+                <article class="shop-card" data-saved-card data-category="work" data-aos="fade-up" data-aos-delay="100">
+                    <div class="shop-card-media">
+                        <img src="../assets/images/looks/saved-look-work-02.jpg" alt="Saved work look 2">
+                        <button class="shop-favorite saved" aria-label="Saved look">
+                            <span>♥</span>
+                        </button>
+                    </div>
+                    <div class="shop-card-body">
+                        <div>
+                            <p class="shop-card-tag">Work</p>
+                            <h3>Keynote stage look</h3>
+                            <p class="shop-card-desc">Structured suit, pointed heels, and light-reflecting skin preset.</p>
+                        </div>
+                        <div class="shop-card-footer">
+                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Live experience</span>
+                            <a href="model-preview.html" class="btn btn-secondary px-3 py-1.5 text-xs">Open in preview</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA strip -->
+    <section class="py-12 md:py-16 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom">
+            <div class="rounded-[32px] bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-8 md:p-12 flex flex-col lg:flex-row gap-6 md:gap-10 items-center">
+                <div class="space-y-3 lg:w-2/3">
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Next</p>
+                    <h2 class="font-rufina text-3xl font-bold">Want us to turn these saved looks into a physical drop?</h2>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Share your size data and timing. We’ll either ship a curated trunk or send shoppable links to your local boutiques.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                    <a href="shop-browsing.html" class="btn btn-secondary w-full sm:w-auto">Add more looks</a>
+                    <a href="contact.html" class="btn btn-primary w-full sm:w-auto">Request styling drop</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
+        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between text-sm">
+            <div>
+                <p class="font-rufina text-2xl">Pyin Mal</p>
+                <p class="text-neutral-400 dark:text-neutral-500">Wardrobe & grooming intelligence.</p>
+            </div>
+            <div class="flex flex-wrap gap-6 text-neutral-400 dark:text-neutral-500">
+                <a href="privacy.html" class="hover:text-white">Privacy</a>
+                <a href="terms.html" class="hover:text-white">Terms</a>
+                <a href="contact.html" class="hover:text-white">Contact</a>
+            </div>
+            <div class="text-neutral-500 dark:text-neutral-400 text-xs">© 2025 Pyin Mal. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('saved-search');
+            const cards = Array.from(document.querySelectorAll('[data-saved-card]'));
+            const filterChips = Array.from(document.querySelectorAll('.filter-chip[data-filter]'));
+            let activeFilter = 'all';
+
+            function matchesFilter(card) {
+                const category = card.dataset.category;
+                return activeFilter === 'all' || category === activeFilter;
+            }
+
+            function matchesSearch(card) {
+                const term = searchInput.value.trim().toLowerCase();
+                if (!term) return true;
+                const text = card.innerText.toLowerCase();
+                return text.includes(term);
+            }
+
+            function applyFilters() {
+                cards.forEach(card => {
+                    const visible = matchesFilter(card) && matchesSearch(card);
+                    card.classList.toggle('hidden', !visible);
+                });
+            }
+
+            searchInput.addEventListener('input', applyFilters);
+
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    activeFilter = chip.dataset.filter;
+                    filterChips.forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    applyFilters();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+

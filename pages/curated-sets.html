@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Curated fashion sets and grooming packages designed by the Pyin Mal studio.">
+    <title>Curated Sets - Pyin Mal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="curated-sets.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2 nav-link-active">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
+                            <a href="curated-sets.html" class="nav-link nav-link-active">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="reviews.html" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-10 sm:py-14 md:py-16 bg-gradient-to-br from-primary-600 via-accent-500 to-primary-500 text-white">
+        <div class="container-custom space-y-10">
+            <div class="grid grid-cols-1 lg:grid-cols-[3fr,2fr] gap-10 items-center">
+                <div data-aos="fade-right">
+                    <p class="text-xs uppercase tracking-[0.4em] text-white/70 mb-3">Curated sets</p>
+                    <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Ready-made wardrobes and grooming kits for each chapter of your life.</h1>
+                    <p class="text-sm sm:text-base text-white/85 mb-6">Instead of styling single pieces, we build mini-systems—looks, hair, and care routines that move together from weekday to weekend, on-camera to off-duty.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#sets" class="btn btn-primary bg-white text-primary-600 hover:bg-neutral-100">Explore sets</a>
+                        <a href="shop-browsing.html" class="btn btn-ghost border-white text-white hover:bg-white/10">Browse individual items</a>
+                    </div>
+                </div>
+                <div class="bg-white/10 border border-white/20 rounded-[32px] overflow-hidden shadow-2xl backdrop-blur" data-aos="fade-left">
+                    <img src="../assets/images/hero/curated-sets-hero.jpg" alt="Curated outfits on rack" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key categories -->
+    <section id="sets" class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom space-y-8">
+            <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Collections</p>
+                <h2 class="font-rufina text-3xl font-bold mb-3">Sets we assemble most often</h2>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Pick a starting point—work, weekend, or events. We’ll adapt lengths, color stories, and grooming add-ons to your face shape and schedule.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <article class="product-card p-0 overflow-hidden" data-aos="fade-up">
+                    <div class="aspect-[4/3]">
+                        <img src="../assets/images/looks/curated-work-01.jpg" alt="Work capsule" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Work capsule</p>
+                        <h3 class="font-rufina text-2xl">Soft structure commute set</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Three looks mixing blazers, trousers, and knitwear, plus hair and grooming presets for office days.</p>
+                        <div class="flex items-center justify-between text-xs">
+                            <span>6–8 pieces</span>
+                            <a href="#work" class="text-primary-600 dark:text-primary-400 hover:underline">View details</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="50">
+                    <div class="aspect-[4/3]">
+                        <img src="../assets/images/looks/curated-weekend-01.jpg" alt="Weekend capsule" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Weekend capsule</p>
+                        <h3 class="font-rufina text-2xl">Off-duty street & cafe kit</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Denim, knits, and sneakers that layer easily with minimal styling effort.</p>
+                        <div class="flex items-center justify-between text-xs">
+                            <span>5–7 pieces</span>
+                            <a href="#weekend" class="text-primary-600 dark:text-primary-400 hover:underline">View details</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aspect-[4/3]">
+                        <img src="../assets/images/looks/curated-event-01.jpg" alt="Event capsule" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Event capsule</p>
+                        <h3 class="font-rufina text-2xl">Launch night wardrobe</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Statement pieces, accessories, and grooming kits tuned for evening light.</p>
+                        <div class="flex items-center justify-between text-xs">
+                            <span>4–6 pieces</span>
+                            <a href="#events" class="text-primary-600 dark:text-primary-400 hover:underline">View details</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed set sections -->
+    <section class="py-10 sm:py-14">
+        <div class="container-custom space-y-12">
+            <!-- Work section -->
+            <div id="work" class="grid grid-cols-1 lg:grid-cols-[3fr,2fr] gap-8 items-start">
+                <div class="space-y-4" data-aos="fade-right">
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Work capsule</p>
+                    <h2 class="font-rufina text-3xl font-bold">Soft structure for hybrid weeks</h2>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">We mix structured tailoring with relaxed pieces so you can move from calls to cafes without changing silhouettes entirely.</p>
+                    <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                        <li>• Two blazer options (neutral & accent) matched with coordinating trousers.</li>
+                        <li>• Knit tops or shirts that layer cleanly under jackets.</li>
+                        <li>• Haircut presets and grooming products suitable for office lighting.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-3 text-xs">
+                        <span class="badge">Office-ready</span>
+                        <span class="badge">Low maintenance</span>
+                        <span class="badge">Mix & match</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4" data-aos="fade-left">
+                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
+                        <img src="../assets/images/looks/curated-work-02.jpg" alt="Blazer set" class="w-full h-full object-cover">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
+                        <img src="../assets/images/looks/curated-work-03.jpg" alt="Work capsule flatlay" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekend section -->
+            <div id="weekend" class="grid grid-cols-1 lg:grid-cols-[2fr,3fr] gap-8 items-start">
+                <div class="grid grid-cols-2 gap-4 order-2 lg:order-1" data-aos="fade-right">
+                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
+                        <img src="../assets/images/looks/curated-weekend-02.jpg" alt="Weekend looks" class="w-full h-full object-cover">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
+                        <img src="../assets/images/looks/curated-weekend-03.jpg" alt="Denim and knitwear" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="space-y-4 order-1 lg:order-2" data-aos="fade-left">
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Weekend capsule</p>
+                    <h2 class="font-rufina text-3xl font-bold">Street, cafe, and quick trips</h2>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">We keep the silhouettes relaxed but intentional, so you always look “ready” even if it’s just for coffee or errands.</p>
+                    <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                        <li>• Denim and trousers that share the same footwear.</li>
+                        <li>• Tops that can be tucked, layered, or worn loose.</li>
+                        <li>• Simple hair and grooming presets that don’t require tools.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-3 text-xs">
+                        <span class="badge">Comfort first</span>
+                        <span class="badge">Carry-on friendly</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events section -->
+            <div id="events" class="grid grid-cols-1 lg:grid-cols-[3fr,2fr] gap-8 items-start">
+                <div class="space-y-4" data-aos="fade-right">
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Event capsule</p>
+                    <h2 class="font-rufina text-3xl font-bold">Launch nights & formal gatherings</h2>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Statement outfits get mapped to specific lighting—indoor spotlight, stage, or outdoor evening—so the garments and grooming still read clearly on camera.</p>
+                    <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                        <li>• 1–2 hero looks with backup alternates.</li>
+                        <li>• Accessory sets that can shift the mood without full changes.</li>
+                        <li>• Hair and grooming looks that stay put under heat and flash.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-3 text-xs">
+                        <span class="badge">Red-carpet ready</span>
+                        <span class="badge">Photogenic</span>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4" data-aos="fade-left">
+                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
+                        <img src="../assets/images/looks/curated-event-02.jpg" alt="Evening look" class="w-full h-full object-cover">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
+                        <img src="../assets/images/looks/curated-event-03.jpg" alt="Accessories for events" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grooming packages strip -->
+    <section class="py-10 sm:py-14 bg-neutral-900 text-white">
+        <div class="container-custom space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Grooming packages</p>
+                    <h2 class="font-rufina text-3xl font-bold">Hair & skin kits that ship with your wardrobe</h2>
+                </div>
+                <a href="haircut-recommendations.html" class="btn btn-secondary border-white text-white hover:bg-white/10">See haircut blueprints</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <article class="product-card bg-white/5 border-white/10 p-6" data-aos="fade-up">
+                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Office ready</p>
+                    <h3 class="font-rufina text-2xl mb-2">Desk-to-dinner kit</h3>
+                    <p class="text-sm text-white/80 mb-4">Dry shampoo, texture spray, and blotting essentials that refresh your look between calls and evening events.</p>
+                </article>
+                <article class="product-card bg-white/5 border-white/10 p-6" data-aos="fade-up" data-aos-delay="50">
+                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Weekend reset</p>
+                    <h3 class="font-rufina text-2xl mb-2">Hair + skin reset</h3>
+                    <p class="text-sm text-white/80 mb-4">Clarifying hair wash, mask, and moisturizer routine to close your week before a fresh styling cycle.</p>
+                </article>
+                <article class="product-card bg-white/5 border-white/10 p-6" data-aos="fade-up" data-aos-delay="100">
+                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Shoot day</p>
+                    <h3 class="font-rufina text-2xl mb-2">On-set touch-up kit</h3>
+                    <p class="text-sm text-white/80 mb-4">Everything our stylists carry on set—finishing sprays, shine balms, and emergency fixes.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12 md:py-16 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom">
+            <div class="rounded-[32px] bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-8 md:p-12 flex flex-col lg:flex-row gap-6 md:gap-10 items-center">
+                <div class="space-y-3 lg:w-2/3">
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Next step</p>
+                    <h2 class="font-rufina text-3xl font-bold">Want a set built around your calendar?</h2>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Share your upcoming events, work schedule, and budget. We’ll recommend one or two capsules and grooming packages that fit.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                    <a href="pricing.html" class="btn btn-secondary w-full sm:w-auto">Preview plans</a>
+                    <a href="contact.html" class="btn btn-primary w-full sm:w-auto">Book styling sprint</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
+        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between text-sm">
+            <div>
+                <p class="font-rufina text-2xl">Pyin Mal</p>
+                <p class="text-neutral-400 dark:text-neutral-500">Wardrobe & grooming intelligence.</p>
+            </div>
+            <div class="flex flex-wrap gap-6 text-neutral-400 dark:text-neutral-500">
+                <a href="privacy.html" class="hover:text-white">Privacy</a>
+                <a href="terms.html" class="hover:text-white">Terms</a>
+                <a href="contact.html" class="hover:text-white">Contact</a>
+            </div>
+            <div class="text-neutral-500 dark:text-neutral-400 text-xs">© 2025 Pyin Mal. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>
+
+

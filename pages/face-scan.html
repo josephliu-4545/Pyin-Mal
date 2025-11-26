@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Face scan UI for previewing haircut recommendations using MediaPipe Face Mesh (UI only for now).">
+    <title>Face Scan - Pyin Mal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="curated-sets.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
+                            <a href="curated-sets.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="reviews.html" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link">Pricing</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-10 sm:py-14 md:py-16 bg-gradient-to-br from-neutral-900 via-slate-900 to-neutral-900 text-white">
+        <div class="container-custom grid grid-cols-1 lg:grid-cols-[3fr,2fr] gap-10 items-center">
+            <div data-aos="fade-right">
+                <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Face scan</p>
+                <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Preview haircuts on your actual face—before you book the chair.</h1>
+                <p class="text-sm sm:text-base text-white/80 mb-6">This interface is wired for MediaPipe Face Mesh in the real product. For the contest build, it simulates the flow so we can test layout, privacy copy, and UX.</p>
+                <ul class="space-y-2 text-sm text-white/80 mb-6">
+                    <li>• Uses your camera or a photo upload (front-facing, good light).</li>
+                    <li>• Detects face shape to pair with haircut recommendations.</li>
+                    <li>• Sends chosen presets to the Haircut Recommendations and Saved Fashion pages.</li>
+                </ul>
+                <p class="text-xs uppercase tracking-[0.3em] text-white/50">No data is stored in this demo build.</p>
+            </div>
+            <div class="rounded-[32px] bg-white/5 border border-white/10 p-6 shadow-2xl backdrop-blur" data-aos="fade-left">
+                <div class="aspect-[9/16] rounded-2xl overflow-hidden bg-neutral-900 flex items-center justify-center relative">
+                    <img src="../assets/images/hero/face-scan-hero.jpg" alt="Face scan preview placeholder" class="w-full h-full object-cover opacity-60">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-40 h-40 border-2 border-white/60 rounded-[32px]"></div>
+                    </div>
+                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[11px] text-white/80">
+                        <span>Face mesh: demo</span>
+                        <span>Shape: Oval (sample)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scan UI -->
+    <section class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom grid grid-cols-1 lg:grid-cols-[3fr,2fr] gap-10 items-start">
+            <!-- Left: preview / canvas -->
+            <div class="space-y-4" data-aos="fade-right">
+                <div class="product-card p-4 sm:p-6 bg-neutral-900 dark:bg-neutral-900">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <p class="text-xs uppercase tracking-[0.3em] text-white/60">Live preview</p>
+                        <span class="text-xs text-white/70">Demo only · MediaPipe planned</span>
+                    </div>
+                    <div class="aspect-video rounded-2xl overflow-hidden bg-black flex items-center justify-center text-white/50 text-xs">
+                        Camera / uploaded image will appear here
+                    </div>
+                </div>
+                <div class="product-card p-4 sm:p-6">
+                    <p class="text-xs uppercase tracking-[0.3em] text-neutral-400 mb-3">Status</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-neutral-600 dark:text-neutral-400">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Face shape</p>
+                            <p class="font-rufina text-base">Oval (demo)</p>
+                        </div>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Confidence</p>
+                            <p class="font-rufina text-base">92%</p>
+                        </div>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Lighting</p>
+                            <p class="font-rufina text-base">Good</p>
+                        </div>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Angle</p>
+                            <p class="font-rufina text-base">Centered</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: controls -->
+            <aside class="space-y-6" data-aos="fade-left">
+                <div class="product-card p-5 space-y-4">
+                    <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Capture</p>
+                    <button class="btn btn-primary w-full">Use camera</button>
+                    <button class="btn btn-secondary w-full">Upload photo</button>
+                    <p class="text-[11px] text-neutral-500 dark:text-neutral-400">In the live build, these buttons will trigger camera permissions and run the MediaPipe pipeline in your browser.</p>
+                </div>
+                <div class="product-card p-5 space-y-4">
+                    <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Preferred vibe</p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <button class="badge">Low maintenance</button>
+                        <button class="badge">Editorial</button>
+                        <button class="badge">Soft layers</button>
+                        <button class="badge">Sharp lines</button>
+                    </div>
+                    <p class="text-xs text-neutral-500 dark:text-neutral-400">These tags will connect to Haircut Recommendations to rank which cuts to show first.</p>
+                </div>
+                <div class="product-card p-5 space-y-4">
+                    <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Send to</p>
+                    <div class="space-y-3 text-sm">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" class="filter-checkbox" checked>
+                            <span>Haircut Recommendations page</span>
+                        </label>
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" class="filter-checkbox" checked>
+                            <span>Saved Fashion (hair presets)</span>
+                        </label>
+                    </div>
+                    <button class="btn btn-primary w-full">Save demo preset</button>
+                </div>
+                <div class="product-card p-5 space-y-2 text-xs text-neutral-500 dark:text-neutral-400">
+                    <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400">Privacy</p>
+                    <p>For the contest build we do not store or send any camera data. In production, we will process everything in-browser and only keep anonymized measurements when needed.</p>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- Recommended cuts preview -->
+    <section class="py-10 sm:py-14">
+        <div class="container-custom space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div data-aos="fade-right">
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Preview</p>
+                    <h2 class="font-rufina text-3xl font-bold mb-2">Sample haircuts for this face shape</h2>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">These tiles mirror the Haircut Recommendations page so users can jump straight into full descriptions.</p>
+                </div>
+                <a href="haircut-recommendations.html" class="btn btn-secondary" data-aos="fade-left">Open full recommendations</a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <article class="hair-card" data-aos="fade-up">
+                    <div class="hair-card-img">
+                        <img src="../assets/images/haircuts/haircut-oval-fluid-layers.jpg" alt="Fluid long layers">
+                    </div>
+                    <div class="hair-card-body">
+                        <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Oval · Low care</p>
+                        <h3 class="font-rufina text-xl mb-1">Fluid long layers</h3>
+                        <p class="text-xs text-neutral-600 dark:text-neutral-400">Great if you want to keep length but add movement.</p>
+                    </div>
+                </article>
+                <article class="hair-card" data-aos="fade-up" data-aos-delay="50">
+                    <div class="hair-card-img">
+                        <img src="../assets/images/haircuts/haircut-heart-curtain-lob.jpg" alt="Curtain lob">
+                    </div>
+                    <div class="hair-card-body">
+                        <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Heart · Medium care</p>
+                        <h3 class="font-rufina text-xl mb-1">Curtain lob</h3>
+                        <p class="text-xs text-neutral-600 dark:text-neutral-400">Soft fringe that balances wider foreheads.</p>
+                    </div>
+                </article>
+                <article class="hair-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="hair-card-img">
+                        <img src="../assets/images/haircuts/haircut-square-soft-pixie.jpg" alt="Soft pixie">
+                    </div>
+                    <div class="hair-card-body">
+                        <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Square · Low care</p>
+                        <h3 class="font-rufina text-xl mb-1">Soft pixie</h3>
+                        <p class="text-xs text-neutral-600 dark:text-neutral-400">Shorter sides and airy top to soften the jaw.</p>
+                    </div>
+                </article>
+                <article class="hair-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="hair-card-img">
+                        <img src="../assets/images/haircuts/haircut-oval-stacked-undercut.jpg" alt="Stacked bob">
+                    </div>
+                    <div class="hair-card-body">
+                        <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Oval · Medium care</p>
+                        <h3 class="font-rufina text-xl mb-1">Stacked bob + undercut</h3>
+                        <p class="text-xs text-neutral-600 dark:text-neutral-400">For sharper, more architectural silhouettes.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
+        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between text-sm">
+            <div>
+                <p class="font-rufina text-2xl">Pyin Mal</p>
+                <p class="text-neutral-400 dark:text-neutral-500">Wardrobe & grooming intelligence.</p>
+            </div>
+            <div class="flex flex-wrap gap-6 text-neutral-400 dark:text-neutral-500">
+                <a href="privacy.html" class="hover:text-white">Privacy</a>
+                <a href="terms.html" class="hover:text-white">Terms</a>
+                <a href="contact.html" class="hover:text-white">Contact</a>
+            </div>
+            <div class="text-neutral-500 dark:text-neutral-400 text-xs">© 2025 Pyin Mal. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>
+
+

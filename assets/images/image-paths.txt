@@ -39,6 +39,32 @@ assets/images/grooming/groom-kit-glass-hair.jpg
 assets/images/grooming/groom-kit-skin-prep.jpg
 assets/images/grooming/groom-kit-curl-trio.jpg
 
+## Curated sets page
+assets/images/hero/curated-sets-hero.jpg           # Curated sets hero image
+assets/images/looks/curated-work-01.jpg            # Work capsule card
+assets/images/looks/curated-weekend-01.jpg         # Weekend capsule card
+assets/images/looks/curated-event-01.jpg           # Event capsule card
+assets/images/looks/curated-work-02.jpg            # Work capsule detail image 1
+assets/images/looks/curated-work-03.jpg            # Work capsule detail image 2
+assets/images/looks/curated-weekend-02.jpg         # Weekend capsule detail image 1
+assets/images/looks/curated-weekend-03.jpg         # Weekend capsule detail image 2
+assets/images/looks/curated-event-02.jpg           # Event capsule detail image 1
+assets/images/looks/curated-event-03.jpg           # Event capsule detail image 2
+
+## Saved fashion page
+assets/images/looks/saved-look-work-01.jpg         # Saved work look 1
+assets/images/looks/saved-look-weekend-01.jpg      # Saved weekend look 1
+assets/images/looks/saved-look-event-01.jpg        # Saved event look 1
+assets/images/looks/saved-look-hair-01.jpg         # Saved haircut preset 1
+assets/images/looks/saved-look-grooming-01.jpg     # Saved grooming kit 1
+assets/images/looks/saved-look-work-02.jpg         # Saved work look 2
+
+## Pricing page (optional visuals if needed later)
+assets/images/hero/pricing-hero.jpg                # Pricing hero (if added)
+
+## Face scan page
+assets/images/hero/face-scan-hero.jpg              # Face scan hero / overlay preview
+
 # When we add new sections/pages:
 # - Choose the correct folder (hero / looks / haircuts / grooming / models / outfits / hairstyles)
 # - Add a descriptive filename in kebab-case.
