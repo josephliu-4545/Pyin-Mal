@@ -28,10 +28,10 @@ design-contest-code/
 ├── pages/                  # All page files
 ├── assets/                 # Images, fonts, icons
 │   ├── images/
-│   │   ├── models/        # Base model silhouettes
-│   │   ├── outfits/       # Transparent PNG outfits
-│   │   ├── hairstyles/    # SVG/PNG hairstyles
-│   │   └── products/      # Product images
+│   │   ├── hero/          # Page hero backdrops
+│   │   ├── looks/         # Outfit/product visuals
+│   │   ├── haircuts/      # Haircut recommendation images
+│   │   └── grooming/      # Grooming kit photos
 │   ├── fonts/             # Custom fonts
 │   └── icons/             # Icon assets
 ├── css/
