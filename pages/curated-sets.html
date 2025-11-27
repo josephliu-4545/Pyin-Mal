@@ -45,7 +45,7 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="saved-fashion.html" class="nav-link">Favorites</a>
                     <a href="shop-browsing.html" class="nav-link">Shop</a>
                     <div class="relative" data-dropdown="more">
                         <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
@@ -120,74 +120,136 @@
         </nav>
     </header>
 
-    <!-- Hero -->
-    <section class="py-10 sm:py-14 md:py-16 bg-gradient-to-br from-primary-600 via-accent-500 to-primary-500 text-white">
-        <div class="container-custom space-y-10">
-            <div class="grid grid-cols-1 lg:grid-cols-[3fr,2fr] gap-10 items-center">
-                <div data-aos="fade-right">
-                    <p class="text-xs uppercase tracking-[0.4em] text-white/70 mb-3">Curated sets</p>
-                    <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Ready-made wardrobes and grooming kits for each chapter of your life.</h1>
-                    <p class="text-sm sm:text-base text-white/85 mb-6">Instead of styling single pieces, we build mini-systems—looks, hair, and care routines that move together from weekday to weekend, on-camera to off-duty.</p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#sets" class="btn btn-primary bg-white text-primary-600 hover:bg-neutral-100">Explore sets</a>
-                        <a href="shop-browsing.html" class="btn btn-ghost border-white text-white hover:bg-white/10">Browse individual items</a>
-                    </div>
-                </div>
-                <div class="bg-white/10 border border-white/20 rounded-[32px] overflow-hidden shadow-2xl backdrop-blur" data-aos="fade-left">
-                    <img src="../assets/images/hero/curated-sets-hero.jpg" alt="Curated outfits on rack" class="w-full h-full object-cover">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Key categories -->
-    <section id="sets" class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
+    <!-- Curated Fashion Sets -->
+    <section id="curated-sets" class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
         <div class="container-custom space-y-8">
             <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
-                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Collections</p>
-                <h2 class="font-rufina text-3xl font-bold mb-3">Sets we assemble most often</h2>
-                <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Pick a starting point—work, weekend, or events. We’ll adapt lengths, color stories, and grooming add-ons to your face shape and schedule.</p>
+                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Curated Fashion Sets</p>
+                <h1 class="font-rufina text-3xl sm:text-4xl font-bold mb-3">Ready-made outfits for every chapter</h1>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">
+                    Each set bundles looks, textures, and accessories from our partner shops—choose one card and get a full week of outfits.
+                </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Set 1 -->
                 <article class="product-card p-0 overflow-hidden" data-aos="fade-up">
-                    <div class="aspect-[4/3]">
-                        <img src="../assets/images/looks/curated-work-01.jpg" alt="Work capsule" class="w-full h-full object-cover">
+                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card">
+                        <img src="../assets/images/looks/curated-work-01.jpg" alt="Soft structure office set" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-6 space-y-3">
-                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Work capsule</p>
-                        <h3 class="font-rufina text-2xl">Soft structure commute set</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Three looks mixing blazers, trousers, and knitwear, plus hair and grooming presets for office days.</p>
-                        <div class="flex items-center justify-between text-xs">
-                            <span>6–8 pieces</span>
-                            <a href="#work" class="text-primary-600 dark:text-primary-400 hover:underline">View details</a>
+                    <div class="p-5 space-y-2">
+                        <h3 class="font-rufina text-xl">Soft Structure Office Set</h3>
+                        <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Work days</p>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Blazers, trousers, and shirts mapped to hybrid weeks.</p>
+                        <div class="flex items-center justify-between text-xs mt-2">
+                            <div class="space-y-0.5">
+                                <p class="font-semibold text-neutral-900 dark:text-dark-text">$289</p>
+                                <p class="text-neutral-500 dark:text-neutral-400">Shop: Studio Lane</p>
+                            </div>
+                            <button
+                                type="button"
+                                class="text-primary-600 dark:text-primary-400 hover:underline text-sm favorite-link"
+                                data-favorite-id="set-soft-office"
+                                data-favorite-title="Soft Structure Office Set"
+                                data-favorite-category="work"
+                            >
+                                ♡ Favorite
+                            </button>
                         </div>
                     </div>
                 </article>
+                <!-- Set 2 -->
                 <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="50">
-                    <div class="aspect-[4/3]">
-                        <img src="../assets/images/looks/curated-weekend-01.jpg" alt="Weekend capsule" class="w-full h-full object-cover">
+                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card">
+                        <img src="../assets/images/looks/curated-weekend-01.jpg" alt="Weekend cafe set" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-6 space-y-3">
-                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Weekend capsule</p>
-                        <h3 class="font-rufina text-2xl">Off-duty street & cafe kit</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Denim, knits, and sneakers that layer easily with minimal styling effort.</p>
-                        <div class="flex items-center justify-between text-xs">
-                            <span>5–7 pieces</span>
-                            <a href="#weekend" class="text-primary-600 dark:text-primary-400 hover:underline">View details</a>
+                    <div class="p-5 space-y-2">
+                        <h3 class="font-rufina text-xl">Weekend Cafe Street Set</h3>
+                        <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Off-duty</p>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Relaxed denim, knits, and sneakers ready for quick trips.</p>
+                        <div class="flex items-center justify-between text-xs mt-2">
+                            <div class="space-y-0.5">
+                                <p class="font-semibold text-neutral-900 dark:text-dark-text">$219</p>
+                                <p class="text-neutral-500 dark:text-neutral-400">Shop: Urban Ground</p>
+                            </div>
+                            <button
+                                type="button"
+                                class="text-primary-600 dark:text-primary-400 hover:underline text-sm favorite-link"
+                                data-favorite-id="set-weekend-cafe"
+                                data-favorite-title="Weekend Cafe Street Set"
+                                data-favorite-category="weekend"
+                            >
+                                ♡ Favorite
+                            </button>
                         </div>
                     </div>
                 </article>
+                <!-- Set 3 -->
                 <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                    <div class="aspect-[4/3]">
-                        <img src="../assets/images/looks/curated-event-01.jpg" alt="Event capsule" class="w-full h-full object-cover">
+                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card">
+                        <img src="../assets/images/looks/curated-event-01.jpg" alt="Launch night set" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-6 space-y-3">
-                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Event capsule</p>
-                        <h3 class="font-rufina text-2xl">Launch night wardrobe</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Statement pieces, accessories, and grooming kits tuned for evening light.</p>
-                        <div class="flex items-center justify-between text-xs">
-                            <span>4–6 pieces</span>
-                            <a href="#events" class="text-primary-600 dark:text-primary-400 hover:underline">View details</a>
+                    <div class="p-5 space-y-2">
+                        <h3 class="font-rufina text-xl">Launch Night Capsule</h3>
+                        <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Events</p>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Statement looks and accessories tuned for evening light.</p>
+                        <div class="flex items-center justify-between text-xs mt-2">
+                            <div class="space-y-0.5">
+                                <p class="font-semibold text-neutral-900 dark:text-dark-text">$349</p>
+                                <p class="text-neutral-500 dark:text-neutral-400">Shop: Night Studio</p>
+                            </div>
+                            <button
+                                type="button"
+                                class="text-primary-600 dark:text-primary-400 hover:underline text-sm favorite-link"
+                                data-favorite-id="set-launch-night"
+                                data-favorite-title="Launch Night Capsule"
+                                data-favorite-category="event"
+                            >
+                                ♡ Favorite
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                <!-- Set 4 -->
+                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="150">
+                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card">
+                        <img src="../assets/images/looks/curated-travel-01.jpg" alt="Carry-on travel set" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="font-rufina text-xl">Carry‑On Travel Set</h3>
+                        <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Travel</p>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Layerable pieces that cover flights, meetings, and nights out.</p>
+                        <div class="flex items-center justify-between text-xs mt-2">
+                            <div class="space-y-0.5">
+                                <p class="font-semibold text-neutral-900 dark:text-dark-text">$279</p>
+                                <p class="text-neutral-500 dark:text-neutral-400">Shop: Transit Room</p>
+                            </div>
+                            <button
+                                type="button"
+                                class="text-primary-600 dark:text-primary-400 hover:underline text-sm favorite-link"
+                                data-favorite-id="set-carry-on"
+                                data-favorite-title="Carry‑On Travel Set"
+                                data-favorite-category="travel"
+                            >
+                                ♡ Favorite
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                <!-- Set 5   -->
+                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="150">
+                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card">
+                        <img src="../assets/images/looks/curated-travel-01.jpg" alt="Carry-on travel set" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="font-rufina text-xl">Carry‑On Travel Set</h3>
+                        <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Travel</p>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Layerable pieces that cover flights, meetings, and nights out.</p>
+                        <div class="flex items-center justify-between text-xs mt-2">
+                            <div class="space-y-0.5">
+                                <p class="font-semibold text-neutral-900 dark:text-dark-text">$279</p>
+                                <p class="text-neutral-500 dark:text-neutral-400">Shop: Transit Room</p>
+                            </div>
+                            <a href="saved-fashion.html" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">♡ Favorite</a>
                         </div>
                     </div>
                 </article>
@@ -195,132 +257,127 @@
         </div>
     </section>
 
-    <!-- Detailed set sections -->
-    <section class="py-10 sm:py-14">
-        <div class="container-custom space-y-12">
-            <!-- Work section -->
-            <div id="work" class="grid grid-cols-1 lg:grid-cols-[3fr,2fr] gap-8 items-start">
-                <div class="space-y-4" data-aos="fade-right">
-                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Work capsule</p>
-                    <h2 class="font-rufina text-3xl font-bold">Soft structure for hybrid weeks</h2>
-                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">We mix structured tailoring with relaxed pieces so you can move from calls to cafes without changing silhouettes entirely.</p>
-                    <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                        <li>• Two blazer options (neutral & accent) matched with coordinating trousers.</li>
-                        <li>• Knit tops or shirts that layer cleanly under jackets.</li>
-                        <li>• Haircut presets and grooming products suitable for office lighting.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-3 text-xs">
-                        <span class="badge">Office-ready</span>
-                        <span class="badge">Low maintenance</span>
-                        <span class="badge">Mix & match</span>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-4" data-aos="fade-left">
-                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
-                        <img src="../assets/images/looks/curated-work-02.jpg" alt="Blazer set" class="w-full h-full object-cover">
-                    </div>
-                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
-                        <img src="../assets/images/looks/curated-work-03.jpg" alt="Work capsule flatlay" class="w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Weekend section -->
-            <div id="weekend" class="grid grid-cols-1 lg:grid-cols-[2fr,3fr] gap-8 items-start">
-                <div class="grid grid-cols-2 gap-4 order-2 lg:order-1" data-aos="fade-right">
-                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
-                        <img src="../assets/images/looks/curated-weekend-02.jpg" alt="Weekend looks" class="w-full h-full object-cover">
-                    </div>
-                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
-                        <img src="../assets/images/looks/curated-weekend-03.jpg" alt="Denim and knitwear" class="w-full h-full object-cover">
-                    </div>
-                </div>
-                <div class="space-y-4 order-1 lg:order-2" data-aos="fade-left">
-                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Weekend capsule</p>
-                    <h2 class="font-rufina text-3xl font-bold">Street, cafe, and quick trips</h2>
-                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">We keep the silhouettes relaxed but intentional, so you always look “ready” even if it’s just for coffee or errands.</p>
-                    <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                        <li>• Denim and trousers that share the same footwear.</li>
-                        <li>• Tops that can be tucked, layered, or worn loose.</li>
-                        <li>• Simple hair and grooming presets that don’t require tools.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-3 text-xs">
-                        <span class="badge">Comfort first</span>
-                        <span class="badge">Carry-on friendly</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Events section -->
-            <div id="events" class="grid grid-cols-1 lg:grid-cols-[3fr,2fr] gap-8 items-start">
-                <div class="space-y-4" data-aos="fade-right">
-                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Event capsule</p>
-                    <h2 class="font-rufina text-3xl font-bold">Launch nights & formal gatherings</h2>
-                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Statement outfits get mapped to specific lighting—indoor spotlight, stage, or outdoor evening—so the garments and grooming still read clearly on camera.</p>
-                    <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                        <li>• 1–2 hero looks with backup alternates.</li>
-                        <li>• Accessory sets that can shift the mood without full changes.</li>
-                        <li>• Hair and grooming looks that stay put under heat and flash.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-3 text-xs">
-                        <span class="badge">Red-carpet ready</span>
-                        <span class="badge">Photogenic</span>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-4" data-aos="fade-left">
-                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
-                        <img src="../assets/images/looks/curated-event-02.jpg" alt="Evening look" class="w-full h-full object-cover">
-                    </div>
-                    <div class="rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-card">
-                        <img src="../assets/images/looks/curated-event-03.jpg" alt="Accessories for events" class="w-full h-full object-cover">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Grooming packages strip -->
-    <section class="py-10 sm:py-14 bg-neutral-900 text-white">
+    <!-- Grooming Kits -->
+    <section id="grooming-kits" class="py-10 sm:py-14 bg-neutral-900 text-white">
         <div class="container-custom space-y-8">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Grooming packages</p>
-                    <h2 class="font-rufina text-3xl font-bold">Hair & skin kits that ship with your wardrobe</h2>
+                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Grooming Kits</p>
+                    <h2 class="font-rufina text-3xl font-bold">Hair & skin routines that match your outfits</h2>
                 </div>
-                <a href="haircut-recommendations.html" class="btn btn-secondary border-white text-white hover:bg-white/10">See haircut blueprints</a>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <article class="product-card bg-white/5 border-white/10 p-6" data-aos="fade-up">
-                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Office ready</p>
-                    <h3 class="font-rufina text-2xl mb-2">Desk-to-dinner kit</h3>
-                    <p class="text-sm text-white/80 mb-4">Dry shampoo, texture spray, and blotting essentials that refresh your look between calls and evening events.</p>
+                <article class="product-card bg-white/5 border-white/10 p-6 flex flex-col justify-between" data-aos="fade-up">
+                    <div class="space-y-3">
+                        <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Office ready</p>
+                        <h3 class="font-rufina text-2xl mb-1">Desk‑to‑Dinner Kit</h3>
+                        <p class="text-sm text-white/80 mb-2">Dry shampoo, texture spray, and blotting essentials for long hybrid days.</p>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between text-xs">
+                        <div class="space-y-0.5">
+                            <p class="font-semibold text-white">$79</p>
+                            <p class="text-white/70">Shop: Glow Bar</p>
+                        </div>
+                        <button
+                            type="button"
+                            class="text-white hover:underline text-sm favorite-link"
+                            data-favorite-id="kit-desk-dinner"
+                            data-favorite-title="Desk‑to‑Dinner Kit"
+                            data-favorite-category="grooming"
+                        >
+                            ♡ Favorite
+                        </button>
+                    </div>
                 </article>
-                <article class="product-card bg-white/5 border-white/10 p-6" data-aos="fade-up" data-aos-delay="50">
-                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Weekend reset</p>
-                    <h3 class="font-rufina text-2xl mb-2">Hair + skin reset</h3>
-                    <p class="text-sm text-white/80 mb-4">Clarifying hair wash, mask, and moisturizer routine to close your week before a fresh styling cycle.</p>
+                <article class="product-card bg-white/5 border-white/10 p-6 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="50">
+                    <div class="space-y-3">
+                        <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Weekend reset</p>
+                        <h3 class="font-rufina text-2xl mb-1">Hair + Skin Reset</h3>
+                        <p class="text-sm text-white/80 mb-2">Clarifying wash, mask, and moisturizer routine to close your week.</p>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between text-xs">
+                        <div class="space-y-0.5">
+                            <p class="font-semibold text-white">$65</p>
+                            <p class="text-white/70">Shop: Sunday Lab</p>
+                        </div>
+                        <button
+                            type="button"
+                            class="text-white hover:underline text-sm favorite-link"
+                            data-favorite-id="kit-hair-skin-reset"
+                            data-favorite-title="Hair + Skin Reset"
+                            data-favorite-category="grooming"
+                        >
+                            ♡ Favorite
+                        </button>
+                    </div>
                 </article>
-                <article class="product-card bg-white/5 border-white/10 p-6" data-aos="fade-up" data-aos-delay="100">
-                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Shoot day</p>
-                    <h3 class="font-rufina text-2xl mb-2">On-set touch-up kit</h3>
-                    <p class="text-sm text-white/80 mb-4">Everything our stylists carry on set—finishing sprays, shine balms, and emergency fixes.</p>
+                <article class="product-card bg-white/5 border-white/10 p-6 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                    <div class="space-y-3">
+                        <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Shoot day</p>
+                        <h3 class="font-rufina text-2xl mb-1">On‑Set Touch‑Up Kit</h3>
+                        <p class="text-sm text-white/80 mb-2">Finishing sprays, shine balms, and emergency fixes from our studio bags.</p>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between text-xs">
+                        <div class="space-y-0.5">
+                            <p class="font-semibold text-white">$92</p>
+                            <p class="text-white/70">Shop: Studio Cart</p>
+                        </div>
+                        <button
+                            type="button"
+                            class="text-white hover:underline text-sm favorite-link"
+                            data-favorite-id="kit-on-set"
+                            data-favorite-title="On‑Set Touch‑Up Kit"
+                            data-favorite-category="grooming"
+                        >
+                            ♡ Favorite
+                        </button>
+                    </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="py-12 md:py-16 bg-neutral-50 dark:bg-dark-surface">
+    <!-- Partner shops -->
+    <section id="partner-shops" class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
         <div class="container-custom">
-            <div class="rounded-[32px] bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-8 md:p-12 flex flex-col lg:flex-row gap-6 md:gap-10 items-center">
-                <div class="space-y-3 lg:w-2/3">
-                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Next step</p>
-                    <h2 class="font-rufina text-3xl font-bold">Want a set built around your calendar?</h2>
-                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Share your upcoming events, work schedule, and budget. We’ll recommend one or two capsules and grooming packages that fit.</p>
+            <div class="space-y-8">
+                <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Partner Shops</p>
+                    <h2 class="font-rufina text-3xl font-bold mb-3">Studios we love to curate from</h2>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">
+                        Explore racks and grooming bars from our favorite partners—many of the pieces in your sets start here.
+                    </p>
                 </div>
-                <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-                    <a href="pricing.html" class="btn btn-secondary w-full sm:w-auto">Preview plans</a>
-                    <a href="contact.html" class="btn btn-primary w-full sm:w-auto">Book styling sprint</a>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6" data-aos="fade-up" data-aos-delay="50">
+                    <article class="product-card p-3 sm:p-4 text-center">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-neutral-100 dark:bg-dark-card">
+                            <img src="../assets/images/shops/shop-01.jpg" alt="Studio Lane" class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-rufina text-lg">Studio Lane</p>
+                    </article>
+                    <article class="product-card p-3 sm:p-4 text-center">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-neutral-100 dark:bg-dark-card">
+                            <img src="../assets/images/shops/shop-02.jpg" alt="Urban Ground" class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-rufina text-lg">Urban Ground</p>
+                    </article>
+                    <article class="product-card p-3 sm:p-4 text-center">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-neutral-100 dark:bg-dark-card">
+                            <img src="../assets/images/shops/shop-03.jpg" alt="Glow Bar" class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-rufina text-lg">Glow Bar</p>
+                    </article>
+                    <article class="product-card p-3 sm:p-4 text-center">
+                        <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-neutral-100 dark:bg-dark-card">
+                            <img src="../assets/images/shops/shop-04.jpg" alt="Transit Room" class="w-full h-full object-cover">
+                        </div>
+                        <p class="font-rufina text-lg">Transit Room</p>
+                    </article>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                    <a href="shop-browsing.html" class="btn btn-secondary inline-flex items-center justify-center px-6">
+                        Browse more shops
+                    </a>
                 </div>
             </div>
         </div>
@@ -346,6 +403,41 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/animations.js"></script>
+    <script>
+        // Handle Favorite clicks on curated sets & grooming kits
+        document.addEventListener('DOMContentLoaded', () => {
+            const FAVORITES_KEY = 'pyinmal_favorites';
+
+            function getFavorites() {
+                try {
+                    return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
+                } catch {
+                    return [];
+                }
+            }
+
+            function saveFavorites(items) {
+                localStorage.setItem(FAVORITES_KEY, JSON.stringify(items));
+            }
+
+            document.querySelectorAll('.favorite-link[data-favorite-id]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.dataset.favoriteId;
+                    const title = btn.dataset.favoriteTitle || '';
+                    const category = btn.dataset.favoriteCategory || 'work';
+
+                    const favorites = getFavorites();
+                    if (!favorites.some(item => item.id === id)) {
+                        favorites.push({ id, title, category });
+                        saveFavorites(favorites);
+                    }
+
+                    // Go to saved-fashion page after marking as favorite
+                    window.location.href = 'saved-fashion.html';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 
