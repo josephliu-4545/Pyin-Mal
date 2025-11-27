@@ -478,6 +478,180 @@
     <!-- Model Preview Page Specific Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // ========== URL MODE DETECTION ==========
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentMode = urlParams.get('mode') || 'outfit'; // Default to outfit mode
+            
+            // Get sidebar elements
+            const outfitSidebar = document.querySelector('.outfit-selection-sidebar');
+            const hairstyleSidebar = document.querySelector('.hairstyle-selection-sidebar');
+            
+            // ========== WARDROBE MANAGEMENT ==========
+            let wardrobe = JSON.parse(localStorage.getItem('wardrobe')) || [];
+            
+            function renderWardrobeItems() {
+                const wardrobeContainer = document.getElementById('wardrobe-items-container');
+                if (!wardrobeContainer) return;
+                
+                if (wardrobe.length === 0) {
+                    wardrobeContainer.innerHTML = `
+                        <div class="text-center py-8 text-neutral-400 dark:text-neutral-500">
+                            <svg class="w-12 h-12 mx-auto mb-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
+                            <p class="text-sm">Your wardrobe is empty</p>
+                            <a href="shop-browsing.html" class="text-primary-500 text-sm hover:underline mt-2 inline-block">Browse Fashion →</a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                wardrobeContainer.innerHTML = wardrobe.map(item => `
+                    <div class="wardrobe-item flex items-center gap-3 p-3 bg-neutral-50 dark:bg-dark-surface rounded-xl hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors">
+                        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-lg">
+                        <div class="flex-1 min-w-0">
+                            <p class="font-medium text-sm truncate">${item.name}</p>
+                            <p class="text-xs text-neutral-500 capitalize">${item.category}</p>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <button onclick="tryOnWardrobeItem('${item.id}')" class="text-xs px-2 py-1 bg-primary-500 text-white rounded hover:bg-primary-600 transition-colors">Try On</button>
+                            <button onclick="removeFromWardrobe('${item.id}')" class="text-xs px-2 py-1 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors">Remove</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            window.tryOnWardrobeItem = function(itemId) {
+                const item = wardrobe.find(w => w.id === itemId);
+                if (item && window.modelPreview) {
+                    // Apply outfit layer based on category
+                    applyOutfitLayer(item);
+                    showNotification(`Trying on ${item.name}`, 'success');
+                }
+            };
+            
+            window.removeFromWardrobe = function(itemId) {
+                wardrobe = wardrobe.filter(w => w.id !== itemId);
+                localStorage.setItem('wardrobe', JSON.stringify(wardrobe));
+                renderWardrobeItems();
+                showNotification('Removed from wardrobe', 'info');
+            };
+            
+            window.clearWardrobe = function() {
+                if (confirm('Clear all items from your wardrobe?')) {
+                    wardrobe = [];
+                    localStorage.setItem('wardrobe', JSON.stringify(wardrobe));
+                    renderWardrobeItems();
+                    showNotification('Wardrobe cleared', 'info');
+                }
+            };
+            
+            // ========== OUTFIT LAYER SYSTEM ==========
+            function applyOutfitLayer(item) {
+                const container = document.getElementById('model-preview-container');
+                if (!container) return;
+                
+                // Remove existing layer of same category
+                const existingLayer = container.querySelector(`.outfit-layer-${item.category}`);
+                if (existingLayer) existingLayer.remove();
+                
+                // Create new layer with fade-in
+                const layer = document.createElement('img');
+                layer.src = item.image;
+                layer.alt = item.name;
+                layer.className = `outfit-layer outfit-layer-${item.category} absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300`;
+                layer.style.zIndex = getZIndexForCategory(item.category);
+                
+                container.appendChild(layer);
+                
+                // Trigger fade-in
+                setTimeout(() => layer.classList.remove('opacity-0'), 10);
+                
+                updateSelectedItemsDisplay();
+            }
+            
+            function getZIndexForCategory(category) {
+                const zIndexMap = { 'bottom': 10, 'top': 20, 'shoes': 5, 'accessories': 30 };
+                return zIndexMap[category] || 15;
+            }
+            
+            // ========== HAIRSTYLE SYSTEM ==========
+            window.applyHairstyle = function(hairstyleId, imageSrc) {
+                const container = document.getElementById('model-preview-container');
+                if (!container) return;
+                
+                // Remove existing hairstyle
+                const existingHair = container.querySelector('.hairstyle-layer');
+                if (existingHair) existingHair.remove();
+                
+                // Create new hairstyle layer
+                const layer = document.createElement('img');
+                layer.src = imageSrc;
+                layer.alt = 'Hairstyle';
+                layer.className = 'hairstyle-layer absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300';
+                layer.style.zIndex = 50;
+                
+                container.appendChild(layer);
+                setTimeout(() => layer.classList.remove('opacity-0'), 10);
+                
+                if (window.modelPreview) {
+                    window.modelPreview.currentHairstyle = hairstyleId;
+                }
+                updateSelectedItemsDisplay();
+                showNotification('Hairstyle applied!', 'success');
+            };
+            
+            // ========== MODE-BASED SIDEBAR SETUP ==========
+            function setupModeBasedUI() {
+                const leftSidebar = document.querySelector('[data-aos="fade-right"]');
+                if (!leftSidebar) return;
+                
+                // Add wardrobe section for outfit mode
+                if (currentMode === 'outfit') {
+                    // Insert wardrobe panel at top of sidebar
+                    const wardrobePanel = document.createElement('div');
+                    wardrobePanel.className = 'bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark mb-6';
+                    wardrobePanel.innerHTML = `
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="font-rufina text-xl font-bold">Digital Wardrobe</h2>
+                            <button onclick="clearWardrobe()" class="text-xs text-red-500 hover:underline">Clear All</button>
+                        </div>
+                        <div id="wardrobe-items-container" class="space-y-3 max-h-64 overflow-y-auto">
+                            <!-- Wardrobe items rendered here -->
+                        </div>
+                        <a href="shop-browsing.html" class="btn btn-secondary w-full mt-4 text-center text-sm">+ Add from Shop</a>
+                    `;
+                    leftSidebar.insertBefore(wardrobePanel, leftSidebar.firstChild);
+                    renderWardrobeItems();
+                }
+                
+                // Highlight hairstyle section for haircut mode
+                if (currentMode === 'haircut') {
+                    const hairstyleSection = leftSidebar.querySelector('.bg-white:last-child, .dark\\:bg-dark-card:last-child');
+                    if (hairstyleSection) {
+                        hairstyleSection.classList.add('ring-2', 'ring-primary-500');
+                    }
+                    // Scroll to hairstyle section
+                    setTimeout(() => {
+                        const section = document.querySelector('[data-aos="fade-right"] > div:last-child');
+                        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 500);
+                }
+                
+                // Update page title based on mode
+                const pageTitle = document.querySelector('h1');
+                if (pageTitle) {
+                    if (currentMode === 'haircut') {
+                        pageTitle.textContent = 'Hairstyle Preview';
+                    } else if (currentMode === 'outfit') {
+                        pageTitle.textContent = 'Outfit Preview';
+                    }
+                }
+            }
+            
+            // Initialize mode-based UI
+            setupModeBasedUI();
+
             // Initialize model preview if not already done
             if (!window.modelPreview) {
                 window.modelPreview = new ModelPreview();
@@ -489,8 +663,11 @@
                 resetBtn.addEventListener('click', () => {
                     if (window.modelPreview) {
                         window.modelPreview.reset();
-                        updateSelectedItemsDisplay();
                     }
+                    // Also remove all layers
+                    document.querySelectorAll('.outfit-layer, .hairstyle-layer').forEach(el => el.remove());
+                    updateSelectedItemsDisplay();
+                    showNotification('Preview reset!', 'info');
                 });
             }
 
@@ -525,8 +702,12 @@
                     accessories: window.modelPreview?.currentOutfit?.accessories || null,
                     hairstyle: window.modelPreview?.currentHairstyle || null
                 };
+                
+                // Also check for applied layers
+                const appliedLayers = document.querySelectorAll('.outfit-layer, .hairstyle-layer');
+                const hasLayers = appliedLayers.length > 0;
 
-                const hasItems = Object.values(selectedItems).some(item => item !== null);
+                const hasItems = Object.values(selectedItems).some(item => item !== null) || hasLayers;
 
                 if (!hasItems) {
                     display.innerHTML = `
@@ -538,28 +719,30 @@
                     return;
                 }
 
-                display.innerHTML = Object.entries(selectedItems)
-                    .filter(([key, value]) => value !== null)
-                    .map(([key, value]) => {
-                        const label = key.charAt(0).toUpperCase() + key.slice(1);
-                        return `
-                            <div class="flex items-center justify-between p-3 bg-neutral-50 dark:bg-dark-surface rounded-lg">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-12 h-12 bg-neutral-200 dark:bg-dark-card rounded-lg"></div>
-                                    <div>
-                                        <div class="font-medium text-sm">${label}</div>
-                                        <div class="text-xs text-neutral-500 dark:text-neutral-400">Selected</div>
-                                    </div>
+                let html = '';
+                appliedLayers.forEach(layer => {
+                    const isHair = layer.classList.contains('hairstyle-layer');
+                    const label = isHair ? 'Hairstyle' : layer.className.match(/outfit-layer-(\w+)/)?.[1] || 'Item';
+                    html += `
+                        <div class="flex items-center justify-between p-3 bg-neutral-50 dark:bg-dark-surface rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <img src="${layer.src}" class="w-12 h-12 object-cover rounded-lg">
+                                <div>
+                                    <div class="font-medium text-sm capitalize">${label}</div>
+                                    <div class="text-xs text-neutral-500 dark:text-neutral-400">Applied</div>
                                 </div>
-                                <button class="text-red-500 hover:text-red-600" onclick="removeItem('${key}')">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                    </svg>
-                                </button>
                             </div>
-                        `;
-                    }).join('');
+                            <button class="text-red-500 hover:text-red-600" onclick="this.closest('.flex').parentElement.remove(); document.querySelector('${isHair ? '.hairstyle-layer' : `.outfit-layer-${label}`}')?.remove();">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                });
+                display.innerHTML = html || `<div class="text-center py-4 text-neutral-400 text-sm">Select items to preview</div>`;
             }
+            window.updateSelectedItemsDisplay = updateSelectedItemsDisplay;
 
             // Remove item function
             window.removeItem = function(category) {
@@ -571,7 +754,7 @@
                         }
                         window.modelPreview.currentHairstyle = null;
                     } else {
-                        const outfitLayer = document.querySelector(`.outfit-${category}`);
+                        const outfitLayer = document.querySelector(`.outfit-layer-${category}`);
                         if (outfitLayer) {
                             outfitLayer.remove();
                         }
@@ -599,18 +782,21 @@
             // Notification function
             function showNotification(message, type = 'info') {
                 const notification = document.createElement('div');
-                notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
+                notification.className = `fixed top-20 right-4 p-4 rounded-xl shadow-lg z-50 transform translate-x-full transition-transform duration-300 ${
                     type === 'success' ? 'bg-green-500' : 
                     type === 'warning' ? 'bg-yellow-500' : 
-                    'bg-blue-500'
+                    'bg-primary-500'
                 } text-white`;
                 notification.textContent = message;
                 document.body.appendChild(notification);
-
+                
+                setTimeout(() => notification.classList.remove('translate-x-full'), 10);
                 setTimeout(() => {
-                    notification.remove();
-                }, 3000);
+                    notification.classList.add('translate-x-full');
+                    setTimeout(() => notification.remove(), 300);
+                }, 2500);
             }
+            window.showNotification = showNotification;
 
             // Listen for outfit/hairstyle changes
             const originalUpdateOutfit = window.modelPreview?.updateOutfit;

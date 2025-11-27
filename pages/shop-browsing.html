@@ -22,6 +22,130 @@
 
     <!-- AOS CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+    <style>
+        /* Tab transitions */
+        .tab-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .tab-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Tab button styles */
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
+            color: white;
+            transform: scale(1.02);
+        }
+        .tab-btn:hover:not(.active) {
+            transform: translateY(-2px);
+        }
+        /* Card hover animations */
+        .shop-card-animated {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .shop-card-animated:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        /* Button hover effects */
+        .btn-hover-scale {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-hover-scale:hover {
+            transform: scale(1.05);
+        }
+        /* Fade animations */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-slide-up {
+            animation: fadeSlideUp 0.6s ease forwards;
+        }
+        /* Stagger children */
+        .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+        .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+        .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+        .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+        .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+        .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Barber tab custom styles */
+        .barber-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .barber-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 40px rgba(15, 23, 42, 0.12);
+        }
+        .service-checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 6px;
+            border: 2px solid rgba(148, 163, 184, 0.7);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .service-checkbox.checked {
+            border-color: #8B5CF6;
+            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            color: #fff;
+        }
+        .service-item.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .service-checkbox.disabled {
+            cursor: not-allowed;
+        }
+        .shop-selected::after {
+            content: "Selected shop";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(236, 72, 153, 0.9);
+            color: #fff;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #EC4899;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 999px;
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 60;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
     <!-- Navigation -->
@@ -64,8 +188,8 @@
                                 <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
                                 <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
                                 <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
-                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover;text-primary-300">Blog</a>
-                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover;text-primary-300">Store Locator</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
                             </div>
                         </div>
                     </div>
@@ -77,8 +201,9 @@
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                         </span>
                     </button>
-                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                    <button class="theme-toggle p-1.5 sm:p-2 relative" aria-label="Cart" id="cart-btn">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
                     </button>
                     <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
                     <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
@@ -123,103 +248,207 @@
         </nav>
     </header>
 
-    <!-- Hero -->
-    <section class="py-10 sm:py-14 md:py-16 bg-gradient-to-br from-neutral-900 via-slate-900 to-neutral-900 text-white">
-        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div class="max-w-2xl space-y-4" data-aos="fade-right">
-                <p class="text-xs uppercase tracking-[0.4em] text-white/60">Shop</p>
-                <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">Search curated outfits, studio capsules, and grooming kits</h1>
-                <p class="text-sm sm:text-base text-white/80">Each piece is vetted by our stylists for fit, fabrication, and how well it layers with Model Preview looks. Toggle filters, save to your library, or request full styling drops.</p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="../index.html#wish-list" class="btn btn-primary bg-white text-primary-600 hover:bg-neutral-100">View saved looks</a>
-                    <a href="curated-sets.html" class="btn btn-ghost border-white text-white hover:bg-white/10">Curated sets</a>
+    <!-- Tab Navigation -->
+    <div class="sticky top-16 z-30 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border">
+        <div class="container-custom py-3">
+            <div class="flex flex-wrap gap-2 sm:gap-3 justify-center">
+                <button data-section="main" class="tab-btn active px-4 sm:px-6 py-2 rounded-full text-sm font-medium bg-neutral-100 dark:bg-dark-card" onclick="showSection('main')">Main</button>
+                <button data-section="explore" class="tab-btn px-4 sm:px-6 py-2 rounded-full text-sm font-medium bg-neutral-100 dark:bg-dark-card" onclick="showSection('explore')">Explore</button>
+                <button data-section="fashion" class="tab-btn px-4 sm:px-6 py-2 rounded-full text-sm font-medium bg-neutral-100 dark:bg-dark-card" onclick="showSection('fashion')">Fashion</button>
+                <button data-section="barbers" class="tab-btn px-4 sm:px-6 py-2 rounded-full text-sm font-medium bg-neutral-100 dark:bg-dark-card" onclick="showSection('barbers')">Baber Shop</button>
                 </div>
             </div>
-            <div class="bg-white/10 border border-white/10 rounded-3xl p-6 shadow-2xl w-full md:max-w-sm" data-aos="fade-left">
-                <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Fresh drops</p>
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span>Kyoto minimal set</span>
-                        <span class="text-sm text-white/70">Stock: 12</span>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <span>Soft tailoring pack</span>
-                        <span class="text-sm text-white/70">Stock: 9</span>
+
+    <!-- MAIN SECTION -->
+    <section id="section-main" class="tab-section active">
+        <div class="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-neutral-900 via-slate-900 to-neutral-900 text-white">
+            <div class="container-custom text-center max-w-4xl mx-auto" data-aos="fade-up">
+                <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-4 animate-fade-slide-up">Welcome to Pyin Mal</p>
+                <h1 class="font-rufina text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-slide-up" style="animation-delay: 0.1s">Discover Fashion & Grooming Near You</h1>
+                <p class="text-base sm:text-lg text-white/80 mb-10 max-w-2xl mx-auto animate-fade-slide-up" style="animation-delay: 0.2s">
+                    Browse curated outfits, connect with local stylists, and preview your perfect look before you buy.
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center animate-fade-slide-up" style="animation-delay: 0.3s">
+                    <button onclick="showSection('explore')" class="btn btn-primary btn-hover-scale px-8 py-3 text-base">
+                        Explore Shops
+                    </button>
+                    <a href="model-preview.html" class="btn btn-ghost border-white text-white hover:bg-white/10 btn-hover-scale px-8 py-3 text-base">
+                        Model Preview
+                    </a>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <span>Hair reset kit</span>
-                        <span class="text-sm text-white/70">Stock: 18</span>
+                    </div>
+                </div>
+
+        <!-- Quick Stats -->
+        <div class="py-12 bg-neutral-50 dark:bg-dark-surface">
+            <div class="container-custom">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center stagger-children">
+                    <div class="animate-fade-slide-up opacity-0" data-aos="fade-up">
+                        <p class="font-rufina text-3xl font-bold text-primary-600 dark:text-primary-400">50+</p>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Fashion Shops</p>
+                    </div>
+                    <div class="animate-fade-slide-up opacity-0" data-aos="fade-up" data-aos-delay="100">
+                        <p class="font-rufina text-3xl font-bold text-primary-600 dark:text-primary-400">30+</p>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Barber Shops</p>
+                    </div>
+                    <div class="animate-fade-slide-up opacity-0" data-aos="fade-up" data-aos-delay="200">
+                        <p class="font-rufina text-3xl font-bold text-primary-600 dark:text-primary-400">1000+</p>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Products</p>
+                    </div>
+                    <div class="animate-fade-slide-up opacity-0" data-aos="fade-up" data-aos-delay="300">
+                        <p class="font-rufina text-3xl font-bold text-primary-600 dark:text-primary-400">5000+</p>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Happy Customers</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Highlighted categories -->
-    <section class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
-        <div class="container-custom space-y-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <!-- EXPLORE SECTION -->
+    <section id="section-explore" class="tab-section">
+        <div class="py-12 sm:py-16">
+            <div class="container-custom space-y-12">
+                <!-- Fashion Shops Category -->
+                <div data-aos="fade-up">
+                    <div class="flex items-center justify-between mb-6">
                 <div>
-                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Browse by mood</p>
-                    <h2 class="font-rufina text-3xl font-bold">Capsules built for the week ahead</h2>
+                            <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-2">Category</p>
+                            <h2 class="font-rufina text-3xl font-bold">Fashion Shops</h2>
                 </div>
-                <div class="flex flex-wrap gap-3 text-sm">
-                    <button class="filter-chip active">All</button>
-                    <button class="filter-chip">Work Luxe</button>
-                    <button class="filter-chip">Weekend</button>
-                    <button class="filter-chip">Evening</button>
-                    <button class="filter-chip">Grooming</button>
+                        <button onclick="showSection('fashion')" class="btn btn-secondary btn-hover-scale">View All</button>
                 </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
+                        <!-- Shop Card 1 -->
+                        <article class="shop-card-animated product-card p-0 overflow-hidden opacity-0 animate-fade-slide-up" data-aos="fade-up">
+                            <div class="aspect-[4/3]">
+                                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80" alt="Urban Style Co" class="w-full h-full object-cover">
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <article class="product-card p-0 overflow-hidden" data-aos="fade-up">
+                            <div class="p-5 space-y-3">
+                                <h3 class="font-rufina text-xl font-bold">Urban Style Co</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Contemporary streetwear and casual essentials</p>
+                                <div class="flex gap-2">
+                                    <button onclick="showSection('fashion')" class="btn btn-secondary btn-hover-scale px-3 py-1.5 text-xs flex-1">View Shop</button>
+                                    <a href="model-preview.html?mode=outfit" class="btn btn-primary btn-hover-scale px-3 py-1.5 text-xs flex-1 text-center">Outfit Preview</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- Shop Card 2 -->
+                        <article class="shop-card-animated product-card p-0 overflow-hidden opacity-0 animate-fade-slide-up" data-aos="fade-up" data-aos-delay="100">
                     <div class="aspect-[4/3]">
-                        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80" alt="Work luxe outfits" class="w-full h-full object-cover">
+                                <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=800&q=80" alt="Elegance Boutique" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-6 space-y-3">
-                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Work luxe</p>
-                        <h3 class="font-rufina text-2xl">Soft-tailored commute set</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Structured blazer, crepe trouser, and modular heels styled for hybrid offices.</p>
-                        <div class="flex items-center justify-between text-sm">
-                            <span>3-piece capsule</span>
-                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Add to preview</button>
+                            <div class="p-5 space-y-3">
+                                <h3 class="font-rufina text-xl font-bold">Elegance Boutique</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Premium formal wear and evening attire</p>
+                                <div class="flex gap-2">
+                                    <button onclick="showSection('fashion')" class="btn btn-secondary btn-hover-scale px-3 py-1.5 text-xs flex-1">View Shop</button>
+                                    <a href="model-preview.html?mode=outfit" class="btn btn-primary btn-hover-scale px-3 py-1.5 text-xs flex-1 text-center">Outfit Preview</a>
                         </div>
                     </div>
                 </article>
-                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="50">
+                        <!-- Shop Card 3 -->
+                        <article class="shop-card-animated product-card p-0 overflow-hidden opacity-0 animate-fade-slide-up" data-aos="fade-up" data-aos-delay="200">
                     <div class="aspect-[4/3]">
-                        <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1200&q=80" alt="Weekend set" class="w-full h-full object-cover">
+                                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Minimal Threads" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-6 space-y-3">
-                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Weekend ease</p>
-                        <h3 class="font-rufina text-2xl">Laid-back denim & mesh</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Relaxed denim jumpsuit + mesh base layers and sandals for rooftop hangs.</p>
-                        <div class="flex items-center justify-between text-sm">
-                            <span>4-piece capsule</span>
-                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Add to preview</button>
+                            <div class="p-5 space-y-3">
+                                <h3 class="font-rufina text-xl font-bold">Minimal Threads</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Clean lines and timeless basics</p>
+                                <div class="flex gap-2">
+                                    <button onclick="showSection('fashion')" class="btn btn-secondary btn-hover-scale px-3 py-1.5 text-xs flex-1">View Shop</button>
+                                    <a href="model-preview.html?mode=outfit" class="btn btn-primary btn-hover-scale px-3 py-1.5 text-xs flex-1 text-center">Outfit Preview</a>
                         </div>
                     </div>
                 </article>
-                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                        <!-- Shop Card 4 -->
+                        <article class="shop-card-animated product-card p-0 overflow-hidden opacity-0 animate-fade-slide-up" data-aos="fade-up" data-aos-delay="300">
                     <div class="aspect-[4/3]">
-                        <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1200&q=80&sat=-25" alt="Evening set" class="w-full h-full object-cover">
+                                <img src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=800&q=80" alt="Vintage Vault" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-6 space-y-3">
-                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Evening</p>
-                        <h3 class="font-rufina text-2xl">Chrome hour wardrobe</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Slip dress, chrome accessories, and hair sculpting kit curated for night shoots.</p>
-                        <div class="flex items-center justify-between text-sm">
-                            <span>5-piece capsule</span>
-                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Add to preview</button>
+                            <div class="p-5 space-y-3">
+                                <h3 class="font-rufina text-xl font-bold">Vintage Vault</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Curated vintage and retro fashion</p>
+                                <div class="flex gap-2">
+                                    <button onclick="showSection('fashion')" class="btn btn-secondary btn-hover-scale px-3 py-1.5 text-xs flex-1">View Shop</button>
+                                    <a href="model-preview.html?mode=outfit" class="btn btn-primary btn-hover-scale px-3 py-1.5 text-xs flex-1 text-center">Outfit Preview</a>
                         </div>
                     </div>
                 </article>
+                        <!-- Shop Card 5 -->
+                        <article class="shop-card-animated product-card p-0 overflow-hidden opacity-0 animate-fade-slide-up" data-aos="fade-up" data-aos-delay="400">
+                    <div class="aspect-[4/3]">
+                                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80" alt="Luxe Label" class="w-full h-full object-cover">
+                    </div>
+                            <div class="p-5 space-y-3">
+                                <h3 class="font-rufina text-xl font-bold">Luxe Label</h3>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Designer pieces and luxury accessories</p>
+                                <div class="flex gap-2">
+                                    <button onclick="showSection('fashion')" class="btn btn-secondary btn-hover-scale px-3 py-1.5 text-xs flex-1">View Shop</button>
+                                    <a href="model-preview.html?mode=outfit" class="btn btn-primary btn-hover-scale px-3 py-1.5 text-xs flex-1 text-center">Outfit Preview</a>
+                        </div>
+                    </div>
+                </article>
+                    </div>
+                </div>
+
+                <!-- Barber Shops Category (Preview Only) -->
+                <div data-aos="fade-up">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-2">Coming Soon</p>
+                            <h2 class="font-rufina text-3xl font-bold">Barber Shops</h2>
+                        </div>
+                        <span class="text-sm text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-dark-card px-3 py-1 rounded-full">Preview</span>
+                    </div>
+                    <p class="text-neutral-600 dark:text-neutral-400 mb-6">Full barber features will be added later.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Barber Placeholder 1 -->
+                        <article class="shop-card-animated product-card p-0 overflow-hidden opacity-70" data-aos="fade-up">
+                            <div class="aspect-[4/3] bg-neutral-200 dark:bg-dark-surface flex items-center justify-center">
+                                <svg class="w-16 h-16 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"/>
+                                </svg>
+                            </div>
+                            <div class="p-5 space-y-3">
+                                <h3 class="font-rufina text-xl font-bold">Classic Cuts Barbershop</h3>
+                                <p class="text-sm text-neutral-500">Coming soon...</p>
+                            </div>
+                        </article>
+                        <!-- Barber Placeholder 2 -->
+                        <article class="shop-card-animated product-card p-0 overflow-hidden opacity-70" data-aos="fade-up" data-aos-delay="100">
+                            <div class="aspect-[4/3] bg-neutral-200 dark:bg-dark-surface flex items-center justify-center">
+                                <svg class="w-16 h-16 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"/>
+                                </svg>
+                            </div>
+                            <div class="p-5 space-y-3">
+                                <h3 class="font-rufina text-xl font-bold">The Gentleman's Den</h3>
+                                <p class="text-sm text-neutral-500">Coming soon...</p>
+                            </div>
+                        </article>
+                        <!-- Barber Placeholder 3 -->
+                        <article class="shop-card-animated product-card p-0 overflow-hidden opacity-70" data-aos="fade-up" data-aos-delay="200">
+                            <div class="aspect-[4/3] bg-neutral-200 dark:bg-dark-surface flex items-center justify-center">
+                                <svg class="w-16 h-16 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"/>
+                                </svg>
+                            </div>
+                            <div class="p-5 space-y-3">
+                                <h3 class="font-rufina text-xl font-bold">Modern Fade Studio</h3>
+                                <p class="text-sm text-neutral-500">Coming soon...</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- FASHION SECTION -->
+    <section id="section-fashion" class="tab-section">
     <!-- Filters -->
-    <section class="py-8">
+        <div class="py-8 bg-neutral-50 dark:bg-dark-surface">
         <div class="container-custom" data-aos="fade-up">
             <div class="product-card p-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div class="flex flex-wrap gap-3 text-sm">
@@ -227,17 +456,19 @@
                         <label class="text-xs uppercase tracking-[0.4em] text-neutral-400 block mb-1">Price range</label>
                         <select class="form-input">
                             <option>All</option>
-                            <option>$100 - $250</option>
-                            <option>$250 - $500</option>
-                            <option>$500+</option>
+                                <option>$0 - $50</option>
+                                <option>$50 - $100</option>
+                                <option>$100 - $200</option>
+                                <option>$200+</option>
                         </select>
                     </div>
                     <div class="filter-field">
                         <label class="text-xs uppercase tracking-[0.4em] text-neutral-400 block mb-1">Category</label>
                         <select class="form-input">
                             <option>All</option>
-                            <option>Wardrobe</option>
-                            <option>Grooming</option>
+                                <option>Tops</option>
+                                <option>Bottoms</option>
+                                <option>Shoes</option>
                             <option>Accessories</option>
                         </select>
                     </div>
@@ -245,236 +476,487 @@
                         <label class="text-xs uppercase tracking-[0.4em] text-neutral-400 block mb-1">Sort by</label>
                         <select class="form-input">
                             <option>Newest</option>
-                            <option>Most saved</option>
+                                <option>Most popular</option>
                             <option>Price: low to high</option>
                             <option>Price: high to low</option>
                         </select>
                     </div>
                 </div>
                 <div class="flex gap-3">
-                    <input type="search" class="form-input" placeholder="Search item, designer, texture">
-                    <button class="btn btn-primary px-4">Search</button>
+                        <input type="search" class="form-input" placeholder="Search products...">
+                        <button class="btn btn-primary px-4 btn-hover-scale">Search</button>
                 </div>
             </div>
         </div>
-    </section>
+        </div>
 
-    <!-- Product grid -->
-    <section class="py-10 sm:py-14">
+        <!-- Product Grid -->
+        <div class="py-10 sm:py-14">
         <div class="container-custom space-y-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Card template x8 -->
-                <!-- We'll reuse classes defined in main.css -->
-                <article class="shop-card" data-aos="fade-up">
-                    <div class="shop-card-media">
-                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Suit set">
-                        <button class="shop-favorite" aria-label="Save look">
-                            <span>♡</span>
-                        </button>
+                <div class="text-center" data-aos="fade-up">
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-2">Shop</p>
+                    <h2 class="font-rufina text-3xl font-bold">Fashion Products</h2>
                     </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Wardrobe</p>
-                            <h3>Contour suit + mesh base</h3>
-                            <p class="shop-card-desc">Matte blazer, mesh top, and curved pant ready for fittings.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span>$640</span>
-                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="shop-card" data-aos="fade-up" data-aos-delay="50">
-                    <div class="shop-card-media">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Dress set">
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Wardrobe</p>
-                            <h3>Lunar silk wrap</h3>
-                            <p class="shop-card-desc">Bias-cut slip with sculptural earrings and sustainable pumps.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span>$420</span>
-                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="shop-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="shop-card-media">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Grooming kit">
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Grooming</p>
-                            <h3>Hair reset ritual kit</h3>
-                            <p class="shop-card-desc">Clarifying wash, bonding mask, and styling cream curated by our grooming lead.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span>$160</span>
-                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="shop-card" data-aos="fade-up" data-aos-delay="150">
-                    <div class="shop-card-media">
-                        <img src="https://images.unsplash.com/photo-1495872298367-3cf511eb3cfe?auto=format&fit=crop&w=800&q=80" alt="Accessory set">
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Accessories</p>
-                            <h3>Chrome essentials</h3>
-                            <p class="shop-card-desc">Necklace, cuff, and convertible belt bag for evening shoots.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span>$210</span>
-                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
-                        </div>
-                    </div>
-                </article>
-                <!-- second row -->
-                <article class="shop-card" data-aos="fade-up">
-                    <div class="shop-card-media">
-                        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80" alt="Another outfit">
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Wardrobe</p>
-                            <h3>Modern utility co-ord</h3>
-                            <p class="shop-card-desc">Sand set with removable sleeves inspired by editorial styling.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span>$350</span>
-                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="shop-card" data-aos="fade-up" data-aos-delay="50">
-                    <div class="shop-card-media">
-                        <img src="https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=800&q=80" alt="Shoes">
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Footwear</p>
-                            <h3>Structural ankle heels</h3>
-                            <p class="shop-card-desc">Architectural heels with flex straps for both fittings and shoots.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span>$280</span>
-                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="shop-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="shop-card-media">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80&sat=-40" alt="Beauty">
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Beauty</p>
-                            <h3>Dewy skin set</h3>
-                            <p class="shop-card-desc">Illuminating primer, skin tint, and gloss balm curated for minimal shoots.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span>$140</span>
-                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="shop-card" data-aos="fade-up" data-aos-delay="150">
-                    <div class="shop-card-media">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80&sat=15" alt="Bag">
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Accessories</p>
-                            <h3>Studio edit tote</h3>
-                            <p class="shop-card-desc">Structured leather tote with compartments for tablets and grooming kits.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span>$220</span>
-                            <button class="btn btn-secondary px-3 py-1.5 text-xs">Preview</button>
-                        </div>
-                    </div>
-                </article>
-            </div>
-            <div class="text-center">
-                <button class="btn btn-secondary">Load more</button>
+                <div id="fashion-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Products will be rendered here by JS -->
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-secondary btn-hover-scale">Load more</button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Grooming carousel -->
-    <section class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
-        <div class="container-custom space-y-6">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <!-- BARBER SHOP SECTION -->
+    <section id="section-barbers" class="tab-section">
+        <!-- Hero -->
+        <div class="py-16 bg-gradient-to-br from-primary-600 via-primary-500 to-accent-500 text-white">
+            <div class="container-custom max-w-4xl mx-auto text-center space-y-4" data-aos="fade-up">
+                <p class="uppercase tracking-[0.4em] text-sm text-white/70">Book your style</p>
+                <h2 class="font-rufina text-4xl sm:text-5xl font-bold">Select a Baber Shop partner</h2>
+                <p class="text-white/85 text-base sm:text-lg">Choose a salon, stack services, and send everything to Model Preview for haircut mode.</p>
+            </div>
+        </div>
+
+        <!-- Selected style -->
+        <div class="py-10 bg-neutral-50 dark:bg-dark-surface">
+            <div class="container-custom max-w-4xl mx-auto" data-aos="fade-up">
+                <div class="bg-white dark:bg-dark-card rounded-3xl p-6 shadow-soft dark:shadow-soft-dark flex flex-col sm:flex-row gap-6 items-center">
+                    <div class="w-36 h-36 rounded-2xl overflow-hidden bg-neutral-200 dark:bg-dark-surface flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" alt="Selected hairstyle" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 space-y-3 text-center sm:text-left">
+                        <p class="text-xs uppercase tracking-[0.4em] text-primary-500">From Model Preview</p>
+                        <h3 class="font-rufina text-2xl font-bold">Layered Bob</h3>
+                        <p class="text-neutral-600 dark:text-neutral-400 text-sm">A modern take on a classic bob with textured layers for movement. Pairs perfectly with the upcoming grooming drops.</p>
+                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 text-xs">
+                            <span class="px-3 py-1 rounded-full bg-primary-50 text-primary-600 dark:bg-primary-900/20 dark:text-primary-200">Oval face</span>
+                            <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Medium length</span>
+                            <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-300">Medium upkeep</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barber shops -->
+        <div class="py-12">
+            <div class="container-custom space-y-10">
+                <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-2">Top Baber Shops</p>
+                    <h3 class="font-rufina text-3xl font-bold mb-3">Pick a partner salon & stack services</h3>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm">You can only select services from a single shop per booking to lock availability.</p>
+                </div>
+
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                    <!-- Template repeated 5 times -->
+                    <template id="barber-card-template"></template>
+
+                    <!-- Cards defined manually for clarity -->
+                    <article class="barber-card relative bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden" data-barber="elite-cuts" data-aos="fade-up">
+                        <div class="border-b border-neutral-100 dark:border-dark-border p-6 space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover" alt="Elite Cuts">
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-rufina text-xl font-bold">Elite Cuts</h4>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">★★★★★ · 4.9 (128)</p>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">123 Fashion Street</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-3 py-1 rounded-full bg-primary-50 text-primary-600 dark:bg-primary-900/20 dark:text-primary-200">Premium</span>
+                                <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Online booking</span>
+                                <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-200">Consult</span>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                                <button class="category-btn active px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="all">All</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="haircut">Haircut</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="coloring">Coloring</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="styling">Styling</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="treatment">Treatment</button>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                        <div>
+                                        <p class="font-semibold text-sm">Classic Haircut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Precision cut with scissor work</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">65,000 MMK</span>
+                                        <div class="service-checkbox" data-service="classic-haircut" data-price="65000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                        <div>
+                                        <p class="font-semibold text-sm">Beard Trim & Shape</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Professional beard sculpt</p>
+                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">35,000 MMK</span>
+                                        <div class="service-checkbox" data-service="beard-trim" data-price="35000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="coloring">
+                        <div>
+                                        <p class="font-semibold text-sm">Full Color</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Complete coloring session</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">125,000 MMK</span>
+                                        <div class="service-checkbox" data-service="full-color" data-price="125000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="treatment">
+                        <div>
+                                        <p class="font-semibold text-sm">Deep Conditioning</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Nourishing treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">50,000 MMK</span>
+                                        <div class="service-checkbox" data-service="conditioning" data-price="50000"></div>
+                                    </div>
+                        </div>
+                        </div>
+                    </div>
+                        <div class="flex items-center justify-between gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                            <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
+                            <button class="btn btn-secondary text-xs px-4 py-2">View details</button>
+                    </div>
+                </article>
+
+                    <!-- second card -->
+                    <article class="barber-card relative bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden" data-barber="urban-grooming" data-aos="fade-up" data-aos-delay="100">
+                        <div class="border-b border-neutral-100 dark:border-dark-border p-6 space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover" alt="Urban Grooming">
+                    </div>
+                                <div class="flex-1">
+                                    <h4 class="font-rufina text-xl font-bold">Urban Grooming</h4>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">★★★★☆ · 4.7 (94)</p>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">456 Modern Avenue</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-3 py-1 rounded-full bg-primary-50 text-primary-600 dark:bg-primary-900/20 dark:text-primary-200">Modern</span>
+                                <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Express</span>
+                                <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-200">Student deal</span>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                                <button class="category-btn active px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="all">All</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="haircut">Haircut</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="coloring">Coloring</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="styling">Styling</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="treatment">Treatment</button>
+                    </div>
+                            <div class="space-y-3">
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                        <div>
+                                        <p class="font-semibold text-sm">Signature Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Custom cut + styling consult</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">80,000 MMK</span>
+                                        <div class="service-checkbox" data-service="signature-cut" data-price="80000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Skin Fade</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Detailed fade work</p>
+                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">60,000 MMK</span>
+                                        <div class="service-checkbox" data-service="skin-fade" data-price="60000"></div>
+                                    </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="coloring">
+                        <div>
+                                        <p class="font-semibold text-sm">Balayage</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Hand-painted highlighting</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">175,000 MMK</span>
+                                        <div class="service-checkbox" data-service="balayage" data-price="175000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="styling">
+                                    <div>
+                                        <p class="font-semibold text-sm">Blowout & Style</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Finish + styling</p>
+                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">50,000 MMK</span>
+                                        <div class="service-checkbox" data-service="blowout" data-price="50000"></div>
+                                    </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="treatment">
+                        <div>
+                                        <p class="font-semibold text-sm">Scalp Treatment</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Therapeutic scalp care</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">65,000 MMK</span>
+                                        <div class="service-checkbox" data-service="scalp-treatment" data-price="65000"></div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                        <div class="flex items-center justify-between gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                            <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
+                            <button class="btn btn-secondary text-xs px-4 py-2">View details</button>
+                    </div>
+                </article>
+
+                    <!-- Additional cards (Gentleman, StyleLab, Precision) -->
+                    <article class="barber-card relative bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden" data-barber="gentleman" data-aos="fade-up">
+                        <div class="border-b border-neutral-100 dark:border-dark-border p-6 space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover" alt="Gentleman Barbers">
+                    </div>
+                                <div class="flex-1">
+                                    <h4 class="font-rufina text-xl font-bold">Gentleman Barbers</h4>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">★★★★★ · 4.8 (210)</p>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">789 Classic Road</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-3 py-1 rounded-full bg-primary-50 text-primary-600 dark:bg-primary-900/20 dark:text-primary-200">Traditional</span>
+                                <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Hot towel</span>
+                                <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-200">Loyalty</span>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                                <button class="category-btn active px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="all">All</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="haircut">Haircut</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="coloring">Coloring</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="styling">Styling</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="treatment">Treatment</button>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                        <div>
+                                        <p class="font-semibold text-sm">Traditional Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Classic cut with hot towel</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">75,000 MMK</span>
+                                        <div class="service-checkbox" data-service="traditional-cut" data-price="75000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                        <div>
+                                        <p class="font-semibold text-sm">Beard Grooming</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Full beard service</p>
+                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">45,000 MMK</span>
+                                        <div class="service-checkbox" data-service="beard-grooming" data-price="45000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="coloring">
+                        <div>
+                                        <p class="font-semibold text-sm">Gray Coverage</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Professional coverage</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">95,000 MMK</span>
+                                        <div class="service-checkbox" data-service="gray-coverage" data-price="95000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="styling">
+                        <div>
+                                        <p class="font-semibold text-sm">Traditional Shave</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Straight razor experience</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">60,000 MMK</span>
+                                        <div class="service-checkbox" data-service="traditional-shave" data-price="60000"></div>
+                                    </div>
+                        </div>
+                        </div>
+                    </div>
+                        <div class="flex items-center justify-between gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                            <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
+                            <button class="btn btn-secondary text-xs px-4 py-2">View details</button>
+                    </div>
+                </article>
+
+                    <article class="barber-card relative bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden" data-barber="style-lab" data-aos="fade-up" data-aos-delay="100">
+                        <div class="border-b border-neutral-100 dark:border-dark-border p-6 space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1593705114312-a0ee03a3f7d0?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover" alt="Style Lab">
+                    </div>
+                                <div class="flex-1">
+                                    <h4 class="font-rufina text-xl font-bold">Style Lab</h4>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">★★★★☆ · 4.6 (87)</p>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">321 Creative Lane</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-3 py-1 rounded-full bg-primary-50 text-primary-600 dark:bg-primary-900/20 dark:text-primary-200">Creative</span>
+                                <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Trend setting</span>
+                                <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-200">Color lab</span>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                                <button class="category-btn active px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="all">All</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="haircut">Haircut</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="coloring">Coloring</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="styling">Styling</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="treatment">Treatment</button>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                        <div>
+                                        <p class="font-semibold text-sm">Creative Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Artistic shape work</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">95,000 MMK</span>
+                                        <div class="service-checkbox" data-service="creative-cut" data-price="95000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                        <div>
+                                        <p class="font-semibold text-sm">Texture Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Movement focused</p>
+            </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">105,000 MMK</span>
+                                        <div class="service-checkbox" data-service="texture-cut" data-price="105000"></div>
+            </div>
+        </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="coloring">
                 <div>
-                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-2">Grooming</p>
-                    <h2 class="font-rufina text-3xl font-bold">Hair and skin kits we can ship with your wardrobe</h2>
+                                        <p class="font-semibold text-sm">Creative Color</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Custom palette</p>
                 </div>
-                <div class="flex gap-3">
-                    <button class="carousel-prev btn btn-secondary px-3">Prev</button>
-                    <button class="carousel-next btn btn-primary px-3">Next</button>
-                </div>
-            </div>
-            <div class="swiper shop-swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <article class="product-card p-0 overflow-hidden">
-                            <div class="aspect-[4/3]">
-                                <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=1000&q=80" alt="Hair duo" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-6 space-y-2">
-                                <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Hair</p>
-                                <h3 class="font-rufina text-xl">Glass hair duo</h3>
-                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Gloss serum + heat shield spray used in our editorial prep.</p>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="swiper-slide">
-                        <article class="product-card p-0 overflow-hidden">
-                            <div class="aspect-[4/3]">
-                                <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=80" alt="Skin kit" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-6 space-y-2">
-                                <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Skin</p>
-                                <h3 class="font-rufina text-xl">Editorial skin prep</h3>
-                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Ice globes, mist, and moisturizer kit for on-set refresh.</p>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="swiper-slide">
-                        <article class="product-card p-0 overflow-hidden">
-                            <div class="aspect-[4/3]">
-                                <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1000&q=80&sat=10" alt="Curl set" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-6 space-y-2">
-                                <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Texture</p>
-                                <h3 class="font-rufina text-xl">Curl definition trio</h3>
-                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Hydrating wash, leave-in cream, and diffuser attachments.</p>
-                            </div>
-                        </article>
-                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">140,000 MMK</span>
+                                        <div class="service-checkbox" data-service="creative-color" data-price="140000"></div>
                 </div>
             </div>
-        </div>
-    </section>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="coloring">
+                <div>
+                                        <p class="font-semibold text-sm">Color Correction</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Fix previous color</p>
+                            </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">175,000 MMK</span>
+                                        <div class="service-checkbox" data-service="color-correction" data-price="175000"></div>
+                            </div>
+                    </div>
+                            </div>
+                            </div>
+                        <div class="flex items-center justify-between gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                            <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
+                            <button class="btn btn-secondary text-xs px-4 py-2">View details</button>
+                            </div>
+                        </article>
 
-    <!-- CTA -->
-    <section class="py-12 md:py-16">
-        <div class="container-custom">
-            <div class="rounded-[32px] bg-neutral-900 text-white p-8 md:p-12 flex flex-col lg:flex-row gap-6 items-center">
-                <div class="space-y-3 lg:w-2/3">
-                    <p class="text-xs uppercase tracking-[0.4em] text-white/60">Need it kitted?</p>
-                    <h2 class="font-rufina text-3xl font-bold">We’ll turn your saved looks into a shippable wardrobe or grooming case.</h2>
-                    <p class="text-white/70">Select items, send us your measurements, and our team will ship a ready-to-wear trunk or provide affiliate links for local pickup.</p>
+                    <article class="barber-card relative bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden" data-barber="precision" data-aos="fade-up" data-aos-delay="150">
+                        <div class="border-b border-neutral-100 dark:border-dark-border p-6 space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover" alt="Precision Cuts">
+                    </div>
+                                <div class="flex-1">
+                                    <h4 class="font-rufina text-xl font-bold">Precision Cuts</h4>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">★★★★★ · 4.9 (156)</p>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">654 Sharp Street</p>
+                            </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-3 py-1 rounded-full bg-primary-50 text-primary-600 dark:bg-primary-900/20 dark:text-primary-200">Precision</span>
+                                <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Fast</span>
+                                <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-200">Corporate</span>
+                    </div>
                 </div>
-                <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-                    <a href="saved-fashion.html" class="btn btn-secondary w-full sm:w-auto">View saved fashion</a>
-                    <a href="contact.html" class="btn btn-primary w-full sm:w-auto bg-white text-neutral-900 hover:bg-neutral-100">Book styling drop</a>
+                        <div class="p-6 space-y-4">
+                            <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                                <button class="category-btn active px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="all">All</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="haircut">Haircut</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="coloring">Coloring</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="styling">Styling</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="treatment">Treatment</button>
+            </div>
+                            <div class="space-y-3">
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Executive Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Sharp, professional</p>
+        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">75,000 MMK</span>
+                                        <div class="service-checkbox" data-service="executive-cut" data-price="75000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Express Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Quick service</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">50,000 MMK</span>
+                                        <div class="service-checkbox" data-service="express-cut" data-price="50000"></div>
+                    </div>
+                            </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Toning Service</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Gloss treatment</p>
+                            </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">65,000 MMK</span>
+                                        <div class="service-checkbox" data-service="toning" data-price="65000"></div>
+                    </div>
+                            </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Express Treatment</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Quick conditioning</p>
+                            </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">35,000 MMK</span>
+                                        <div class="service-checkbox" data-service="express-treatment" data-price="35000"></div>
+                    </div>
                 </div>
             </div>
         </div>
+                        <div class="flex items-center justify-between gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                            <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
+                            <button class="btn btn-secondary text-xs px-4 py-2">View details</button>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Cart summary -->
+                <div class="bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4" data-aos="fade-up">
+                    <div>
+                        <p class="text-sm text-neutral-500 dark:text-neutral-400 uppercase tracking-[0.4em]">Selected services</p>
+                        <p class="text-2xl font-rufina mt-1"><span id="selected-count">0</span> items · <span id="cart-total">0</span> MMK</p>
+                        <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">All selected services will carry over to the booking flow.</p>
+                </div>
+                    <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                        <a href="model-preview.html?mode=haircut" class="btn btn-secondary w-full sm:w-auto text-center">Preview haircut</a>
+                        <a href="booking.html" id="continue-btn" class="btn btn-primary w-full sm:w-auto text-center opacity-70 pointer-events-none">Continue to booking</a>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div id="toast" class="toast">Added</div>
     </section>
 
     <!-- Footer -->
@@ -499,22 +981,265 @@
     <script src="../js/main.js"></script>
     <script src="../js/animations.js"></script>
     <script>
+        // Initialize AOS
         document.addEventListener('DOMContentLoaded', () => {
-            const swiper = new Swiper('.shop-swiper', {
-                slidesPerView: 1,
-                spaceBetween: 16,
-                breakpoints: {
-                    640: { slidesPerView: 1.5 },
-                    768: { slidesPerView: 2 },
-                    1024: { slidesPerView: 3 }
-                },
-                navigation: {
-                    nextEl: '.carousel-next',
-                    prevEl: '.carousel-prev'
+            AOS.init({ duration: 600, once: true });
+        });
+
+        // Tab Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.tab-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // Show target section
+            const targetSection = document.getElementById('section-' + sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                // Refresh AOS for new section
+                setTimeout(() => AOS.refresh(), 100);
+            }
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.section === sectionId) {
+                    btn.classList.add('active');
                 }
             });
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Wardrobe Storage
+        let wardrobe = JSON.parse(localStorage.getItem('wardrobe')) || [];
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        function addToWardrobe(item) {
+            // Check if item already exists
+            const exists = wardrobe.find(w => w.id === item.id);
+            if (!exists) {
+                wardrobe.push(item);
+                localStorage.setItem('wardrobe', JSON.stringify(wardrobe));
+                showNotification('Added to Digital Wardrobe!', 'success');
+            } else {
+                showNotification('Item already in wardrobe', 'info');
+            }
+        }
+
+        function addToCart(item) {
+            cart.push(item);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification('Added to Cart!', 'success');
+        }
+
+        function addToFavorites(item) {
+            const exists = favorites.find(f => f.id === item.id);
+            if (!exists) {
+                favorites.push(item);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                showNotification('Added to Favorites!', 'success');
+            } else {
+                showNotification('Already in favorites', 'info');
+            }
+        }
+
+        function updateCartCount() {
+            const countEl = document.getElementById('cart-count');
+            if (countEl) {
+                countEl.textContent = cart.length;
+                countEl.classList.toggle('hidden', cart.length === 0);
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-20 right-4 p-4 rounded-xl shadow-lg z-50 transition-all transform translate-x-full ${
+                type === 'success' ? 'bg-green-500' : 
+                type === 'warning' ? 'bg-yellow-500' : 
+                'bg-primary-500'
+            } text-white`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => notification.classList.remove('translate-x-full'), 10);
+            
+            // Remove after delay
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => notification.remove(), 300);
+            }, 2500);
+        }
+
+        // Fashion Products Data
+        const fashionProducts = [
+            { id: 'prod-1', name: 'Classic White Tee', price: 45, category: 'top', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80' },
+            { id: 'prod-2', name: 'Slim Fit Jeans', price: 89, category: 'bottom', image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=80' },
+            { id: 'prod-3', name: 'Leather Jacket', price: 299, category: 'top', image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80' },
+            { id: 'prod-4', name: 'Canvas Sneakers', price: 75, category: 'shoes', image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80' },
+            { id: 'prod-5', name: 'Linen Shirt', price: 65, category: 'top', image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80' },
+            { id: 'prod-6', name: 'Chino Pants', price: 79, category: 'bottom', image: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=800&q=80' },
+            { id: 'prod-7', name: 'Wool Blazer', price: 189, category: 'top', image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80' },
+            { id: 'prod-8', name: 'Minimalist Watch', price: 129, category: 'accessories', image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=800&q=80' },
+        ];
+
+        // Render Fashion Products
+        function renderFashionProducts() {
+            const container = document.getElementById('fashion-products');
+            if (!container) return;
+
+            container.innerHTML = fashionProducts.map((product, index) => `
+                <article class="shop-card-animated product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="${index * 50}">
+                    <div class="shop-card-media aspect-[4/3] relative">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                        <button class="absolute top-3 right-3 w-8 h-8 bg-white/90 dark:bg-dark-card/90 rounded-full flex items-center justify-center hover:bg-primary-500 hover:text-white transition-colors" onclick="addToFavorites(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                        </button>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-neutral-400 mb-1">${product.category}</p>
+                            <h3 class="font-medium">${product.name}</h3>
+                            <p class="text-primary-600 dark:text-primary-400 font-bold">$${product.price}</p>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <button onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})" class="btn btn-primary btn-hover-scale w-full text-xs py-2">Add to Cart</button>
+                            <div class="flex gap-2">
+                                <button onclick="addToWardrobe(${JSON.stringify(product).replace(/"/g, '&quot;')})" class="btn btn-secondary btn-hover-scale flex-1 text-xs py-2">+ Wardrobe</button>
+                                <a href="model-preview.html?mode=outfit" class="btn btn-ghost border border-neutral-200 dark:border-dark-border btn-hover-scale flex-1 text-xs py-2 text-center">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFashionProducts();
+            updateCartCount();
+            initBarberShopModule();
         });
+
+        // Barber tab logic
+        function initBarberShopModule() {
+            const section = document.getElementById('section-barbers');
+            if (!section) return;
+
+            const serviceCheckboxes = section.querySelectorAll('.service-checkbox');
+            const categoryButtons = section.querySelectorAll('.category-btn');
+            const selectedCount = document.getElementById('selected-count');
+            const cartTotal = document.getElementById('cart-total');
+            const continueBtn = document.getElementById('continue-btn');
+            const toast = document.getElementById('toast');
+            let selectedServices = [];
+            let selectedBarber = null;
+
+            const formatCurrency = (amount) => amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+            const showToast = (message) => {
+                if (!toast) return;
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2500);
+            };
+
+            const updateCart = () => {
+                const total = selectedServices.reduce((sum, svc) => sum + svc.price, 0);
+                const count = selectedServices.length;
+                selectedCount.textContent = count;
+                cartTotal.textContent = formatCurrency(total);
+
+                // update per barber totals
+                section.querySelectorAll('.barber-card').forEach(card => {
+                    const barberId = card.dataset.barber;
+                    const barberServices = selectedServices.filter(s => s.barber === barberId);
+                    const barberTotal = barberServices.reduce((sum, svc) => sum + svc.price, 0);
+                    const totalEl = card.querySelector('.total-price');
+                    if (totalEl) totalEl.textContent = `${formatCurrency(barberTotal)} MMK`;
+                    card.classList.toggle('shop-selected', barberServices.length > 0);
+                });
+
+                if (continueBtn) {
+                    if (count > 0) {
+                        continueBtn.classList.remove('opacity-70', 'pointer-events-none');
+                        continueBtn.classList.add('btn-hover-scale');
+                    } else {
+                        continueBtn.classList.add('opacity-70', 'pointer-events-none');
+                        continueBtn.classList.remove('btn-hover-scale');
+                    }
+                }
+
+                localStorage.setItem('selectedBarberServices', JSON.stringify(selectedServices));
+                localStorage.setItem('selectedBarberShop', selectedBarber);
+            };
+
+            const updateServiceAvailability = () => {
+                serviceCheckboxes.forEach(box => {
+                    const card = box.closest('.barber-card');
+                    if (!card) return;
+                    const isLocked = selectedBarber && card.dataset.barber !== selectedBarber;
+                    box.closest('.service-item').classList.toggle('disabled', Boolean(isLocked));
+                    box.classList.toggle('disabled', Boolean(isLocked));
+                });
+            };
+
+            serviceCheckboxes.forEach(box => {
+                box.addEventListener('click', () => {
+                    const card = box.closest('.barber-card');
+                    const barberId = card?.dataset.barber;
+                    const price = parseInt(box.dataset.price, 10);
+                    const service = box.dataset.service;
+
+                    if (!selectedBarber) {
+                        selectedBarber = barberId;
+                        showToast(`Selected ${card.querySelector('.font-rufina').textContent}`);
+                    }
+
+                    if (selectedBarber && barberId !== selectedBarber) {
+                        showToast('Select services from one Baber shop at a time.');
+                        box.classList.add('animate-pulse');
+                        setTimeout(() => box.classList.remove('animate-pulse'), 400);
+                        return;
+                    }
+
+                    if (box.classList.contains('checked')) {
+                        box.classList.remove('checked');
+                        selectedServices = selectedServices.filter(s => s.service !== service);
+                        if (selectedServices.length === 0) selectedBarber = null;
+                    } else {
+                        box.classList.add('checked');
+                        selectedServices.push({ service, price, barber: barberId });
+                    }
+
+                    updateServiceAvailability();
+                    updateCart();
+                });
+            });
+
+            categoryButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const category = btn.dataset.category;
+                    const card = btn.closest('.barber-card');
+                    card.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    card.querySelectorAll('.service-item').forEach(item => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            item.style.display = 'flex';
+                            item.classList.add('animate-fade-slide-up');
+                        } else {
+                            item.style.display = 'none';
+                            item.classList.remove('animate-fade-slide-up');
+                        }
+                    });
+                });
+            });
+
+            updateCart();
+            updateServiceAvailability();
+        }
     </script>
 </body>
 </html>
-

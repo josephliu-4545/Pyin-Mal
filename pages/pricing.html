@@ -121,18 +121,17 @@
     </header>
 
     <!-- Hero -->
-    <section class="py-10 sm:py-14 md:py-16 bg-neutral-900 text-white">
+    <section class="py-10 sm:py-14 md:py-16 bg-gradient-to-br from-primary-600 via-primary-700 to-purple-800 text-white">
         <div class="container-custom max-w-3xl mx-auto text-center">
             <div data-aos="fade-up">
                 <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Pricing</p>
-                <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Styling sprints that match your calendar and budget.</h1>
-                <p class="text-sm sm:text-base text-white/80 mb-6">Each package is a focused sprint: we define your goals, build looks and grooming presets, preview everything digitally, then deliver a clear plan you can reuse.</p>
+                <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Style that grows with you. Choose your plan.</h1>
+                <p class="text-sm sm:text-base text-white/80 mb-6">From free discovery to premium styling, find the perfect plan for your fashion journey. No commitments, just great style.</p>
                 <div class="flex flex-wrap gap-4 justify-center">
-                    <a href="#plans" class="btn btn-primary">View plans</a>
+                    <a href="#plans" class="btn btn-primary bg-white text-primary-700 hover:bg-neutral-100">View plans</a>
                     <a href="contact.html" class="btn btn-ghost border-white text-white hover:bg-white/10">Talk to our team</a>
                 </div>
             </div>
-            
         </div>
     </section>
 
@@ -141,52 +140,71 @@
         <div class="container-custom space-y-8">
             <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
                 <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Plans</p>
-                <h2 class="font-rufina text-3xl font-bold mb-3">Choose how deep you want to go</h2>
-                <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Pricing below is indicative for contest/demo. In a real launch, numbers can be adapted for your market while the structure stays the same.</p>
+                <h2 class="font-rufina text-3xl font-bold mb-3">Simple pricing for every style journey</h2>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Start free, upgrade as your style needs grow. Cancel anytime.</p>
             </div>
+            
+            <!-- Billing Toggle -->
+            <div class="flex justify-center" data-aos="fade-up">
+                <div class="inline-flex rounded-xl bg-white dark:bg-dark-card p-1.5 shadow-sm border border-neutral-200 dark:border-dark-border">
+                    <button class="billing-toggle billing-toggle-active px-4 py-2 rounded-lg text-sm font-medium">Monthly</button>
+                    <button class="billing-toggle px-4 py-2 rounded-lg text-sm font-medium">Yearly <span class="text-primary-600 ml-1">Save 20%</span></button>
+                </div>
+            </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Plan 1 -->
+                <!-- Free Plan -->
                 <article class="product-card p-6 flex flex-col gap-4" data-aos="fade-up">
                     <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Starter</p>
-                    <h3 class="font-rufina text-2xl">Single Sprint</h3>
-                    <p class="text-3xl font-rufina">$290<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / sprint</span></p>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Perfect for one upcoming event, new role, or profile refresh.</p>
+                    <h3 class="font-rufina text-2xl">Free</h3>
+                    <p class="text-3xl font-rufina">$0<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / forever</span></p>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Perfect for exploring your style and getting basic recommendations.</p>
                     <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                        <li>• 4–6 complete outfit looks.</li>
-                        <li>• 1 haircut recommendation blueprint.</li>
-                        <li>• 1 grooming mini-kit suggestion.</li>
-                        <li>• Access to Saved Fashion library for 30 days.</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Basic style recommendations</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> 1 haircut blueprint monthly</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Access to basic fashion library</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Community style challenges</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Email support</li>
                     </ul>
-                    <a href="contact.html" class="btn btn-secondary mt-2">Start a starter sprint</a>
+                    <a href="signup.html" class="btn btn-secondary mt-2">Get Started Free</a>
                 </article>
-                <!-- Plan 2 -->
-                <article class="product-card p-6 flex flex-col gap-4 border border-primary-500/40 shadow-soft dark:shadow-soft-dark" data-aos="fade-up" data-aos-delay="50">
-                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Most popular</p>
-                    <h3 class="font-rufina text-2xl">Capsule Wardrobe</h3>
-                    <p class="text-3xl font-rufina">$540<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / sprint</span></p>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">For people who want a mini-wardrobe that works across work, weekend, and events.</p>
+                
+                <!-- Monthly Plan -->
+                <article class="product-card p-6 flex flex-col gap-4 border-2 border-primary-500/40 shadow-soft dark:shadow-soft-dark relative" data-aos="fade-up" data-aos-delay="50">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-primary-600 text-white text-xs px-3 py-1 rounded-full">Most Popular</span>
+                    </div>
+                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Premium</p>
+                    <h3 class="font-rufina text-2xl">Monthly</h3>
+                    <p class="text-3xl font-rufina">$29<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / month</span></p>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">For style enthusiasts who want personalized recommendations and premium features.</p>
                     <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                        <li>• 10–14 outfit looks across at least two capsules.</li>
-                        <li>• 2 haircut recommendations with MediaPipe previews.</li>
-                        <li>• 2 grooming packages mapped to your lifestyle.</li>
-                        <li>• Saved Fashion library access for 6 months.</li>
-                        <li>• 1 follow-up refinement call.</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Unlimited style recommendations</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> 5 haircut blueprints monthly</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Full fashion library access</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Model Preview sessions</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Priority email & chat support</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Seasonal grooming kits</li>
                     </ul>
-                    <a href="contact.html" class="btn btn-primary mt-2">Book capsule sprint</a>
+                    <a href="signup.html" class="btn btn-primary mt-2">Start Monthly Plan</a>
                 </article>
-                <!-- Plan 3 -->
+                
+                <!-- Yearly Plan -->
                 <article class="product-card p-6 flex flex-col gap-4" data-aos="fade-up" data-aos-delay="100">
-                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Studio</p>
-                    <h3 class="font-rufina text-2xl">Creator / Team</h3>
-                    <p class="text-3xl font-rufina">Custom<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / quarter</span></p>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">For studios, brands, or creators needing on-going drops for shoots and launches.</p>
+                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Premium</p>
+                    <h3 class="font-rufina text-2xl">Yearly</h3>
+                    <p class="text-3xl font-rufina">$279<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / year</span></p>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Best value for committed style lovers with all premium features at a discount.</p>
                     <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                        <li>• Quarterly capsules for 1–3 people.</li>
-                        <li>• Live Model Preview sessions per campaign.</li>
-                        <li>• Hair & grooming residencies with your salon team.</li>
-                        <li>• Priority Slack/DM channel with our stylists.</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Everything in Monthly plan</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Unlimited haircut blueprints</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Premium fashion library access</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Unlimited Model Preview sessions</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> VIP support & styling consultations</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Exclusive seasonal grooming boxes</li>
+                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Early access to new features</li>
                     </ul>
-                    <a href="contact.html" class="btn btn-secondary mt-2">Request studio quote</a>
+                    <a href="signup.html" class="btn btn-secondary mt-2">Save 20% Yearly</a>
                 </article>
             </div>
         </div>
@@ -197,49 +215,61 @@
         <div class="container-custom space-y-6">
             <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
                 <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Compare</p>
-                <h2 class="font-rufina text-3xl font-bold mb-3">What’s inside each sprint?</h2>
-                <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Every plan moves through the same four phases—Discovery, Curation, Preview, Launch. The difference is how much we pack into each phase.</p>
+                <h2 class="font-rufina text-3xl font-bold mb-3">See all features at a glance</h2>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Choose the plan that works best for your style journey. All plans include our core styling technology.</p>
             </div>
             <div class="overflow-x-auto product-card p-0" data-aos="fade-up">
                 <table class="min-w-full text-sm border-separate border-spacing-y-1">
                     <thead class="text-left text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400">
                         <tr>
-                            <th class="px-4 py-3">Included</th>
-                            <th class="px-4 py-3">Starter</th>
-                            <th class="px-4 py-3">Capsule</th>
-                            <th class="px-4 py-3">Studio</th>
+                            <th class="px-4 py-3">Features</th>
+                            <th class="px-4 py-3">Free</th>
+                            <th class="px-4 py-3">Monthly</th>
+                            <th class="px-4 py-3">Yearly</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="bg-neutral-50 dark:bg-dark-surface">
-                            <td class="px-4 py-3">Outfit looks</td>
-                            <td class="px-4 py-3">4–6</td>
-                            <td class="px-4 py-3">10–14</td>
-                            <td class="px-4 py-3">24+ per quarter</td>
+                            <td class="px-4 py-3">Style recommendations</td>
+                            <td class="px-4 py-3">Basic</td>
+                            <td class="px-4 py-3">Unlimited</td>
+                            <td class="px-4 py-3">Unlimited Premium</td>
                         </tr>
                         <tr class="bg-neutral-50/70 dark:bg-dark-surface/70">
                             <td class="px-4 py-3">Haircut blueprints</td>
-                            <td class="px-4 py-3">1</td>
-                            <td class="px-4 py-3">2</td>
-                            <td class="px-4 py-3">Team-based</td>
+                            <td class="px-4 py-3">1 per month</td>
+                            <td class="px-4 py-3">5 per month</td>
+                            <td class="px-4 py-3">Unlimited</td>
+                        </tr>
+                        <tr class="bg-neutral-50 dark:bg-dark-surface">
+                            <td class="px-4 py-3">Fashion library</td>
+                            <td class="px-4 py-3">Basic access</td>
+                            <td class="px-4 py-3">Full access</td>
+                            <td class="px-4 py-3">Premium access</td>
+                        </tr>
+                        <tr class="bg-neutral-50/70 dark:bg-dark-surface/70">
+                            <td class="px-4 py-3">Model Preview</td>
+                            <td class="px-4 py-3">-</td>
+                            <td class="px-4 py-3">5 sessions/month</td>
+                            <td class="px-4 py-3">Unlimited</td>
                         </tr>
                         <tr class="bg-neutral-50 dark:bg-dark-surface">
                             <td class="px-4 py-3">Grooming kits</td>
-                            <td class="px-4 py-3">1 mini-kit</td>
-                            <td class="px-4 py-3">2 full kits</td>
-                            <td class="px-4 py-3">Custom playbook</td>
+                            <td class="px-4 py-3">-</td>
+                            <td class="px-4 py-3">Seasonal</td>
+                            <td class="px-4 py-3">Exclusive boxes</td>
                         </tr>
                         <tr class="bg-neutral-50/70 dark:bg-dark-surface/70">
-                            <td class="px-4 py-3">Model Preview access</td>
-                            <td class="px-4 py-3">Single session</td>
-                            <td class="px-4 py-3">Multi-session</td>
-                            <td class="px-4 py-3">Per campaign</td>
+                            <td class="px-4 py-3">Support</td>
+                            <td class="px-4 py-3">Email</td>
+                            <td class="px-4 py-3">Priority</td>
+                            <td class="px-4 py-3">VIP</td>
                         </tr>
                         <tr class="bg-neutral-50 dark:bg-dark-surface">
-                            <td class="px-4 py-3">Saved Fashion access</td>
-                            <td class="px-4 py-3">30 days</td>
-                            <td class="px-4 py-3">6 months</td>
-                            <td class="px-4 py-3">On-going</td>
+                            <td class="px-4 py-3">Style consultations</td>
+                            <td class="px-4 py-3">-</td>
+                            <td class="px-4 py-3">-</td>
+                            <td class="px-4 py-3">Quarterly</td>
                         </tr>
                     </tbody>
                 </table>
@@ -247,16 +277,51 @@
         </div>
     </section>
 
+    <!-- FAQ -->
+    <section class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom max-w-3xl mx-auto">
+            <div class="text-center mb-10" data-aos="fade-up">
+                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">FAQ</p>
+                <h2 class="font-rufina text-3xl font-bold mb-3">Frequently asked questions</h2>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Everything you need to know about our plans and services.</p>
+            </div>
+            
+            <div class="space-y-4" data-aos="fade-up">
+                <div class="product-card p-6">
+                    <h3 class="font-rufina text-lg mb-2">Can I change plans anytime?</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Yes! You can upgrade, downgrade, or cancel your plan at any time. Changes take effect at the start of your next billing cycle.</p>
+                </div>
+                
+                <div class="product-card p-6">
+                    <h3 class="font-rufina text-lg mb-2">Is there a free trial for paid plans?</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">We offer a 14-day free trial for both Monthly and Yearly plans. No credit card required to start with our Free plan.</p>
+                </div>
+                
+                <div class="product-card p-6">
+                    <h3 class="font-rufina text-lg mb-2">What payment methods do you accept?</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">We accept all major credit cards, PayPal, and in some regions, Apple Pay and Google Pay.</p>
+                </div>
+                
+                <div class="product-card p-6">
+                    <h3 class="font-rufina text-lg mb-2">Do you offer refunds?</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">We offer a 30-day money-back guarantee if you're not satisfied with our service. Contact our support team for assistance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <!-- CTA -->
-    <section class="py-12 md:py-16 bg-neutral-900 text-white">
+    <section class="py-12 md:py-16 bg-gradient-to-r from-primary-600 to-purple-700 text-white">
         <div class="container-custom flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div class="space-y-3 md:w-2/3">
                 <p class="text-xs uppercase tracking-[0.4em] text-white/60">Ready to start?</p>
-                <h2 class="font-rufina text-3xl font-bold">Tell us what you’re planning and we’ll recommend a sprint.</h2>
-                <p class="text-sm sm:text-base text-white/80">You’ll receive a short email with suggested plan, timeline, and deliverables—no pressure to commit.</p>
+                <h2 class="font-rufina text-3xl font-bold">Join thousands finding their perfect style</h2>
+                <p class="text-sm sm:text-base text-white/80">Start with our free plan today. No credit card required.</p>
             </div>
-            <a href="contact.html" class="btn btn-primary bg-white text-neutral-900 hover:bg-neutral-100 w-full md:w-auto">Book discovery call</a>
+            <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                <a href="signup.html" class="btn btn-primary bg-white text-primary-700 hover:bg-neutral-100 text-center">Start Free Today</a>
+                <a href="contact.html" class="btn btn-ghost border-white text-white hover:bg-white/10 text-center">Talk to sales</a>
+            </div>
         </div>
     </section>
 
@@ -282,5 +347,3 @@
     <script src="../js/animations.js"></script>
 </body>
 </html>
-
-
