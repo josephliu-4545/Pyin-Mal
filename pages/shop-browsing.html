@@ -1224,15 +1224,21 @@
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-        function addToWardrobe(item) {
-            // Check if item already exists
-            const exists = wardrobe.find(w => w.id === item.id);
-            if (!exists) {
-                wardrobe.push(item);
-                localStorage.setItem('wardrobe', JSON.stringify(wardrobe));
-                showNotification('Added to Digital Wardrobe!', 'success');
+        // Add item to wardrobe and enrich with transparent mannequin data when available
+        async function addToWardrobe(item) {
+            if (window.addToWardrobeAsync) {
+                // Use shared async helper so items get canTryOn / transparentImg metadata
+                wardrobe = await window.addToWardrobeAsync(item);
             } else {
-                showNotification('Item already in wardrobe', 'info');
+                // Fallback: previous simple behavior
+                const exists = wardrobe.find(w => w.id === item.id);
+                if (!exists) {
+                    wardrobe.push(item);
+                    localStorage.setItem('wardrobe', JSON.stringify(wardrobe));
+                    showNotification('Added to Digital Wardrobe!', 'success');
+                } else {
+                    showNotification('Item already in wardrobe', 'info');
+                }
             }
         }
 
@@ -2064,5 +2070,6 @@
 
         
     </script>
+    <script src="../js/tryon-utils.js"></script>
 </body>
 </html>

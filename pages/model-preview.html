@@ -16,282 +16,6 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/main.css">
-
-    <style>
-        .preview-container {
-            background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.35), transparent 45%),
-                        radial-gradient(circle at 80% 0%, rgba(255,255,255,0.35), transparent 55%),
-                        linear-gradient(135deg, rgba(248,250,252,0.8), rgba(226,232,240,0.6));
-            border: 1px solid rgba(148, 163, 184, 0.3);
-            border-radius: 2rem;
-            min-height: 520px;
-            overflow: hidden;
-            position: relative;
-            padding: 2rem;
-        }
-        .preview-container::before {
-            content: '';
-            position: absolute;
-            inset: 1.5rem;
-            border-radius: 1.5rem;
-            border: 1px dashed rgba(148, 163, 184, 0.4);
-            pointer-events: none;
-        }
-        .preview-container::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 8%;
-            transform: translateX(-50%);
-            width: 230px;
-            height: 90px;
-            background: radial-gradient(circle, rgba(15,23,42,0.2), transparent 70%);
-            filter: blur(12px);
-            opacity: 0.8;
-        }
-        .preview-container img {
-            pointer-events: none;
-        }
-        .tryon-stage {
-            position: relative;
-            min-height: 560px;
-            border-radius: 2rem;
-            border: 1px solid rgba(148, 163, 184, 0.35);
-            padding: 2.6rem 2rem 3.3rem;
-            background: radial-gradient(circle at 28% 18%, rgba(255,255,255,0.45), transparent 55%),
-                        linear-gradient(130deg, rgba(248,250,252,0.95), rgba(226,232,240,0.65));
-            overflow: hidden;
-            --silhouette-scale: 1;
-            --top-width-scale: 1;
-            --bottom-width-scale: 1;
-            --torso-scale: 1;
-        }
-        .tryon-stage::before {
-            content: '';
-            position: absolute;
-            inset: 1.4rem;
-            border-radius: 1.5rem;
-            border: 1px dashed rgba(148, 163, 184, 0.35);
-            pointer-events: none;
-        }
-        .tryon-stage::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: linear-gradient(rgba(148,163,184,0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(148,163,184,0.1) 1px, transparent 1px);
-            background-size: 95px 95px;
-            opacity: 0.35;
-            pointer-events: none;
-        }
-        .silhouette-base {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            z-index: 1;
-        }
-        .silhouette-outline {
-            width: clamp(220px, 36vw, 310px);
-            height: auto;
-            stroke: rgba(15,23,42,0.85);
-            stroke-width: 3;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: transparent;
-            transform-origin: top center;
-            transform: scaleY(var(--silhouette-scale));
-            filter: drop-shadow(0 18px 35px rgba(15,23,42,0.15));
-        }
-        .garment-layer {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            pointer-events: none;
-            z-index: 2;
-            --garment-main: #c084fc;
-            --garment-secondary: #a855f7;
-            --garment-edge: rgba(15,23,42,0.15);
-            transition: opacity 0.25s ease;
-        }
-        .garment-layer[data-active="false"] {
-            opacity: 0.35;
-        }
-        .garment-layer[data-layer="top"] {
-            top: 105px;
-        }
-        .garment-layer[data-layer="bottom"] {
-            top: calc(315px + (var(--torso-scale) - 1) * 65px);
-        }
-        .garment-svg {
-            width: clamp(230px, 32vw, 360px);
-            max-width: 360px;
-            height: auto;
-            transition: width 0.25s ease, height 0.25s ease;
-            filter: drop-shadow(0 16px 30px rgba(15,23,42,0.18));
-        }
-        .garment-layer[data-layer="top"] .garment-svg,
-        .garment-layer[data-layer="top"] .garment-img {
-            width: calc(260px * var(--top-width-scale));
-            height: calc(240px * var(--torso-scale));
-        }
-        .garment-layer[data-layer="bottom"] .garment-svg,
-        .garment-layer[data-layer="bottom"] .garment-img {
-            width: calc(270px * var(--bottom-width-scale));
-            height: calc(320px * var(--silhouette-scale));
-        }
-        .garment-svg .fill-shape {
-            stroke: none;
-        }
-        .garment-svg .edge-line {
-            stroke: var(--garment-edge);
-            stroke-width: 2.4;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .garment-svg .detail-line {
-            stroke: rgba(255,255,255,0.45);
-            stroke-width: 1.4;
-            stroke-dasharray: 8 6;
-            fill: none;
-            opacity: 0.8;
-        }
-        .garment-img {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: auto;
-            opacity: 0;
-            transition: opacity 0.25s ease;
-            filter: drop-shadow(0 18px 32px rgba(15,23,42,0.25));
-        }
-        .garment-img[data-visible="true"] {
-            opacity: 1;
-        }
-        .wardrobe-card {
-            border: 1px solid rgba(148,163,184,0.25);
-            border-radius: 1.5rem;
-        }
-        .wardrobe-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 0.85rem;
-        }
-        .wardrobe-item {
-            border: 1px solid rgba(148,163,184,0.3);
-            border-radius: 1rem;
-            padding: 0.85rem;
-            text-align: left;
-            background: rgba(248,250,252,0.6);
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-        }
-        .wardrobe-item:hover {
-            transform: translateY(-3px);
-        }
-        .wardrobe-item[data-selected="true"] {
-            border-color: rgba(59,130,246,0.7);
-            background: rgba(59,130,246,0.08);
-        }
-        .wardrobe-item .swatch {
-            width: 100%;
-            aspect-ratio: 1 / 0.65;
-            border-radius: 0.9rem;
-            border: 1px solid rgba(15,23,42,0.08);
-            position: relative;
-            overflow: hidden;
-        }
-        .wardrobe-item .swatch::after {
-            content: attr(data-texture);
-            position: absolute;
-            bottom: 8px;
-            right: 10px;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: rgba(255,255,255,0.75);
-        }
-        .control-row {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-            padding: 1rem;
-            border-radius: 1rem;
-            background: rgba(15,23,42,0.02);
-        }
-        .control-row header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .control-value {
-            font-size: 0.85rem;
-            color: rgba(15,23,42,0.6);
-        }
-        .control-slider {
-            appearance: none;
-            height: 6px;
-            border-radius: 999px;
-            background: rgba(148,163,184,0.35);
-        }
-        .control-slider::-webkit-slider-thumb {
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #2563eb;
-            border: 2px solid #fff;
-            box-shadow: 0 4px 10px rgba(37,99,235,0.35);
-            cursor: pointer;
-        }
-        .control-slider::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #2563eb;
-            border: 2px solid #fff;
-            box-shadow: 0 4px 10px rgba(37,99,235,0.35);
-            cursor: pointer;
-        }
-        .look-summary-row {
-            border: 1px solid rgba(148,163,184,0.25);
-            border-radius: 1.25rem;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-        .color-dot {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            border: 2px solid rgba(15,23,42,0.15);
-        }
-        .summary-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        .summary-actions button {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #ef4444;
-        }
-        @media (max-width: 1024px) {
-            .virtual-tryon-stage {
-                padding: 2rem 1.5rem 2.5rem;
-            }
-        }
-    </style>
     
     <!-- Swiper CSS (CDN) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -400,267 +124,341 @@
     </header>
 
     <!-- Main Content -->
-    <main class="py-10 md:py-14">
-        <div class="container-custom space-y-10">
-            <div class="text-center px-4 max-w-3xl mx-auto" data-aos="fade-up">
-                <p class="uppercase tracking-[0.35em] text-xs text-neutral-400 mb-3">Virtual Try-On Lab</p>
-                <h1 class="font-rufina text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4">
-                    Build a mannequin that mirrors you
-                </h1>
-                <p class="font-orbit text-base sm:text-lg text-neutral-600 dark:text-neutral-400">
-                    Adjust proportions, layer garments, and preview silhouettes in a focused mannequin workspace. Tops and bottoms stay anchored to shoulder, waist, and hip guides so every tweak feels intentional.
+    <main class="py-8 md:py-12">
+        <div class="container-custom">
+            <!-- Page Header -->
+            <div class="text-center mb-8 px-2" data-aos="fade-up">
+                <h1 class="font-rufina text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Model Preview</h1>
+                <p class="font-orbit text-base sm:text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                    Try on different outfits and hairstyles on our virtual model. Mix and match to create your perfect look!
                 </p>
             </div>
 
-            <div class="grid gap-8 xl:grid-cols-[280px_minmax(0,1fr)_320px]">
-                <!-- Wardrobe Column -->
-                <section class="space-y-6 order-2 xl:order-1" data-aos="fade-right">
-                    <div class="wardrobe-card bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-6">
-                        <div class="flex items-center justify-between mb-5">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Sidebar - Outfit Selection -->
+                <div class="lg:col-span-1 space-y-6 order-2 lg:order-1" data-aos="fade-right">
+                    <!-- Outfit Categories -->
+                    <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
+                        <h2 class="font-rufina text-2xl font-bold mb-6">Outfit Selection</h2>
+                        
+                        <!-- Tops Section -->
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-lg mb-3 text-neutral-900 dark:text-dark-text">Tops</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="top-1"
+                                    data-outfit-image="../assets/images/outfits/top-1.png"
+                                    data-category="top">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">T-Shirt</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="top-2"
+                                    data-outfit-image="../assets/images/outfits/top-2.png"
+                                    data-category="top">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Hoodie</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="top-3"
+                                    data-outfit-image="../assets/images/outfits/top-3.png"
+                                    data-category="top">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Shirt</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="top-4"
+                                    data-outfit-image="../assets/images/outfits/top-4.png"
+                                    data-category="top">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Blazer</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Bottoms Section -->
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-lg mb-3 text-neutral-900 dark:text-dark-text">Bottoms</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="bottom-1"
+                                    data-outfit-image="../assets/images/outfits/bottom-1.png"
+                                    data-category="bottom">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Jeans</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="bottom-2"
+                                    data-outfit-image="../assets/images/outfits/bottom-2.png"
+                                    data-category="bottom">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Joggers</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="bottom-3"
+                                    data-outfit-image="../assets/images/outfits/bottom-3.png"
+                                    data-category="bottom">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Shorts</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="bottom-4"
+                                    data-outfit-image="../assets/images/outfits/bottom-4.png"
+                                    data-category="bottom">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Pants</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Shoes Section -->
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-lg mb-3 text-neutral-900 dark:text-dark-text">Shoes</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="shoes-1"
+                                    data-outfit-image="../assets/images/outfits/shoes-1.png"
+                                    data-category="shoes">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Sneakers</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="shoes-2"
+                                    data-outfit-image="../assets/images/outfits/shoes-2.png"
+                                    data-category="shoes">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Boots</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="shoes-3"
+                                    data-outfit-image="../assets/images/outfits/shoes-3.png"
+                                    data-category="shoes">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Loafers</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="shoes-4"
+                                    data-outfit-image="../assets/images/outfits/shoes-4.png"
+                                    data-category="shoes">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Sandals</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Accessories Section -->
+                        <div>
+                            <h3 class="font-semibold text-lg mb-3 text-neutral-900 dark:text-dark-text">Accessories</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="acc-1"
+                                    data-outfit-image="../assets/images/outfits/acc-1.png"
+                                    data-category="accessories">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Watch</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="acc-2"
+                                    data-outfit-image="../assets/images/outfits/acc-2.png"
+                                    data-category="accessories">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Bag</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="acc-3"
+                                    data-outfit-image="../assets/images/outfits/acc-3.png"
+                                    data-category="accessories">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Hat</span>
+                                </button>
+                                <button 
+                                    class="outfit-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                    data-outfit-id="acc-4"
+                                    data-outfit-image="../assets/images/outfits/acc-4.png"
+                                    data-category="accessories">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                    <span class="text-sm font-medium">Sunglasses</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hairstyle Selection -->
+                    <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
+                        <h2 class="font-rufina text-2xl font-bold mb-6">Hairstyles</h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-1"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-1.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Short</span>
+                            </button>
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-2"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-2.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Medium</span>
+                            </button>
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-3"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-3.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Long</span>
+                            </button>
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-4"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-4.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Curly</span>
+                            </button>
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-5"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-5.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Wavy</span>
+                            </button>
+                            <button 
+                                class="hairstyle-item product-card p-3 text-center hover:scale-105 transition-transform"
+                                data-hairstyle-id="hair-6"
+                                data-hairstyle-image="../assets/images/hairstyles/hair-6.png">
+                                <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
+                                <span class="text-sm font-medium">Fade</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center - Model Preview -->
+                <div class="lg:col-span-1 order-1 lg:order-2" data-aos="fade-up">
+                    <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark lg:sticky top-24">
+                        <div class="flex justify-center mb-4">
+                            <div class="inline-flex rounded-full bg-neutral-100 dark:bg-dark-surface p-1 text-xs sm:text-sm">
+                                <button id="mode-toggle-mannequin" class="px-3 py-1.5 rounded-full bg-white dark:bg-dark-card shadow-soft text-neutral-900 dark:text-dark-text">Mannequin Preview</button>
+                                <button id="mode-toggle-ai" class="px-3 py-1.5 rounded-full text-neutral-600 dark:text-neutral-300">AI Real View (Demo)</button>
+                            </div>
+                        </div>
+                        <h2 class="font-rufina text-2xl font-bold mb-4 text-center">Preview</h2>
+                        
+                        <!-- Model Preview Container -->
+                        <div id="model-preview-container" class="preview-container relative">
+                            <!-- Base Model -->
+                            <img 
+                                src="../assets/images/models/base-model.png" 
+                                alt="Base Model" 
+                                class="model-base w-full h-auto"
+                                onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'600\'%3E%3Crect fill=\'%23f3f4f6\' width=\'400\' height=\'600\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' fill=\'%239ca3af\' font-size=\'20\'%3EBase Model%3C/text%3E%3C/svg%3E'"
+                            >
+                            <!-- Outfit layers will be added here dynamically -->
+                            <!-- Hairstyle layers will be added here dynamically -->
+                        </div>
+
+                        <!-- Control Buttons -->
+                        <div class="flex flex-col sm:flex-row lg:flex-col gap-3 mt-6">
+                            <button id="reset-preview" class="btn btn-secondary w-full">
+                                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                                Reset
+                            </button>
+                            <button id="save-screenshot" class="btn btn-primary w-full">
+                                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                                </svg>
+                                Save Screenshot
+                            </button>
+                            <button id="save-to-favorites" class="btn btn-accent w-full">
+                                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                                Save to Favorites
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar - Selected Items & Info -->
+                <div class="lg:col-span-1 space-y-6 order-3" data-aos="fade-left">
+                    <!-- Selected Items Display -->
+                    <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
+                        <h2 class="font-rufina text-2xl font-bold mb-6">Selected Items</h2>
+                        <div id="selected-items-display" class="space-y-4">
+                            <div class="text-center py-8 text-neutral-400 dark:text-neutral-600">
+                                <p>No items selected</p>
+                                <p class="text-sm mt-2">Click items to add them to the model</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Real View (Demo) Panel -->
+                    <div id="ai-demo-panel" class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark hidden">
+                        <h2 class="font-rufina text-2xl font-bold mb-4">AI Real View (Demo)</h2>
+                        <div class="space-y-4 text-sm">
                             <div>
-                                <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Wardrobe</p>
-                                <h2 class="font-rufina text-2xl font-bold">Tops</h2>
+                                <p class="font-semibold mb-2">1. Upload your photo</p>
+                                <input type="file" id="ai-upload-input" accept="image/*" class="block w-full text-xs">
+                                <div id="ai-upload-preview" class="mt-2 text-xs text-neutral-500 dark:text-neutral-400"></div>
                             </div>
-                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-primary-50 text-primary-600">Anchors: shoulders</span>
-                        </div>
-                        <div class="wardrobe-grid">
-                            <button class="wardrobe-item" data-garment="top-soft-drape" data-type="top" data-label="Soft Drape Tee" data-primary="#f97316" data-secondary="#fb923c" data-texture="stripes">
-                                <div class="swatch" style="background: linear-gradient(140deg, #f97316, #fb923c);" data-texture="stripes"></div>
-                                <div>
-                                    <p class="font-semibold text-sm">Soft Drape Tee</p>
-                                    <p class="text-xs text-neutral-500">Relaxed shoulder</p>
-                                </div>
-                            </button>
-                            <button class="wardrobe-item" data-garment="top-tailored" data-type="top" data-label="Tailored Shell" data-primary="#a855f7" data-secondary="#7c3aed" data-texture="grid">
-                                <div class="swatch" style="background: linear-gradient(140deg, #a855f7, #7c3aed);" data-texture="grid"></div>
-                                <div>
-                                    <p class="font-semibold text-sm">Tailored Shell</p>
-                                    <p class="text-xs text-neutral-500">Structure + darts</p>
-                                </div>
-                            </button>
-                            <button class="wardrobe-item" data-garment="top-wrap" data-type="top" data-label="Wrap Knit" data-primary="#0ea5e9" data-secondary="#38bdf8" data-texture="dots">
-                                <div class="swatch" style="background: linear-gradient(140deg, #0ea5e9, #38bdf8);" data-texture="dots"></div>
-                                <div>
-                                    <p class="font-semibold text-sm">Wrap Knit</p>
-                                    <p class="text-xs text-neutral-500">Cinched waist</p>
-                                </div>
-                            </button>
-                            <button class="wardrobe-item" data-garment="top-boxy" data-type="top" data-label="Boxy Crop" data-primary="#14b8a6" data-secondary="#0f766e" data-texture="solid">
-                                <div class="swatch" style="background: linear-gradient(140deg, #14b8a6, #0f766e);" data-texture="solid"></div>
-                                <div>
-                                    <p class="font-semibold text-sm">Boxy Crop</p>
-                                    <p class="text-xs text-neutral-500">Boxy balance</p>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="wardrobe-card bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-6">
-                        <div class="flex items-center justify-between mb-5">
                             <div>
-                                <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Wardrobe</p>
-                                <h2 class="font-rufina text-2xl font-bold">Bottoms</h2>
+                                <p class="font-semibold mb-2">2. Choose an item</p>
+                                <select id="ai-item-select" class="form-input text-sm w-full">
+                                    <option value="">Select from your wardrobe</option>
+                                </select>
+                                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Shows items that support mannequin try-on.</p>
                             </div>
-                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-accent-50 text-accent-600">Anchors: hips</span>
-                        </div>
-                        <div class="wardrobe-grid">
-                            <button class="wardrobe-item" data-garment="bottom-barrel" data-type="bottom" data-label="Barrel Denim" data-primary="#2563eb" data-secondary="#1d4ed8" data-texture="grid">
-                                <div class="swatch" style="background: linear-gradient(140deg, #2563eb, #1d4ed8);" data-texture="grid"></div>
-                                <div>
-                                    <p class="font-semibold text-sm">Barrel Denim</p>
-                                    <p class="text-xs text-neutral-500">Soft volume</p>
+                            <button id="ai-generate-btn" class="btn btn-primary w-full text-sm">Generate Demo Result</button>
+                            <div id="ai-demo-result" class="mt-4 hidden">
+                                <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-surface rounded-xl overflow-hidden mb-3">
+                                    <img id="ai-demo-image" src="" alt="AI Demo Result" class="w-full h-full object-cover">
                                 </div>
-                            </button>
-                            <button class="wardrobe-item" data-garment="bottom-column" data-type="bottom" data-label="Column Trouser" data-primary="#0f172a" data-secondary="#1f2937" data-texture="stripes">
-                                <div class="swatch" style="background: linear-gradient(140deg, #0f172a, #1f2937);" data-texture="stripes"></div>
-                                <div>
-                                    <p class="font-semibold text-sm">Column Trouser</p>
-                                    <p class="text-xs text-neutral-500">Extended line</p>
-                                </div>
-                            </button>
-                            <button class="wardrobe-item" data-garment="bottom-pleated" data-type="bottom" data-label="Pleated Midi" data-primary="#facc15" data-secondary="#f97316" data-texture="dots">
-                                <div class="swatch" style="background: linear-gradient(140deg, #facc15, #f97316);" data-texture="dots"></div>
-                                <div>
-                                    <p class="font-semibold text-sm">Pleated Midi</p>
-                                    <p class="text-xs text-neutral-500">Swing & flare</p>
-                                </div>
-                            </button>
-                            <button class="wardrobe-item" data-garment="bottom-relaxed" data-type="bottom" data-label="Relaxed Drape" data-primary="#fb7185" data-secondary="#f43f5e" data-texture="solid">
-                                <div class="swatch" style="background: linear-gradient(140deg, #fb7185, #f43f5e);" data-texture="solid"></div>
-                                <div>
-                                    <p class="font-semibold text-sm">Relaxed Drape</p>
-                                    <p class="text-xs text-neutral-500">Lightweight</p>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Preview Column -->
-                <section class="space-y-6 order-1 xl:order-2" data-aos="fade-up">
-                    <div class="bg-white dark:bg-dark-card rounded-3xl p-6 shadow-soft dark:shadow-soft-dark">
-                        <div class="flex flex-col items-center text-center mb-6">
-                            <p class="uppercase tracking-[0.4em] text-xs text-neutral-400 mb-2">Preview</p>
-                            <h2 class="font-rufina text-3xl font-bold">Adaptive mannequin</h2>
-                            <p class="text-sm text-neutral-500">Segments respond to every control so garments keep their anchors.</p>
-                        </div>
-
-                        <div class="tryon-stage" id="silhouette-stage">
-                            <div class="silhouette-base" aria-hidden="true">
-                                <svg class="silhouette-outline" viewBox="0 0 320 720" role="presentation">
-                                    <path d="M160 24C138 24 122 43 122 68C122 94 134 117 134 138L134 188C111 205 94 232 88 264L75 354L94 525L132 692L160 712L188 692L226 525L245 354L232 264C226 232 209 205 186 188L186 138C186 117 198 93 198 68C198 43 182 24 160 24Z"/>
-                                </svg>
+                                <p class="text-xs text-neutral-500 dark:text-neutral-400 mb-3">This is a pre-generated AI demo result for illustration.</p>
+                                <a id="ai-hf-link" href="https://huggingface.co/spaces/fffiloni/Virtual-Try-On" target="_blank" rel="noopener" class="btn btn-secondary w-full text-center text-xs">Open full AI try-on model</a>
                             </div>
-
-                            <div class="garment-layer" data-layer="top" data-active="false" data-texture="solid" aria-label="Top garment">
-                                <svg class="garment-svg" data-layer-svg="top" viewBox="0 0 320 720" role="img" aria-label="Fitted top overlay">
-                                    <defs>
-                                        <linearGradient id="topGradient" x1="80" y1="120" x2="250" y2="280" gradientUnits="userSpaceOnUse">
-                                            <stop offset="0%" style="stop-color:var(--garment-main)" />
-                                            <stop offset="100%" style="stop-color:var(--garment-secondary)" />
-                                        </linearGradient>
-                                    </defs>
-                                    <path class="fill-shape" d="M86 210C82 168 92 132 118 106L118 84C118 56 138 40 160 40C182 40 202 56 202 84L202 106C227 132 237 168 234 210L244 296C210 318 110 318 76 296Z" fill="url(#topGradient)"/>
-                                    <path class="edge-line" d="M86 210C82 168 92 132 118 106L118 84C118 56 138 40 160 40C182 40 202 56 202 84L202 106C227 132 237 168 234 210L244 296C210 318 110 318 76 296Z"/>
-                                    <path class="detail-line" d="M120 132C148 154 172 154 200 132" />
-                                </svg>
-                                <img class="garment-img" data-layer-img="top" alt="" data-visible="false" loading="lazy">
-                            </div>
-
-                            <div class="garment-layer" data-layer="bottom" data-active="false" data-texture="solid" aria-label="Bottom garment">
-                                <svg class="garment-svg" data-layer-svg="bottom" viewBox="0 0 320 720" role="img" aria-label="Tailored bottom overlay">
-                                    <defs>
-                                        <linearGradient id="bottomGradient" x1="90" y1="320" x2="240" y2="640" gradientUnits="userSpaceOnUse">
-                                            <stop offset="0%" style="stop-color:var(--garment-main)" />
-                                            <stop offset="100%" style="stop-color:var(--garment-secondary)" />
-                                        </linearGradient>
-                                    </defs>
-                                    <path class="fill-shape" d="M98 310C150 332 170 332 222 310L240 480L216 648L188 694L132 694L104 648L80 480Z" fill="url(#bottomGradient)"/>
-                                    <path class="edge-line" d="M98 310C150 332 170 332 222 310L240 480L216 648L188 694L132 694L104 648L80 480Z"/>
-                                    <path class="detail-line" d="M160 328L160 678" />
-                                </svg>
-                                <img class="garment-img" data-layer-img="bottom" alt="" data-visible="false" loading="lazy">
-                            </div>
-                        </div>
-
-                        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-                            <button id="reset-tryon" class="btn btn-secondary flex-1">Reset mannequin</button>
-                            <button id="mirror-pose" class="btn btn-primary flex-1" disabled>Save snapshot (soon)</button>
                         </div>
                     </div>
 
-                    <div class="bg-gradient-to-br from-primary-50/70 via-white to-accent-50 rounded-3xl p-6 shadow-soft dark:shadow-soft-dark">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-rufina text-2xl font-bold">Anchor map</h3>
-                            <span class="text-xs uppercase tracking-[0.35em] text-neutral-500">Guides</span>
-                        </div>
-                        <ul class="grid sm:grid-cols-3 gap-4 text-sm">
-                            <li class="p-3 rounded-2xl bg-white/70 shadow-sm">
-                                <p class="font-semibold">Shoulders</p>
-                                <p class="text-neutral-500 text-xs mt-1">Controls width + top drape.</p>
+                    <!-- Tips & Info -->
+                    <div class="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
+                        <h3 class="font-rufina text-xl font-bold mb-4">Tips</h3>
+                        <ul class="space-y-3 text-sm text-neutral-700 dark:text-neutral-300">
+                            <li class="flex items-start">
+                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
+                                <span>Mix and match different items to create unique looks</span>
                             </li>
-                            <li class="p-3 rounded-2xl bg-white/70 shadow-sm">
-                                <p class="font-semibold">Waistline</p>
-                                <p class="text-neutral-500 text-xs mt-1">Follows torso length slider.</p>
+                            <li class="flex items-start">
+                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
+                                <span>Try different hairstyles to see what suits you best</span>
                             </li>
-                            <li class="p-3 rounded-2xl bg-white/70 shadow-sm">
-                                <p class="font-semibold">Hips</p>
-                                <p class="text-neutral-500 text-xs mt-1">Bottoms stretch from this point.</p>
+                            <li class="flex items-start">
+                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
+                                <span>Save your favorite combinations to your favorites</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
+                                <span>Use the reset button to start over anytime</span>
                             </li>
                         </ul>
                     </div>
-                </section>
-
-                <!-- Controls Column -->
-                <section class="space-y-6 order-3" data-aos="fade-left">
-                    <div class="bg-white dark:bg-dark-card rounded-3xl p-6 shadow-soft dark:shadow-soft-dark">
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Body controls</p>
-                                <h2 class="font-rufina text-2xl font-bold">Proportion sliders</h2>
-                            </div>
-                            <span class="text-xs px-3 py-1 rounded-full bg-neutral-100 dark:bg-dark-surface">Live</span>
-                        </div>
-
-                        <div class="space-y-4">
-                            <div class="control-row">
-                                <header>
-                                    <div>
-                                        <p class="font-semibold text-sm">Height</p>
-                                        <p class="text-xs text-neutral-500">Extends leg segments</p>
-                                    </div>
-                                    <span class="control-value" data-output="height">185 cm</span>
-                                </header>
-                                <input type="range" min="150" max="210" value="185" data-default="185" data-control="height" class="control-slider" aria-label="Height slider">
-                            </div>
-                            <div class="control-row">
-                                <header>
-                                    <div>
-                                        <p class="font-semibold text-sm">Shoulder width</p>
-                                        <p class="text-xs text-neutral-500">Changes upper body span</p>
-                                    </div>
-                                    <span class="control-value" data-output="shoulder">120 cm</span>
-                                </header>
-                                <input type="range" min="90" max="150" value="120" data-default="120" data-control="shoulder" class="control-slider" aria-label="Shoulder width slider">
-                            </div>
-                            <div class="control-row">
-                                <header>
-                                    <div>
-                                        <p class="font-semibold text-sm">Hip width</p>
-                                        <p class="text-xs text-neutral-500">Influences bottom drape</p>
-                                    </div>
-                                    <span class="control-value" data-output="hips">110 cm</span>
-                                </header>
-                                <input type="range" min="90" max="150" value="110" data-default="110" data-control="hips" class="control-slider" aria-label="Hip width slider">
-                            </div>
-                            <div class="control-row">
-                                <header>
-                                    <div>
-                                        <p class="font-semibold text-sm">Torso length</p>
-                                        <p class="text-xs text-neutral-500">Moves waist seam</p>
-                                    </div>
-                                    <span class="control-value" data-output="torso">180 px</span>
-                                </header>
-                                <input type="range" min="140" max="220" value="180" data-default="180" data-control="torso" class="control-slider" aria-label="Torso length slider">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white dark:bg-dark-card rounded-3xl p-6 shadow-soft dark:shadow-soft-dark">
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Look log</p>
-                                <h2 class="font-rufina text-2xl font-bold">Selected pieces</h2>
-                            </div>
-                            <button id="save-look" class="text-sm text-primary-600 hover:underline">Save combo</button>
-                        </div>
-
-                        <div id="look-summary" class="space-y-4">
-                            <div class="look-summary-row" data-summary="top">
-                                <div>
-                                    <p class="text-xs text-neutral-500 uppercase tracking-[0.35em]">Top</p>
-                                    <p class="font-semibold text-base mt-1 summary-value">Not selected</p>
-                                    <p class="text-xs text-neutral-500 summary-meta">Choose a silhouette</p>
-                                </div>
-                                <div class="summary-actions">
-                                    <span class="color-dot" style="background:#e5e7eb" data-color></span>
-                                    <button type="button" data-remove="top" disabled>Clear</button>
-                                </div>
-                            </div>
-                            <div class="look-summary-row" data-summary="bottom">
-                                <div>
-                                    <p class="text-xs text-neutral-500 uppercase tracking-[0.35em]">Bottom</p>
-                                    <p class="font-semibold text-base mt-1 summary-value">Not selected</p>
-                                    <p class="text-xs text-neutral-500 summary-meta">Ground the look</p>
-                                </div>
-                                <div class="summary-actions">
-                                    <span class="color-dot" style="background:#e5e7eb" data-color></span>
-                                    <button type="button" data-remove="bottom" disabled>Clear</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                </div>
             </div>
         </div>
     </main>
@@ -709,5 +507,465 @@
     <script src="../js/main.js"></script>
     <script src="../js/model-preview.js"></script>
     <script src="../js/animations.js"></script>
+    <script src="../js/tryon-utils.js"></script>
+    
+    <!-- Model Preview Page Specific Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ========== URL MODE DETECTION ==========
+            const urlParams = new URLSearchParams(window.location.search);
+            const rawMode = urlParams.get('mode');
+            const previewMode = (rawMode === 'ai' || rawMode === 'ai-demo') ? 'ai' : 'mannequin';
+            const isHaircutMode = rawMode === 'haircut';
+            
+            // Get sidebar elements
+            const outfitSidebar = document.querySelector('.outfit-selection-sidebar');
+            const hairstyleSidebar = document.querySelector('.hairstyle-selection-sidebar');
+            
+            // ========== WARDROBE MANAGEMENT ==========
+            let wardrobe = JSON.parse(localStorage.getItem('wardrobe')) || [];
+            
+            function renderWardrobeItems() {
+                const wardrobeContainer = document.getElementById('wardrobe-items-container');
+                if (!wardrobeContainer) return;
+                
+                if (wardrobe.length === 0) {
+                    wardrobeContainer.innerHTML = `
+                        <div class="text-center py-8 text-neutral-400 dark:text-neutral-500">
+                            <svg class="w-12 h-12 mx-auto mb-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
+                            <p class="text-sm">Your wardrobe is empty</p>
+                            <a href="shop-browsing.html" class="text-primary-500 text-sm hover:underline mt-2 inline-block">Browse Fashion →</a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                wardrobeContainer.innerHTML = wardrobe.map(item => `
+                    <div class="wardrobe-item flex items-center gap-3 p-3 bg-neutral-50 dark:bg-dark-surface rounded-xl hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" data-wardrobe-id="${item.id}">
+                        <img src="${item.bgImg || item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-lg">
+                        <div class="flex-1 min-w-0">
+                            <p class="font-medium text-sm truncate">${item.name}</p>
+                            <p class="text-xs text-neutral-500 capitalize">${item.category}</p>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <button data-action="try-on" onclick="tryOnWardrobeItem('${item.id}')" class="text-xs px-2 py-1 bg-primary-500 text-white rounded hover:bg-primary-600 transition-colors">Try On</button>
+                            <button onclick="removeFromWardrobe('${item.id}')" class="text-xs px-2 py-1 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors">Remove</button>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Disable mannequin try-on for items without transparent versions
+                wardrobeContainer.querySelectorAll('[data-wardrobe-id]').forEach((row) => {
+                    const id = row.getAttribute('data-wardrobe-id');
+                    const itemData = wardrobe.find(w => w.id === id);
+                    const btn = row.querySelector('[data-action="try-on"]');
+                    if (!btn || !itemData) return;
+                    if (!itemData.canTryOn) {
+                        btn.disabled = true;
+                        btn.classList.add('opacity-50', 'cursor-not-allowed');
+                    }
+                });
+            }
+            
+            window.tryOnWardrobeItem = function(itemId) {
+                const item = wardrobe.find(w => w.id === itemId);
+                if (!item) return;
+                if (!item.canTryOn) {
+                    showNotification('This item is not ready for mannequin try-on yet.', 'warning');
+                    return;
+                }
+                if (window.modelPreview) {
+                    // Apply outfit layer based on category
+                    applyOutfitLayer(item);
+                    showNotification(`Trying on ${item.name}`, 'success');
+                }
+            };
+            
+            window.removeFromWardrobe = function(itemId) {
+                wardrobe = wardrobe.filter(w => w.id !== itemId);
+                localStorage.setItem('wardrobe', JSON.stringify(wardrobe));
+                renderWardrobeItems();
+                showNotification('Removed from wardrobe', 'info');
+            };
+            
+            window.clearWardrobe = function() {
+                if (confirm('Clear all items from your wardrobe?')) {
+                    wardrobe = [];
+                    localStorage.setItem('wardrobe', JSON.stringify(wardrobe));
+                    renderWardrobeItems();
+                    showNotification('Wardrobe cleared', 'info');
+                }
+            };
+            
+            // ========== OUTFIT LAYER SYSTEM ==========
+            function applyOutfitLayer(item) {
+                const container = document.getElementById('model-preview-container');
+                if (!container) return;
+
+                const src = item.transparentImg || item.image;
+                if (!src) return;
+                
+                // Remove existing layer of same category
+                const existingLayer = container.querySelector(`.outfit-layer-${item.category}`);
+                if (existingLayer) existingLayer.remove();
+                
+                // Create new layer with fade-in
+                const layer = document.createElement('img');
+                layer.src = src;
+                layer.alt = item.name;
+                layer.className = `outfit-layer outfit-layer-${item.category} absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300`;
+                layer.style.zIndex = getZIndexForCategory(item.category);
+                
+                container.appendChild(layer);
+                
+                // Trigger fade-in
+                setTimeout(() => layer.classList.remove('opacity-0'), 10);
+                
+                updateSelectedItemsDisplay();
+            }
+            
+            function getZIndexForCategory(category) {
+                const zIndexMap = { 'bottom': 10, 'top': 20, 'shoes': 5, 'accessories': 30 };
+                return zIndexMap[category] || 15;
+            }
+            
+            // ========== HAIRSTYLE SYSTEM ==========
+            window.applyHairstyle = function(hairstyleId, imageSrc) {
+                const container = document.getElementById('model-preview-container');
+                if (!container) return;
+                
+                // Remove existing hairstyle
+                const existingHair = container.querySelector('.hairstyle-layer');
+                if (existingHair) existingHair.remove();
+                
+                // Create new hairstyle layer
+                const layer = document.createElement('img');
+                layer.src = imageSrc;
+                layer.alt = 'Hairstyle';
+                layer.className = 'hairstyle-layer absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300';
+                layer.style.zIndex = 50;
+                
+                container.appendChild(layer);
+                setTimeout(() => layer.classList.remove('opacity-0'), 10);
+                
+                if (window.modelPreview) {
+                    window.modelPreview.currentHairstyle = hairstyleId;
+                }
+                updateSelectedItemsDisplay();
+                showNotification('Hairstyle applied!', 'success');
+            };
+            
+            // ========== MODE-BASED SIDEBAR SETUP ==========
+            function setupModeBasedUI() {
+                const leftSidebar = document.querySelector('[data-aos="fade-right"]');
+                if (!leftSidebar) return;
+                
+                // Add wardrobe section for mannequin/AI preview (non-haircut modes)
+                if (!isHaircutMode) {
+                    // Insert wardrobe panel at top of sidebar
+                    const wardrobePanel = document.createElement('div');
+                    wardrobePanel.className = 'bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark mb-6';
+                    wardrobePanel.innerHTML = `
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="font-rufina text-xl font-bold">Digital Wardrobe</h2>
+                            <button onclick="clearWardrobe()" class="text-xs text-red-500 hover:underline">Clear All</button>
+                        </div>
+                        <div id="wardrobe-items-container" class="space-y-3 max-h-64 overflow-y-auto">
+                            <!-- Wardrobe items rendered here -->
+                        </div>
+                        <a href="shop-browsing.html" class="btn btn-secondary w-full mt-4 text-center text-sm">+ Add from Shop</a>
+                    `;
+                    leftSidebar.insertBefore(wardrobePanel, leftSidebar.firstChild);
+                    renderWardrobeItems();
+                }
+                
+                // Highlight hairstyle section for haircut mode
+                if (isHaircutMode) {
+                    const hairstyleSection = leftSidebar.querySelector('.bg-white:last-child, .dark\\:bg-dark-card:last-child');
+                    if (hairstyleSection) {
+                        hairstyleSection.classList.add('ring-2', 'ring-primary-500');
+                    }
+                    // Scroll to hairstyle section
+                    setTimeout(() => {
+                        const section = document.querySelector('[data-aos="fade-right"] > div:last-child');
+                        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 500);
+                }
+                
+                // Update page title based on mode
+                const pageTitle = document.querySelector('h1');
+                if (pageTitle) {
+                    if (isHaircutMode) {
+                        pageTitle.textContent = 'Hairstyle Preview';
+                    } else if (previewMode === 'ai') {
+                        pageTitle.textContent = 'AI Real View (Demo)';
+                    } else {
+                        pageTitle.textContent = 'Model Preview';
+                    }
+                }
+            }
+            
+            // Initialize mode-based UI
+            setupModeBasedUI();
+
+            // Initialize model preview if not already done
+            if (!window.modelPreview) {
+                window.modelPreview = new ModelPreview();
+            }
+
+            // Reset button
+            const resetBtn = document.getElementById('reset-preview');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    if (window.modelPreview) {
+                        window.modelPreview.reset();
+                    }
+                    // Also remove all layers
+                    document.querySelectorAll('.outfit-layer, .hairstyle-layer').forEach(el => el.remove());
+                    updateSelectedItemsDisplay();
+                    showNotification('Preview reset!', 'info');
+                });
+            }
+
+            // Save screenshot button
+            const saveScreenshotBtn = document.getElementById('save-screenshot');
+            if (saveScreenshotBtn) {
+                saveScreenshotBtn.addEventListener('click', () => {
+                    if (window.modelPreview) {
+                        window.modelPreview.saveScreenshot();
+                        showNotification('Screenshot saved!', 'success');
+                    }
+                });
+            }
+
+            // Save to favorites button
+            const saveFavoritesBtn = document.getElementById('save-to-favorites');
+            if (saveFavoritesBtn) {
+                saveFavoritesBtn.addEventListener('click', () => {
+                    saveCurrentLook();
+                });
+            }
+
+            // Update selected items display when items are selected
+            function updateSelectedItemsDisplay() {
+                const display = document.getElementById('selected-items-display');
+                if (!display) return;
+
+                const selectedItems = {
+                    top: window.modelPreview?.currentOutfit?.top || null,
+                    bottom: window.modelPreview?.currentOutfit?.bottom || null,
+                    shoes: window.modelPreview?.currentOutfit?.shoes || null,
+                    accessories: window.modelPreview?.currentOutfit?.accessories || null,
+                    hairstyle: window.modelPreview?.currentHairstyle || null
+                };
+                
+                // Also check for applied layers
+                const appliedLayers = document.querySelectorAll('.outfit-layer, .hairstyle-layer');
+                const hasLayers = appliedLayers.length > 0;
+
+                const hasItems = Object.values(selectedItems).some(item => item !== null) || hasLayers;
+
+                if (!hasItems) {
+                    display.innerHTML = `
+                        <div class="text-center py-8 text-neutral-400 dark:text-neutral-600">
+                            <p>No items selected</p>
+                            <p class="text-sm mt-2">Click items to add them to the model</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                appliedLayers.forEach(layer => {
+                    const isHair = layer.classList.contains('hairstyle-layer');
+                    const label = isHair ? 'Hairstyle' : layer.className.match(/outfit-layer-(\w+)/)?.[1] || 'Item';
+                    html += `
+                        <div class="flex items-center justify-between p-3 bg-neutral-50 dark:bg-dark-surface rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <img src="${layer.src}" class="w-12 h-12 object-cover rounded-lg">
+                                <div>
+                                    <div class="font-medium text-sm capitalize">${label}</div>
+                                    <div class="text-xs text-neutral-500 dark:text-neutral-400">Applied</div>
+                                </div>
+                            </div>
+                            <button class="text-red-500 hover:text-red-600" onclick="this.closest('.flex').parentElement.remove(); document.querySelector('${isHair ? '.hairstyle-layer' : `.outfit-layer-${label}`}')?.remove();">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                });
+                display.innerHTML = html || `<div class="text-center py-4 text-neutral-400 text-sm">Select items to preview</div>`;
+            }
+            window.updateSelectedItemsDisplay = updateSelectedItemsDisplay;
+
+            // Remove item function
+            window.removeItem = function(category) {
+                if (window.modelPreview) {
+                    if (category === 'hairstyle') {
+                        const hairstyleLayer = document.querySelector('.hairstyle-layer');
+                        if (hairstyleLayer) {
+                            hairstyleLayer.remove();
+                        }
+                        window.modelPreview.currentHairstyle = null;
+                    } else {
+                        const outfitLayer = document.querySelector(`.outfit-layer-${category}`);
+                        if (outfitLayer) {
+                            outfitLayer.remove();
+                        }
+                    }
+                    updateSelectedItemsDisplay();
+                }
+            };
+
+            // Save current look
+            function saveCurrentLook() {
+                const look = {
+                    id: `look-${Date.now()}`,
+                    outfit: window.modelPreview?.currentOutfit || {},
+                    hairstyle: window.modelPreview?.currentHairstyle || null,
+                    timestamp: new Date().toISOString()
+                };
+
+                let favorites = JSON.parse(localStorage.getItem('favoriteLooks') || '[]');
+                favorites.push(look);
+                localStorage.setItem('favoriteLooks', JSON.stringify(favorites));
+
+                showNotification('Look saved to favorites!', 'success');
+            }
+
+            // Notification function
+            function showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-20 right-4 p-4 rounded-xl shadow-lg z-50 transform translate-x-full transition-transform duration-300 ${
+                    type === 'success' ? 'bg-green-500' : 
+                    type === 'warning' ? 'bg-yellow-500' : 
+                    'bg-primary-500'
+                } text-white`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => notification.classList.remove('translate-x-full'), 10);
+                setTimeout(() => {
+                    notification.classList.add('translate-x-full');
+                    setTimeout(() => notification.remove(), 300);
+                }, 2500);
+            }
+            window.showNotification = showNotification;
+
+            // Listen for outfit/hairstyle changes
+            const originalUpdateOutfit = window.modelPreview?.updateOutfit;
+            if (window.modelPreview && originalUpdateOutfit) {
+                window.modelPreview.updateOutfit = function(...args) {
+                    originalUpdateOutfit.apply(this, args);
+                    updateSelectedItemsDisplay();
+                };
+            }
+
+            const originalUpdateHairstyle = window.modelPreview?.updateHairstyle;
+            if (window.modelPreview && originalUpdateHairstyle) {
+                window.modelPreview.updateHairstyle = function(...args) {
+                    originalUpdateHairstyle.apply(this, args);
+                    updateSelectedItemsDisplay();
+                };
+            }
+
+            // ========== MODE TOGGLE & AI DEMO PANEL ==========
+            const mannequinToggle = document.getElementById('mode-toggle-mannequin');
+            const aiToggle = document.getElementById('mode-toggle-ai');
+            const aiPanel = document.getElementById('ai-demo-panel');
+            const aiUploadInput = document.getElementById('ai-upload-input');
+            const aiUploadPreview = document.getElementById('ai-upload-preview');
+            const aiItemSelect = document.getElementById('ai-item-select');
+            const aiGenerateBtn = document.getElementById('ai-generate-btn');
+            const aiDemoResult = document.getElementById('ai-demo-result');
+            const aiDemoImage = document.getElementById('ai-demo-image');
+
+            function applyPreviewModeUI(mode) {
+                const isAi = mode === 'ai';
+                if (aiPanel) {
+                    aiPanel.classList.toggle('hidden', !isAi);
+                }
+                if (mannequinToggle && aiToggle) {
+                    if (isAi) {
+                        aiToggle.classList.add('bg-white', 'dark:bg-dark-card', 'shadow-soft');
+                        mannequinToggle.classList.remove('bg-white', 'dark:bg-dark-card', 'shadow-soft');
+                    } else {
+                        mannequinToggle.classList.add('bg-white', 'dark:bg-dark-card', 'shadow-soft');
+                        aiToggle.classList.remove('bg-white', 'dark:bg-dark-card', 'shadow-soft');
+                    }
+                }
+            }
+
+            applyPreviewModeUI(previewMode);
+
+            if (mannequinToggle) {
+                mannequinToggle.addEventListener('click', () => {
+                    const nextUrl = new URL(window.location.href);
+                    nextUrl.searchParams.set('mode', 'mannequin');
+                    window.location.href = nextUrl.toString();
+                });
+            }
+
+            if (aiToggle) {
+                aiToggle.addEventListener('click', () => {
+                    const nextUrl = new URL(window.location.href);
+                    nextUrl.searchParams.set('mode', 'ai-demo');
+                    window.location.href = nextUrl.toString();
+                });
+            }
+
+            function refreshAiWardrobeOptions() {
+                if (!aiItemSelect) return;
+                const source = window.filterTryOnItems ? window.filterTryOnItems(wardrobe) : (wardrobe || []);
+                aiItemSelect.innerHTML = '<option value="">Select from your wardrobe</option>' +
+                    source.map(item => `<option value="${item.id}">${item.name}</option>`).join('');
+            }
+
+            // Populate AI demo item select from wardrobe
+            refreshAiWardrobeOptions();
+
+            if (aiUploadInput && aiUploadPreview) {
+                aiUploadInput.addEventListener('change', () => {
+                    const file = aiUploadInput.files && aiUploadInput.files[0];
+                    if (!file) {
+                        aiUploadPreview.textContent = '';
+                        return;
+                    }
+                    aiUploadPreview.textContent = `Selected: ${file.name}`;
+                });
+            }
+
+            if (aiGenerateBtn && aiItemSelect && aiDemoResult && aiDemoImage) {
+                aiGenerateBtn.addEventListener('click', () => {
+                    const file = aiUploadInput && aiUploadInput.files && aiUploadInput.files[0];
+                    const itemId = aiItemSelect.value;
+                    if (!file || !itemId) {
+                        showNotification('Upload a photo and choose an item first.', 'warning');
+                        return;
+                    }
+                    const demoPath = `/public/ai-demo-results/${encodeURIComponent(itemId)}.png`;
+                    aiDemoImage.src = demoPath;
+                    aiDemoImage.alt = `AI demo try-on for ${itemId}`;
+                    aiDemoResult.classList.remove('hidden');
+                    showNotification('AI demo result loaded.', 'success');
+                });
+            }
+
+            // Ensure AI select stays in sync when wardrobe changes
+            const originalRenderWardrobeItems = renderWardrobeItems;
+            renderWardrobeItems = function() {
+                originalRenderWardrobeItems();
+                refreshAiWardrobeOptions();
+            };
+
+            // Initial display update
+            setTimeout(updateSelectedItemsDisplay, 500);
+        });
+    </script>
 </body>
 </html>
+
