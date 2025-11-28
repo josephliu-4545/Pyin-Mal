@@ -5,8 +5,8 @@
 
 (() => {
   const TRANSPARENT_ROOT = '/public/items/transparent';
-  const BACKGROUND_ROOT = '/public/items/background';
   const WARDROBE_KEY = 'wardrobe';
+  const MANNEQUIN_ROOT = '/public/mannequins';
 
   // Check if a transparent PNG exists for this item id
   async function hasTransparentVersion(itemId) {
@@ -52,9 +52,13 @@
     }
 
     const itemId = item.id;
-    const bgImg = item.image || `${BACKGROUND_ROOT}/${encodeURIComponent(itemId)}.png`;
+    const bgImg = item.image;
     const transparentPath = `${TRANSPARENT_ROOT}/${encodeURIComponent(itemId)}.png`;
     const canTryOn = await hasTransparentVersion(itemId);
+
+    if (!canTryOn && typeof console !== 'undefined' && console.warn) {
+      console.warn(`No transparent PNG found for: ${itemId}  → expected at /public/items/transparent/${itemId}.png`);
+    }
 
     const entry = {
       ...item,
@@ -83,9 +87,44 @@
     return (items || []).filter(i => i && i.canTryOn && i.transparentImg);
   }
 
+  // Mannequin gender helpers
+  function getMannequinGender() {
+    try {
+      const stored = localStorage.getItem('mannequinGender');
+      if (stored === 'male' || stored === 'female') return stored;
+      return 'female';
+    } catch (err) {
+      return 'female';
+    }
+  }
+
+  function setMannequinGender(gender) {
+    const normalized = gender === 'male' ? 'male' : 'female';
+    try {
+      localStorage.setItem('mannequinGender', normalized);
+    } catch (err) {
+      // ignore storage errors
+    }
+
+    const mannequinImg = document.getElementById('mannequin-base');
+    if (mannequinImg) {
+      mannequinImg.src = `${MANNEQUIN_ROOT}/${normalized}-front.png`;
+    }
+  }
+
+  function applyAutoGender(item) {
+    if (!item || !item.gender) return;
+    const g = item.gender === 'male' ? 'male' : item.gender === 'female' ? 'female' : null;
+    if (!g) return;
+    setMannequinGender(g);
+  }
+
   // Expose helpers on window for inline scripts
   window.hasTransparentVersion = hasTransparentVersion;
   window.getWardrobeItems = getWardrobeItems;
   window.addToWardrobeAsync = addToWardrobe;
   window.filterTryOnItems = filterTryOnItems;
+  window.setMannequinGender = setMannequinGender;
+  window.getMannequinGender = getMannequinGender;
+  window.applyAutoGender = applyAutoGender;
 })();

@@ -1573,12 +1573,23 @@
         let displayedCount = 0;
         const itemsPerPage = 32;
 
-        function renderFashionProducts(filteredProducts = null) {
+        async function renderFashionProducts(filteredProducts = null) {
             const container = document.getElementById('fashion-products-container');
             if (!container) return;
 
             const productsToShow = filteredProducts || fashionProducts;
             const productsToDisplay = productsToShow.slice(0, displayedCount + itemsPerPage);
+
+            // Precompute try-on availability per product using transparent PNGs
+            if (window.hasTransparentVersion) {
+                await Promise.all(productsToDisplay.map(async (product) => {
+                    try {
+                        product.canTryOn = await window.hasTransparentVersion(product.id);
+                    } catch (err) {
+                        product.canTryOn = false;
+                    }
+                }));
+            }
             
             // Group products by fashion type
             const groupedByType = {};
@@ -1602,6 +1613,7 @@
                             ${typeProducts.map((product, index) => `
                                 <article class="shop-card-animated product-card p-0 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="${index * 50}" data-shop="${product.shop.toLowerCase().replace(/\s+/g, '-')}" onclick="openProductModal(${JSON.stringify(product).replace(/"/g, '&quot;')})">
                                     <div class="shop-card-media aspect-[4/3] relative">
+                                        ${product.canTryOn ? '<span class="absolute top-2 right-2 z-20 bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-full shadow">Try-On Ready</span>' : ''}
                                         <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
                                         <button class="absolute top-3 right-3 w-8 h-8 bg-white/90 dark:bg-dark-card/90 rounded-full flex items-center justify-center hover:bg-primary-500 hover:text-white transition-colors z-10" onclick="event.stopPropagation(); addToFavorites(${JSON.stringify(product).replace(/"/g, '&quot;')})">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
