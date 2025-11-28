@@ -22,6 +22,88 @@
     
     <!-- AOS CSS (CDN) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #4338ca, #6d28d9);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #0d9668, #047857);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-accent {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #4f46e5;
+            color: #4f46e5;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background: #4f46e5;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .section-card {
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-bg-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .gradient-bg-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .gradient-bg-4 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+    </style>
 </head>
 <body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
     <!-- Navigation Header -->
@@ -48,7 +130,7 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="#wish-list" class="nav-link">Favorites</a>
+                    <a href="#face-analysis" class="nav-link">Face Analysis</a>
                     <a href="pages/shop-browsing.html" class="nav-link">Shop</a>
                     <div class="relative" data-dropdown="more">
                         <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
@@ -99,7 +181,7 @@
                             <a href="pages/model-preview.html" class="nav-link">Model Preview</a>
                         </div>
                     </div>
-                    <a href="pages/saved-fashion.html" class="block nav-link">Favorites</a>
+                    <a href="#face-analysis" class="block nav-link">Face Analysis</a>
                     <a href="pages/shop-browsing.html" class="block nav-link">Shop</a>
                     <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
                         <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
@@ -126,7 +208,7 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Banner Section -->
-        <section class="relative bg-gradient-to-r from-primary-500 to-accent-500 text-white py-16 sm:py-20 md:py-32">
+        <section id="hero" class="relative gradient-bg text-white py-16 sm:py-20 md:py-32">
             <div class="container-custom">
                 <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
                     <h1 class="font-rufina text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
@@ -139,7 +221,7 @@
                         <a href="pages/outfit-generator.html" class="btn btn-primary bg-white text-primary-600 hover:bg-neutral-100 w-full sm:w-auto">
                             Generate Outfit
                         </a>
-                        <a href="pages/shop-browsing.html" class="btn btn-ghost border-white text-white hover:bg-white/10 w-full sm:w-auto">
+                        <a href="pages/shop-browsing.html" class="btn btn-outline border-white text-white hover:bg-white hover:text-primary-600 w-full sm:w-auto">
                             Browse Shop
                         </a>
                     </div>
@@ -147,75 +229,260 @@
             </div>
         </section>
 
-        <!-- New Banner Section -->
-        <section id="new-banner" class="py-12 bg-neutral-50 dark:bg-dark-surface">
+        <!-- Features Section -->
+        <section id="features" class="py-16 bg-white dark:bg-dark-bg">
             <div class="container-custom">
-                <h2 class="font-rufina text-3xl font-bold text-center mb-8">New Arrivals</h2>
+                <h2 class="font-rufina text-3xl md:text-4xl font-bold text-center mb-4">Our Amazing Features</h2>
+                <p class="text-center text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-12">
+                    Discover how our AI-powered platform can transform your style journey
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="feature-card section-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="feature-icon bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-rufina text-xl font-semibold mb-3">AI Hair Recommendations</h3>
+                        <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+                            Get personalized hairstyle suggestions based on your face shape and preferences
+                        </p>
+                        <a href="pages/haircut-recommendations.html" class="btn btn-primary w-full">Explore Hair Styles</a>
+                    </div>
+                    <div class="feature-card section-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon bg-accent-100 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-rufina text-xl font-semibold mb-3">Curated Fashion Sets</h3>
+                        <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+                            Complete outfits curated by AI to match your style, occasion, and preferences
+                        </p>
+                        <a href="pages/digital-outfit.html" class="btn btn-secondary w-full">View Fashion Sets</a>
+                    </div>
+                    <div class="feature-card section-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon bg-secondary-100 dark:bg-secondary-900/30 text-secondary-600 dark:text-secondary-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-rufina text-xl font-semibold mb-3">Virtual Try-On</h3>
+                        <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+                            See how outfits and hairstyles look on you with our advanced model preview
+                        </p>
+                        <a href="pages/model-preview.html" class="btn btn-accent w-full">Try It On</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Arrivals Section -->
+        <section id="new-arrivals" class="py-16 bg-neutral-50 dark:bg-dark-surface">
+            <div class="container-custom">
+                <h2 class="font-rufina text-3xl md:text-4xl font-bold text-center mb-4">New Arrivals</h2>
+                <p class="text-center text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-12">
+                    Check out our latest fashion pieces and accessories
+                </p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Banner items would go here -->
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="0">
-                        <div class="product-card-image bg-neutral-200 dark:bg-dark-card h-64"></div>
+                    <div class="product-card section-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="product-card-image bg-gradient-bg-2 h-64 flex items-center justify-center text-white text-4xl">
+                            👕
+                        </div>
                         <div class="product-card-content">
-                            <h3 class="product-card-title">New Collection</h3>
+                            <h3 class="product-card-title">Summer Collection</h3>
+                            <p class="text-neutral-600 dark:text-neutral-400 mb-4">Light and breezy outfits perfect for warm weather</p>
+                            <a href="pages/shop-browsing.html" class="btn btn-primary w-full">Shop Now</a>
                         </div>
                     </div>
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="product-card-image bg-neutral-200 dark:bg-dark-card h-64"></div>
+                    <div class="product-card section-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="product-card-image bg-gradient-bg-3 h-64 flex items-center justify-center text-white text-4xl">
+                            👖
+                        </div>
                         <div class="product-card-content">
                             <h3 class="product-card-title">Trending Now</h3>
+                            <p class="text-neutral-600 dark:text-neutral-400 mb-4">What's hot in the fashion world right now</p>
+                            <a href="pages/shop-browsing.html" class="btn btn-secondary w-full">Shop Now</a>
                         </div>
                     </div>
-                    <div class="product-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="product-card-image bg-neutral-200 dark:bg-dark-card h-64"></div>
+                    <div class="product-card section-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="product-card-image bg-gradient-bg-4 h-64 flex items-center justify-center text-white text-4xl">
+                            👗
+                        </div>
                         <div class="product-card-content">
                             <h3 class="product-card-title">Featured Styles</h3>
+                            <p class="text-neutral-600 dark:text-neutral-400 mb-4">Editor's picks for this season</p>
+                            <a href="pages/shop-browsing.html" class="btn btn-accent w-full">Shop Now</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Wish List Section -->
-        <section id="wish-list" class="py-12">
+        <!-- Face Analysis & Haircut Section -->
+        <section id="face-analysis" class="py-16 bg-white dark:bg-dark-bg">
             <div class="container-custom">
-                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-                    <h2 class="font-rufina text-3xl font-bold text-center sm:text-left">My Wish List</h2>
-                    <a href="#wishlist" class="text-primary-600 dark:text-primary-400 hover:underline text-center sm:text-right">View All</a>
-                </div>
-                <div class="product-grid">
-                    <!-- Wishlist items would be dynamically loaded here -->
-                    <div class="text-center py-12 text-neutral-500 dark:text-neutral-400">
-                        <p>Your wishlist is empty. Start adding items you love!</p>
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <div class="lg:w-1/2" data-aos="fade-right">
+                        <h2 class="font-rufina text-3xl md:text-4xl font-bold mb-4">Face Analysis & Perfect Haircut</h2>
+                        <p class="text-neutral-600 dark:text-neutral-400 mb-6">
+                            Our advanced AI analyzes your facial features to recommend the perfect haircut that complements your unique face shape, hair type, and personal style.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>AI-powered face shape detection</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Personalized haircut recommendations</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Virtual try-on before you commit</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="pages/face-analysis.html" class="btn btn-primary">Analyze My Face</a>
+                            <a href="pages/haircut-recommendations.html" class="btn btn-outline">View Hair Styles</a>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2" data-aos="fade-left">
+                        <div class="bg-gradient-bg rounded-2xl p-8 text-white text-center h-80 flex flex-col justify-center">
+                            <div class="text-6xl mb-4">💇‍♂️</div>
+                            <h3 class="text-2xl font-bold mb-2">Find Your Perfect Cut</h3>
+                            <p>Upload a photo and let our AI work its magic</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- My Account Section -->
-        <section id="my-account" class="py-12 bg-neutral-50 dark:bg-dark-surface">
+        <!-- Our Partner Shop Section -->
+        <section id="partner-shop" class="py-16 bg-neutral-50 dark:bg-dark-surface">
             <div class="container-custom">
-                <h2 class="font-rufina text-3xl font-bold text-center mb-8">My Account</h2>
-                <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <a href="pages/style-profile.html" class="product-card p-6 text-center hover:scale-105 transition-transform">
-                        <div class="text-4xl mb-4">👤</div>
-                        <h3 class="font-rufina text-xl font-semibold mb-2">Style Profile</h3>
-                        <p class="text-neutral-600 dark:text-neutral-400">Manage your preferences</p>
-                    </a>
-                    <a href="pages/saved-fashion.html" class="product-card p-6 text-center hover:scale-105 transition-transform">
-                        <div class="text-4xl mb-4">💾</div>
-                        <h3 class="font-rufina text-xl font-semibold mb-2">Saved Fashion</h3>
-                        <p class="text-neutral-600 dark:text-neutral-400">View saved outfits</p>
-                    </a>
-                    <a href="pages/style-dashboard.html" class="product-card p-6 text-center hover:scale-105 transition-transform">
-                        <div class="text-4xl mb-4">📊</div>
-                        <h3 class="font-rufina text-xl font-semibold mb-2">Style Dashboard</h3>
-                        <p class="text-neutral-600 dark:text-neutral-400">Track your style</p>
-                    </a>
-                    <a href="pages/pricing.html" class="product-card p-6 text-center hover:scale-105 transition-transform">
-                        <div class="text-4xl mb-4">💳</div>
-                        <h3 class="font-rufina text-xl font-semibold mb-2">Pricing & Plans</h3>
-                        <p class="text-neutral-600 dark:text-neutral-400">View subscription options</p>
-                    </a>
+                <h2 class="font-rufina text-3xl md:text-4xl font-bold text-center mb-4">Our Partner Shop</h2>
+                <p class="text-center text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-12">
+                    Discover exclusive collections from our trusted fashion partners
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <div class="partner-card section-card text-center p-6" data-aos="zoom-in" data-aos-delay="0">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-bg flex items-center justify-center text-white text-2xl">
+                            🛍️
+                        </div>
+                        <h3 class="font-semibold mb-2">Trendy Threads</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Latest fashion trends</p>
+                    </div>
+                    <div class="partner-card section-card text-center p-6" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-bg-2 flex items-center justify-center text-white text-2xl">
+                            👔
+                        </div>
+                        <h3 class="font-semibold mb-2">Elite Attire</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Premium formal wear</p>
+                    </div>
+                    <div class="partner-card section-card text-center p-6" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-bg-3 flex items-center justify-center text-white text-2xl">
+                            👟
+                        </div>
+                        <h3 class="font-semibold mb-2">Urban Steps</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Streetwear & sneakers</p>
+                    </div>
+                    <div class="partner-card section-card text-center p-6" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-bg-4 flex items-center justify-center text-white text-2xl">
+                            💎
+                        </div>
+                        <h3 class="font-semibold mb-2">Glamour Accessories</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Jewelry & accessories</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <a href="pages/shop-browsing.html" class="btn btn-primary">Explore All Partners</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curated Sets & Grooming Kit Section -->
+        <section id="curated-sets" class="py-16 bg-white dark:bg-dark-bg">
+            <div class="container-custom">
+                <h2 class="font-rufina text-3xl md:text-4xl font-bold text-center mb-4">Curated Sets & Grooming Kits</h2>
+                <p class="text-center text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-12">
+                    Complete style solutions with perfectly matched outfits and grooming essentials
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="curated-set section-card p-6" data-aos="fade-up" data-aos-delay="0">
+                        <div class="flex items-start mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-bg flex items-center justify-center text-white text-xl mr-4">
+                                👔
+                            </div>
+                            <div>
+                                <h3 class="font-rufina text-xl font-semibold">Professional Collection</h3>
+                                <p class="text-neutral-600 dark:text-neutral-400">Perfect for office and business meetings</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">Includes tailored suits, dress shirts, ties, and matching accessories for a polished professional look.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">$249.99</span>
+                            <a href="pages/digital-outfit.html" class="btn btn-primary">View Set</a>
+                        </div>
+                    </div>
+                    <div class="curated-set section-card p-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-start mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-bg-2 flex items-center justify-center text-white text-xl mr-4">
+                                🏖️
+                            </div>
+                            <div>
+                                <h3 class="font-rufina text-xl font-semibold">Weekend Getaway</h3>
+                                <p class="text-neutral-600 dark:text-neutral-400">Casual and comfortable for leisure time</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">Relaxed outfits perfect for weekends, vacations, or casual outings with friends and family.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">$179.99</span>
+                            <a href="pages/digital-outfit.html" class="btn btn-secondary">View Set</a>
+                        </div>
+                    </div>
+                    <div class="curated-set section-card p-6" data-aos="fade-up" data-aos-delay="0">
+                        <div class="flex items-start mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-bg-3 flex items-center justify-center text-white text-xl mr-4">
+                                ✨
+                            </div>
+                            <div>
+                                <h3 class="font-rufina text-xl font-semibold">Essential Grooming Kit</h3>
+                                <p class="text-neutral-600 dark:text-neutral-400">Complete skincare and haircare routine</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">Premium grooming products selected based on your skin type and hair needs for a complete self-care routine.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">$89.99</span>
+                            <a href="pages/grooming-kit.html" class="btn btn-accent">View Kit</a>
+                        </div>
+                    </div>
+                    <div class="curated-set section-card p-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-start mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-bg-4 flex items-center justify-center text-white text-xl mr-4">
+                                🎉
+                            </div>
+                            <div>
+                                <h3 class="font-rufina text-xl font-semibold">Date Night Special</h3>
+                                <p class="text-neutral-600 dark:text-neutral-400">Make a lasting impression</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">Stylish and sophisticated outfits perfect for romantic dinners, special occasions, or nights out.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold">$199.99</span>
+                            <a href="pages/digital-outfit.html" class="btn btn-primary">View Set</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="pages/curated-sets.html" class="btn btn-outline">View All Curated Sets</a>
                 </div>
             </div>
         </section>
@@ -226,7 +493,7 @@
         <div class="container-custom">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="text-center md:text-left">
-                    <h3 class="font-rufina text-xl font-bold mb-4">StyleHub</h3>
+                    <h3 class="font-rufina text-xl font-bold mb-4">Pyin Mal</h3>
                     <p class="text-neutral-400 dark:text-neutral-500 text-sm">
                         Your personal fashion and grooming assistant
                     </p>
@@ -254,7 +521,7 @@
                 </div>
             </div>
             <div class="border-t border-neutral-800 dark:border-dark-border mt-8 pt-8 text-center text-sm text-neutral-400 dark:text-neutral-500">
-                <p>&copy; 2025 StyleHub. All rights reserved.</p>
+                <p>&copy; 2025 Pyin Mal. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -266,4 +533,3 @@
     <script src="./js/animations.js"></script>
 </body>
 </html>
-

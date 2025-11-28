@@ -19,6 +19,326 @@
 
     <!-- AOS CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+    <style>
+        :root {
+            --hr-primary: #8B5CF6;
+            --hr-primary-dark: #7C3AED;
+            --hr-accent: #EC4899;
+            --hr-accent-light: #F472B6;
+            --hr-light-bg: #F9FAFB;
+            --hr-light-surface: #FFFFFF;
+            --hr-light-card: #F3F4F6;
+            --hr-light-border: #E5E7EB;
+            --hr-dark-bg: #111827;
+            --hr-dark-surface: #1F2937;
+            --hr-dark-card: #374151;
+            --hr-dark-border: #4B5563;
+            --hr-neutral-400: #9CA3AF;
+            --hr-neutral-500: #6B7280;
+            --hr-neutral-600: #4B5563;
+            --hr-radius: 0.75rem;
+            --hr-radius-xl: 1rem;
+            --hr-radius-2xl: 1.5rem;
+            --hr-shadow: 0 15px 30px rgba(15,23,42,0.12);
+        }
+
+        #haircut-app {
+            font-family: 'Segoe UI', 'Inter', sans-serif;
+            background-color: var(--hr-light-bg);
+            color: var(--hr-neutral-600);
+        }
+
+        .dark #haircut-app {
+            background-color: var(--hr-dark-bg);
+            color: var(--hr-neutral-400);
+        }
+
+        #haircut-app section {
+            padding: 4rem 0;
+        }
+
+        #haircut-app .hr-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        #haircut-app h1,
+        #haircut-app h2,
+        #haircut-app h3 {
+            color: #111827;
+        }
+
+        .dark #haircut-app h1,
+        .dark #haircut-app h2,
+        .dark #haircut-app h3 {
+            color: #F9FAFB;
+        }
+
+        #haircut-app .hr-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.6rem;
+            border-radius: var(--hr-radius);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #haircut-app .hr-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        #haircut-app .hr-btn:hover::after { left: 100%; }
+
+        #haircut-app .hr-btn-primary {
+            background-color: var(--hr-primary);
+            color: #fff;
+            box-shadow: var(--hr-shadow);
+        }
+
+        #haircut-app .hr-btn-primary:hover {
+            transform: translateY(-2px);
+            background-color: var(--hr-primary-dark);
+        }
+
+        #haircut-app .hr-btn-secondary {
+            border: 1px solid rgba(255,255,255,0.6);
+            color: #fff;
+            background: transparent;
+        }
+
+        #haircut-app .hr-btn-secondary:hover {
+            background-color: rgba(255,255,255,0.15);
+        }
+
+        #haircut-app .hr-card {
+            background-color: var(--hr-light-surface);
+            border-radius: var(--hr-radius-2xl);
+            box-shadow: var(--hr-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dark #haircut-app .hr-card {
+            background-color: var(--hr-dark-card);
+        }
+
+        #haircut-app .hr-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 45px rgba(15,23,42,0.28);
+        }
+
+        #haircut-app .face-scan {
+            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #haircut-app .face-scan::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
+            animation: spinBlob 18s linear infinite;
+        }
+
+        @keyframes spinBlob {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #haircut-app .scan-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        #haircut-app .scan-option {
+            width: 300px;
+            max-width: 100%;
+            padding: 1.75rem;
+            border-radius: var(--hr-radius-2xl);
+            background-color: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        #haircut-app .scan-option:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        #haircut-app .scan-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background-color: rgba(255,255,255,0.2);
+            display: grid;
+            place-items: center;
+        }
+
+        #haircut-app .section-header {
+            text-align: center;
+            max-width: 820px;
+            margin: 0 auto 3rem;
+        }
+
+        #haircut-app .section-title {
+            display: inline-block;
+            position: relative;
+        }
+
+        #haircut-app .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #8B5CF6, #EC4899);
+        }
+
+        #haircut-app .face-shapes-grid,
+        #haircut-app .hairstyles-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            #haircut-app .face-shapes-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+            #haircut-app .hairstyles-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+        }
+
+        @media (min-width: 1024px) {
+            #haircut-app .face-shapes-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+            #haircut-app .hairstyles-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+        }
+
+        #haircut-app .face-shape-image,
+        #haircut-app .hairstyle-image {
+            height: 14rem;
+            overflow: hidden;
+        }
+
+        #haircut-app .face-shape-image img,
+        #haircut-app .hairstyle-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        #haircut-app .face-shape-card:hover img,
+        #haircut-app .hairstyle-card:hover img {
+            transform: scale(1.05);
+        }
+
+        #haircut-app .gender-tabs,
+        #haircut-app .face-shape-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        #haircut-app .gender-tab,
+        #haircut-app .face-shape-filter {
+            padding: 0.6rem 1.35rem;
+            border-radius: var(--hr-radius);
+            border: 1px solid var(--hr-light-border);
+            background-color: var(--hr-light-card);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .dark #haircut-app .gender-tab,
+        .dark #haircut-app .face-shape-filter {
+            border-color: var(--hr-dark-border);
+            background-color: var(--hr-dark-card);
+            color: #F9FAFB;
+        }
+
+        #haircut-app .gender-tab.active,
+        #haircut-app .face-shape-filter.active {
+            background-color: var(--hr-primary);
+            border-color: var(--hr-primary);
+            color: #fff;
+        }
+
+        #haircut-app .hairstyle-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        #haircut-app .hairstyle-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.7));
+            padding: 1rem;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        #haircut-app .hairstyle-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: auto;
+        }
+
+        #haircut-app .scroll-reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        #haircut-app .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #haircut-app footer {
+            background-color: #0f172a;
+            color: #fff;
+            padding: 2.5rem 0;
+        }
+
+        #haircut-app .footer-links {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+    </style>
 </head>
 
 <body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">

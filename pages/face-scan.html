@@ -3,35 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Face scan UI for previewing haircut recommendations using MediaPipe Face Mesh (UI only for now).">
-    <title>Face Scan - Pyin Mal</title>
-
+    <meta name="description" content="Shopping cart - Pyin Mal Fashion Styling Platform">
+    <title>Shopping Cart - Pyin Mal</title>
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
-
+    
     <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="../css/tailwind.css">
-
+    <link rel="stylesheet" href="./css/tailwind.css">
+    
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/main.css">
-
-    <!-- AOS CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="./css/main.css">
+    
+    <!-- AOS CSS (CDN) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
-    <!-- Navigation -->
+    <!-- Navigation Header -->
     <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
         <nav class="container-custom">
             <div class="flex items-center justify-between h-16 gap-6">
-                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                <a href="index.html" class="flex items-center space-x-1.5 sm:space-x-2">
                     <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
                     <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
                 </a>
 
                 <div class="hidden lg:flex items-center space-x-6">
-                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="index.html" class="nav-link">Home</a>
                     <div class="relative" data-dropdown="features">
                         <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
                             Features
@@ -39,14 +39,14 @@
                         </button>
                         <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
                             <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
-                                <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
-                                <li><a href="curated-sets.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
-                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                                <li><a href="pages/haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="pages/digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="pages/model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
                             </ul>
                         </div>
                     </div>
-                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
-                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <a href="pages/saved-fashion.html" class="nav-link">Favorites</a>
+                    <a href="pages/shop-browsing.html" class="nav-link">Shop</a>
                     <div class="relative" data-dropdown="more">
                         <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
                             More
@@ -54,15 +54,15 @@
                         </button>
                         <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
                             <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
-                                <a href="reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
-                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
-                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
-                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <a href="pages/reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="pages/contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="pages/about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="pages/faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
                                 <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
-                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
-                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
-                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
-                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                                <a href="pages/pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="pages/testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="pages/blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="pages/locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
                             </div>
                         </div>
                     </div>
@@ -74,11 +74,12 @@
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                         </span>
                     </button>
-                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                    <a href="cart.html" class="theme-toggle p-1.5 sm:p-2 relative" aria-label="Cart">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
-                    </button>
-                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
-                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                        <span class="absolute -top-1 -right-1 bg-primary-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                    </a>
+                    <a href="pages/login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="pages/login.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
                     <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
@@ -87,222 +88,331 @@
 
             <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
                 <div class="pt-4 space-y-4">
-                    <a href="../index.html" class="block nav-link">Home</a>
+                    <a href="index.html" class="block nav-link">Home</a>
                     <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
                         <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
                         <div class="flex flex-col space-y-2">
-                            <a href="haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
-                            <a href="curated-sets.html" class="nav-link">Curated Fashion Sets</a>
-                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                            <a href="pages/haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
+                            <a href="pages/digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="pages/model-preview.html" class="nav-link">Model Preview</a>
                         </div>
                     </div>
-                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
-                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <a href="pages/saved-fashion.html" class="block nav-link">Favorites</a>
+                    <a href="pages/shop-browsing.html" class="block nav-link">Shop</a>
                     <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
                         <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
                         <div class="flex flex-col space-y-2">
-                            <a href="reviews.html" class="nav-link">Reviews</a>
-                            <a href="contact.html" class="nav-link">Contact</a>
-                            <a href="about.html" class="nav-link">About us</a>
-                            <a href="faq.html" class="nav-link">FAQ</a>
-                            <a href="pricing.html" class="nav-link">Pricing</a>
-                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
-                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
-                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                            <a href="pages/reviews.html" class="nav-link">Reviews</a>
+                            <a href="pages/contact.html" class="nav-link">Contact</a>
+                            <a href="pages/about.html" class="nav-link">About us</a>
+                            <a href="pages/faq.html" class="nav-link">FAQ</a>
+                            <a href="pages/pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="pages/testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="pages/blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="pages/locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
                         </div>
                     </div>
                     <div class="flex flex-col gap-3">
-                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
-                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                        <a href="pages/login.html" target="_blank" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="pages/signup.html" target="_blank" class="btn btn-primary w-full text-center">Get Started</a>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <!-- Hero -->
-    <section class="py-10 sm:py-14 md:py-16 bg-gradient-to-br from-neutral-900 via-slate-900 to-neutral-900 text-white">
-        <div class="container-custom grid grid-cols-1 lg:grid-cols-[3fr,2fr] gap-10 items-center">
-            <div data-aos="fade-right">
-                <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Face scan</p>
-                <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Preview haircuts on your actual face—before you book the chair.</h1>
-                <p class="text-sm sm:text-base text-white/80 mb-6">This interface is wired for MediaPipe Face Mesh in the real product. For the contest build, it simulates the flow so we can test layout, privacy copy, and UX.</p>
-                <ul class="space-y-2 text-sm text-white/80 mb-6">
-                    <li>• Uses your camera or a photo upload (front-facing, good light).</li>
-                    <li>• Detects face shape to pair with haircut recommendations.</li>
-                    <li>• Sends chosen presets to the Haircut Recommendations and Saved Fashion pages.</li>
-                </ul>
-                <p class="text-xs uppercase tracking-[0.3em] text-white/50">No data is stored in this demo build.</p>
-            </div>
-            <div class="rounded-[32px] bg-white/5 border border-white/10 p-6 shadow-2xl backdrop-blur" data-aos="fade-left">
-                <div class="aspect-[9/16] rounded-2xl overflow-hidden bg-neutral-900 flex items-center justify-center relative">
-                    <img src="../assets/images/hero/face-scan-hero.jpg" alt="Face scan preview placeholder" class="w-full h-full object-cover opacity-60">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-40 h-40 border-2 border-white/60 rounded-[32px]"></div>
-                    </div>
-                    <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[11px] text-white/80">
-                        <span>Face mesh: demo</span>
-                        <span>Shape: Oval (sample)</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Scan UI -->
-    <section class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
-        <div class="container-custom grid grid-cols-1 lg:grid-cols-[3fr,2fr] gap-10 items-start">
-            <!-- Left: preview / canvas -->
-            <div class="space-y-4" data-aos="fade-right">
-                <div class="product-card p-4 sm:p-6 bg-neutral-900 dark:bg-neutral-900">
-                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-                        <p class="text-xs uppercase tracking-[0.3em] text-white/60">Live preview</p>
-                        <span class="text-xs text-white/70">Demo only · MediaPipe planned</span>
-                    </div>
-                    <div class="aspect-video rounded-2xl overflow-hidden bg-black flex items-center justify-center text-white/50 text-xs">
-                        Camera / uploaded image will appear here
-                    </div>
-                </div>
-                <div class="product-card p-4 sm:p-6">
-                    <p class="text-xs uppercase tracking-[0.3em] text-neutral-400 mb-3">Status</p>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-neutral-600 dark:text-neutral-400">
-                        <div>
-                            <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Face shape</p>
-                            <p class="font-rufina text-base">Oval (demo)</p>
-                        </div>
-                        <div>
-                            <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Confidence</p>
-                            <p class="font-rufina text-base">92%</p>
-                        </div>
-                        <div>
-                            <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Lighting</p>
-                            <p class="font-rufina text-base">Good</p>
-                        </div>
-                        <div>
-                            <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Angle</p>
-                            <p class="font-rufina text-base">Centered</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- Main Content -->
+    <main class="py-8">
+        <div class="container-custom">
+            <!-- Page Header -->
+            <div class="mb-8">
+                <h1 class="font-rufina text-3xl md:text-4xl font-bold text-neutral-900 dark:text-dark-text mb-2">Shopping Cart</h1>
+                <p class="text-neutral-600 dark:text-neutral-400">You have 3 items in your cart</p>
             </div>
 
-            <!-- Right: controls -->
-            <aside class="space-y-6" data-aos="fade-left">
-                <div class="product-card p-5 space-y-4">
-                    <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Capture</p>
-                    <button class="btn btn-primary w-full">Use camera</button>
-                    <button class="btn btn-secondary w-full">Upload photo</button>
-                    <p class="text-[11px] text-neutral-500 dark:text-neutral-400">In the live build, these buttons will trigger camera permissions and run the MediaPipe pipeline in your browser.</p>
-                </div>
-                <div class="product-card p-5 space-y-4">
-                    <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Preferred vibe</p>
-                    <div class="flex flex-wrap gap-2 text-xs">
-                        <button class="badge">Low maintenance</button>
-                        <button class="badge">Editorial</button>
-                        <button class="badge">Soft layers</button>
-                        <button class="badge">Sharp lines</button>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Cart Items -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Cart Item 1 -->
+                    <div class="bg-white dark:bg-dark-card rounded-xl border border-neutral-200 dark:border-dark-border p-6 shadow-sm dark:shadow-soft-dark" data-aos="fade-up">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <!-- Product Image -->
+                            <div class="w-full md:w-32 h-32 bg-neutral-200 dark:bg-dark-surface rounded-lg flex-shrink-0"></div>
+                            
+                            <!-- Product Details -->
+                            <div class="flex-1">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="font-rufina text-lg font-semibold text-neutral-900 dark:text-dark-text mb-1">Premium Wireless Headphones</h3>
+                                        <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-1">Color: Black | Size: One Size</p>
+                                        <p class="text-neutral-500 dark:text-neutral-500 text-sm">SKU: WH-001-BLK</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0">
+                                        <p class="font-rufina text-lg font-semibold text-neutral-900 dark:text-dark-text">$299.00</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Quantity Controls -->
+                                <div class="flex items-center justify-between mt-4">
+                                    <div class="flex items-center space-x-3">
+                                        <button class="quantity-btn bg-white dark:bg-dark-surface border border-neutral-300 dark:border-dark-border rounded-full w-8 h-8 flex items-center justify-center hover:bg-neutral-50 dark:hover:bg-dark-bg transition-colors">
+                                            <svg class="w-4 h-4 text-neutral-600 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                            </svg>
+                                        </button>
+                                        <span class="w-12 text-center border border-neutral-300 dark:border-dark-border rounded-md py-1 bg-white dark:bg-dark-surface">1</span>
+                                        <button class="quantity-btn bg-white dark:bg-dark-surface border border-neutral-300 dark:border-dark-border rounded-full w-8 h-8 flex items-center justify-center hover:bg-neutral-50 dark:hover:bg-dark-bg transition-colors">
+                                            <svg class="w-4 h-4 text-neutral-600 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <button class="text-neutral-500 dark:text-neutral-400 hover:text-red-500 dark:hover:text-red-400 transition-colors">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-xs text-neutral-500 dark:text-neutral-400">These tags will connect to Haircut Recommendations to rank which cuts to show first.</p>
-                </div>
-                <div class="product-card p-5 space-y-4">
-                    <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Send to</p>
-                    <div class="space-y-3 text-sm">
-                        <label class="flex items-center gap-2">
-                            <input type="checkbox" class="filter-checkbox" checked>
-                            <span>Haircut Recommendations page</span>
-                        </label>
-                        <label class="flex items-center gap-2">
-                            <input type="checkbox" class="filter-checkbox" checked>
-                            <span>Saved Fashion (hair presets)</span>
-                        </label>
-                    </div>
-                    <button class="btn btn-primary w-full">Save demo preset</button>
-                </div>
-                <div class="product-card p-5 space-y-2 text-xs text-neutral-500 dark:text-neutral-400">
-                    <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400">Privacy</p>
-                    <p>For the contest build we do not store or send any camera data. In production, we will process everything in-browser and only keep anonymized measurements when needed.</p>
-                </div>
-            </aside>
-        </div>
-    </section>
 
-    <!-- Recommended cuts preview -->
-    <section class="py-10 sm:py-14">
-        <div class="container-custom space-y-6">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div data-aos="fade-right">
-                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Preview</p>
-                    <h2 class="font-rufina text-3xl font-bold mb-2">Sample haircuts for this face shape</h2>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">These tiles mirror the Haircut Recommendations page so users can jump straight into full descriptions.</p>
+                    <!-- Cart Item 2 -->
+                    <div class="bg-white dark:bg-dark-card rounded-xl border border-neutral-200 dark:border-dark-border p-6 shadow-sm dark:shadow-soft-dark" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <!-- Product Image -->
+                            <div class="w-full md:w-32 h-32 bg-neutral-200 dark:bg-dark-surface rounded-lg flex-shrink-0"></div>
+                            
+                            <!-- Product Details -->
+                            <div class="flex-1">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="font-rufina text-lg font-semibold text-neutral-900 dark:text-dark-text mb-1">Smart Watch Pro</h3>
+                                        <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-1">Color: Silver | Size: 42mm</p>
+                                        <p class="text-neutral-500 dark:text-neutral-500 text-sm">SKU: SW-042-SLV</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0">
+                                        <p class="font-rufina text-lg font-semibold text-neutral-900 dark:text-dark-text">$798.00</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Quantity Controls -->
+                                <div class="flex items-center justify-between mt-4">
+                                    <div class="flex items-center space-x-3">
+                                        <button class="quantity-btn bg-white dark:bg-dark-surface border border-neutral-300 dark:border-dark-border rounded-full w-8 h-8 flex items-center justify-center hover:bg-neutral-50 dark:hover:bg-dark-bg transition-colors">
+                                            <svg class="w-4 h-4 text-neutral-600 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                            </svg>
+                                        </button>
+                                        <span class="w-12 text-center border border-neutral-300 dark:border-dark-border rounded-md py-1 bg-white dark:bg-dark-surface">2</span>
+                                        <button class="quantity-btn bg-white dark:bg-dark-surface border border-neutral-300 dark:border-dark-border rounded-full w-8 h-8 flex items-center justify-center hover:bg-neutral-50 dark:hover:bg-dark-bg transition-colors">
+                                            <svg class="w-4 h-4 text-neutral-600 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <button class="text-neutral-500 dark:text-neutral-400 hover:text-red-500 dark:hover:text-red-400 transition-colors">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Item 3 -->
+                    <div class="bg-white dark:bg-dark-card rounded-xl border border-neutral-200 dark:border-dark-border p-6 shadow-sm dark:shadow-soft-dark" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <!-- Product Image -->
+                            <div class="w-full md:w-32 h-32 bg-neutral-200 dark:bg-dark-surface rounded-lg flex-shrink-0"></div>
+                            
+                            <!-- Product Details -->
+                            <div class="flex-1">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="font-rufina text-lg font-semibold text-neutral-900 dark:text-dark-text mb-1">Laptop Stand Aluminum</h3>
+                                        <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-1">Color: Space Gray | Size: Adjustable</p>
+                                        <p class="text-neutral-500 dark:text-neutral-500 text-sm">SKU: LS-ADJ-SG</p>
+                                    </div>
+                                    <div class="mt-2 md:mt-0">
+                                        <p class="font-rufina text-lg font-semibold text-neutral-900 dark:text-dark-text">$49.00</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Quantity Controls -->
+                                <div class="flex items-center justify-between mt-4">
+                                    <div class="flex items-center space-x-3">
+                                        <button class="quantity-btn bg-white dark:bg-dark-surface border border-neutral-300 dark:border-dark-border rounded-full w-8 h-8 flex items-center justify-center hover:bg-neutral-50 dark:hover:bg-dark-bg transition-colors">
+                                            <svg class="w-4 h-4 text-neutral-600 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                            </svg>
+                                        </button>
+                                        <span class="w-12 text-center border border-neutral-300 dark:border-dark-border rounded-md py-1 bg-white dark:bg-dark-surface">1</span>
+                                        <button class="quantity-btn bg-white dark:bg-dark-surface border border-neutral-300 dark:border-dark-border rounded-full w-8 h-8 flex items-center justify-center hover:bg-neutral-50 dark:hover:bg-dark-bg transition-colors">
+                                            <svg class="w-4 h-4 text-neutral-600 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <button class="text-neutral-500 dark:text-neutral-400 hover:text-red-500 dark:hover:text-red-400 transition-colors">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Continue Shopping -->
+                    <div class="flex items-center mt-6" data-aos="fade-up" data-aos-delay="300">
+                        <a href="pages/shop-browsing.html" class="flex items-center text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                            Continue Shopping
+                        </a>
+                    </div>
                 </div>
-                <a href="haircut-recommendations.html" class="btn btn-secondary" data-aos="fade-left">Open full recommendations</a>
+
+                <!-- Order Summary -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white dark:bg-dark-card rounded-xl border border-neutral-200 dark:border-dark-border p-6 shadow-sm dark:shadow-soft-dark sticky top-24" data-aos="fade-left">
+                        <h2 class="font-rufina text-xl font-semibold text-neutral-900 dark:text-dark-text mb-6">Order Summary</h2>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex justify-between">
+                                <span class="text-neutral-600 dark:text-neutral-400">Subtotal (4 items)</span>
+                                <span class="text-neutral-900 dark:text-dark-text">$1,146.00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-neutral-600 dark:text-neutral-400">Shipping</span>
+                                <span class="text-neutral-900 dark:text-dark-text">$15.00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-neutral-600 dark:text-neutral-400">Tax</span>
+                                <span class="text-neutral-900 dark:text-dark-text">$92.48</span>
+                            </div>
+                            <div class="border-t border-neutral-200 dark:border-dark-border pt-4">
+                                <div class="flex justify-between">
+                                    <span class="font-semibold text-neutral-900 dark:text-dark-text">Total</span>
+                                    <span class="font-semibold text-neutral-900 dark:text-dark-text">$1,253.48</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Promo Code -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">Promo Code</label>
+                            <div class="flex gap-2">
+                                <input type="text" placeholder="Enter code" class="flex-1 px-3 py-2 border border-neutral-300 dark:border-dark-border rounded-lg bg-white dark:bg-dark-surface focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                <button class="px-4 py-2 bg-neutral-200 dark:bg-dark-surface text-neutral-700 dark:text-neutral-300 rounded-lg hover:bg-neutral-300 dark:hover:bg-dark-border transition-colors">Apply</button>
+                            </div>
+                        </div>
+
+                        <!-- Checkout Button -->
+                        <button class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-medium transition-colors mb-4">
+                            Proceed to Checkout
+                        </button>
+
+                        <!-- Payment Methods -->
+                        <div class="border-t border-neutral-200 dark:border-dark-border pt-6">
+                            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">We accept:</p>
+                            <div class="flex space-x-2 mb-4">
+                                <div class="w-12 h-8 bg-neutral-200 dark:bg-dark-surface rounded"></div>
+                                <div class="w-12 h-8 bg-neutral-200 dark:bg-dark-surface rounded"></div>
+                                <div class="w-12 h-8 bg-neutral-200 dark:bg-dark-surface rounded"></div>
+                                <div class="w-12 h-8 bg-neutral-200 dark:bg-dark-surface rounded"></div>
+                            </div>
+                            <div class="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                                Secure Checkout
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <article class="hair-card" data-aos="fade-up">
-                    <div class="hair-card-img">
-                        <img src="../assets/images/haircuts/haircut-oval-fluid-layers.jpg" alt="Fluid long layers">
+
+            <!-- You Might Also Like -->
+            <section class="mt-16" data-aos="fade-up">
+                <h2 class="font-rufina text-2xl font-bold text-neutral-900 dark:text-dark-text mb-6">You might also like</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Product 1 -->
+                    <div class="bg-white dark:bg-dark-card rounded-xl border border-neutral-200 dark:border-dark-border p-4 shadow-sm dark:shadow-soft-dark hover:shadow-md dark:hover:shadow-soft-dark transition-shadow">
+                        <div class="h-40 bg-neutral-200 dark:bg-dark-surface rounded-lg mb-4"></div>
+                        <h3 class="font-medium text-neutral-900 dark:text-dark-text mb-1">Wireless Mouse</h3>
+                        <p class="font-semibold text-neutral-900 dark:text-dark-text">$39.99</p>
                     </div>
-                    <div class="hair-card-body">
-                        <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Oval · Low care</p>
-                        <h3 class="font-rufina text-xl mb-1">Fluid long layers</h3>
-                        <p class="text-xs text-neutral-600 dark:text-neutral-400">Great if you want to keep length but add movement.</p>
+                    
+                    <!-- Product 2 -->
+                    <div class="bg-white dark:bg-dark-card rounded-xl border border-neutral-200 dark:border-dark-border p-4 shadow-sm dark:shadow-soft-dark hover:shadow-md dark:hover:shadow-soft-dark transition-shadow">
+                        <div class="h-40 bg-neutral-200 dark:bg-dark-surface rounded-lg mb-4"></div>
+                        <h3 class="font-medium text-neutral-900 dark:text-dark-text mb-1">USB-C Hub</h3>
+                        <p class="font-semibold text-neutral-900 dark:text-dark-text">$59.99</p>
                     </div>
-                </article>
-                <article class="hair-card" data-aos="fade-up" data-aos-delay="50">
-                    <div class="hair-card-img">
-                        <img src="../assets/images/haircuts/haircut-heart-curtain-lob.jpg" alt="Curtain lob">
+                    
+                    <!-- Product 3 -->
+                    <div class="bg-white dark:bg-dark-card rounded-xl border border-neutral-200 dark:border-dark-border p-4 shadow-sm dark:shadow-soft-dark hover:shadow-md dark:hover:shadow-soft-dark transition-shadow">
+                        <div class="h-40 bg-neutral-200 dark:bg-dark-surface rounded-lg mb-4"></div>
+                        <h3 class="font-medium text-neutral-900 dark:text-dark-text mb-1">Phone Case</h3>
+                        <p class="font-semibold text-neutral-900 dark:text-dark-text">$24.99</p>
                     </div>
-                    <div class="hair-card-body">
-                        <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Heart · Medium care</p>
-                        <h3 class="font-rufina text-xl mb-1">Curtain lob</h3>
-                        <p class="text-xs text-neutral-600 dark:text-neutral-400">Soft fringe that balances wider foreheads.</p>
+                    
+                    <!-- Product 4 -->
+                    <div class="bg-white dark:bg-dark-card rounded-xl border border-neutral-200 dark:border-dark-border p-4 shadow-sm dark:shadow-soft-dark hover:shadow-md dark:hover:shadow-soft-dark transition-shadow">
+                        <div class="h-40 bg-neutral-200 dark:bg-dark-surface rounded-lg mb-4"></div>
+                        <h3 class="font-medium text-neutral-900 dark:text-dark-text mb-1">Desk Lamp</h3>
+                        <p class="font-semibold text-neutral-900 dark:text-dark-text">$79.99</p>
                     </div>
-                </article>
-                <article class="hair-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="hair-card-img">
-                        <img src="../assets/images/haircuts/haircut-square-soft-pixie.jpg" alt="Soft pixie">
-                    </div>
-                    <div class="hair-card-body">
-                        <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Square · Low care</p>
-                        <h3 class="font-rufina text-xl mb-1">Soft pixie</h3>
-                        <p class="text-xs text-neutral-600 dark:text-neutral-400">Shorter sides and airy top to soften the jaw.</p>
-                    </div>
-                </article>
-                <article class="hair-card" data-aos="fade-up" data-aos-delay="150">
-                    <div class="hair-card-img">
-                        <img src="../assets/images/haircuts/haircut-oval-stacked-undercut.jpg" alt="Stacked bob">
-                    </div>
-                    <div class="hair-card-body">
-                        <p class="text-[11px] uppercase tracking-[0.25em] text-neutral-400 mb-1">Oval · Medium care</p>
-                        <h3 class="font-rufina text-xl mb-1">Stacked bob + undercut</h3>
-                        <p class="text-xs text-neutral-600 dark:text-neutral-400">For sharper, more architectural silhouettes.</p>
-                    </div>
-                </article>
-            </div>
+                </div>
+            </section>
         </div>
-    </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
-        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between text-sm">
-            <div>
-                <p class="font-rufina text-2xl">Pyin Mal</p>
-                <p class="text-neutral-400 dark:text-neutral-500">Wardrobe & grooming intelligence.</p>
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-12 mt-20">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center md:text-left">
+                    <h3 class="font-rufina text-xl font-bold mb-4">Pyin Mal</h3>
+                    <p class="text-neutral-400 dark:text-neutral-500 text-sm">
+                        Your personal fashion and grooming assistant
+                    </p>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="pages/about.html" class="hover:text-white dark:hover:text-dark-text">About</a></li>
+                        <li><a href="pages/services.html" class="hover:text-white dark:hover:text-dark-text">Services</a></li>
+                        <li><a href="pages/faq.html" class="hover:text-white dark:hover:text-dark-text">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="pages/privacy.html" class="hover:text-white dark:hover:text-dark-text">Privacy Policy</a></li>
+                        <li><a href="pages/terms.html" class="hover:text-white dark:hover:text-dark-text">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="pages/contact.html" class="hover:text-white dark:hover:text-dark-text">Contact Us</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="flex flex-wrap gap-6 text-neutral-400 dark:text-neutral-500">
-                <a href="privacy.html" class="hover:text-white">Privacy</a>
-                <a href="terms.html" class="hover:text-white">Terms</a>
-                <a href="contact.html" class="hover:text-white">Contact</a>
+            <div class="border-t border-neutral-800 dark:border-dark-border mt-8 pt-8 text-center text-sm text-neutral-400 dark:text-neutral-500">
+                <p>&copy; 2025 Pyin Mal. All rights reserved.</p>
             </div>
-            <div class="text-neutral-500 dark:text-neutral-400 text-xs">© 2025 Pyin Mal. All rights reserved.</div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- JavaScript Files -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/animations.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/animations.js"></script>
 </body>
 </html>
-
-
