@@ -1,197 +1,240 @@
-/**
- * Model Preview System
- * Handles outfit and hairstyle layering on base model
- */
-
 class ModelPreview {
   constructor() {
-    this.baseModel = null;
-    this.currentOutfit = null;
-    this.currentHairstyle = null;
-    this.init();
-  }
-
-  init() {
-    // Find preview container
-    this.previewContainer = document.getElementById('model-preview-container');
-    if (!this.previewContainer) return;
-
-    // Load base model
-    this.loadBaseModel();
-
-    // Initialize outfit selection handlers
-    this.initOutfitHandlers();
-
-    // Initialize hairstyle selection handlers
-    this.initHairstyleHandlers();
-  }
-
-  loadBaseModel() {
-    // Base model should be in the HTML, but we can also load dynamically
-    const baseModelImg = this.previewContainer?.querySelector('.model-base');
-    if (baseModelImg) {
-      this.baseModel = baseModelImg;
-    }
-  }
-
-  initOutfitHandlers() {
-    const outfitItems = document.querySelectorAll('[data-outfit-id]');
-    outfitItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        const outfitId = e.currentTarget.dataset.outfitId;
-        const outfitImage = e.currentTarget.dataset.outfitImage;
-        this.updateOutfit(outfitId, outfitImage);
-      });
-    });
-  }
-
-  initHairstyleHandlers() {
-    const hairstyleItems = document.querySelectorAll('[data-hairstyle-id]');
-    hairstyleItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        const hairstyleId = e.currentTarget.dataset.hairstyleId;
-        const hairstyleImage = e.currentTarget.dataset.hairstyleImage;
-        this.updateHairstyle(hairstyleId, hairstyleImage);
-      });
-    });
-  }
-
-  updateOutfit(outfitData, outfitImage = null) {
-    if (typeof outfitData === 'object' && outfitData !== null) {
-      // Handle object with multiple items
-      this.updateOutfitLayers(outfitData);
-    } else {
-      // Handle single outfit ID/image
-      this.updateOutfitLayer(outfitData, outfitImage);
-    }
-  }
-
-  updateOutfitLayers(items) {
-    // Remove existing outfit layers
-    this.removeOutfitLayers();
-
-    // Add new outfit layers based on items
-    if (items.top) {
-      this.addOutfitLayer('top', items.top.image || items.top);
-    }
-    if (items.bottom) {
-      this.addOutfitLayer('bottom', items.bottom.image || items.bottom);
-    }
-    if (items.shoes) {
-      this.addOutfitLayer('shoes', items.shoes.image || items.shoes);
-    }
-    if (items.accessories) {
-      this.addOutfitLayer('accessories', items.accessories.image || items.accessories);
-    }
-  }
-
-  updateOutfitLayer(outfitId, outfitImage) {
-    // Remove existing outfit layer
-    this.removeOutfitLayers();
-
-    // Add new outfit layer
-    if (outfitImage) {
-      this.addOutfitLayer('full', outfitImage);
-    }
-  }
-
-  addOutfitLayer(type, imagePath) {
-    if (!this.previewContainer) return;
-
-    const layer = document.createElement('img');
-    layer.className = `outfit-layer outfit-${type}`;
-    layer.src = imagePath;
-    layer.alt = `Outfit ${type}`;
-    layer.style.zIndex = this.getZIndex(type);
-
-    // Add fade-in animation
-    layer.style.opacity = '0';
-    layer.style.transition = 'opacity 0.3s ease';
-
-    this.previewContainer.appendChild(layer);
-
-    // Trigger fade-in
-    setTimeout(() => {
-      layer.style.opacity = '1';
-    }, 10);
-
-    this.currentOutfit = { type, imagePath };
-  }
-
-  removeOutfitLayers() {
-    if (!this.previewContainer) return;
-
-    const layers = this.previewContainer.querySelectorAll('.outfit-layer');
-    layers.forEach(layer => {
-      layer.style.opacity = '0';
-      setTimeout(() => layer.remove(), 300);
-    });
-  }
-
-  updateHairstyle(hairstyleId, hairstyleImage) {
-    if (!this.previewContainer) return;
-
-    // Remove existing hairstyle
-    const existingHairstyle = this.previewContainer.querySelector('.hairstyle-layer');
-    if (existingHairstyle) {
-      existingHairstyle.style.opacity = '0';
-      setTimeout(() => existingHairstyle.remove(), 300);
-    }
-
-    // Add new hairstyle
-    if (hairstyleImage) {
-      const hairstyleLayer = document.createElement('img');
-      hairstyleLayer.className = 'hairstyle-layer';
-      hairstyleLayer.src = hairstyleImage;
-      hairstyleLayer.alt = `Hairstyle ${hairstyleId}`;
-      hairstyleLayer.style.zIndex = '100';
-      hairstyleLayer.style.opacity = '0';
-      hairstyleLayer.style.transition = 'opacity 0.3s ease';
-
-      this.previewContainer.appendChild(hairstyleLayer);
-
-      setTimeout(() => {
-        hairstyleLayer.style.opacity = '1';
-      }, 10);
-
-      this.currentHairstyle = { id: hairstyleId, image: hairstyleImage };
-    }
-  }
-
-  getZIndex(type) {
-    const zIndexMap = {
-      'bottom': 10,
-      'top': 20,
-      'accessories': 30,
-      'shoes': 5,
-      'full': 15
+    this.stage = document.getElementById('silhouette-stage');
+    this.summary = document.getElementById('look-summary');
+    this.layerGroups = {
+      top: document.querySelector('[data-layer="top"]'),
+      bottom: document.querySelector('[data-layer="bottom"]')
     };
-    return zIndexMap[type] || 15;
+    this.imageLayers = {
+      top: document.querySelector('[data-layer-img="top"]'),
+      bottom: document.querySelector('[data-layer-img="bottom"]')
+    };
+
+    if (!this.stage) {
+      return;
+    }
+
+    this.resetBtn = document.getElementById('reset-tryon');
+    this.saveBtn = document.getElementById('save-look');
+    this.selected = { top: null, bottom: null };
+    this.controlDefaults = { height: 185, shoulder: 120, hips: 110, torso: 180 };
+    this.controlBindings = {
+      height: '--silhouette-scale',
+      shoulder: '--top-width-scale',
+      hips: '--bottom-width-scale',
+      torso: '--torso-scale'
+    };
+
+    this.initWardrobe();
+    this.initControls();
+    this.initActions();
+    this.updateSummary();
+  }
+
+  initWardrobe() {
+    this.wardrobeButtons = Array.from(document.querySelectorAll('[data-garment]'));
+    this.wardrobeButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const data = {
+          id: btn.dataset.garment,
+          type: btn.dataset.type,
+          label: btn.dataset.label,
+          primary: btn.dataset.primary || '#94a3b8',
+          secondary: btn.dataset.secondary || btn.dataset.primary || '#64748b',
+          texture: btn.dataset.texture || 'solid',
+          image: btn.dataset.outfitImage || ''
+        };
+        this.applyGarment(data);
+      });
+    });
+  }
+
+  applyGarment(garment) {
+    if (!garment?.type || !this.layerGroups[garment.type]) return;
+
+    const group = this.layerGroups[garment.type];
+    group.dataset.active = 'true';
+    group.dataset.texture = garment.texture || 'solid';
+    group.style.setProperty('--garment-main', garment.primary || '#94a3b8');
+    group.style.setProperty('--garment-secondary', garment.secondary || garment.primary || '#64748b');
+    group.setAttribute('aria-label', `${garment.label} layer`);
+
+    const imgLayer = this.imageLayers[garment.type];
+    if (imgLayer) {
+      if (garment.image && garment.image.trim() !== '') {
+        imgLayer.src = garment.image;
+        imgLayer.alt = garment.label;
+        imgLayer.dataset.visible = 'true';
+      } else {
+        imgLayer.removeAttribute('src');
+        imgLayer.alt = '';
+        imgLayer.dataset.visible = 'false';
+      }
+    }
+
+    this.selected[garment.type] = { ...garment };
+    this.highlightSelection(garment.type, garment.id);
+    this.updateSummary();
+  }
+
+  highlightSelection(type, id) {
+    this.wardrobeButtons
+      .filter((btn) => btn.dataset.type === type)
+      .forEach((btn) => {
+        btn.dataset.selected = btn.dataset.garment === id ? 'true' : 'false';
+      });
+  }
+
+  clearGarment(type, options = {}) {
+    if (!this.layerGroups[type]) return;
+    const group = this.layerGroups[type];
+    const imgLayer = this.imageLayers[type];
+    group.dataset.active = 'false';
+    group.dataset.texture = 'solid';
+    group.style.removeProperty('--garment-main');
+    group.style.removeProperty('--garment-secondary');
+    if (imgLayer) {
+      imgLayer.removeAttribute('src');
+      imgLayer.alt = '';
+      imgLayer.dataset.visible = 'false';
+    }
+    this.selected[type] = null;
+    this.highlightSelection(type, '');
+    if (!options.silent) {
+      this.updateSummary();
+    }
+  }
+
+  initControls() {
+    this.controls = Array.from(document.querySelectorAll('[data-control]'));
+    this.controls.forEach((input) => {
+      const control = input.dataset.control;
+      const defaultValue = Number(input.dataset.default || input.value);
+      input.value = defaultValue;
+      this.setMeasurement(control, defaultValue);
+      this.updateControlOutput(control, defaultValue);
+
+      input.addEventListener('input', (event) => {
+        const value = Number(event.target.value);
+        this.setMeasurement(control, value);
+        this.updateControlOutput(control, value);
+      });
+    });
+  }
+
+  updateControlOutput(control, value) {
+    const output = document.querySelector(`[data-output="${control}"]`);
+    if (output) {
+      output.textContent = control === 'torso' ? `${value} px` : `${value} cm`;
+    }
+  }
+
+  setMeasurement(control, value) {
+    const base = this.controlDefaults[control];
+    const cssVar = this.controlBindings[control];
+    if (!cssVar || !this.stage || !base) return;
+    const ratio = value / base;
+    this.stage.style.setProperty(cssVar, ratio.toFixed(3));
+  }
+
+  initActions() {
+    if (this.resetBtn) {
+      this.resetBtn.addEventListener('click', () => this.reset());
+    }
+
+    document.querySelectorAll('[data-remove]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.remove;
+        if (!type) return;
+        this.clearGarment(type, { silent: false });
+        this.showToast(`Cleared ${type} layer`, 'info');
+      });
+    });
+
+    if (this.saveBtn) {
+      this.saveBtn.addEventListener('click', () => this.handleSaveLook());
+    }
+  }
+
+  updateSummary() {
+    if (!this.summary) return;
+    ['top', 'bottom'].forEach((type) => {
+      const row = this.summary.querySelector(`[data-summary="${type}"]`);
+      if (!row) return;
+      const valueEl = row.querySelector('.summary-value');
+      const metaEl = row.querySelector('.summary-meta');
+      const colorDot = row.querySelector('[data-color]');
+      const removeBtn = row.querySelector(`[data-remove="${type}"]`);
+      const data = this.selected[type];
+
+      if (data) {
+        valueEl.textContent = data.label;
+        metaEl.textContent = 'Anchored & scaled';
+        if (colorDot) colorDot.style.background = data.primary;
+        if (removeBtn) removeBtn.disabled = false;
+      } else {
+        valueEl.textContent = 'Not selected';
+        metaEl.textContent = type === 'top' ? 'Choose a silhouette' : 'Ground the look';
+        if (colorDot) colorDot.style.background = '#e5e7eb';
+        if (removeBtn) removeBtn.disabled = true;
+      }
+    });
+  }
+
+  handleSaveLook() {
+    const snapshot = {
+      id: `look-${Date.now()}`,
+      savedAt: new Date().toISOString(),
+      selections: this.selected,
+      measurements: this.getMeasurementSnapshot()
+    };
+    const savedLooks = JSON.parse(localStorage.getItem('virtualLooks') || '[]');
+    savedLooks.unshift(snapshot);
+    localStorage.setItem('virtualLooks', JSON.stringify(savedLooks.slice(0, 12)));
+    this.showToast('Look saved locally', 'success');
+  }
+
+  getMeasurementSnapshot() {
+    const result = {};
+    Object.keys(this.controlDefaults).forEach((key) => {
+      const control = this.controls.find((input) => input.dataset.control === key);
+      result[key] = Number(control?.value || this.controlDefaults[key]);
+    });
+    return result;
+  }
+
+  showToast(message, variant = 'info') {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.className = `fixed top-24 right-5 z-50 px-4 py-2 rounded-2xl text-sm text-white shadow-lg transition duration-300 translate-x-6 opacity-0 ${
+      variant === 'success' ? 'bg-emerald-500' : 'bg-slate-700'
+    }`;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => {
+      toast.classList.remove('translate-x-6', 'opacity-0');
+    });
+    setTimeout(() => {
+      toast.classList.add('translate-x-6', 'opacity-0');
+      setTimeout(() => toast.remove(), 300);
+    }, 2200);
   }
 
   reset() {
-    this.removeOutfitLayers();
-    const hairstyleLayer = this.previewContainer?.querySelector('.hairstyle-layer');
-    if (hairstyleLayer) {
-      hairstyleLayer.remove();
-    }
-    this.currentOutfit = null;
-    this.currentHairstyle = null;
-  }
-
-  saveScreenshot() {
-    // This would require html2canvas or similar library
-    // For now, just log the current state
-    console.log('Screenshot functionality would be implemented here');
-    console.log('Current outfit:', this.currentOutfit);
-    console.log('Current hairstyle:', this.currentHairstyle);
+    Object.entries(this.controlDefaults).forEach(([control, value]) => {
+      const input = this.controls.find((c) => c.dataset.control === control);
+      if (input) {
+        input.value = value;
+      }
+      this.setMeasurement(control, value);
+      this.updateControlOutput(control, value);
+    });
+    ['top', 'bottom'].forEach((type) => this.clearGarment(type, { silent: true }));
+    this.updateSummary();
+    this.showToast('Silhouette reset', 'info');
   }
 }
 
-// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  if (document.getElementById('model-preview-container')) {
-    window.modelPreview = new ModelPreview();
-  }
+  window.modelPreview = new ModelPreview();
 });
-
