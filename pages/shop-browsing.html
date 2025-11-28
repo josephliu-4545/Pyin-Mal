@@ -145,6 +145,139 @@
         .toast.show {
             opacity: 1;
         }
+        /* Product Modal Styles */
+        #product-modal {
+            animation: fadeIn 0.3s ease;
+        }
+        #product-modal > div {
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        /* Modal Scrollbar Styling */
+        #product-modal > div > div::-webkit-scrollbar {
+            width: 8px;
+        }
+        #product-modal > div > div::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+        }
+        #product-modal > div > div::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 4px;
+        }
+        #product-modal > div > div::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.5);
+        }
+        /* Thumbnail scrollbar */
+        #modal-thumbnails::-webkit-scrollbar {
+            height: 4px;
+        }
+        #modal-thumbnails::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #modal-thumbnails::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 2px;
+        }
+        #modal-thumbnails::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.5);
+        }
+        /* Responsive modal adjustments */
+        @media (max-width: 1023px) {
+            #product-modal {
+                padding: 0;
+            }
+            #product-modal > div {
+                min-height: 100vh;
+                border-radius: 0;
+            }
+        }
+        @media (min-width: 1024px) {
+            #product-modal:not(.hidden) {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 1rem;
+            }
+            #product-modal > div {
+                width: 90%;
+                max-width: 72rem;
+                height: auto;
+                max-height: 90vh;
+                margin: auto;
+            }
+            /* Thumbnails - Responsive sizing */
+            #modal-thumbnails {
+                height: 120px;
+                min-height: 120px;
+            }
+            /* Mobile thumbnails - taller and more visible */
+            @media (max-width: 1023px) {
+                #modal-thumbnails {
+                    height: 100px;
+                    min-height: 100px;
+                    max-height: 100px;
+                }
+            }
+            /* Desktop thumbnails */
+            @media (min-width: 1024px) {
+                #modal-thumbnails {
+                    height: 120px;
+                    min-height: 120px;
+                    max-height: 120px;
+                }
+            }
+            /* Make modal content more responsive */
+            #product-modal > div {
+                width: min(90%, 72rem);
+            }
+            /* Related items - ensure scrolling works on desktop */
+            @media (min-width: 1024px) {
+                #modal-related-items {
+                    max-height: 350px !important;
+                    min-height: 200px;
+                }
+            }
+        }
+        /* Better scrolling on mobile */
+        @media (max-width: 1023px) {
+            #product-modal {
+                -webkit-overflow-scrolling: touch;
+                overflow-y: auto;
+            }
+            #product-modal > div {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        /* Related items scrollbar */
+        #modal-related-items::-webkit-scrollbar {
+            width: 6px;
+        }
+        #modal-related-items::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 3px;
+        }
+        #modal-related-items::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 3px;
+        }
+        #modal-related-items::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.5);
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
@@ -454,37 +587,44 @@
                 <div class="flex flex-wrap gap-3 text-sm">
                     <div class="filter-field">
                         <label class="text-xs uppercase tracking-[0.4em] text-neutral-400 block mb-1">Price range</label>
-                        <select class="form-input">
-                            <option>All</option>
-                                <option>$0 - $50</option>
-                                <option>$50 - $100</option>
-                                <option>$100 - $200</option>
-                                <option>$200+</option>
+                        <select class="form-input" id="price-filter">
+                            <option value="all">All</option>
+                            <option value="0-30000">0 - 30,000 MMK</option>
+                            <option value="30000-60000">30,000 - 60,000 MMK</option>
+                            <option value="60000-100000">60,000 - 100,000 MMK</option>
+                            <option value="100000+">100,000+ MMK</option>
                         </select>
                     </div>
                     <div class="filter-field">
                         <label class="text-xs uppercase tracking-[0.4em] text-neutral-400 block mb-1">Category</label>
-                        <select class="form-input">
-                            <option>All</option>
-                                <option>Tops</option>
-                                <option>Bottoms</option>
-                                <option>Shoes</option>
-                            <option>Accessories</option>
+                        <select class="form-input" id="category-filter">
+                            <option value="all">All</option>
+                                <option value="top">Tops</option>
+                                <option value="bottom">Bottoms</option>
+                                <option value="shoes">Shoes</option>
+                            <option value="accessories">Accessories</option>
+                        </select>
+                    </div>
+                    <div class="filter-field">
+                        <label class="text-xs uppercase tracking-[0.4em] text-neutral-400 block mb-1">Shop</label>
+                        <select class="form-input" id="shop-filter">
+                            <option value="all">All Shops</option>
+                            <!-- Shop options will be populated by JS -->
                         </select>
                     </div>
                     <div class="filter-field">
                         <label class="text-xs uppercase tracking-[0.4em] text-neutral-400 block mb-1">Sort by</label>
-                        <select class="form-input">
-                            <option>Newest</option>
-                                <option>Most popular</option>
-                            <option>Price: low to high</option>
-                            <option>Price: high to low</option>
+                        <select class="form-input" id="sort-filter">
+                            <option value="newest">Newest</option>
+                                <option value="popular">Most popular</option>
+                            <option value="price-low">Price: low to high</option>
+                            <option value="price-high">Price: high to low</option>
                         </select>
                     </div>
                 </div>
                 <div class="flex gap-3">
-                        <input type="search" class="form-input" placeholder="Search products...">
-                        <button class="btn btn-primary px-4 btn-hover-scale">Search</button>
+                        <input type="search" id="search-input" class="form-input" placeholder="Search products or shops...">
+                        <button class="btn btn-primary px-4 btn-hover-scale" id="search-btn">Search</button>
                 </div>
             </div>
         </div>
@@ -497,18 +637,18 @@
                     <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-2">Shop</p>
                     <h2 class="font-rufina text-3xl font-bold">Fashion Products</h2>
                     </div>
-                <div id="fashion-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Products will be rendered here by JS -->
+                <div id="fashion-products-container" class="space-y-12">
+                    <!-- Products grouped by fashion type will be rendered here by JS -->
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-secondary btn-hover-scale">Load more</button>
+                    <button class="btn btn-secondary btn-hover-scale" id="load-more-btn">Load more</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- BARBER SHOP SECTION -->
-    <section id="sectionbarbers" class="tab-section">
+    <section id="section-barbers" class="tab-section">
         <!-- Hero -->
         <div class="py-16 bg-gradient-to-br from-primary-600 via-primary-500 to-accent-500 text-white">
             <div class="container-custom max-w-4xl mx-auto text-center space-y-4" data-aos="fade-up">
@@ -959,6 +1099,69 @@
         <div id="toast" class="toast">Added</div>
     </section>
 
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden bg-black/50 dark:bg-black/70 backdrop-blur-sm overflow-y-auto" onclick="closeProductModal(event)">
+        <div class="relative bg-white dark:bg-dark-card w-full min-h-full lg:w-auto lg:min-h-0 lg:h-auto lg:rounded-2xl lg:shadow-2xl lg:max-w-6xl lg:max-h-[90vh] lg:my-4 lg:mx-auto flex flex-col" onclick="event.stopPropagation()">
+            <!-- Close Button - Top Right -->
+            <button onclick="closeProductModal()" class="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 bg-white/90 dark:bg-dark-surface rounded-full flex items-center justify-center hover:bg-primary-500 hover:text-white transition-colors shadow-lg">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Scrollable Content Container -->
+            <div class="flex flex-col lg:flex-row flex-1 min-h-0 lg:max-h-[90vh] lg:overflow-hidden">
+                <!-- Image Gallery Section -->
+                <div class="lg:w-1/2 p-4 sm:p-6 space-y-3 sm:space-y-4 flex flex-col flex-shrink-0">
+                    <!-- Main Image -->
+                    <div class="aspect-square rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-100 dark:bg-dark-surface flex-shrink-0 w-full">
+                        <img id="modal-main-image" src="" alt="Product" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/600x600?text=Image+Not+Found'">
+                    </div>
+                    
+                    <!-- Thumbnail Gallery - Responsive sizing -->
+                    <div id="modal-thumbnails" class="flex gap-2 overflow-x-auto pb-2 flex-shrink-0">
+                        <!-- Thumbnails will be populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Product Details Section -->
+                <div class="lg:w-1/2 p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 relative lg:overflow-y-auto lg:flex-shrink lg:min-h-0 flex flex-col">
+                    <!-- Heart/Favorite Button - Top Right of Details Section -->
+                    <button id="modal-favorite-btn" class="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 w-9 h-9 sm:w-10 sm:h-10 bg-white/90 dark:bg-dark-surface rounded-full flex items-center justify-center hover:bg-primary-500 hover:text-white transition-colors shadow-lg">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </button>
+
+                    <div>
+                        <p id="modal-shop" class="text-xs uppercase tracking-wider text-primary-600 dark:text-primary-400 mb-2"></p>
+                        <h2 id="modal-name" class="font-rufina text-2xl sm:text-3xl font-bold mb-2 pr-12"></h2>
+                        <p id="modal-fashion-type" class="text-sm text-neutral-600 dark:text-neutral-400 mb-4"></p>
+                        <p id="modal-price" class="text-xl sm:text-2xl font-bold text-primary-600 dark:text-primary-400"></p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex flex-col gap-2">
+                            <button id="modal-add-cart" class="btn btn-primary btn-hover-scale w-full py-2 sm:py-3 text-sm sm:text-base">Add to Cart</button>
+                            <div class="flex gap-2">
+                                <button id="modal-add-wardrobe" class="btn btn-secondary btn-hover-scale flex-1 py-2 text-xs sm:text-sm">+ Wardrobe</button>
+                                <a href="model-preview.html?mode=outfit" class="btn btn-ghost border border-neutral-200 dark:border-dark-border btn-hover-scale flex-1 text-xs py-2 text-center">Preview</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Items - Scrollable Section -->
+                    <div class="border-t border-neutral-200 dark:border-dark-border pt-4 sm:pt-6 flex flex-col flex-shrink-0 min-h-0">
+                        <h3 class="font-rufina text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex-shrink-0">Related Items</h3>
+                        <div id="modal-related-items" class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 overflow-y-auto pr-2" style="max-height: 400px; min-height: 150px;">
+                            <!-- Related items will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
         <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between text-sm">
@@ -1073,54 +1276,666 @@
             }, 2500);
         }
 
-        // Fashion Products Data
-        const fashionProducts = [
-            { id: 'prod-1', name: 'Classic White Tee', price: 45, category: 'top', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80' },
-            { id: 'prod-2', name: 'Slim Fit Jeans', price: 89, category: 'bottom', image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=800&q=80' },
-            { id: 'prod-3', name: 'Leather Jacket', price: 299, category: 'top', image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=80' },
-            { id: 'prod-4', name: 'Canvas Sneakers', price: 75, category: 'shoes', image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80' },
-            { id: 'prod-5', name: 'Linen Shirt', price: 65, category: 'top', image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80' },
-            { id: 'prod-6', name: 'Chino Pants', price: 79, category: 'bottom', image: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=800&q=80' },
-            { id: 'prod-7', name: 'Wool Blazer', price: 189, category: 'top', image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80' },
-            { id: 'prod-8', name: 'Minimalist Watch', price: 129, category: 'accessories', image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=800&q=80' },
-        ];
+        // Helper function to get base name (for grouping same items with different angles)
+        function getBaseName(imageName) {
+            // Remove extension
+            let base = imageName.replace(/\.(jpg|jpeg|png)$/i, '');
+            // Remove trailing numbers (for grouping images like "Bold prints tee0.jpg" and "Bold prints tee1.jpg")
+            // This handles patterns like "tee0", "tee1", "Tee0", "Tee1", etc.
+            base = base.replace(/\s*\d+$/, '').trim();
+            // Handle special cases where the base name might have variations
+            // Normalize common patterns
+            base = base.replace(/\s+(tee|Tee|T-Shirt|T-shirt|TSHIRT)$/i, (match, p1) => {
+                // Keep the word but normalize spacing
+                return ' ' + p1.toLowerCase();
+            });
+            return base || imageName.replace(/\.(jpg|jpeg|png)$/i, '');
+        }
 
-        // Render Fashion Products
-        function renderFashionProducts() {
-            const container = document.getElementById('fashion-products');
+        // Helper function to get MMK price based on fashion type
+        function getMMKPrice(fashionType, shop) {
+            const type = fashionType.toLowerCase();
+            let basePrice, variance;
+            
+            if (type.includes('tee') || type.includes('tshirt') || type.includes('shirt') || (type.includes('top') && !type.includes('dress'))) {
+                // T-shirts, Tops: 15,000 - 35,000 MMK
+                basePrice = 25000;
+                variance = 10000;
+            } else if (type.includes('hoodie')) {
+                // Hoodies: 40,000 - 80,000 MMK
+                basePrice = 60000;
+                variance = 20000;
+            } else if (type.includes('pant')) {
+                // Pants: 25,000 - 60,000 MMK
+                basePrice = 42500;
+                variance = 17500;
+            } else if (type.includes('burmese dress')) {
+                // Burmese dresses: 30,000 - 100,000 MMK
+                basePrice = 65000;
+                variance = 35000;
+            } else if (type.includes('set')) {
+                // Sets: 50,000 - 150,000 MMK
+                basePrice = 100000;
+                variance = 50000;
+            } else if (type.includes('skirt')) {
+                // Skirts: 20,000 - 50,000 MMK
+                basePrice = 35000;
+                variance = 15000;
+            } else if (type.includes('longyi')) {
+                // Longyi: 15,000 - 40,000 MMK
+                basePrice = 27500;
+                variance = 12500;
+            } else {
+                // Default: 20,000 - 50,000 MMK
+                basePrice = 35000;
+                variance = 15000;
+            }
+            
+            // Add some randomness within the range
+            const price = basePrice + Math.floor(Math.random() * variance * 2) - variance;
+            return Math.max(10000, price); // Minimum 10,000 MMK
+        }
+
+        // Helper function to create product with grouped images
+        function createProductGroup(gender, fashionType, shop, baseName, images, productIndex) {
+            const id = `${gender}-${shop.toLowerCase().replace(/\s+/g, '-')}-${fashionType.toLowerCase().replace(/\s+/g, '-')}-${productIndex}`;
+            const name = baseName || `${fashionType} ${productIndex + 1}`;
+            const price = getMMKPrice(fashionType, shop);
+            
+            return {
+                id: id,
+                name: name,
+                shop: shop,
+                fashionType: fashionType,
+                gender: gender,
+                images: images, // Array of image paths
+                image: images[0], // Primary image (first one)
+                price: price,
+                category: fashionType.toLowerCase().includes('top') || fashionType.toLowerCase().includes('tee') || fashionType.toLowerCase().includes('shirt') ? 'top' :
+                         fashionType.toLowerCase().includes('pant') || fashionType.toLowerCase().includes('skirt') || fashionType.toLowerCase().includes('longyi') ? 'bottom' :
+                         fashionType.toLowerCase().includes('hoodie') ? 'top' : 'accessories'
+            };
+        }
+
+        // Helper function to group images by base name
+        function groupImagesByBaseName(imageList, basePath) {
+            const grouped = {};
+            imageList.forEach(imageName => {
+                const baseName = getBaseName(imageName);
+                if (!grouped[baseName]) {
+                    grouped[baseName] = [];
+                }
+                grouped[baseName].push(`${basePath}/${imageName}`);
+            });
+            return grouped;
+        }
+
+        // Build Fashion Products Data from folder structure
+        function buildFashionProducts() {
+            const products = [];
+            let productIndex = 0;
+
+            // FEMALE PRODUCTS - Fashion Type First, Shop Second
+            // dress. top
+            const femaleDressTopShops = ['nami', 'Oro', 'T shirt collection'];
+            femaleDressTopShops.forEach(shop => {
+                const basePath = `../assets/images/Female/dress. top/${shop}`;
+                let imageList = [];
+                
+                if (shop === 'nami') {
+                    imageList = Array.from({length: 9}, (_, i) => `nami${i}.jpg`);
+                } else if (shop === 'Oro') {
+                    imageList = Array.from({length: 9}, (_, i) => `oro ${i + 1}.jpg`);
+                } else if (shop === 'T shirt collection') {
+                    imageList = ['crest tee.jpg', 'crest tee1.jpg', 'lizx tee1.jpg', 'lizx tee2.jpg', 'VAL3 03 tee1.jpg', 'VAL3 03 tee2.jpg', 'VAL3 spiral1.jpg', 'VAL3 spiral2.jpg', 'VAL3 spiral3.jpg'];
+                }
+                
+                const grouped = groupImagesByBaseName(imageList, basePath);
+                Object.keys(grouped).forEach(baseName => {
+                    products.push(createProductGroup('female', 'Dress Top', shop, baseName, grouped[baseName], productIndex++));
+                });
+            });
+
+            // dress.burmese
+            const femaleBurmeseShops = ['anastasia', 'Luna', 'luxe', 'Veronica'];
+            femaleBurmeseShops.forEach(shop => {
+                const basePath = `../assets/images/Female/dress.burmese/${shop}`;
+                const imageCount = shop === 'anastasia' ? 21 : shop === 'Luna' ? 12 : shop === 'luxe' ? 14 : 9;
+                const imageList = Array.from({length: imageCount}, (_, i) => 
+                    shop === 'anastasia' ? `anastasia${i}.jpg` :
+                    shop === 'Luna' ? `LUNA${i}.jpg` :
+                    shop === 'luxe' ? `LUXE${i}.jpg` :
+                    `veronica${i}.jpg`
+                );
+                
+                const grouped = groupImagesByBaseName(imageList, basePath);
+                Object.keys(grouped).forEach(baseName => {
+                    products.push(createProductGroup('female', 'Burmese Dress', shop, baseName, grouped[baseName], productIndex++));
+                });
+            });
+
+            // dress.set
+            const femaleSetShops = ['Luna', 'oro set'];
+            femaleSetShops.forEach(shop => {
+                const basePath = `../assets/images/Female/dress.set/${shop}`;
+                const imageCount = shop === 'Luna' ? 12 : 13;
+                const imageList = Array.from({length: imageCount}, (_, i) => 
+                    shop === 'Luna' ? `luna set${i + 1}.jpg` : `oro set${i + 1}.jpg`
+                );
+                
+                const grouped = groupImagesByBaseName(imageList, basePath);
+                Object.keys(grouped).forEach(baseName => {
+                    products.push(createProductGroup('female', 'Dress Set', shop, baseName, grouped[baseName], productIndex++));
+                });
+            });
+
+            // dress.skirt (no shop subfolder - use "Online Shop")
+            const basePath = `../assets/images/Female/dress.skirt`;
+            const skirtImages = Array.from({length: 4}, (_, i) => `oro skirt${i + 1}.jpg`);
+            const grouped = groupImagesByBaseName(skirtImages, basePath);
+            Object.keys(grouped).forEach(baseName => {
+                products.push(createProductGroup('female', 'Dress Skirt', 'Online Shop', baseName, grouped[baseName], productIndex++));
+            });
+
+            // MALE PRODUCTS - Shop First, Fashion Type Second (except Burmese dress for men)
+            // Burmese dress for men (no shop - use "Online Shop")
+            const burmeseBasePath = `../assets/images/Male/Burmese dress for men`;
+            const burmeseImages = [];
+            for (let i = 0; i < 14; i++) {
+                burmeseImages.push(i < 6 ? `longyi${i}.jpg` : `shirt & longyi ${i - 6}.jpg`);
+            }
+            const burmeseGrouped = groupImagesByBaseName(burmeseImages, burmeseBasePath);
+            Object.keys(burmeseGrouped).forEach(baseName => {
+                products.push(createProductGroup('male', 'Burmese Dress', 'Online Shop', baseName, burmeseGrouped[baseName], productIndex++));
+            });
+
+            // Malory
+            // Malory pants
+            const maloryPantsBasePath = `../assets/images/Male/Malory/pants`;
+            const maloryPants = ['cargo pant.jpg', 'long pant 1.jpg', 'long pant 3.jpg', 'long pant 6.jpg', 'long pant 7.jpg', 'long pant0.jpg.jpg', 'long pant2.jpg.jpg', 'long pant4.jpg', 'long pant5.jpg', 'short pant0.jpg', 'short pant1.jpg', 'short pant2.jpg', 'short pant3.jpg', 'styple pant0.jpg', 'styple pant1.jpg'];
+            const maloryPantsGrouped = groupImagesByBaseName(maloryPants, maloryPantsBasePath);
+            Object.keys(maloryPantsGrouped).forEach(baseName => {
+                products.push(createProductGroup('male', 'Pants', 'Malory', baseName, maloryPantsGrouped[baseName], productIndex++));
+            });
+
+            // Malory T shirt
+            const maloryTeesBasePath = `../assets/images/Male/Malory/T shirt`;
+            const maloryTees = ['Bold prints tee0.jpg', 'Bold prints tee1.jpg', 'Dead Inside T-Shirt0.jpg', 'Dead Inside T-Shirt1.jpg', 'I LOVE HATERS TEE0.jpg', 'I LOVE HATERS TEE1.jpg', 'Let It Shine T-Shirt0.jpg', 'Let It Shine T-Shirt1.jpg', 'MENTAL TEE0.jpg', 'MENTAL TEE1.jpg', 'Myanmar Traditional Kayan People Tee0.jpg', 'Myanmar Traditional Kayan People Tee1.jpg', 'Myanmar Traditional Kayan People Tee2.jpg', 'Myanmar Traditional Kayan People Tee3.jpg', 'Purpose T-shirt0.jpg', 'Purpose T-shirt1.jpg', 'Traditional Burma\'s Puppet Tee0.jpg', 'Traditional Burma\'s Puppet Tee1.jpg'];
+            const maloryTeesGrouped = groupImagesByBaseName(maloryTees, maloryTeesBasePath);
+            Object.keys(maloryTeesGrouped).forEach(baseName => {
+                products.push(createProductGroup('male', 'T Shirt', 'Malory', baseName, maloryTeesGrouped[baseName], productIndex++));
+            });
+
+            // Nrf
+            // Nrf Hoodie
+            const nrfHoodiesBasePath = `../assets/images/Male/Nrf/Hoodie`;
+            const nrfHoodies = ['ABCD 2XL ZIP UP HOODIE0.jpg', 'ABCD 2XL ZIP UP HOODIE1.jpg', 'Aj V1 Hd 0.jpg', 'AJOHN V2 HOODIE.jpg', 'Bias Hd0.jpg', 'Lttv Hd 0.jpg', 'NRF Deathwish hoodie0.jpg', 'NRF Deathwish hoodie1.jpg', 'Nrf x Rowska shirt punk flower0.jpg', 'Nrf x Rowska shirt punk flower1.jpg', 'NRFC ZIP UP HOODIE GREY0.jpg', 'NRFC ZIP UP HOODIE GREY1.jpg', 'NRF™ + GAWLI 2.0hoodie0.jpg', 'NRF™ + GAWLI 2.0hoodie1.jpg', 'PRO-TECT DETACHABLE JACKET 0.jpg', 'PRO-TECT DETACHABLE JACKET 1.jpg', 'V1 INTRODUCTION Hoodie .jpg', 'V2 LOGO Hoodie 0.jpg', 'V2 LOGO Hoodie 1.jpg', 'V3 jacket olive green 0.jpg'];
+            const nrfHoodiesGrouped = groupImagesByBaseName(nrfHoodies, nrfHoodiesBasePath);
+            Object.keys(nrfHoodiesGrouped).forEach(baseName => {
+                products.push(createProductGroup('male', 'Hoodie', 'Nrf', baseName, nrfHoodiesGrouped[baseName], productIndex++));
+            });
+
+            // Nrf Tee
+            const nrfTeesBasePath = `../assets/images/Male/Nrf/Tee`;
+            const nrfTees = ['ABCD TEE.jpg', 'ABCD TEE0.jpg', 'ACID TSHIRT 0.jpg', 'ACID TSHIRT 1.jpg', 'AJOHN V4 0.jpg', 'AJOHN V4.jpg', 'AJOHN V41.jpg', 'LAPSES TSHIRT OATMEAL0.jpg', 'LAPSES TSHIRT OATMEAL1.jpg', 'LTTV 2.0 DOUBLELAYER 0.jpg', 'LTTV 2.0 DOUBLELAYER 1.jpg', 'nrf ajohn v4 tee.jpg', 'Nrf x rowska shirt 4 0.jpg', 'Nrf x rowska shirt 4 1.jpg', 'NRF+RG Premium tee0.jpg', 'NRF+RG Premium tee1.jpg', 'NRFC Jersey0.jpg', 'NRFC Jersey1.jpg', 'NRF™ + GAWLI 2.0 tee0.jpg', 'NRF™ + GAWLI 2.0 tee1.jpg', 'NRF™ + GAWLI 2.0 tee3.jpg', 'RUBBER TAG TSHIRT 0.jpg', 'RUBBER TAG TSHIRT 1.jpg', 'V4 logo tee0.jpg'];
+            const nrfTeesGrouped = groupImagesByBaseName(nrfTees, nrfTeesBasePath);
+            Object.keys(nrfTeesGrouped).forEach(baseName => {
+                products.push(createProductGroup('male', 'Tee', 'Nrf', baseName, nrfTeesGrouped[baseName], productIndex++));
+            });
+
+            // Set (outfit set from sian store)
+            const setBasePath = `../assets/images/Male/Set/outfit set from sian store`;
+            const setImages = Array.from({length: 23}, (_, i) => `set${i}.jpg`);
+            const setGrouped = groupImagesByBaseName(setImages, setBasePath);
+            Object.keys(setGrouped).forEach(baseName => {
+                products.push(createProductGroup('male', 'Set', 'outfit set from sian store', baseName, setGrouped[baseName], productIndex++));
+            });
+
+            // VAL3
+            // VAL3 Hoodie
+            const val3HoodiesBasePath = `../assets/images/Male/VAL3/Hoodie`;
+            const val3Hoodies = ['VAL3 crop hoodie 0.jpg', 'VAL3 crop hoodie 1.jpg', 'VAL3 crop hoodie 2.jpg', 'VAL3 hoodie 0.jpg', 'VAL3 hoodie 1.jpg', 'VAL3 hoodie 2.jpg'];
+            const val3HoodiesGrouped = groupImagesByBaseName(val3Hoodies, val3HoodiesBasePath);
+            Object.keys(val3HoodiesGrouped).forEach(baseName => {
+                products.push(createProductGroup('male', 'Hoodie', 'VAL3', baseName, val3HoodiesGrouped[baseName], productIndex++));
+            });
+
+            // VAL3 Pants
+            const val3PantsBasePath = `../assets/images/Male/VAL3/Pants`;
+            const val3Pants = ['VAL3 Sweat pants🍃0.jpg', 'VAL3 Sweat pants🍃1.jpg'];
+            const val3PantsGrouped = groupImagesByBaseName(val3Pants, val3PantsBasePath);
+            Object.keys(val3PantsGrouped).forEach(baseName => {
+                products.push(createProductGroup('male', 'Pants', 'VAL3', baseName, val3PantsGrouped[baseName], productIndex++));
+            });
+
+            // VAL3 T shirt
+            const val3TeesBasePath = `../assets/images/Male/VAL3/T shirt`;
+            const val3Tees = ['VAL3 03 tshirt 0.jpg', 'VAL3 03 tshirt 1.jpg', 'VAL3 03 tshirt 2.jpg', 'VAL3 ETHIC Tee0.jpg', 'VAL3 ETHIC Tee1.jpg', 'VAL3 Polo shirt.jpg', 'VAL3🌀Spiral tee0.jpg', 'VAL3🌀Spiral tee1.jpg', 'VAL3爱 Tee 0.jpg', 'VAL3爱 Tee 1.png', 'VAL3爱 Tee 2.jpg'];
+            const val3TeesGrouped = groupImagesByBaseName(val3Tees, val3TeesBasePath);
+            Object.keys(val3TeesGrouped).forEach(baseName => {
+                products.push(createProductGroup('male', 'T Shirt', 'VAL3', baseName, val3TeesGrouped[baseName], productIndex++));
+            });
+
+            return products;
+        }
+
+        // Fashion Products Data
+        const fashionProducts = buildFashionProducts();
+        
+        // Initialize current filtered products
+        let currentFilteredProducts = fashionProducts;
+
+        // Get unique shops for filter
+        function getUniqueShops() {
+            const shops = new Set();
+            fashionProducts.forEach(product => {
+                shops.add(product.shop);
+            });
+            return Array.from(shops).sort();
+        }
+
+        // Get unique fashion types
+        function getUniqueFashionTypes() {
+            const types = new Set();
+            fashionProducts.forEach(product => {
+                types.add(product.fashionType);
+            });
+            return Array.from(types).sort();
+        }
+
+        // Populate shop filter dropdown
+        function populateShopFilter() {
+            const shopFilter = document.getElementById('shop-filter');
+            if (!shopFilter) return;
+            
+            const shops = getUniqueShops();
+            shops.forEach(shop => {
+                const option = document.createElement('option');
+                option.value = shop.toLowerCase().replace(/\s+/g, '-');
+                option.textContent = shop;
+                shopFilter.appendChild(option);
+            });
+        }
+
+        // Filter and render products
+        let displayedCount = 0;
+        const itemsPerPage = 32;
+
+        function renderFashionProducts(filteredProducts = null) {
+            const container = document.getElementById('fashion-products-container');
             if (!container) return;
 
-            container.innerHTML = fashionProducts.map((product, index) => `
-                <article class="shop-card-animated product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="${index * 50}">
-                    <div class="shop-card-media aspect-[4/3] relative">
-                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
-                        <button class="absolute top-3 right-3 w-8 h-8 bg-white/90 dark:bg-dark-card/90 rounded-full flex items-center justify-center hover:bg-primary-500 hover:text-white transition-colors" onclick="addToFavorites(${JSON.stringify(product).replace(/"/g, '&quot;')})">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                        </button>
+            const productsToShow = filteredProducts || fashionProducts;
+            const productsToDisplay = productsToShow.slice(0, displayedCount + itemsPerPage);
+            
+            // Group products by fashion type
+            const groupedByType = {};
+            productsToDisplay.forEach(product => {
+                if (!groupedByType[product.fashionType]) {
+                    groupedByType[product.fashionType] = [];
+                }
+                groupedByType[product.fashionType].push(product);
+            });
+
+            // Render grouped sections
+            container.innerHTML = Object.keys(groupedByType).sort().map(fashionType => {
+                const typeProducts = groupedByType[fashionType];
+                return `
+                    <div class="space-y-6" data-aos="fade-up">
+                        <div class="flex items-center gap-4">
+                            <h3 class="font-rufina text-2xl font-bold">${fashionType}</h3>
+                            <span class="text-sm text-neutral-500 dark:text-neutral-400">${typeProducts.length} items</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            ${typeProducts.map((product, index) => `
+                                <article class="shop-card-animated product-card p-0 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="${index * 50}" data-shop="${product.shop.toLowerCase().replace(/\s+/g, '-')}" onclick="openProductModal(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                                    <div class="shop-card-media aspect-[4/3] relative">
+                                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
+                                        <button class="absolute top-3 right-3 w-8 h-8 bg-white/90 dark:bg-dark-card/90 rounded-full flex items-center justify-center hover:bg-primary-500 hover:text-white transition-colors z-10" onclick="event.stopPropagation(); addToFavorites(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                        </button>
+                                    </div>
+                                    <div class="p-4 space-y-3">
+                                        <div>
+                                            <p class="text-xs uppercase tracking-wider text-neutral-400 mb-1">${product.shop}</p>
+                                            <h3 class="font-medium text-sm">${product.name}</h3>
+                                            <p class="text-primary-600 dark:text-primary-400 font-bold">${product.price.toLocaleString()} MMK</p>
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <button onclick="event.stopPropagation(); addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})" class="btn btn-primary btn-hover-scale w-full text-xs py-2">Add to Cart</button>
+                                            <div class="flex gap-2">
+                                                <button onclick="event.stopPropagation(); addToWardrobe(${JSON.stringify(product).replace(/"/g, '&quot;')})" class="btn btn-secondary btn-hover-scale flex-1 text-xs py-2">+ Wardrobe</button>
+                                                <a href="model-preview.html?mode=outfit" onclick="event.stopPropagation();" class="btn btn-ghost border border-neutral-200 dark:border-dark-border btn-hover-scale flex-1 text-xs py-2 text-center">Preview</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            `).join('')}
+                        </div>
                     </div>
-                    <div class="p-4 space-y-3">
-                        <div>
-                            <p class="text-xs uppercase tracking-wider text-neutral-400 mb-1">${product.category}</p>
-                            <h3 class="font-medium">${product.name}</h3>
-                            <p class="text-primary-600 dark:text-primary-400 font-bold">$${product.price}</p>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <button onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})" class="btn btn-primary btn-hover-scale w-full text-xs py-2">Add to Cart</button>
-                            <div class="flex gap-2">
-                                <button onclick="addToWardrobe(${JSON.stringify(product).replace(/"/g, '&quot;')})" class="btn btn-secondary btn-hover-scale flex-1 text-xs py-2">+ Wardrobe</button>
-                                <a href="model-preview.html?mode=outfit" class="btn btn-ghost border border-neutral-200 dark:border-dark-border btn-hover-scale flex-1 text-xs py-2 text-center">Preview</a>
-                            </div>
-                        </div>
+                `;
+            }).join('');
+
+            displayedCount = productsToDisplay.length;
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            if (loadMoreBtn) {
+                loadMoreBtn.style.display = displayedCount >= productsToShow.length ? 'none' : 'inline-flex';
+            }
+
+            // Refresh AOS
+            setTimeout(() => AOS.refresh(), 100);
+        }
+
+        // Filter products
+        function filterProducts(resetCount = true) {
+            const shopFilter = document.getElementById('shop-filter')?.value || 'all';
+            const categoryFilter = document.getElementById('category-filter')?.value || 'all';
+            const priceFilter = document.getElementById('price-filter')?.value || 'all';
+            const sortFilter = document.getElementById('sort-filter')?.value || 'newest';
+            const searchQuery = document.getElementById('search-input')?.value?.toLowerCase().trim() || '';
+
+            let filtered = [...fashionProducts];
+
+            // Filter by shop
+            if (shopFilter !== 'all') {
+                filtered = filtered.filter(product => 
+                    product.shop.toLowerCase().replace(/\s+/g, '-') === shopFilter
+                );
+            }
+
+            // Filter by category
+            if (categoryFilter !== 'all') {
+                filtered = filtered.filter(product => product.category === categoryFilter);
+            }
+
+            // Filter by price range
+            if (priceFilter !== 'all') {
+                filtered = filtered.filter(product => {
+                    switch(priceFilter) {
+                        case '0-30000':
+                            return product.price >= 0 && product.price <= 30000;
+                        case '30000-60000':
+                            return product.price > 30000 && product.price <= 60000;
+                        case '60000-100000':
+                            return product.price > 60000 && product.price <= 100000;
+                        case '100000+':
+                            return product.price > 100000;
+                        default:
+                            return true;
+                    }
+                });
+            }
+
+            // Search by product name or shop name
+            if (searchQuery) {
+                filtered = filtered.filter(product => 
+                    product.name.toLowerCase().includes(searchQuery) ||
+                    product.shop.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            // Sort
+            switch(sortFilter) {
+                case 'price-low':
+                    filtered.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filtered.sort((a, b) => b.price - a.price);
+                    break;
+                case 'popular':
+                    // For now, just randomize. Can be improved with actual popularity data
+                    filtered.sort(() => Math.random() - 0.5);
+                    break;
+                default: // newest
+                    // Keep original order (newest first based on array order)
+                    break;
+            }
+
+            currentFilteredProducts = filtered;
+            if (resetCount) displayedCount = 0;
+            renderFashionProducts(filtered);
+        }
+
+        // Load more products
+        function loadMoreProducts() {
+            displayedCount += itemsPerPage;
+            renderFashionProducts(currentFilteredProducts || fashionProducts);
+        }
+
+        // Product Modal Functions
+        let currentModalProduct = null;
+        let carouselInterval = null;
+        let currentImageIndex = 0;
+
+        function openProductModal(product) {
+            currentModalProduct = product;
+            currentImageIndex = 0;
+            const modal = document.getElementById('product-modal');
+            if (!modal) return;
+
+            // Populate modal content
+            document.getElementById('modal-name').textContent = product.name;
+            document.getElementById('modal-shop').textContent = product.shop;
+            document.getElementById('modal-fashion-type').textContent = product.fashionType;
+            document.getElementById('modal-price').textContent = `${product.price.toLocaleString()} MMK`;
+
+            // Set up images
+            const images = product.images || [product.image];
+            setupImageCarousel(images);
+
+            // Set up action buttons
+            const addCartBtn = document.getElementById('modal-add-cart');
+            const addWardrobeBtn = document.getElementById('modal-add-wardrobe');
+            const favoriteBtn = document.getElementById('modal-favorite-btn');
+            
+            if (addCartBtn) {
+                addCartBtn.onclick = () => {
+                    addToCart(product);
+                    closeProductModal();
+                };
+            }
+            if (addWardrobeBtn) {
+                addWardrobeBtn.onclick = () => {
+                    addToWardrobe(product);
+                };
+            }
+            if (favoriteBtn) {
+                favoriteBtn.onclick = () => {
+                    addToFavorites(product);
+                };
+            }
+
+            // Get related items (same shop AND same fashion type) - no limit, show all
+            const relatedItems = fashionProducts.filter(p => 
+                p.id !== product.id && 
+                p.shop === product.shop && 
+                p.fashionType === product.fashionType
+            );
+
+            setupRelatedItems(relatedItems);
+
+            // Show modal
+            modal.classList.remove('hidden');
+            // Add flex class for desktop centering
+            if (window.innerWidth >= 1024) {
+                modal.classList.add('flex', 'items-center', 'justify-center');
+                document.body.style.overflow = 'hidden';
+            } else {
+                // On mobile, modal container scrolls, body stays scrollable
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Start auto-play carousel after a brief delay
+            setTimeout(() => {
+                startCarousel(images);
+            }, 100);
+        }
+
+        function closeProductModal(event) {
+            // Prevent event from bubbling if called from button
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            const modal = document.getElementById('product-modal');
+            if (!modal) return;
+            
+            // If event exists and it's not from the overlay, don't close
+            if (event && event.target !== modal && event.target !== event.currentTarget) {
+                return;
+            }
+            
+            // Close the modal
+            modal.classList.add('hidden');
+            modal.classList.remove('flex', 'items-center', 'justify-center');
+            document.body.style.overflow = '';
+            stopCarousel();
+            currentModalProduct = null;
+        }
+
+        function setupImageCarousel(images) {
+            const mainImage = document.getElementById('modal-main-image');
+            const thumbnailsContainer = document.getElementById('modal-thumbnails');
+            
+            if (!mainImage || !thumbnailsContainer) return;
+
+            // Set main image
+            mainImage.src = images[0];
+            mainImage.alt = currentModalProduct?.name || 'Product';
+
+            // Create thumbnails with responsive sizing
+            const isMobile = window.innerWidth < 1024;
+            const thumbSize = isMobile ? '90px' : '100px';
+            thumbnailsContainer.innerHTML = images.map((img, index) => `
+                <button onclick="selectImage(${index})" class="flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
+                    index === 0 ? 'border-primary-500' : 'border-transparent hover:border-primary-300'
+                }" style="width: ${thumbSize}; height: ${thumbSize}; min-width: ${thumbSize}; min-height: ${thumbSize};">
+                    <img src="${img}" alt="Thumbnail ${index + 1}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/100x100?text=Image+Not+Found'">
+                </button>
+            `).join('');
+        }
+
+        function selectImage(index) {
+            if (!currentModalProduct) return;
+            const images = currentModalProduct.images || [currentModalProduct.image];
+            if (index < 0 || index >= images.length) return;
+
+            currentImageIndex = index;
+            const mainImage = document.getElementById('modal-main-image');
+            if (mainImage) {
+                mainImage.src = images[index];
+            }
+
+            // Update thumbnail borders
+            const thumbnails = document.querySelectorAll('#modal-thumbnails button');
+            thumbnails.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('border-primary-500');
+                    btn.classList.remove('border-transparent');
+                } else {
+                    btn.classList.remove('border-primary-500');
+                    btn.classList.add('border-transparent');
+                }
+            });
+
+            // Restart carousel from this index
+            stopCarousel();
+            startCarousel(images);
+        }
+
+        function startCarousel(images) {
+            if (images.length <= 1) return;
+            
+            stopCarousel();
+            carouselInterval = setInterval(() => {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                selectImage(currentImageIndex);
+            }, 5000); // 5 seconds
+        }
+
+        function stopCarousel() {
+            if (carouselInterval) {
+                clearInterval(carouselInterval);
+                carouselInterval = null;
+            }
+        }
+
+        function setupRelatedItems(relatedItems) {
+            const container = document.getElementById('modal-related-items');
+            if (!container) return;
+
+            if (relatedItems.length === 0) {
+                container.innerHTML = '<p class="col-span-2 text-sm text-neutral-500 dark:text-neutral-400">No related items found.</p>';
+                return;
+            }
+
+            container.innerHTML = relatedItems.map(product => `
+                <article class="product-card p-0 overflow-hidden cursor-pointer rounded-xl" onclick="openProductModal(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                    <div class="aspect-square">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200x200?text=Image+Not+Found'">
+                    </div>
+                    <div class="p-2 sm:p-3">
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 truncate">${product.shop}</p>
+                        <h4 class="font-medium text-xs sm:text-sm truncate">${product.name}</h4>
+                        <p class="text-primary-600 dark:text-primary-400 font-bold text-xs sm:text-sm">${product.price.toLocaleString()} MMK</p>
                     </div>
                 </article>
             `).join('');
         }
 
+        // Make functions globally available
+        window.openProductModal = openProductModal;
+        window.closeProductModal = closeProductModal;
+        window.selectImage = selectImage;
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
+            // Ensure modal is hidden on page load
+            const modal = document.getElementById('product-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex', 'items-center', 'justify-center');
+            }
+            
+            populateShopFilter();
             renderFashionProducts();
             updateCartCount();
             initBarberShopModule();
+            
+            // Add filter event listeners
+            const shopFilter = document.getElementById('shop-filter');
+            const categoryFilter = document.getElementById('category-filter');
+            const priceFilter = document.getElementById('price-filter');
+            const sortFilter = document.getElementById('sort-filter');
+            const searchBtn = document.getElementById('search-btn');
+            const searchInput = document.getElementById('search-input');
+            
+            if (shopFilter) shopFilter.addEventListener('change', filterProducts);
+            if (categoryFilter) categoryFilter.addEventListener('change', filterProducts);
+            if (priceFilter) priceFilter.addEventListener('change', filterProducts);
+            if (sortFilter) sortFilter.addEventListener('change', filterProducts);
+            if (searchBtn) searchBtn.addEventListener('click', filterProducts);
+            if (searchInput) {
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') filterProducts();
+                });
+            }
+            
+            // Load more button
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', loadMoreProducts);
+            }
+            
+            // Close modal on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('product-modal');
+                    if (modal && !modal.classList.contains('hidden')) {
+                        closeProductModal();
+                    }
+                }
+            });
         });
 
         // Barber tab logic
