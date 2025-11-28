@@ -219,27 +219,24 @@
                 max-height: 90vh;
                 margin: auto;
             }
-            /* Thumbnails - Responsive sizing */
+        #modal-thumbnails {
+            height: 110px;
+            min-height: 110px;
+        }
+
+        
+        @media (max-width: 1023px) {
+            #modal-thumbnails {
+                height: 95px;
+                min-height: 95px;
+            }
+        }
+        @media (min-width: 1024px) {
             #modal-thumbnails {
                 height: 120px;
                 min-height: 120px;
             }
-            /* Mobile thumbnails - taller and more visible */
-            @media (max-width: 1023px) {
-                #modal-thumbnails {
-                    height: 100px;
-                    min-height: 100px;
-                    max-height: 100px;
-                }
-            }
-            /* Desktop thumbnails */
-            @media (min-width: 1024px) {
-                #modal-thumbnails {
-                    height: 120px;
-                    min-height: 120px;
-                    max-height: 120px;
-                }
-            }
+        }
             /* Make modal content more responsive */
             #product-modal > div {
                 width: min(90%, 72rem);
@@ -261,6 +258,15 @@
             #product-modal > div {
                 display: flex;
                 flex-direction: column;
+            }
+        }
+        /* Related items container */
+        #modal-related-items {
+            max-height: 18rem;
+        }
+        @media (min-width: 1024px) {
+            #modal-related-items {
+                max-height: 20rem;
             }
         }
         /* Related items scrollbar */
@@ -1125,7 +1131,7 @@
                 </div>
 
                 <!-- Product Details Section -->
-                <div class="lg:w-1/2 p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 relative lg:overflow-y-auto lg:flex-shrink lg:min-h-0 flex flex-col">
+                <div class="lg:w-1/2 p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 relative lg:overflow-y-auto lg:flex-1 lg:min-h-0 flex flex-col">
                     <!-- Heart/Favorite Button - Top Right of Details Section -->
                     <button id="modal-favorite-btn" class="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 w-9 h-9 sm:w-10 sm:h-10 bg-white/90 dark:bg-dark-surface rounded-full flex items-center justify-center hover:bg-primary-500 hover:text-white transition-colors shadow-lg">
                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1151,9 +1157,9 @@
                     </div>
 
                     <!-- Related Items - Scrollable Section -->
-                    <div class="border-t border-neutral-200 dark:border-dark-border pt-4 sm:pt-6 flex flex-col flex-shrink-0 min-h-0">
+                    <div class="border-t border-neutral-200 dark:border-dark-border pt-4 sm:pt-6 flex flex-col flex-1 min-h-0">
                         <h3 class="font-rufina text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex-shrink-0">Related Items</h3>
-                        <div id="modal-related-items" class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 overflow-y-auto pr-2" style="max-height: 400px; min-height: 150px;">
+                        <div id="modal-related-items" class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 w-full overflow-y-auto pr-2 flex-1 min-h-0">
                             <!-- Related items will be populated by JS -->
                         </div>
                     </div>
