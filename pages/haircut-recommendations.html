@@ -1,850 +1,1432 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover haircut recommendations personalized by face shape, texture, and styling goals.">
-    <title>Haircut Recommendations - Pyin Mal</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="../css/tailwind.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/main.css">
-
-    <!-- AOS CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-
+    <title>Face Analysis & Haircut Recommendations</title>
     <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
         :root {
-            --hr-primary: #8B5CF6;
-            --hr-primary-dark: #7C3AED;
-            --hr-accent: #EC4899;
-            --hr-accent-light: #F472B6;
-            --hr-light-bg: #F9FAFB;
-            --hr-light-surface: #FFFFFF;
-            --hr-light-card: #F3F4F6;
-            --hr-light-border: #E5E7EB;
-            --hr-dark-bg: #111827;
-            --hr-dark-surface: #1F2937;
-            --hr-dark-card: #374151;
-            --hr-dark-border: #4B5563;
-            --hr-neutral-400: #9CA3AF;
-            --hr-neutral-500: #6B7280;
-            --hr-neutral-600: #4B5563;
-            --hr-radius: 0.75rem;
-            --hr-radius-xl: 1rem;
-            --hr-radius-2xl: 1.5rem;
-            --hr-shadow: 0 15px 30px rgba(15,23,42,0.12);
+            --primary: #8B5CF6;
+            --primary-light: #A78BFA;
+            --primary-dark: #7C3AED;
+            --accent: #EC4899;
+            --accent-light: #F472B6;
+            --dark-bg: #111827;
+            --dark-surface: #1F2937;
+            --dark-card: #374151;
+            --dark-border: #4B5563;
+            --dark-text: #F9FAFB;
+            --light-bg: #F9FAFB;
+            --light-surface: #FFFFFF;
+            --light-card: #F3F4F6;
+            --light-border: #E5E7EB;
+            --light-text: #111827;
+            --neutral-100: #F3F4F6;
+            --neutral-200: #E5E7EB;
+            --neutral-300: #D1D5DB;
+            --neutral-400: #9CA3AF;
+            --neutral-500: #6B7280;
+            --neutral-600: #4B5563;
+            --neutral-700: #374151;
+            --neutral-800: #1F2937;
+            --neutral-900: #111827;
+            --radius-sm: 0.375rem;
+            --radius: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-
-        #haircut-app {
-            font-family: 'Segoe UI', 'Inter', sans-serif;
-            background-color: var(--hr-light-bg);
-            color: var(--hr-neutral-600);
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            transition: all 0.3s ease;
         }
-
-        .dark #haircut-app {
-            background-color: var(--hr-dark-bg);
-            color: var(--hr-neutral-400);
+        
+        body.dark {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
         }
-
-        #haircut-app section {
-            padding: 4rem 0;
-        }
-
-        #haircut-app .hr-container {
+        
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.25rem;
+            padding: 0 1rem;
         }
-
-        #haircut-app h1,
-        #haircut-app h2,
-        #haircut-app h3 {
-            color: #111827;
+        
+        section {
+            padding: 4rem 0;
         }
-
-        .dark #haircut-app h1,
-        .dark #haircut-app h2,
-        .dark #haircut-app h3 {
-            color: #F9FAFB;
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
         }
-
-        #haircut-app .hr-btn {
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Buttons */
+        .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.8rem 1.6rem;
-            border-radius: var(--hr-radius);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
             font-weight: 600;
-            font-size: 0.95rem;
-            border: none;
+            text-decoration: none;
+            transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            font-size: 0.875rem;
         }
-
-        #haircut-app .hr-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s ease;
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
         }
-
-        #haircut-app .hr-btn:hover::after { left: 100%; }
-
-        #haircut-app .hr-btn-primary {
-            background-color: var(--hr-primary);
-            color: #fff;
-            box-shadow: var(--hr-shadow);
-        }
-
-        #haircut-app .hr-btn-primary:hover {
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
             transform: translateY(-2px);
-            background-color: var(--hr-primary-dark);
+            box-shadow: var(--shadow-lg);
         }
-
-        #haircut-app .hr-btn-secondary {
-            border: 1px solid rgba(255,255,255,0.6);
-            color: #fff;
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(139, 92, 246, 0.1);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+        
+        /* Cards */
+        .card {
+            background-color: var(--light-surface);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .dark .card {
+            background-color: var(--dark-card);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-primary {
+            background-color: rgba(139, 92, 246, 0.1);
+            color: var(--primary);
+        }
+        
+        .badge-accent {
+            background-color: rgba(236, 72, 153, 0.1);
+            color: var(--accent);
+        }
+        
+        /* Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--light-border);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .dark header {
+            background-color: rgba(31, 41, 55, 0.95);
+            border-bottom: 1px solid var(--dark-border);
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4rem;
+            gap: 1.5rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            display: inline-flex;
+            height: 2.25rem;
+            width: 2.25rem;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-lg);
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .theme-toggle, .cart-btn {
+            padding: 0.5rem;
+            border-radius: var(--radius);
             background: transparent;
+            border: none;
+            color: currentColor;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-
-        #haircut-app .hr-btn-secondary:hover {
-            background-color: rgba(255,255,255,0.15);
+        
+        .theme-toggle:hover, .cart-btn:hover {
+            background-color: var(--neutral-100);
         }
-
-        #haircut-app .hr-card {
-            background-color: var(--hr-light-surface);
-            border-radius: var(--hr-radius-2xl);
-            box-shadow: var(--hr-shadow);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
+        .dark .theme-toggle:hover, .dark .cart-btn:hover {
+            background-color: var(--dark-card);
         }
-
-        .dark #haircut-app .hr-card {
-            background-color: var(--hr-dark-card);
-        }
-
-        #haircut-app .hr-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 25px 45px rgba(15,23,42,0.28);
-        }
-
-        #haircut-app .face-scan {
-            background: linear-gradient(135deg, #8B5CF6, #EC4899);
-            color: #fff;
+        
+        /* Section 1: Face Scan */
+        .face-scan {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-
-        #haircut-app .face-scan::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
-            animation: spinBlob 18s linear infinite;
+        
+        .face-scan-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
-
-        @keyframes spinBlob {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        
+        .face-scan-subtitle {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+            margin-bottom: 1rem;
         }
-
-        #haircut-app .scan-options {
+        
+        .face-scan-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .face-scan-title {
+                font-size: 3rem;
+            }
+        }
+        
+        .face-scan-description {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-size: 1.125rem;
+        }
+        
+        .scan-options {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 1rem;
             margin-bottom: 2rem;
         }
-
-        #haircut-app .scan-option {
-            width: 300px;
-            max-width: 100%;
-            padding: 1.75rem;
-            border-radius: var(--hr-radius-2xl);
-            background-color: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.25);
-            backdrop-filter: blur(10px);
+        
+        .scan-option {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 300px;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: transform 0.3s ease, border-color 0.3s ease;
         }
-
-        #haircut-app .scan-option:hover {
-            transform: translateY(-6px);
-            border-color: rgba(255,255,255,0.5);
+        
+        .scan-option:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
         }
-
-        #haircut-app .scan-icon {
-            width: 3.5rem;
-            height: 3.5rem;
+        
+        .scan-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 0 auto 1rem;
-            background-color: rgba(255,255,255,0.2);
-            display: grid;
-            place-items: center;
         }
-
-        #haircut-app .section-header {
+        
+        .scan-option-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .scan-option-description {
+            opacity: 0.8;
+            font-size: 0.875rem;
+        }
+        
+        /* Section 2: Face Shape Analysis */
+        .face-analysis {
+            background-color: var(--light-bg);
+        }
+        
+        .dark .face-analysis {
+            background-color: var(--dark-bg);
+        }
+        
+        .section-header {
             text-align: center;
-            max-width: 820px;
+            max-width: 800px;
             margin: 0 auto 3rem;
         }
-
-        #haircut-app .section-title {
-            display: inline-block;
-            position: relative;
+        
+        .section-subtitle {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
-
-        #haircut-app .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #8B5CF6, #EC4899);
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
-
-        #haircut-app .face-shapes-grid,
-        #haircut-app .hairstyles-grid {
+        
+        .section-description {
+            color: var(--neutral-600);
+        }
+        
+        .dark .section-description {
+            color: var(--neutral-400);
+        }
+        
+        .face-shapes-grid {
             display: grid;
+            grid-template-columns: 1fr;
             gap: 2rem;
         }
-
+        
         @media (min-width: 768px) {
-            #haircut-app .face-shapes-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-            #haircut-app .hairstyles-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+            .face-shapes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-
+        
         @media (min-width: 1024px) {
-            #haircut-app .face-shapes-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
-            #haircut-app .hairstyles-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+            .face-shapes-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
-
-        #haircut-app .face-shape-image,
-        #haircut-app .hairstyle-image {
-            height: 14rem;
+        
+        .face-shape-card {
+            background-color: var(--light-surface);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+        
+        .dark .face-shape-card {
+            background-color: var(--dark-card);
+        }
+        
+        .face-shape-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .face-shape-image {
+            height: 12rem;
             overflow: hidden;
         }
-
-        #haircut-app .face-shape-image img,
-        #haircut-app .hairstyle-image img {
+        
+        .face-shape-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-
-        #haircut-app .face-shape-card:hover img,
-        #haircut-app .hairstyle-card:hover img {
+        
+        .face-shape-card:hover .face-shape-image img {
             transform: scale(1.05);
         }
-
-        #haircut-app .gender-tabs,
-        #haircut-app .face-shape-filters {
+        
+        .face-shape-content {
+            padding: 1.5rem;
+        }
+        
+        .face-shape-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .face-shape-description {
+            color: var(--neutral-600);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .dark .face-shape-description {
+            color: var(--neutral-400);
+        }
+        
+        .face-shape-features {
+            list-style: none;
+        }
+        
+        .face-shape-features li {
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--neutral-600);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .dark .face-shape-features li {
+            color: var(--neutral-400);
+        }
+        
+        .face-shape-features li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* Section 3: Gender & Category Selection */
+        .category-selection {
+            background-color: var(--light-surface);
+        }
+        
+        .dark .category-selection {
+            background-color: var(--dark-surface);
+        }
+        
+        .gender-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .gender-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            background-color: transparent;
+            border: 1px solid var(--neutral-300);
+            color: var(--neutral-600);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dark .gender-tab {
+            border-color: var(--dark-border);
+            color: var(--neutral-300);
+        }
+        
+        .gender-tab.active {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        .face-shape-filters {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.75rem;
+            gap: 1rem;
             margin-bottom: 2rem;
         }
-
-        #haircut-app .gender-tab,
-        #haircut-app .face-shape-filter {
-            padding: 0.6rem 1.35rem;
-            border-radius: var(--hr-radius);
-            border: 1px solid var(--hr-light-border);
-            background-color: var(--hr-light-card);
-            font-weight: 600;
+        
+        .face-shape-filter {
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            background-color: var(--light-card);
+            border: 1px solid var(--light-border);
+            color: var(--neutral-600);
+            font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
-
-        .dark #haircut-app .gender-tab,
-        .dark #haircut-app .face-shape-filter {
-            border-color: var(--hr-dark-border);
-            background-color: var(--hr-dark-card);
-            color: #F9FAFB;
+        
+        .dark .face-shape-filter {
+            background-color: var(--dark-card);
+            border-color: var(--dark-border);
+            color: var(--neutral-300);
         }
-
-        #haircut-app .gender-tab.active,
-        #haircut-app .face-shape-filter.active {
-            background-color: var(--hr-primary);
-            border-color: var(--hr-primary);
-            color: #fff;
+        
+        .face-shape-filter.active {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
         }
-
-        #haircut-app .hairstyle-card {
-            display: flex;
-            flex-direction: column;
+        
+        /* Section 4: Hairstyle Recommendations */
+        .hairstyle-recommendations {
+            background-color: var(--light-bg);
+        }
+        
+        .dark .hairstyle-recommendations {
+            background-color: var(--dark-bg);
+        }
+        
+        .hairstyles-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .hairstyles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hairstyles-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .hairstyle-card {
+            background-color: var(--light-surface);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+        
+        .dark .hairstyle-card {
+            background-color: var(--dark-card);
+        }
+        
+        .hairstyle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .hairstyle-image {
+            height: 16rem;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .hairstyle-image img {
+            width: 100%;
             height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
-
-        #haircut-app .hairstyle-overlay {
+        
+        .hairstyle-card:hover .hairstyle-image img {
+            transform: scale(1.05);
+        }
+        
+        .hairstyle-overlay {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.7));
-            padding: 1rem;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7));
             display: flex;
             align-items: flex-end;
+            padding: 1rem;
         }
-
-        #haircut-app .hairstyle-actions {
+        
+        .hairstyle-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .hairstyle-content {
+            padding: 1.5rem;
+        }
+        
+        .hairstyle-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hairstyle-description {
+            color: var(--neutral-600);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .dark .hairstyle-description {
+            color: var(--neutral-400);
+        }
+        
+        .hairstyle-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: var(--neutral-500);
+        }
+        
+        .hairstyle-maintenance {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .hairstyle-actions {
             display: flex;
             gap: 0.75rem;
-            margin-top: auto;
         }
-
-        #haircut-app .scroll-reveal {
-            opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        #haircut-app .scroll-reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        #haircut-app footer {
-            background-color: #0f172a;
-            color: #fff;
+        
+        /* Footer */
+        footer {
+            background-color: var(--neutral-900);
+            color: white;
             padding: 2.5rem 0;
         }
-
-        #haircut-app .footer-links {
+        
+        .dark footer {
+            background-color: var(--dark-bg);
+        }
+        
+        .footer-content {
             display: flex;
-            gap: 1.25rem;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+        
+        .footer-brand {
+            max-width: 100%;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-tagline {
+            color: var(--neutral-400);
+            font-size: 0.875rem;
+        }
+        
+        .footer-links {
+            display: flex;
             flex-wrap: wrap;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.7);
+            gap: 1.5rem;
+            color: var(--neutral-400);
+            font-size: 0.875rem;
+        }
+        
+        .footer-links a {
+            color: var(--neutral-400);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-copyright {
+            color: var(--neutral-500);
+            font-size: 0.75rem;
+        }
+        
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .mb-3 {
+            margin-bottom: 0.75rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .space-y-3 > * + * {
+            margin-top: 0.75rem;
+        }
+        
+        .space-y-4 > * + * {
+            margin-top: 1rem;
+        }
+        
+        .space-y-6 > * + * {
+            margin-top: 1.5rem;
+        }
+        
+        .space-y-8 > * + * {
+            margin-top: 2rem;
+        }
+        
+        .gap-3 {
+            gap: 0.75rem;
+        }
+        
+        .gap-4 {
+            gap: 1rem;
+        }
+        
+        .gap-6 {
+            gap: 1.5rem;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+        
+        .flex-col {
+            flex-direction: column;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .w-full {
+            width: 100%;
         }
     </style>
 </head>
-
-<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+<body>
     <!-- Navigation -->
-    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
-        <nav class="container-custom">
-            <div class="flex items-center justify-between h-16 gap-6">
-                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
-                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
-                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <span class="logo-icon">PM</span>
+                    <span class="logo-text">Pyin Mal</span>
                 </a>
+                
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="theme-toggle">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                    </button>
+                    <button class="cart-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </button>
+                    <a href="#" class="btn btn-secondary">Sign In</a>
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-                <div class="hidden lg:flex items-center space-x-6">
-                    <a href="../index.html" class="nav-link">Home</a>
-                    <div class="relative" data-dropdown="features">
-                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
-                            Features
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
-                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
-                                <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
-                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
-                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
-                            </ul>
+    <!-- Section 1: Face Scan -->
+    <section class="face-scan">
+        <div class="container">
+            <div class="face-scan-content">
+                <p class="face-scan-subtitle">Face Analysis</p>
+                <h1 class="face-scan-title">Find Your Perfect Haircut</h1>
+                <p class="face-scan-description">Upload a photo or use your camera to analyze your face shape and get personalized haircut recommendations</p>
+                
+                <div class="scan-options">
+                    <div class="scan-option" id="upload-option">
+                        <div class="scan-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                            </svg>
                         </div>
+                        <h3 class="scan-option-title">Upload Photo</h3>
+                        <p class="scan-option-description">Upload a clear front-facing photo for accurate analysis</p>
                     </div>
-                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
-                    <a href="shop-browsing.html" class="nav-link">Shop</a>
-                    <div class="relative" data-dropdown="more">
-                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
-                            More
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
-                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
-                                <a href="reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
-                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
-                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
-                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
-                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
-                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
-                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
-                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
-                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                    
+                    <div class="scan-option" id="camera-option">
+                        <div class="scan-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+                                <circle cx="12" cy="13" r="4"/>
+                            </svg>
+                        </div>
+                        <h3 class="scan-option-title">Use Camera</h3>
+                        <p class="scan-option-description">Take a photo directly with your device camera</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn btn-accent">Start Face Analysis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Face Shape Analysis -->
+    <section class="face-analysis">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">How It Works</p>
+                <h2 class="section-title">Understanding Face Shapes</h2>
+                <p class="section-description">Our AI analyzes facial proportions to determine your face shape and recommends hairstyles that complement your features</p>
+            </div>
+            
+            <div class="face-shapes-grid">
+                <div class="face-shape-card">
+                    <div class="face-shape-image">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Oval face shape">
+                    </div>
+                    <div class="face-shape-content">
+                        <h3 class="face-shape-title">Oval Face</h3>
+                        <p class="face-shape-description">Balanced proportions with slightly wider cheekbones</p>
+                        <ul class="face-shape-features">
+                            <li>Forehead slightly wider than jaw</li>
+                            <li>Rounded jawline</li>
+                            <li>Face length about 1.5 times width</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="face-shape-card">
+                    <div class="face-shape-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Round face shape">
+                    </div>
+                    <div class="face-shape-content">
+                        <h3 class="face-shape-title">Round Face</h3>
+                        <p class="face-shape-description">Similar width and length with soft angles</p>
+                        <ul class="face-shape-features">
+                            <li>Widest at cheeks</li>
+                            <li>Rounded jawline</li>
+                            <li>Fuller cheeks</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="face-shape-card">
+                    <div class="face-shape-image">
+                        <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?auto=format&fit=crop&w=800&q=80" alt="Square face shape">
+                    </div>
+                    <div class="face-shape-content">
+                        <h3 class="face-shape-title">Square Face</h3>
+                        <p class="face-shape-description">Strong jawline and forehead with similar width</p>
+                        <ul class="face-shape-features">
+                            <li>Angular jawline</li>
+                            <li>Forehead and jaw similar width</li>
+                            <li>Minimal curve at hairline</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="face-shape-card">
+                    <div class="face-shape-image">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Heart face shape">
+                    </div>
+                    <div class="face-shape-content">
+                        <h3 class="face-shape-title">Heart Face</h3>
+                        <p class="face-shape-description">Wider forehead tapering to a narrow chin</p>
+                        <ul class="face-shape-features">
+                            <li>Wide forehead and cheekbones</li>
+                            <li>Narrow jawline</li>
+                            <li>Pointed chin</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- New Face Shapes -->
+                <div class="face-shape-card">
+                    <div class="face-shape-image">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Diamond face shape">
+                    </div>
+                    <div class="face-shape-content">
+                        <h3 class="face-shape-title">Diamond Face</h3>
+                        <p class="face-shape-description">Narrow forehead and jaw with wide cheekbones</p>
+                        <ul class="face-shape-features">
+                            <li>Widest at cheekbones</li>
+                            <li>Narrow forehead and jaw</li>
+                            <li>Pointed chin</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="face-shape-card">
+                    <div class="face-shape-image">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Triangle face shape">
+                    </div>
+                    <div class="face-shape-content">
+                        <h3 class="face-shape-title">Triangle Face</h3>
+                        <p class="face-shape-description">Wide jawline with a narrow forehead</p>
+                        <ul class="face-shape-features">
+                            <li>Wide jawline</li>
+                            <li>Narrow forehead</li>
+                            <li>Strong chin</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Gender & Category Selection -->
+    <section class="category-selection">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Personalization</p>
+                <h2 class="section-title">Refine Your Recommendations</h2>
+                <p class="section-description">Select your preferences to get the most accurate hairstyle suggestions</p>
+            </div>
+            
+            <div class="gender-tabs">
+                <button class="gender-tab active" data-gender="all">All Genders</button>
+                <button class="gender-tab" data-gender="female">Female</button>
+                <button class="gender-tab" data-gender="male">Male</button>
+            </div>
+            
+            <div class="face-shape-filters">
+                <button class="face-shape-filter active" data-face-shape="all">All Shapes</button>
+                <button class="face-shape-filter" data-face-shape="oval">Oval</button>
+                <button class="face-shape-filter" data-face-shape="round">Round</button>
+                <button class="face-shape-filter" data-face-shape="square">Square</button>
+                <button class="face-shape-filter" data-face-shape="heart">Heart</button>
+                <button class="face-shape-filter" data-face-shape="diamond">Diamond</button>
+                <button class="face-shape-filter" data-face-shape="triangle">Triangle</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Hairstyle Recommendations -->
+    <section class="hairstyle-recommendations">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Recommendations</p>
+                <h2 class="section-title">Perfect Hairstyles For You</h2>
+                <p class="section-description">Based on your face shape and preferences</p>
+            </div>
+            
+            <div class="hairstyles-grid">
+
+                <!-- Card -->
+                <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
+                    <div class="hairstyle-image">
+                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond  - Textured Crop.jpg">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Diamond Face</span>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="flex items-center space-x-2 sm:space-x-3">
-                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
-                        <span id="theme-icon">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-                        </span>
-                    </button>
-                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
-                    </button>
-                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
-                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
-                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
-                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                    </button>
-                </div>
-            </div>
-
-            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
-                <div class="pt-4 space-y-4">
-                    <a href="../index.html" class="block nav-link">Home</a>
-                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
-                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
-                        <div class="flex flex-col space-y-2">
-                            <a href="haircut-recommendations.html" class="nav-link nav-link-active">Hair Recommendations</a>
-                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
-                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
+                        <div class="hairstyle-meta">
                         </div>
-                    </div>
-                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
-                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
-                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
-                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
-                        <div class="flex flex-col space-y-2">
-                            <a href="../index.html#reviews" class="nav-link">Reviews</a>
-                            <a href="contact.html" class="nav-link">Contact</a>
-                            <a href="about.html" class="nav-link">About us</a>
-                            <a href="faq.html" class="nav-link">FAQ</a>
-                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
-                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
-                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
-                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        <div class="hairstyle-actions">
+                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+
                         </div>
-                    </div>
-                    <div class="flex flex-col gap-3">
-                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
-                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Hero -->
-    <section class="py-10 sm:py-14 md:py-16 bg-gradient-to-br from-primary-600 via-accent-500 to-primary-400 text-white">
-        <div class="container-custom grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div data-aos="fade-right">
-                <p class="text-xs uppercase tracking-[0.4em] text-white/70 mb-3">Haircut recommendations</p>
-                <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">See how every cut frames your face before booking the chair</h1>
-                <p class="text-white/80 text-sm sm:text-base mb-6">Our stylists blend MediaPipe data with salon experience to suggest cuts, fringes, and fades that match your face shape, texture, and styling effort level.</p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="face-scan.html" class="btn btn-primary bg-white text-primary-600 hover:bg-neutral-100">Launch face scan</a>
-                    <a href="../index.html#wish-list" class="btn btn-ghost border-white text-white hover:bg-white/10">View saved visuals</a>
-                </div>
-            </div>
-            <div class="rounded-[32px] bg-white/10 border border-white/20 p-6 shadow-2xl backdrop-blur" data-aos="fade-left">
-                <div class="aspect-[16/10] rounded-2xl overflow-hidden bg-white/5 flex items-center justify-center">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="Haircut preview" class="w-full h-full object-cover">
-                </div>
-                <div class="mt-6 flex flex-wrap gap-4 text-sm text-white/80">
-                    <span class="px-3 py-1 rounded-full bg-white/15">Oval face</span>
-                    <span class="px-3 py-1 rounded-full bg-white/15">Low maintenance</span>
-                    <span class="px-3 py-1 rounded-full bg-white/15">Soft layers</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Filters -->
-    <section class="py-8 bg-neutral-50 dark:bg-dark-surface">
-        <div class="container-custom" data-aos="fade-up">
-            <div class="product-card p-5 flex flex-col gap-4">
-                <div class="flex flex-wrap gap-3 text-sm">
-                    <div class="filter-field">
-                        <label for="face-filter" class="filter-label">Face shape</label>
-                        <select id="face-filter" class="form-input">
-                            <option value="all">All</option>
-                            <option value="oval">Oval</option>
-                            <option value="round">Round</option>
-                            <option value="heart">Heart</option>
-                            <option value="square">Square</option>
-                        </select>
-                    </div>
-                    <div class="filter-field">
-                        <label for="texture-filter" class="filter-label">Texture</label>
-                        <select id="texture-filter" class="form-input">
-                            <option value="all">All</option>
-                            <option value="straight">Straight</option>
-                            <option value="wavy">Wavy</option>
-                            <option value="curly">Curly</option>
-                            <option value="coily">Coily</option>
-                        </select>
-                    </div>
-                    <div class="filter-field">
-                        <label for="care-filter" class="filter-label">Maintenance</label>
-                        <select id="care-filter" class="form-input">
-                            <option value="all">Any</option>
-                            <option value="low">Low</option>
-                            <option value="medium">Medium</option>
-                            <option value="high">High</option>
-                        </select>
-                    </div>
-                </div>
-                <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Filters update instantly so you can compare options in one view.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Recommendation grid -->
-    <section class="py-10 sm:py-14">
-        <div class="container-custom space-y-8">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Featured visual -->
-                <div class="lg:col-span-3 bg-neutral-900 dark:bg-dark-card text-white rounded-[32px] p-6 sm:p-10 flex flex-col lg:flex-row gap-6" data-aos="fade-up">
-                    <div class="lg:w-2/3 space-y-4">
-                        <p class="text-xs uppercase tracking-[0.4em] text-white/60">Featured cut</p>
-                        <h2 class="font-rufina text-3xl">Sculpted fringe bob</h2>
-                        <p class="text-white/80 text-sm sm:text-base">Designed for heart-shaped faces wanting more jaw balance. We taper the nape, add invisible layers, and frame cheeks with bevelled bangs. Works with natural wave or styled straight.</p>
-                        <div class="flex flex-wrap gap-3 text-xs">
-                            <span class="badge badge-light">Heart face</span>
-                            <span class="badge badge-light">Medium maintenance</span>
-                            <span class="badge badge-light">Salon visit: 6 weeks</span>
-                        </div>
-                    </div>
-                    <div class="lg:w-1/3 rounded-2xl overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Featured haircut" class="w-full h-full object-cover">
                     </div>
                 </div>
 
-                <!-- Cards -->
-                <article class="hair-card" data-hair-card data-face="oval" data-texture="wavy" data-maintenance="low" data-aos="fade-up">
-                    <div class="hair-card-img">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Hairstyle">
-                    </div>
-                    <div class="hair-card-body">
-                        <div class="flex items-center justify-between text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">
-                            <span>Oval face</span>
-                            <span>Low care</span>
-                        </div>
-                        <h3 class="font-rufina text-2xl mb-2">Fluid long layers</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Weight is removed near the collarbone to keep movement. Works with natural texture and blowouts.</p>
-                        <div class="flex flex-wrap gap-3 text-xs">
-                            <span class="badge">Wavy or straight</span>
-                            <span class="badge">Face framing</span>
+                <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
+                    <div class="hairstyle-image">
+                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Classic Side Part.jpg">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Diamond Face</span>
+                            </div>
                         </div>
                     </div>
-                </article>
-                <article class="hair-card" data-hair-card data-face="round" data-texture="curly" data-maintenance="medium" data-aos="fade-up" data-aos-delay="50">
-                    <div class="hair-card-img">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80&sat=-20" alt="Hairstyle">
-                    </div>
-                    <div class="hair-card-body">
-                        <div class="flex items-center justify-between text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">
-                            <span>Round face</span>
-                            <span>Medium care</span>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
+                        <div class="hairstyle-meta">
                         </div>
-                        <h3 class="font-rufina text-2xl mb-2">Textured shag</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Crown volume and curtain fringe elongate the face. Best with diffuser styling.</p>
-                        <div class="flex flex-wrap gap-3 text-xs">
-                            <span class="badge">Curly / wavy</span>
-                            <span class="badge">Diffuser</span>
-                        </div>
-                    </div>
-                </article>
-                <article class="hair-card" data-hair-card data-face="square" data-texture="straight" data-maintenance="low" data-aos="fade-up" data-aos-delay="100">
-                    <div class="hair-card-img">
-                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Hairstyle">
-                    </div>
-                    <div class="hair-card-body">
-                        <div class="flex items-center justify-between text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">
-                            <span>Square face</span>
-                            <span>Low care</span>
-                        </div>
-                        <h3 class="font-rufina text-2xl mb-2">Soft pixie crop</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Tapered sides with airy top length soften angular jawlines. Style with pomade.</p>
-                        <div class="flex flex-wrap gap-3 text-xs">
-                            <span class="badge">Short hair</span>
-                            <span class="badge">Pomade finish</span>
-                        </div>
-                    </div>
-                </article>
-                <article class="hair-card" data-hair-card data-face="heart" data-texture="straight" data-maintenance="medium" data-aos="fade-up">
-                    <div class="hair-card-img">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80&sat=-40" alt="Hairstyle">
-                    </div>
-                    <div class="hair-card-body">
-                        <div class="flex items-center justify-between text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">
-                            <span>Heart face</span>
-                            <span>Medium care</span>
-                        </div>
-                        <h3 class="font-rufina text-2xl mb-2">Airy curtain lob</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Mid length with beveled edges balances wider foreheads and narrow chins.</p>
-                        <div class="flex flex-wrap gap-3 text-xs">
-                            <span class="badge">Heat styling</span>
-                            <span class="badge">Volume spray</span>
-                        </div>
-                    </div>
-                </article>
-                <article class="hair-card" data-hair-card data-face="oval" data-texture="coily" data-maintenance="high" data-aos="fade-up" data-aos-delay="50">
-                    <div class="hair-card-img">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80&sat=-15" alt="Hairstyle">
-                    </div>
-                    <div class="hair-card-body">
-                        <div class="flex items-center justify-between text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">
-                            <span>Oval face</span>
-                            <span>High care</span>
-                        </div>
-                        <h3 class="font-rufina text-2xl mb-2">Sculpted coils frohawk</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Side fades with defined coil strip. Requires twist-outs or setting mousse.</p>
-                        <div class="flex flex-wrap gap-3 text-xs">
-                            <span class="badge">Coily</span>
-                            <span class="badge">Twist-outs</span>
-                        </div>
-                    </div>
-                </article>
-                <article class="hair-card" data-hair-card data-face="round" data-texture="straight" data-maintenance="low" data-aos="fade-up" data-aos-delay="100">
-                    <div class="hair-card-img">
-                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80&sat=-10" alt="Hairstyle">
-                    </div>
-                    <div class="hair-card-body">
-                        <div class="flex items-center justify-between text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">
-                            <span>Round face</span>
-                            <span>Low care</span>
-                        </div>
-                        <h3 class="font-rufina text-2xl mb-2">Long blunt + micro fringe</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Ultra straight lengths with short fringe slim the profile while keeping edge.</p>
-                        <div class="flex flex-wrap gap-3 text-xs">
-                            <span class="badge">Straight</span>
-                            <span class="badge">Micro bangs</span>
-                        </div>
-                    </div>
-                </article>
-                <article class="hair-card" data-hair-card data-face="square" data-texture="wavy" data-maintenance="medium" data-aos="fade-up">
-                    <div class="hair-card-img">
-                        <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=800&q=80" alt="Hairstyle">
-                    </div>
-                    <div class="hair-card-body">
-                        <div class="flex items-center justify-between text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">
-                            <span>Square face</span>
-                            <span>Medium care</span>
-                        </div>
-                        <h3 class="font-rufina text-2xl mb-2">Layered wave bob</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Soft slicing around the jaw plus tousled texture carves dimension.</p>
-                        <div class="flex flex-wrap gap-3 text-xs">
-                            <span class="badge">Sea salt spray</span>
-                            <span class="badge">Tousled</span>
-                        </div>
-                    </div>
-                </article>
-                <article class="hair-card" data-hair-card data-face="heart" data-texture="wavy" data-maintenance="low" data-aos="fade-up" data-aos-delay="50">
-                    <div class="hair-card-img">
-                        <img src="https://images.unsplash.com/photo-1544723795-432537dc3d60?auto=format&fit=crop&w=800&q=80" alt="Hairstyle">
-                    </div>
-                    <div class="hair-card-body">
-                        <div class="flex items-center justify-between text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">
-                            <span>Heart face</span>
-                            <span>Low care</span>
-                        </div>
-                        <h3 class="font-rufina text-2xl mb-2">Cascade curtain layers</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Soft cascading layers with curtain fringe soften cheekbones and make styling effortless.</p>
-                        <div class="flex flex-wrap gap-3 text-xs">
-                            <span class="badge">Air dry</span>
-                            <span class="badge">Wavy</span>
-                        </div>
-                    </div>
-                </article>
-                <article class="hair-card" data-hair-card data-face="oval" data-texture="straight" data-maintenance="medium" data-aos="fade-up" data-aos-delay="100">
-                    <div class="hair-card-img">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80&sat=15" alt="Hairstyle">
-                    </div>
-                    <div class="hair-card-body">
-                        <div class="flex items-center justify-between text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">
-                            <span>Oval face</span>
-                            <span>Medium care</span>
-                        </div>
-                        <h3 class="font-rufina text-2xl mb-2">Stacked bob + undercut</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Stacked layers give lift while an undercut keeps it cool; ideal for sleek styling.</p>
-                        <div class="flex flex-wrap gap-3 text-xs">
-                            <span class="badge">Blow dry</span>
-                            <span class="badge">Undercut</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
+                        <div class="hairstyle-actions">
+                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
 
-    <!-- Layer blueprint -->
-    <section class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
-        <div class="container-custom grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div class="space-y-4" data-aos="fade-right">
-                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Layer library</p>
-                <h2 class="font-rufina text-3xl font-bold">Layered depth maps we send to your stylist</h2>
-                <p class="text-neutral-600 dark:text-neutral-400">Every haircut recommendation ships with a PDF blueprint showing sectioning, guide lengths, and styling products so your stylist can recreate the exact shape.</p>
-                <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
-                    <li>• Crown elevations with degree markers.</li>
-                    <li>• Fringe tension points and over-direction notes.</li>
-                    <li>• Product layering order plus drying techniques.</li>
-                </ul>
-            </div>
-            <div class="bg-white dark:bg-dark-card rounded-[32px] shadow-soft dark:shadow-soft-dark p-6 space-y-4" data-aos="fade-left">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="rounded-2xl overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=700&q=80" alt="Layer chart" class="w-full h-full object-cover">
-                    </div>
-                    <div class="rounded-2xl overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=700&q=80" alt="Layer chart" class="w-full h-full object-cover">
+                        </div>
                     </div>
                 </div>
-                <p class="text-sm text-neutral-500 dark:text-neutral-400">Includes notes for both scissors-over-comb and razor work.</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- Male / Female tabs -->
-    <section class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
-        <div class="container-custom space-y-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Gallery</p>
-                    <h2 class="font-rufina text-3xl font-bold">Pick from curated male/female lookbooks</h2>
-                </div>
-                <div class="flex gap-3">
-                    <button class="tab-btn active">Female</button>
-                    <button class="tab-btn">Male</button>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-aos="fade-up">
-                <div class="hair-gallery-card">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80" alt="Gallery hair">
-                    <p>Micro bob</p>
-                </div>
-                <div class="hair-gallery-card">
-                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" alt="Gallery hair">
-                    <p>Coily taper</p>
-                </div>
-                <div class="hair-gallery-card">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Gallery hair">
-                    <p>Wave layers</p>
-                </div>
-                <div class="hair-gallery-card">
-                    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" alt="Gallery hair">
-                    <p>Structured pixie</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
+                    <div class="hairstyle-image">
+                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Crew Cut.jpg">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Diamond Face</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
+                        <div class="hairstyle-meta">
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
 
-    <!-- Steps -->
-    <section class="py-10 sm:py-14">
-        <div class="container-custom space-y-6">
-            <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
-                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Process</p>
-                <h2 class="font-rufina text-3xl font-bold">How we deliver your haircut blueprint</h2>
-                <p class="text-neutral-600 dark:text-neutral-400">We go beyond inspiration boards and give precise lengths, angles, and stylist notes.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="product-card p-5" data-aos="fade-up">
-                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">01</p>
-                    <h3 class="font-rufina text-xl mb-2">Face scan</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Use our MediaPipe tool or upload reference photos.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="product-card p-5" data-aos="fade-up" data-aos-delay="50">
-                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">02</p>
-                    <h3 class="font-rufina text-xl mb-2">Style goals</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Tell us maintenance levels, vibe, and color plans.</p>
-                </div>
-                <div class="product-card p-5" data-aos="fade-up" data-aos-delay="100">
-                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">03</p>
-                    <h3 class="font-rufina text-xl mb-2">Preview deck</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">We send mockups, salon-ready instructions, and products.</p>
-                </div>
-                <div class="product-card p-5" data-aos="fade-up" data-aos-delay="150">
-                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">04</p>
-                    <h3 class="font-rufina text-xl mb-2">Salon consult</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Join virtually or invite your stylist to our workspace.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- CTA -->
-    <section class="py-12 md:py-16 bg-neutral-900 text-white">
-        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div class="space-y-3">
-                <p class="text-xs uppercase tracking-[0.4em] text-white/60">Ready?</p>
-                <h2 class="font-rufina text-3xl font-bold">Preview your next cut with our stylists before booking a salon.</h2>
-                <p class="text-white/70">Upload your selfie, tell us your routine, and we’ll send three haircut options with try-on visuals.</p>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="face-scan.html" class="btn btn-primary bg-white text-neutral-900 hover:bg-neutral-100">Start face scan</a>
-                <a href="contact.html" class="btn btn-secondary border-white text-white hover:bg-white/10">Book consultation</a>
+                <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
+                    <div class="hairstyle-image">
+                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Faux Hawk.jpg">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Diamond Face</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
+                        <div class="hairstyle-meta">
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
+                    <div class="hairstyle-image">
+                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Long Side Part.jpg">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Diamond Face</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
+                        <div class="hairstyle-meta">
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
+                    <div class="hairstyle-image">
+                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Sweeping Fringe.jpg">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Diamond Face</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
+                        <div class="hairstyle-meta">
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
+                    <div class="hairstyle-image">
+                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Textured Quiff.jpg">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Diamond Face</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
+                        <div class="hairstyle-meta">
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
+                    <div class="hairstyle-image">
+                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Textured Quiff.jpg">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Diamond Face</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
+                        <div class="hairstyle-meta">
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="hairstyle-card" data-gender="female" data-face-shape="round">
+                    <div class="hairstyle-image">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80" alt="Textured Shag">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Round Face</span>
+                                <span class="badge badge-accent">Long</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Textured Shag</h3>
+                        <p class="hairstyle-description">Layered cut with plenty of texture and movement, perfect for adding volume.</p>
+                        <div class="hairstyle-meta">
+                            <div class="hairstyle-maintenance">Medium Maintenance</div>
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="#" class="btn btn-primary">View Details</a>
+                            <a href="#" class="btn btn-secondary">Find Shops</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="hairstyle-card" data-gender="male" data-face-shape="square">
+                    <div class="hairstyle-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Modern Pompadour">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Square Face</span>
+                                <span class="badge badge-accent">Short</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Modern Pompadour</h3>
+                        <p class="hairstyle-description">A contemporary version of the classic pompadour with textured top and faded sides.</p>
+                        <div class="hairstyle-meta">
+                            <div class="hairstyle-maintenance">High Maintenance</div>
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="#" class="btn btn-primary">View Details</a>
+                            <a href="#" class="btn btn-secondary">Find Shops</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="hairstyle-card" data-gender="female" data-face-shape="heart">
+                    <div class="hairstyle-image">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Soft Layers">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Heart Face</span>
+                                <span class="badge badge-accent">Medium Length</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Soft Layers</h3>
+                        <p class="hairstyle-description">Face-framing layers that soften the forehead and add balance to the chin area.</p>
+                        <div class="hairstyle-meta">
+                            <div class="hairstyle-maintenance">Low Maintenance</div>
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="#" class="btn btn-primary">View Details</a>
+                            <a href="#" class="btn btn-secondary">Find Shops</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
+                    <div class="hairstyle-image">
+                        <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?auto=format&fit=crop&w=800&q=80" alt="Textured Crop">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Diamond Face</span>
+                                <span class="badge badge-accent">Short</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <p class="hairstyle-description">Short, textured cut that adds width to the forehead and balances cheekbones.</p>
+                        <div class="hairstyle-meta">
+                            <div class="hairstyle-maintenance">Medium Maintenance</div>
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="#" class="btn btn-primary">View Details</a>
+                            <a href="#" class="btn btn-secondary">Find Shops</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="hairstyle-card" data-gender="female" data-face-shape="triangle">
+                    <div class="hairstyle-image">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Side-Swept Bangs">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Triangle Face</span>
+                                <span class="badge badge-accent">Long</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Side-Swept Bangs</h3>
+                        <p class="hairstyle-description">Long layers with side-swept bangs that add width to the forehead area.</p>
+                        <div class="hairstyle-meta">
+                            <div class="hairstyle-maintenance">Medium Maintenance</div>
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="#" class="btn btn-primary">View Details</a>
+                            <a href="#" class="btn btn-secondary">Find Shops</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 7 -->
+                <div class="hairstyle-card" data-gender="male" data-face-shape="oval">
+                    <div class="hairstyle-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Classic Fade">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Oval Face</span>
+                                <span class="badge badge-accent">Short</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Classic Fade</h3>
+                        <p class="hairstyle-description">Clean fade with textured top that works well with oval face proportions.</p>
+                        <div class="hairstyle-meta">
+                            <div class="hairstyle-maintenance">Low Maintenance</div>
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="#" class="btn btn-primary">View Details</a>
+                            <a href="#" class="btn btn-secondary">Find Shops</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 8 -->
+                <div class="hairstyle-card" data-gender="female" data-face-shape="diamond">
+                    <div class="hairstyle-image">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80" alt="Chin-Length Bob">
+                        <div class="hairstyle-overlay">
+                            <div class="hairstyle-tags">
+                                <span class="badge badge-primary">Diamond Face</span>
+                                <span class="badge badge-accent">Short</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hairstyle-content">
+                        <h3 class="hairstyle-title">Chin-Length Bob</h3>
+                        <p class="hairstyle-description">Blunt bob that hits at chin level to add width to the narrow jawline.</p>
+                        <div class="hairstyle-meta">
+                            <div class="hairstyle-maintenance">Low Maintenance</div>
+                        </div>
+                        <div class="hairstyle-actions">
+                            <a href="#" class="btn btn-primary">View Details</a>
+                            <a href="#" class="btn btn-secondary">Find Shops</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
-        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between text-sm">
-            <div>
-                <p class="font-rufina text-2xl">Pyin Mal</p>
-                <p class="text-neutral-400 dark:text-neutral-500">Wardrobe & grooming intelligence.</p>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <p class="footer-logo">Pyin Mal</p>
+                    <p class="footer-tagline">Wardrobe & grooming intelligence.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-copyright">© 2025 Pyin Mal. All rights reserved.</div>
             </div>
-            <div class="flex flex-wrap gap-6 text-neutral-400 dark:text-neutral-500">
-                <a href="privacy.html" class="hover:text-white">Privacy</a>
-                <a href="terms.html" class="hover:text-white">Terms</a>
-                <a href="contact.html" class="hover:text-white">Contact</a>
-            </div>
-            <div class="text-neutral-500 dark:text-neutral-400 text-xs">© 2025 Pyin Mal. All rights reserved.</div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/animations.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const faceFilter = document.getElementById('face-filter');
-            const textureFilter = document.getElementById('texture-filter');
-            const careFilter = document.getElementById('care-filter');
-            const cards = Array.from(document.querySelectorAll('[data-hair-card]'));
-
-            function applyFilters() {
-                const face = faceFilter.value;
-                const texture = textureFilter.value;
-                const care = careFilter.value;
-
-                cards.forEach(card => {
-                    const matchesFace = face === 'all' || card.dataset.face === face;
-                    const matchesTexture = texture === 'all' || card.dataset.texture === texture;
-                    const matchesCare = care === 'all' || card.dataset.maintenance === care;
-                    if (matchesFace && matchesTexture && matchesCare) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            
+            // Update icon based on theme
+            const icon = themeToggle.querySelector('svg');
+            if (body.classList.contains('dark')) {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
             }
-
-            [faceFilter, textureFilter, careFilter].forEach(select => {
-                select.addEventListener('change', applyFilters);
-            });
-
-            applyFilters();
         });
+        
+        // Gender Tabs
+        const genderTabs = document.querySelectorAll('.gender-tab');
+        const faceShapeFilters = document.querySelectorAll('.face-shape-filter');
+        const hairstyleCards = document.querySelectorAll('.hairstyle-card');
+        
+        genderTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                genderTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                filterHairstyles();
+            });
+        });
+        
+        faceShapeFilters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                faceShapeFilters.forEach(f => f.classList.remove('active'));
+                filter.classList.add('active');
+                filterHairstyles();
+            });
+        });
+        
+        function filterHairstyles() {
+            const activeGender = document.querySelector('.gender-tab.active').dataset.gender;
+            const activeFaceShape = document.querySelector('.face-shape-filter.active').dataset.faceShape;
+            
+            hairstyleCards.forEach(card => {
+                const cardGender = card.dataset.gender;
+                const cardFaceShape = card.dataset.faceShape;
+                
+                const genderMatch = activeGender === 'all' || cardGender === activeGender;
+                const faceShapeMatch = activeFaceShape === 'all' || cardFaceShape === activeFaceShape;
+                
+                if (genderMatch && faceShapeMatch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Scan Options
+        const scanOptions = document.querySelectorAll('.scan-option');
+        
+        scanOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                scanOptions.forEach(o => o.style.borderColor = 'rgba(255, 255, 255, 0.2)');
+                option.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+            });
+        });
+        
     </script>
 </body>
 </html>
-

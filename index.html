@@ -24,57 +24,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        .btn-primary {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
-            border: none;
-            transition: all 0.3s ease;
-        }
         
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #4338ca, #6d28d9);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            border: none;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            background: linear-gradient(135deg, #0d9668, #047857);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
-        }
-        
-        .btn-accent {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            border: none;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-accent:hover {
-            background: linear-gradient(135deg, #d97706, #b45309);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #4f46e5;
-            color: #4f46e5;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-outline:hover {
-            background: #4f46e5;
-            color: white;
-            transform: translateY(-2px);
-        }
         
         .section-card {
             border-radius: 16px;
@@ -106,17 +56,17 @@
     </style>
 </head>
 <body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
-    <!-- Navigation Header -->
+    <!-- Navigation -->
     <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
         <nav class="container-custom">
             <div class="flex items-center justify-between h-16 gap-6">
-                <a href="index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
                     <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
                     <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
                 </a>
 
                 <div class="hidden lg:flex items-center space-x-6">
-                    <a href="index.html" class="nav-link nav-link-active">Home</a>
+                    <a href="../index.html" class="nav-link">Home</a>
                     <div class="relative" data-dropdown="features">
                         <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
                             Features
@@ -124,14 +74,14 @@
                         </button>
                         <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
                             <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
-                                <li><a href="pages/haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
-                                <li><a href="pages/digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
-                                <li><a href="pages/model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                                <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
                             </ul>
                         </div>
                     </div>
-                    <a href="#face-analysis" class="nav-link">Face Analysis</a>
-                    <a href="pages/shop-browsing.html" class="nav-link">Shop</a>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
                     <div class="relative" data-dropdown="more">
                         <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
                             More
@@ -139,15 +89,15 @@
                         </button>
                         <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
                             <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
-                                <a href="pages/reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
-                                <a href="pages/contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
-                                <a href="pages/about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
-                                <a href="pages/faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <a href="reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
                                 <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
-                                <a href="pages/pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
-                                <a href="pages/testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
-                                <a href="pages/blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
-                                <a href="pages/locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
                             </div>
                         </div>
                     </div>
@@ -162,8 +112,8 @@
                     <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
                     </button>
-                    <a href="pages/login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
-                    <a href="pages/login.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
                     <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
@@ -172,33 +122,33 @@
 
             <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
                 <div class="pt-4 space-y-4">
-                    <a href="index.html" class="block nav-link nav-link-active">Home</a>
+                    <a href="../index.html" class="block nav-link">Home</a>
                     <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
                         <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
                         <div class="flex flex-col space-y-2">
-                            <a href="pages/haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
-                            <a href="pages/digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
-                            <a href="pages/model-preview.html" class="nav-link">Model Preview</a>
+                            <a href="haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
+                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
                         </div>
                     </div>
-                    <a href="#face-analysis" class="block nav-link">Face Analysis</a>
-                    <a href="pages/shop-browsing.html" class="block nav-link">Shop</a>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
                     <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
                         <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
                         <div class="flex flex-col space-y-2">
-                            <a href="pages/reviews.html" class="nav-link">Reviews</a>
-                            <a href="pages/contact.html" class="nav-link">Contact</a>
-                            <a href="pages/about.html" class="nav-link">About us</a>
-                            <a href="pages/faq.html" class="nav-link">FAQ</a>
-                            <a href="pages/pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
-                            <a href="pages/testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
-                            <a href="pages/blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
-                            <a href="pages/locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                            <a href="reviews.html" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link nav-link-active">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
                         </div>
                     </div>
                     <div class="flex flex-col gap-3">
-                        <a href="pages/login.html" target="_blank" class="btn btn-secondary w-full text-center">Sign In</a>
-                        <a href="pages/signup.html" target="_blank" class="btn btn-primary w-full text-center">Get Started</a>
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
                     </div>
                 </div>
             </div>
