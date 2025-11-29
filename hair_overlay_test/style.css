@@ -1,0 +1,48 @@
+/* Basic page layout */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #0b0b0c;
+  color: #e9e9ea;
+}
+
+.stage {
+  position: relative; /* establishes stacking and positioning context */
+  width: min(100%, 960px);
+  margin: 24px auto;
+  aspect-ratio: 3 / 4; /* camera portrait-ish; will be updated to match stream */
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Video is the base layer */
+.layer {
+  position: absolute;
+  inset: 0; /* top:0 right:0 bottom:0 left:0 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fill container nicely */
+}
+
+/* Canvas and hair are overlays above the video */
+.overlay {
+  position: absolute;
+  pointer-events: none; /* important: let clicks pass through */
+}
+
+#canvas {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#hair {
+  /* defaults; will be updated dynamically via JS */
+  left: 0;
+  top: 0;
+  width: 70%;
+  z-index: 3; /* ensure above video and canvas */
+}
