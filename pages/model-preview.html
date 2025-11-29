@@ -16,6 +16,15 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/main.css">
+    <style>
+    .outfit-layer {
+        pointer-events: auto !important;
+    }
+    #model-preview-container {
+        pointer-events: auto !important;
+        touch-action: none !important;
+    }
+    </style>
     
     <!-- Swiper CSS (CDN) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -155,6 +164,7 @@
                             </div>
                         </div>
                         <h2 class="font-rufina text-2xl font-bold mb-4 text-center">Preview</h2>
+                        <button id="fit-adjust-btn" class="btn btn-secondary w-full text-xs">Adjust Fit Mode</button>
 
                         <!-- AI Mode Instructions (shown only in AI mode) -->
                         <div id="ai-mode-instructions" class="hidden text-center text-sm text-neutral-600 dark:text-neutral-400 px-4 py-10">
@@ -440,7 +450,7 @@
                 }
             };
             
-            // ========== OUTFIT LAYER SYSTEM ==========
+            // ========== OUTFIT LAYER SYSTEM & FIT ADJUST MODE ==========
             function applyOutfitLayer(item) {
                 const container = document.getElementById('model-preview-container');
                 if (!container) return;
@@ -452,13 +462,26 @@
                 const existingLayer = container.querySelector(`.outfit-layer-${item.category}`);
                 if (existingLayer) existingLayer.remove();
                 
-                // Create new layer with fade-in
+                // Create new layer with optional saved transform and fade-in
                 const layer = document.createElement('img');
                 layer.src = src;
+                layer.style.pointerEvents = "auto";   // ensures dragging works
                 layer.alt = item.name;
                 layer.className = `outfit-layer outfit-layer-${item.category} absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300`;
                 layer.style.zIndex = getZIndexForCategory(item.category);
                 
+                if (window.applySavedTransform && item.id) {
+                    window.applySavedTransform(layer, item.id);
+                }
+
+                if (window.enableLayerDragging) {
+                    window.enableLayerDragging(layer, item);
+                }
+
+                if (window.fitAdjustMode) {
+                    layer.classList.add('ring-2', 'ring-primary-400');
+                }
+
                 container.appendChild(layer);
                 
                 // Trigger fade-in
@@ -470,6 +493,17 @@
             function getZIndexForCategory(category) {
                 const zIndexMap = { 'bottom': 10, 'top': 20, 'shoes': 5, 'accessories': 30 };
                 return zIndexMap[category] || 15;
+            }
+
+            function updateFitAdjustLayersUI() {
+                const layers = document.querySelectorAll('.outfit-layer');
+                layers.forEach(layer => {
+                    if (window.fitAdjustMode) {
+                        layer.classList.add('ring-2', 'ring-primary-400');
+                    } else {
+                        layer.classList.remove('ring-2', 'ring-primary-400');
+                    }
+                });
             }
             
             // ========== HAIRSTYLE SYSTEM ==========
@@ -554,6 +588,15 @@
             // Initialize model preview if not already done
             if (!window.modelPreview) {
                 window.modelPreview = new ModelPreview();
+            }
+
+            // Fit Adjust Mode toggle
+            const fitAdjustBtn = document.getElementById('fit-adjust-btn');
+            if (fitAdjustBtn) {
+                fitAdjustBtn.addEventListener('click', () => {
+                    window.fitAdjustMode = !window.fitAdjustMode;
+                    updateFitAdjustLayersUI();
+                });
             }
 
             // Reset button
