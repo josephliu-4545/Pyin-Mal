@@ -94,20 +94,49 @@
             box-shadow: 0 25px 40px rgba(15, 23, 42, 0.12);
         }
         .service-checkbox {
-            width: 1.25rem;
-            height: 1.25rem;
-            border-radius: 6px;
-            border: 2px solid rgba(148, 163, 184, 0.7);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #9CA3AF;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            position: relative;
+            transition: all 0.2s;
         }
         .service-checkbox.checked {
             border-color: #8B5CF6;
-            background: linear-gradient(135deg, #8B5CF6, #EC4899);
-            color: #fff;
+        }
+        
+        /* Category button styles */
+        .category-btn {
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .category-btn.active {
+            background-color: #4F46E5;
+            color: white;
+        }
+        
+        .category-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .category-btn:hover::after {
+            transform: translateX(0);
         }
         .service-item.disabled {
             opacity: 0.4;
@@ -665,21 +694,20 @@
         </div>
 
         <!-- Selected style -->
-        <div class="py-10 bg-neutral-50 dark:bg-dark-surface">
+        <div id="selected-hairstyle-card" class="py-10 bg-gradient-to-r from-primary-50 to-accent-50 dark:from-dark-surface dark:to-dark-card">
             <div class="container-custom max-w-4xl mx-auto" data-aos="fade-up">
-                <div class="bg-white dark:bg-dark-card rounded-3xl p-6 shadow-soft dark:shadow-soft-dark flex flex-col sm:flex-row gap-6 items-center">
-                    <div class="w-36 h-36 rounded-2xl overflow-hidden bg-neutral-200 dark:bg-dark-surface flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" alt="Selected hairstyle" class="w-full h-full object-cover">
+                <div class="bg-white dark:bg-dark-card rounded-3xl p-6 shadow-soft dark:shadow-soft-dark flex flex-col sm:flex-row gap-6 items-center transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                    <div class="w-40 h-40 rounded-2xl overflow-hidden border-4 border-white dark:border-dark-surface shadow-md flex-shrink-0">
+                        <img id="hairstyle-image" src="" alt="Selected hairstyle" class="w-full h-full object-cover">
                     </div>
                     <div class="flex-1 space-y-3 text-center sm:text-left">
-                        <p class="text-xs uppercase tracking-[0.4em] text-primary-500">From Model Preview</p>
-                        <h3 class="font-rufina text-2xl font-bold">Layered Bob</h3>
-                        <p class="text-neutral-600 dark:text-neutral-400 text-sm">A modern take on a classic bob with textured layers for movement. Pairs perfectly with the upcoming grooming drops.</p>
-                        <div class="flex flex-wrap justify-center sm:justify-start gap-2 text-xs">
-                            <span class="px-3 py-1 rounded-full bg-primary-50 text-primary-600 dark:bg-primary-900/20 dark:text-primary-200">Oval face</span>
-                            <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Medium length</span>
-                            <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-300">Medium upkeep</span>
+                        <p class="text-xs uppercase tracking-[0.4em] text-primary-500 dark:text-primary-400 font-medium">Selected Hairstyle</p>
+                        <h3 id="hairstyle-name" class="font-rufina text-2xl font-bold text-gray-900 dark:text-white"></h3>
+                        <p id="hairstyle-desc" class="text-neutral-600 dark:text-neutral-300 text-sm"></p>
+                        <div id="hairstyle-tags" class="flex flex-wrap justify-center sm:justify-start gap-2 text-xs">
+                            <!-- Tags will be inserted here by JavaScript -->
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -725,7 +753,8 @@
                                 <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="styling">Styling</button>
                                 <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="treatment">Treatment</button>
                             </div>
-                            <div class="space-y-3">
+                            <div class="space-y-3 services-container">
+                                <!-- First 4 services will be visible by default -->
                                 <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
                         <div>
                                         <p class="font-semibold text-sm">Classic Haircut</p>
@@ -765,13 +794,83 @@
                                         <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">50,000 MMK</span>
                                         <div class="service-checkbox" data-service="conditioning" data-price="50000"></div>
                                     </div>
-                        </div>
+                                </div>
+                                <!-- Additional services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Kids Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">For ages 12 and under</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">45,000 MMK</span>
+                                        <div class="service-checkbox" data-service="kids-cut" data-price="45000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="styling">
+                                    <div>
+                                        <p class="font-semibold text-sm">Blowout</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Professional blow dry</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">40,000 MMK</span>
+                                        <div class="service-checkbox" data-service="blowout" data-price="40000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Root Touch Up</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Regrowth coverage</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">85,000 MMK</span>
+                                        <div class="service-checkbox" data-service="root-touchup" data-price="85000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Buzz Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Classic clipper cut</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">40,000 MMK</span>
+                                        <div class="service-checkbox" data-service="buzz-cut" data-price="40000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Hair Spa</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Relaxing hair treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">65,000 MMK</span>
+                                        <div class="service-checkbox" data-service="hair-spa" data-price="65000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="styling">
+                                    <div>
+                                        <p class="font-semibold text-sm">Updo Styling</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Special occasion styling</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">75,000 MMK</span>
+                                        <div class="service-checkbox" data-service="updo" data-price="75000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Ombré</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Gradual color effect</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">150,000 MMK</span>
+                                        <div class="service-checkbox" data-service="ombre" data-price="150000"></div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
-                        <div class="flex items-center justify-between gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                        <div class="flex items-center justify-end border-t border-neutral-100 dark:border-dark-border p-6">
                             <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
-                            <button class="btn btn-secondary text-xs px-4 py-2">View details</button>
-                    </div>
+                        </div>
                 </article>
 
                     <!-- second card -->
@@ -789,8 +888,8 @@
                             </div>
                             <div class="flex flex-wrap gap-2 text-xs">
                                 <span class="px-3 py-1 rounded-full bg-primary-50 text-primary-600 dark:bg-primary-900/20 dark:text-primary-200">Modern</span>
-                                <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Express</span>
-                                <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-200">Student deal</span>
+                                <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Luxury</span>
+                                <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-200">Premium</span>
                             </div>
                         </div>
                         <div class="p-6 space-y-4">
@@ -800,64 +899,130 @@
                                 <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="coloring">Coloring</button>
                                 <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="styling">Styling</button>
                                 <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="treatment">Treatment</button>
-                    </div>
-                            <div class="space-y-3">
-                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
-                        <div>
-                                        <p class="font-semibold text-sm">Signature Cut</p>
-                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Custom cut + styling consult</p>
-                        </div>
-                                    <div class="flex items-center gap-3">
-                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">80,000 MMK</span>
-                                        <div class="service-checkbox" data-service="signature-cut" data-price="80000"></div>
-                        </div>
-                    </div>
+                            </div>
+                            <div class="space-y-3 services-container">
+                                <!-- First 4 services will be visible by default -->
                                 <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
                                     <div>
-                                        <p class="font-semibold text-sm">Skin Fade</p>
-                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Detailed fade work</p>
-                    </div>
-                                    <div class="flex items-center gap-3">
-                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">60,000 MMK</span>
-                                        <div class="service-checkbox" data-service="skin-fade" data-price="60000"></div>
+                                        <p class="font-semibold text-sm">Executive Fade</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Premium skin fade with detail</p>
                                     </div>
-                    </div>
-                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="coloring">
-                        <div>
-                                        <p class="font-semibold text-sm">Balayage</p>
-                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Hand-painted highlighting</p>
-                        </div>
                                     <div class="flex items-center gap-3">
-                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">175,000 MMK</span>
-                                        <div class="service-checkbox" data-service="balayage" data-price="175000"></div>
-                        </div>
-                    </div>
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">90,000 MMK</span>
+                                        <div class="service-checkbox" data-service="executive-fade" data-price="90000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Designer Undercut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Precision undercut with design</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">110,000 MMK</span>
+                                        <div class="service-checkbox" data-service="designer-undercut" data-price="110000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Platinum Blonde</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Full platinum transformation</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">220,000 MMK</span>
+                                        <div class="service-checkbox" data-service="platinum-blonde" data-price="220000"></div>
+                                    </div>
+                                </div>
                                 <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="styling">
                                     <div>
-                                        <p class="font-semibold text-sm">Blowout & Style</p>
-                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Finish + styling</p>
-                    </div>
-                                    <div class="flex items-center gap-3">
-                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">50,000 MMK</span>
-                                        <div class="service-checkbox" data-service="blowout" data-price="50000"></div>
+                                        <p class="font-semibold text-sm">Luxury Styling</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Premium products + finish</p>
                                     </div>
-                    </div>
-                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="treatment">
-                        <div>
-                                        <p class="font-semibold text-sm">Scalp Treatment</p>
-                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Therapeutic scalp care</p>
-                        </div>
                                     <div class="flex items-center gap-3">
-                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">65,000 MMK</span>
-                                        <div class="service-checkbox" data-service="scalp-treatment" data-price="65000"></div>
-                        </div>
-                    </div>
-                        </div>
-                    </div>
-                        <div class="flex items-center justify-between gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
-                            <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
-                            <button class="btn btn-secondary text-xs px-4 py-2">View details</button>
-                    </div>
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">75,000 MMK</span>
+                                        <div class="service-checkbox" data-service="luxury-styling" data-price="75000"></div>
+                                    </div>
+                                </div>
+                                <!-- Additional services (initially hidden) -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Gold Therapy</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">24K gold infused treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">120,000 MMK</span>
+                                        <div class="service-checkbox" data-service="gold-therapy" data-price="120000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Neon Lights</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Vibrant fashion colors</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">180,000 MMK</span>
+                                        <div class="service-checkbox" data-service="neon-lights" data-price="180000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Precision Beard</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Detailed beard sculpting</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">60,000 MMK</span>
+                                        <div class="service-checkbox" data-service="precision-beard" data-price="60000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="styling">
+                                    <div>
+                                        <p class="font-semibold text-sm">Texture Play</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Multi-dimensional styling</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">85,000 MMK</span>
+                                        <div class="service-checkbox" data-service="texture-play" data-price="85000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Diamond Glow</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Luxury shine treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">150,000 MMK</span>
+                                        <div class="service-checkbox" data-service="diamond-glow" data-price="150000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Smoke & Mirrors</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Smokey color melt</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">200,000 MMK</span>
+                                        <div class="service-checkbox" data-service="smoke-mirrors" data-price="200000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Modern Mullet</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Contemporary retro cut</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">95,000 MMK</span>
+                                        <div class="service-checkbox" data-service="modern-mullet" data-price="95000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="styling">
+                                    <div>
+                                        <p class="font-semibold text-sm">Red Carpet Ready</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Event styling</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">120,000 MMK</span>
+                                        <div class="service-checkbox" data-service="red-carpet" data-price="120000"></div>
+                                    </div>
+                                </div>
                 </article>
 
                     <!-- Additional cards (Gentleman, StyleLab, Precision) -->
@@ -887,7 +1052,8 @@
                                 <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="styling">Styling</button>
                                 <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="treatment">Treatment</button>
                             </div>
-                            <div class="space-y-3">
+                            <div class="space-y-3 services-container">
+                                <!-- First 4 services will be visible by default -->
                                 <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
                         <div>
                                         <p class="font-semibold text-sm">Traditional Cut</p>
@@ -928,12 +1094,92 @@
                                         <div class="service-checkbox" data-service="traditional-shave" data-price="60000"></div>
                                     </div>
                         </div>
+                                <!-- Additional services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Senior Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">For gentlemen 60+</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">60,000 MMK</span>
+                                        <div class="service-checkbox" data-service="senior-cut" data-price="60000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="styling">
+                                    <div>
+                                        <p class="font-semibold text-sm">Mustache Trim</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Precise mustache work</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">35,000 MMK</span>
+                                        <div class="service-checkbox" data-service="mustache-trim" data-price="35000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Beard Coloring</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Full beard color</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">75,000 MMK</span>
+                                        <div class="service-checkbox" data-service="beard-color" data-price="75000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Hot Towel Treatment</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Relaxing facial treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">45,000 MMK</span>
+                                        <div class="service-checkbox" data-service="hot-towel" data-price="45000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Buzz Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Classic clipper cut</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">40,000 MMK</span>
+                                        <div class="service-checkbox" data-service="buzz-cut" data-price="40000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="styling">
+                                    <div>
+                                        <p class="font-semibold text-sm">Hair Tattoo</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Design shave</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">65,000 MMK</span>
+                                        <div class="service-checkbox" data-service="hair-tattoo" data-price="65000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Highlights</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Partial highlighting</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">120,000 MMK</span>
+                                        <div class="service-checkbox" data-service="highlights" data-price="120000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Scalp Massage</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Therapeutic treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">40,000 MMK</span>
+                                        <div class="service-checkbox" data-service="scalp-massage" data-price="40000"></div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
-                        <div class="flex items-center justify-between gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                        <div class="flex items-center justify-end border-t border-neutral-100 dark:border-dark-border p-6">
                             <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
-                            <button class="btn btn-secondary text-xs px-4 py-2">View details</button>
-                    </div>
+                        </div>
                 </article>
 
                     <article class="barber-card relative bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden" data-barber="style-lab" data-aos="fade-up" data-aos-delay="100">
@@ -962,7 +1208,8 @@
                                 <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="styling">Styling</button>
                                 <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="treatment">Treatment</button>
                             </div>
-                            <div class="space-y-3">
+                            <div class="space-y-3 services-container">
+                                <!-- First 4 services will be visible by default -->
                                 <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
                         <div>
                                         <p class="font-semibold text-sm">Creative Cut</p>
@@ -1003,12 +1250,92 @@
                                         <div class="service-checkbox" data-service="color-correction" data-price="175000"></div>
                             </div>
                     </div>
+                                <!-- Additional services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Undercut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Edgy undercut style</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">85,000 MMK</span>
+                                        <div class="service-checkbox" data-service="undercut" data-price="85000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="styling">
+                                    <div>
+                                        <p class="font-semibold text-sm">Updo Styling</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Elegant formal style</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">90,000 MMK</span>
+                                        <div class="service-checkbox" data-service="updo-styling" data-price="90000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Ombré</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Gradual color effect</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">160,000 MMK</span>
+                                        <div class="service-checkbox" data-service="ombre" data-price="160000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Hair Spa</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Deep conditioning</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">75,000 MMK</span>
+                                        <div class="service-checkbox" data-service="hair-spa" data-price="75000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Pixie Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Short and stylish</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">95,000 MMK</span>
+                                        <div class="service-checkbox" data-service="pixie-cut" data-price="95000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="styling">
+                                    <div>
+                                        <p class="font-semibold text-sm">Bridal Styling</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Wedding day look</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">120,000 MMK</span>
+                                        <div class="service-checkbox" data-service="bridal-style" data-price="120000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Fashion Colors</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Vibrant fashion shades</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">180,000 MMK</span>
+                                        <div class="service-checkbox" data-service="fashion-colors" data-price="180000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Keratin Treatment</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Smoothing treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">200,000 MMK</span>
+                                        <div class="service-checkbox" data-service="keratin" data-price="200000"></div>
+                                    </div>
+                                </div>
                             </div>
                             </div>
-                        <div class="flex items-center justify-between gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                        <div class="flex items-center justify-end border-t border-neutral-100 dark:border-dark-border p-6">
                             <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
-                            <button class="btn btn-secondary text-xs px-4 py-2">View details</button>
-                            </div>
+                        </div>
                         </article>
 
                     <article class="barber-card relative bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden" data-barber="precision" data-aos="fade-up" data-aos-delay="150">
@@ -1037,7 +1364,8 @@
                                 <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="styling">Styling</button>
                                 <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="treatment">Treatment</button>
             </div>
-                            <div class="space-y-3">
+                            <div class="space-y-3 services-container">
+                                <!-- First 4 services will be visible by default -->
                                 <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
                                     <div>
                                         <p class="font-semibold text-sm">Executive Cut</p>
@@ -1078,11 +1406,560 @@
                                         <div class="service-checkbox" data-service="express-treatment" data-price="35000"></div>
                     </div>
                 </div>
+                                <!-- Additional services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Precision Fade</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Sharp fade with detail work</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">80,000 MMK</span>
+                                        <div class="service-checkbox" data-service="precision-fade" data-price="80000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="styling">
+                                    <div>
+                                        <p class="font-semibold text-sm">Executive Styling</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Business-appropriate finish</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">55,000 MMK</span>
+                                        <div class="service-checkbox" data-service="executive-style" data-price="55000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Root Touch-Up</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Professional coverage</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">90,000 MMK</span>
+                                        <div class="service-checkbox" data-service="root-touchup" data-price="90000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Scalp Treatment</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Therapeutic care</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">60,000 MMK</span>
+                                        <div class="service-checkbox" data-service="scalp-treatment" data-price="60000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Beard Trim & Shape</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Precision beard work</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">40,000 MMK</span>
+                                        <div class="service-checkbox" data-service="beard-trim" data-price="40000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="styling">
+                                    <div>
+                                        <p class="font-semibold text-sm">Hairline Design</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Precise hairline work</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">45,000 MMK</span>
+                                        <div class="service-checkbox" data-service="hairline-design" data-price="45000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="coloring">
+                                    <div>
+                                        <p class="font-semibold text-sm">Full Color</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Complete color service</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">120,000 MMK</span>
+                                        <div class="service-checkbox" data-service="full-color" data-price="120000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface hidden" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Deep Conditioning</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Intensive treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">50,000 MMK</span>
+                                        <div class="service-checkbox" data-service="deep-conditioning" data-price="50000"></div>
+                                    </div>
+                                </div>
             </div>
         </div>
-                        <div class="flex items-center justify-between gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                        <div class="flex items-center justify-end gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
                             <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
-                            <button class="btn btn-secondary text-xs px-4 py-2">View details</button>
+                        </div>
+                    </article>
+
+                    <!-- New Barber Shop 1 -->
+                    <article class="barber-card relative bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden" data-barber="royal-grooming" data-aos="fade-up" data-aos-delay="200">
+                        <div class="border-b border-neutral-100 dark:border-dark-border p-6 space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover" alt="Royal Grooming">
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-rufina text-xl font-bold">Royal Grooming Lounge</h4>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">★★★★★ · 4.9 (142)</p>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">456 Luxury Avenue</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-3 py-1 rounded-full bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-200">Luxury</span>
+                                <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Online booking</span>
+                                <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-200">VIP Lounge</span>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                                <button class="category-btn active px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="all">All</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="haircut">Haircut</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="treatment">Treatment</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="luxury">Luxury</button>
+                            </div>
+                            <div class="space-y-3 services-container">
+                                <!-- First 4 services will be visible by default -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Royal Haircut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Premium cut with royal treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">85,000 MMK</span>
+                                        <div class="service-checkbox" data-service="royal-haircut" data-price="85000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Executive Style</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Business professional cut</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">95,000 MMK</span>
+                                        <div class="service-checkbox" data-service="executive-style" data-price="95000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Luxury Fade</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Precision fade with detail work</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">110,000 MMK</span>
+                                        <div class="service-checkbox" data-service="luxury-fade" data-price="110000"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Treatment Services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Gold Hair Treatment</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Luxury hair restoration</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">120,000 MMK</span>
+                                        <div class="service-checkbox" data-service="gold-treatment" data-price="120000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Diamond Scalp Therapy</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Premium scalp treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">90,000 MMK</span>
+                                        <div class="service-checkbox" data-service="diamond-scalp" data-price="90000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Keratin Smoothing</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Professional smoothing treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">150,000 MMK</span>
+                                        <div class="service-checkbox" data-service="keratin-smoothing" data-price="150000"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Luxury Services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="luxury">
+                                    <div>
+                                        <p class="font-semibold text-sm">Royal Shave</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Hot towel & straight razor</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">60,000 MMK</span>
+                                        <div class="service-checkbox" data-service="royal-shave" data-price="60000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="luxury">
+                                    <div>
+                                        <p class="font-semibold text-sm">VIP Grooming Package</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Full service experience</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">200,000 MMK</span>
+                                        <div class="service-checkbox" data-service="vip-package" data-price="200000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="luxury">
+                                    <div>
+                                        <p class="font-semibold text-sm">24K Gold Facial</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Luxury facial treatment</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">130,000 MMK</span>
+                                        <div class="service-checkbox" data-service="gold-facial" data-price="130000"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Beard Trim & Shape</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Precision beard grooming</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">50,000 MMK</span>
+                                        <div class="service-checkbox" data-service="beard-trim" data-price="50000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="treatment">
+                                    <div>
+                                        <p class="font-semibold text-sm">Hair Spa Treatment</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Relaxing hair therapy</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">80,000 MMK</span>
+                                        <div class="service-checkbox" data-service="hair-spa" data-price="80000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="luxury">
+                                    <div>
+                                        <p class="font-semibold text-sm">Champagne Service</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Premium beverage with service</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">40,000 MMK</span>
+                                        <div class="service-checkbox" data-service="champagne" data-price="40000"></div>
+                                    </div>
+                                </div>
+                                <!-- Additional services (hidden by default) -->
+                                <div class="additional-services hidden space-y-3"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-end gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                            <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
+                        </div>
+                    </article>
+
+                    <!-- New Barber Shop 2 -->
+                    <article class="barber-card relative bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden" data-barber="urban-barber" data-aos="fade-up" data-aos-delay="250">
+                        <div class="border-b border-neutral-100 dark:border-dark-border p-6 space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1585747860715-2ba90756fbc7?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover" alt="The Urban Barber">
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-rufina text-xl font-bold">The Urban Barber</h4>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">★★★★☆ · 4.7 (98)</p>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">789 Downtown Street</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-3 py-1 rounded-full bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-200">Trendy</span>
+                                <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Online booking</span>
+                                <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-200">Walk-ins</span>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                                <button class="category-btn active px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="all">All</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="haircut">Haircut</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="beard">Beard</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="fade">Fade</button>
+                            </div>
+                            <div class="space-y-3 services-container">
+                                <!-- First 4 services will be visible by default -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Urban Fade</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Precision fade with scissors on top</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">55,000 MMK</span>
+                                        <div class="service-checkbox" data-service="urban-fade" data-price="55000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">High & Tight</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Military style precision cut</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">60,000 MMK</span>
+                                        <div class="service-checkbox" data-service="high-tight" data-price="60000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Taper Fade</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Gradual fade with clean lines</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">50,000 MMK</span>
+                                        <div class="service-checkbox" data-service="taper-fade" data-price="50000"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Beard Services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="beard">
+                                    <div>
+                                        <p class="font-semibold text-sm">Beard Sculpt</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Detailed beard shaping</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">40,000 MMK</span>
+                                        <div class="service-checkbox" data-service="beard-sculpt" data-price="40000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="beard">
+                                    <div>
+                                        <p class="font-semibold text-sm">Beard Coloring</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Professional beard color</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">45,000 MMK</span>
+                                        <div class="service-checkbox" data-service="beard-color" data-price="45000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="beard">
+                                    <div>
+                                        <p class="font-semibold text-sm">Beard Treatment</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Conditioning & styling</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">35,000 MMK</span>
+                                        <div class="service-checkbox" data-service="beard-treatment" data-price="35000"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Fade Services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="fade">
+                                    <div>
+                                        <p class="font-semibold text-sm">Skin Fade</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Ultra-clean skin fade</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">65,000 MMK</span>
+                                        <div class="service-checkbox" data-service="skin-fade" data-price="65000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="fade">
+                                    <div>
+                                        <p class="font-semibold text-sm">Burst Fade</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Circular fade style</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">70,000 MMK</span>
+                                        <div class="service-checkbox" data-service="burst-fade" data-price="70000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="fade">
+                                    <div>
+                                        <p class="font-semibold text-sm">Temple Fade</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Temple-focused fade style</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">60,000 MMK</span>
+                                        <div class="service-checkbox" data-service="temple-fade" data-price="60000"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                                    <div>
+                                        <p class="font-semibold text-sm">Kids Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">For the little ones</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">40,000 MMK</span>
+                                        <div class="service-checkbox" data-service="kids-cut" data-price="40000"></div>
+                                    </div>
+                                </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="beard">
+                                    <div>
+                                        <p class="font-semibold text-sm">Hot Towel Shave</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Classic straight razor shave</p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">50,000 MMK</span>
+                                        <div class="service-checkbox" data-service="hot-towel" data-price="50000"></div>
+                                    </div>
+                                </div>
+                                <!-- Additional services (hidden by default) -->
+                                <div class="additional-services hidden space-y-3"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-end gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                            <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
+                        </div>
+                    </article>
+
+                    <!-- New Barber Shop 3 -->
+                    <article class="barber-card relative bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden" data-barber="classic-cuts" data-aos="fade-up">
+                        <div class="border-b border-neutral-100 dark:border-dark-border p-6 space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582cd35?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover" alt="Classic Cuts">
+                    </div>
+                                <div class="flex-1">
+                                    <h4 class="font-rufina text-xl font-bold">Classic Cuts</h4>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">★★★★★ · 4.8 (112)</p>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">321 Heritage Road</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-3 py-1 rounded-full bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-200">Classic</span>
+                                <span class="px-3 py-1 rounded-full bg-accent-50 text-accent-600 dark:bg-accent-900/20 dark:text-accent-200">Appointment only</span>
+                                <span class="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 dark:bg-dark-card dark:text-neutral-200">Veteran Owned</span>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                                <button class="category-btn active px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="all">All</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="haircut">Haircut</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="shave">Shave</button>
+                                <button class="category-btn px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-dark-surface" data-category="styling">Styling</button>
+                            </div>
+                            <div class="space-y-3 services-container">
+                                <!-- First 4 services will be visible by default -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                        <div>
+                                        <p class="font-semibold text-sm">Classic Taper</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Traditional taper cut</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">50,000 MMK</span>
+                                        <div class="service-checkbox" data-service="classic-taper" data-price="50000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                        <div>
+                                        <p class="font-semibold text-sm">Pompadour</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Classic voluminous style</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">65,000 MMK</span>
+                                        <div class="service-checkbox" data-service="pompadour" data-price="65000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                        <div>
+                                        <p class="font-semibold text-sm">Scissor Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Precision scissor work</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">55,000 MMK</span>
+                                        <div class="service-checkbox" data-service="scissor-cut" data-price="55000"></div>
+                        </div>
+                    </div>
+
+                                <!-- Shave Services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="shave">
+                        <div>
+                                        <p class="font-semibold text-sm">Hot Towel Shave</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Traditional straight razor</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">45,000 MMK</span>
+                                        <div class="service-checkbox" data-service="hot-towel-shave" data-price="45000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="shave">
+                        <div>
+                                        <p class="font-semibold text-sm">Royal Shave</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Deluxe straight razor experience</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">60,000 MMK</span>
+                                        <div class="service-checkbox" data-service="royal-shave" data-price="60000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="shave">
+                        <div>
+                                        <p class="font-semibold text-sm">Beard Trim & Line Up</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Sharp, clean lines</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">35,000 MMK</span>
+                                        <div class="service-checkbox" data-service="beard-lineup" data-price="35000"></div>
+                        </div>
+                    </div>
+
+                                <!-- Styling Services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="styling">
+                        <div>
+                                        <p class="font-semibold text-sm">Hair & Beard Combo</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Complete grooming package</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">80,000 MMK</span>
+                                        <div class="service-checkbox" data-service="combo-grooming" data-price="80000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="styling">
+                        <div>
+                                        <p class="font-semibold text-sm">Classic Pomade Style</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Traditional hold & shine</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">30,000 MMK</span>
+                                        <div class="service-checkbox" data-service="pomade-style" data-price="30000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="styling">
+                        <div>
+                                        <p class="font-semibold text-sm">Texture & Volume</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">For fine or thinning hair</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">40,000 MMK</span>
+                                        <div class="service-checkbox" data-service="texture-volume" data-price="40000"></div>
+                        </div>
+                    </div>
+
+                                <!-- Additional Services -->
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="haircut">
+                        <div>
+                                        <p class="font-semibold text-sm">Senior Citizen Cut</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Classic style for seniors</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">40,000 MMK</span>
+                                        <div class="service-checkbox" data-service="senior-cut" data-price="40000"></div>
+                        </div>
+                    </div>
+                                <div class="service-item flex items-center justify-between gap-3 p-4 rounded-2xl bg-neutral-50 dark:bg-dark-surface" data-category="styling">
+                        <div>
+                                        <p class="font-semibold text-sm">Mustache Grooming</p>
+                                        <p class="text-xs text-neutral-500 dark:text-neutral-400">Precision mustache trim</p>
+                        </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold text-primary-600 dark:text-primary-300 text-sm">25,000 MMK</span>
+                                        <div class="service-checkbox" data-service="mustache-groom" data-price="25000"></div>
+                        </div>
+                    </div>
+                                <!-- Additional services (hidden by default) -->
+                                <div class="additional-services hidden space-y-3"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-end gap-4 border-t border-neutral-100 dark:border-dark-border p-6">
+                            <p class="font-semibold text-primary-600 dark:text-primary-300 text-sm">Total: <span class="total-price">0 MMK</span></p>
                         </div>
                     </article>
                 </div>
@@ -1180,7 +2057,7 @@
                 <a href="terms.html" class="hover:text-white">Terms</a>
                 <a href="contact.html" class="hover:text-white">Contact</a>
             </div>
-            <div class="text-neutral-500 dark:text-neutral-400 text-xs">© 2025 Pyin Mal. All rights reserved.</div>
+            <div class="text-neutral-500 dark:text-neutral-400 text-xs"> 2025 Pyin Mal. All rights reserved.</div>
         </div>
     </footer>
 
@@ -1190,9 +2067,129 @@
     <script src="../js/main.js"></script>
     <script src="../js/animations.js"></script>
     <script>
+        // Initialize view more button for a services container
+        function initViewMoreButton(container) {
+            const services = container.querySelectorAll('.service-item');
+            const visibleServices = Array.from(services).filter(s => 
+                window.getComputedStyle(s).display !== 'none'
+            );
+            
+            // Remove existing view more button if any
+            const existingBtn = container.nextElementSibling;
+            if (existingBtn && existingBtn.classList.contains('view-more-container')) {
+                existingBtn.remove();
+            }
+            
+            if (visibleServices.length > 4) {
+                // Hide all services beyond the first 4
+                visibleServices.forEach((service, index) => {
+                    if (index >= 4) {
+                        service.classList.add('hidden');
+                    } else {
+                        service.classList.remove('hidden');
+                    }
+                });
+                
+                // Add a "View more" button with enhanced styling
+                const viewMoreContainer = document.createElement('div');
+                viewMoreContainer.className = 'view-more-container text-center mt-4';
+                viewMoreContainer.innerHTML = `
+                    <button class="view-more-btn group relative inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white text-sm font-medium transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-95 overflow-hidden">
+                        <span class="relative z-10 flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-white transition-all duration-300 group-hover:translate-y-[-2px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                            <span class="transition-all duration-300 group-hover:tracking-wider">Show more</span>
+                        </span>
+                        <span class="absolute inset-0 w-0 bg-white/10 group-hover:w-full transition-all duration-500 ease-in-out"></span>
+                        <span class="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-white/80 group-hover:w-4/5 group-hover:left-[10%] transition-all duration-300"></span>
+                    </button>
+                `;
+                container.parentNode.insertBefore(viewMoreContainer, container.nextSibling);
+                
+                // Add click handler for the view more button
+                const viewMoreBtn = viewMoreContainer.querySelector('.view-more-btn');
+                viewMoreBtn.addEventListener('click', function() {
+                    visibleServices.forEach(service => {
+                        service.classList.remove('hidden');
+                    });
+                    viewMoreContainer.remove();
+                });
+            } else {
+                // Show all services if there are 4 or fewer
+                visibleServices.forEach(service => {
+                    service.classList.remove('hidden');
+                });
+            }
+        }
+        
+        // Initialize services - show only first 4 by default
+        function initServices() {
+            document.querySelectorAll('.services-container').forEach(container => {
+                const services = container.querySelectorAll('.service-item');
+                if (services.length > 4) {
+                    // Hide all services beyond the first 4
+                    services.forEach((service, index) => {
+                        if (index >= 4) {
+                            service.classList.add('hidden');
+                        }
+                    });
+                    
+                    // Add a "View more" button if not already present
+                    if (!container.nextElementSibling || !container.nextElementSibling.classList.contains('view-more-container')) {
+                        const viewMoreContainer = document.createElement('div');
+                        viewMoreContainer.className = 'view-more-container text-center mt-6';
+                        viewMoreContainer.innerHTML = `
+                            <button class="view-more-btn group relative inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white text-sm font-medium transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-95 overflow-hidden">
+                                <span class="relative z-10 flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-white transition-all duration-300 group-hover:translate-y-[-2px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                    <span class="transition-all duration-300 group-hover:tracking-wider">Show more</span>
+                                </span>
+                                <span class="absolute inset-0 w-0 bg-white/10 group-hover:w-full transition-all duration-500 ease-in-out"></span>
+                                <span class="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-white/80 group-hover:w-4/5 group-hover:left-[10%] transition-all duration-300"></span>
+                            </button>
+                        `;
+                        container.parentNode.insertBefore(viewMoreContainer, container.nextSibling);
+                        
+                        // Add click handler for the view more button
+                        const viewMoreBtn = viewMoreContainer.querySelector('.view-more-btn');
+                        viewMoreBtn.addEventListener('click', function() {
+                            services.forEach(service => {
+                                service.classList.remove('hidden');
+                            });
+                            viewMoreContainer.remove();
+                        });
+                    }
+                }
+            });
+        }
+        
         // Initialize AOS
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
             AOS.init({ duration: 600, once: true });
+            
+            // Initialize services
+            initServices();
+
+            // Check for URL parameter to set active tab
+            const urlParams = new URLSearchParams(window.location.search);
+            let tabParam = urlParams.get('tab');
+            
+            // Handle 'barber' parameter for backward compatibility
+            if (tabParam === 'barber') {
+                tabParam = 'barbers';
+            }
+            
+            if (tabParam) {
+                // Show the section based on URL parameter
+                showSection(tabParam);
+            }
+            
+            // Load selected hairstyle if any
+            loadSelectedHairstyle();
         });
 
         // Tab Navigation
@@ -1208,6 +2205,32 @@
                 // Refresh AOS for new section
                 setTimeout(() => AOS.refresh(), 100);
             }
+            // Filter services based on category
+            document.querySelectorAll('.category-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active state
+                    this.closest('.flex').querySelectorAll('.category-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    const servicesContainer = this.closest('.p-6').querySelector('.services-container');
+                    const services = servicesContainer.querySelectorAll('.service-item');
+                    
+                    services.forEach(service => {
+                        const serviceCategory = service.getAttribute('data-category');
+                        if (category === 'all' || serviceCategory === category) {
+                            service.style.display = 'flex';
+                        } else {
+                            service.style.display = 'none';
+                        }
+                    });
+                    
+                    // Reinitialize the view more button after filtering
+                    initViewMoreButton(servicesContainer);
+                });
+            });
             // Update tab buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -1905,6 +2928,47 @@
                     </div>
                 </article>
             `).join('');
+        }
+
+        // Handle selected hairstyle from URL
+        function loadSelectedHairstyle() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hairstyleData = urlParams.get('hairstyle');
+            const card = document.getElementById('selected-hairstyle-card');
+            
+            if (!hairstyleData) {
+                card.style.display = 'none';
+                return;
+            }
+
+            try {
+                const { name, image, description, tags } = JSON.parse(decodeURIComponent(hairstyleData));
+                
+                document.getElementById('hairstyle-name').textContent = name;
+                document.getElementById('hairstyle-desc').textContent = description;
+                
+                const imageEl = document.getElementById('hairstyle-image');
+                imageEl.src = image || 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80';
+                imageEl.alt = name;
+                
+                const tagsContainer = document.getElementById('hairstyle-tags');
+                tagsContainer.innerHTML = ''; // Clear any existing tags
+                
+                if (tags && Array.isArray(tags)) {
+                    tags.forEach(tag => {
+                        const tagEl = document.createElement('span');
+                        tagEl.className = 'px-3 py-1 rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-200';
+                        tagEl.textContent = tag;
+                        tagsContainer.appendChild(tagEl);
+                    });
+                }
+                
+                // Show the card
+                card.style.display = 'block';
+            } catch (e) {
+                console.error('Error parsing hairstyle data:', e);
+                card.style.display = 'none';
+            }
         }
 
         // Make functions globally available
