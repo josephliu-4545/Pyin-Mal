@@ -1349,23 +1349,35 @@
         }
 
         // Helper function to create product with grouped images
-        function createProductGroup(gender, fashionType, shop, baseName, images, productIndex) {
-            const id = `${gender}-${shop.toLowerCase().replace(/\s+/g, '-')}-${fashionType.toLowerCase().replace(/\s+/g, '-')}-${productIndex}`;
-            const name = baseName || `${fashionType} ${productIndex + 1}`;
+        function createProductGroup(gender, category, shop, baseName, images, index, id) {
+            const stableId = id || slugify(baseName);
+
+            const fashionType = category;
+            const name = baseName || `${fashionType} ${index + 1}`;
             const price = getMMKPrice(fashionType, shop);
-            
+
+            const lower = fashionType.toLowerCase();
+            const filterCategory =
+                lower.includes("top") || lower.includes("tee") || lower.includes("shirt") || lower.includes("hoodie")
+                    ? "top"
+                    : lower.includes("pant") || lower.includes("skirt") || lower.includes("longyi")
+                    ? "bottom"
+                    : lower.includes("set")
+                    ? "set"
+                    : "accessories";
+
             return {
-                id: id,
-                name: name,
-                shop: shop,
-                fashionType: fashionType,
-                gender: gender,
-                images: images, // Array of image paths
-                image: images[0], // Primary image (first one)
-                price: price,
-                category: fashionType.toLowerCase().includes('top') || fashionType.toLowerCase().includes('tee') || fashionType.toLowerCase().includes('shirt') ? 'top' :
-                         fashionType.toLowerCase().includes('pant') || fashionType.toLowerCase().includes('skirt') || fashionType.toLowerCase().includes('longyi') ? 'bottom' :
-                         fashionType.toLowerCase().includes('hoodie') ? 'top' : 'accessories'
+                id: stableId,
+                gender,
+                category: filterCategory,
+                shop,
+                baseName,
+                images,
+                image: images[0],
+                productIndex: index,
+                name,
+                price,
+                fashionType
             };
         }
 
@@ -1382,151 +1394,146 @@
             return grouped;
         }
 
-        // Build Fashion Products Data from folder structure
+        function slugify(str) {
+            return str
+                .toLowerCase()
+                .replace(/\.[^/.]+$/, "")          // remove extension
+                .replace(/[^a-z0-9]+/g, "-")       // replace spaces/symbols
+                .replace(/-+/g, "-")               // collapse ---
+                .replace(/^-|-$/g, "");            // trim dash
+        }
+
         function buildFashionProducts() {
             const products = [];
             let productIndex = 0;
 
-            // FEMALE PRODUCTS - Fashion Type First, Shop Second
-            // dress. top
-            const femaleDressTopShops = ['nami', 'Oro', 'T shirt collection'];
-            femaleDressTopShops.forEach(shop => {
-                const basePath = `../assets/images/Female/dress. top/${shop}`;
-                let imageList = [];
-                
-                if (shop === 'nami') {
-                    imageList = Array.from({length: 9}, (_, i) => `nami${i}.jpg`);
-                } else if (shop === 'Oro') {
-                    imageList = Array.from({length: 9}, (_, i) => `oro ${i + 1}.jpg`);
-                } else if (shop === 'T shirt collection') {
-                    imageList = ['crest tee.jpg', 'crest tee1.jpg', 'lizx tee1.jpg', 'lizx tee2.jpg', 'VAL3 03 tee1.jpg', 'VAL3 03 tee2.jpg', 'VAL3 spiral1.jpg', 'VAL3 spiral2.jpg', 'VAL3 spiral3.jpg'];
-                }
-                
+            function pushGroups(gender, fashionType, shop, basePath, imageList) {
                 const grouped = groupImagesByBaseName(imageList, basePath);
                 Object.keys(grouped).forEach(baseName => {
-                    products.push(createProductGroup('female', 'Dress Top', shop, baseName, grouped[baseName], productIndex++));
+                    const id = slugify(baseName);
+                    products.push(
+                        createProductGroup(
+                            gender,
+                            fashionType,
+                            shop,
+                            baseName,
+                            grouped[baseName],
+                            productIndex++,
+                            id
+                        )
+                    );
                 });
-            });
-
-            // dress.burmese
-            const femaleBurmeseShops = ['anastasia', 'Luna', 'luxe', 'Veronica'];
-            femaleBurmeseShops.forEach(shop => {
-                const basePath = `../assets/images/Female/dress.burmese/${shop}`;
-                const imageCount = shop === 'anastasia' ? 21 : shop === 'Luna' ? 12 : shop === 'luxe' ? 14 : 9;
-                const imageList = Array.from({length: imageCount}, (_, i) => 
-                    shop === 'anastasia' ? `anastasia${i}.jpg` :
-                    shop === 'Luna' ? `LUNA${i}.jpg` :
-                    shop === 'luxe' ? `LUXE${i}.jpg` :
-                    `veronica${i}.jpg`
-                );
-                
-                const grouped = groupImagesByBaseName(imageList, basePath);
-                Object.keys(grouped).forEach(baseName => {
-                    products.push(createProductGroup('female', 'Burmese Dress', shop, baseName, grouped[baseName], productIndex++));
-                });
-            });
-
-            // dress.set
-            const femaleSetShops = ['Luna', 'oro set'];
-            femaleSetShops.forEach(shop => {
-                const basePath = `../assets/images/Female/dress.set/${shop}`;
-                const imageCount = shop === 'Luna' ? 12 : 13;
-                const imageList = Array.from({length: imageCount}, (_, i) => 
-                    shop === 'Luna' ? `luna set${i + 1}.jpg` : `oro set${i + 1}.jpg`
-                );
-                
-                const grouped = groupImagesByBaseName(imageList, basePath);
-                Object.keys(grouped).forEach(baseName => {
-                    products.push(createProductGroup('female', 'Dress Set', shop, baseName, grouped[baseName], productIndex++));
-                });
-            });
-
-            // dress.skirt (no shop subfolder - use "Online Shop")
-            const basePath = `../assets/images/Female/dress.skirt`;
-            const skirtImages = Array.from({length: 4}, (_, i) => `oro skirt${i + 1}.jpg`);
-            const grouped = groupImagesByBaseName(skirtImages, basePath);
-            Object.keys(grouped).forEach(baseName => {
-                products.push(createProductGroup('female', 'Dress Skirt', 'Online Shop', baseName, grouped[baseName], productIndex++));
-            });
-
-            // MALE PRODUCTS - Shop First, Fashion Type Second (except Burmese dress for men)
-            // Burmese dress for men (no shop - use "Online Shop")
-            const burmeseBasePath = `../assets/images/Male/Burmese dress for men`;
-            const burmeseImages = [];
-            for (let i = 0; i < 14; i++) {
-                burmeseImages.push(i < 6 ? `longyi${i}.jpg` : `shirt & longyi ${i - 6}.jpg`);
             }
-            const burmeseGrouped = groupImagesByBaseName(burmeseImages, burmeseBasePath);
-            Object.keys(burmeseGrouped).forEach(baseName => {
-                products.push(createProductGroup('male', 'Burmese Dress', 'Online Shop', baseName, burmeseGrouped[baseName], productIndex++));
+
+            // ------------------------------
+            // FEMALE — Dress.Top
+            // ------------------------------
+            pushGroups("female", "Dress Top", "nami", "../assets/images/Female/dress. top/nami", 
+                Array.from({length: 9}, (_, i) => `nami${i}.jpg`)
+            );
+            pushGroups("female", "Dress Top", "Oro", "../assets/images/Female/dress. top/Oro", 
+                Array.from({length: 9}, (_, i) => `oro ${i+1}.jpg`)
+            );
+            pushGroups("female", "Dress Top", "T shirt collection", "../assets/images/Female/dress. top/T shirt collection",
+                ['crest tee.jpg','crest tee1.jpg','lizx tee1.jpg','lizx tee2.jpg','VAL3 03 tee1.jpg','VAL3 03 tee2.jpg','VAL3 spiral1.jpg','VAL3 spiral2.jpg','VAL3 spiral3.jpg']
+            );
+
+            // ------------------------------
+            // FEMALE — Burmese
+            // ------------------------------
+            const femaleBurmese = [
+                { shop:"anastasia", base:"../assets/images/Female/dress.burmese/anastasia", count:21, prefix:"anastasia" },
+                { shop:"Luna", base:"../assets/images/Female/dress.burmese/Luna", count:12, prefix:"LUNA" },
+                { shop:"luxe", base:"../assets/images/Female/dress.burmese/luxe", count:14, prefix:"LUXE" },
+                { shop:"Veronica", base:"../assets/images/Female/dress.burmese/Veronica", count:9, prefix:"veronica" }
+            ];
+
+            femaleBurmese.forEach(({shop, base, count, prefix}) => {
+                const list = Array.from({length: count}, (_, i) => `${prefix}${i}.jpg`);
+                pushGroups("female", "Burmese Dress", shop, base, list);
             });
 
-            // Malory
-            // Malory pants
-            const maloryPantsBasePath = `../assets/images/Male/Malory/pants`;
-            const maloryPants = ['cargo pant.jpg', 'long pant 1.jpg', 'long pant 3.jpg', 'long pant 6.jpg', 'long pant 7.jpg', 'long pant0.jpg.jpg', 'long pant2.jpg.jpg', 'long pant4.jpg', 'long pant5.jpg', 'short pant0.jpg', 'short pant1.jpg', 'short pant2.jpg', 'short pant3.jpg', 'styple pant0.jpg', 'styple pant1.jpg'];
-            const maloryPantsGrouped = groupImagesByBaseName(maloryPants, maloryPantsBasePath);
-            Object.keys(maloryPantsGrouped).forEach(baseName => {
-                products.push(createProductGroup('male', 'Pants', 'Malory', baseName, maloryPantsGrouped[baseName], productIndex++));
-            });
+            // ------------------------------
+            // FEMALE — Dress Set
+            // ------------------------------
+            pushGroups("female", "Dress Set", "Luna", "../assets/images/Female/dress.set/Luna",
+                Array.from({length:12}, (_, i)=>`luna set${i+1}.jpg`)
+            );
+            pushGroups("female", "Dress Set", "oro set", "../assets/images/Female/dress.set/oro set",
+                Array.from({length:13}, (_, i)=>`oro set${i+1}.jpg`)
+            );
 
-            // Malory T shirt
-            const maloryTeesBasePath = `../assets/images/Male/Malory/T shirt`;
-            const maloryTees = ['Bold prints tee0.jpg', 'Bold prints tee1.jpg', 'Dead Inside T-Shirt0.jpg', 'Dead Inside T-Shirt1.jpg', 'I LOVE HATERS TEE0.jpg', 'I LOVE HATERS TEE1.jpg', 'Let It Shine T-Shirt0.jpg', 'Let It Shine T-Shirt1.jpg', 'MENTAL TEE0.jpg', 'MENTAL TEE1.jpg', 'Myanmar Traditional Kayan People Tee0.jpg', 'Myanmar Traditional Kayan People Tee1.jpg', 'Myanmar Traditional Kayan People Tee2.jpg', 'Myanmar Traditional Kayan People Tee3.jpg', 'Purpose T-shirt0.jpg', 'Purpose T-shirt1.jpg', 'Traditional Burma\'s Puppet Tee0.jpg', 'Traditional Burma\'s Puppet Tee1.jpg'];
-            const maloryTeesGrouped = groupImagesByBaseName(maloryTees, maloryTeesBasePath);
-            Object.keys(maloryTeesGrouped).forEach(baseName => {
-                products.push(createProductGroup('male', 'T Shirt', 'Malory', baseName, maloryTeesGrouped[baseName], productIndex++));
-            });
+            // ------------------------------
+            // FEMALE — Dress Skirt
+            // ------------------------------
+            pushGroups("female", "Dress Skirt", "Online Shop", "../assets/images/Female/dress.skirt",
+                Array.from({length:4}, (_, i)=>`oro skirt${i+1}.jpg`)
+            );
 
-            // Nrf
-            // Nrf Hoodie
-            const nrfHoodiesBasePath = `../assets/images/Male/Nrf/Hoodie`;
-            const nrfHoodies = ['ABCD 2XL ZIP UP HOODIE0.jpg', 'ABCD 2XL ZIP UP HOODIE1.jpg', 'Aj V1 Hd 0.jpg', 'AJOHN V2 HOODIE.jpg', 'Bias Hd0.jpg', 'Lttv Hd 0.jpg', 'NRF Deathwish hoodie0.jpg', 'NRF Deathwish hoodie1.jpg', 'Nrf x Rowska shirt punk flower0.jpg', 'Nrf x Rowska shirt punk flower1.jpg', 'NRFC ZIP UP HOODIE GREY0.jpg', 'NRFC ZIP UP HOODIE GREY1.jpg', 'NRF™ + GAWLI 2.0hoodie0.jpg', 'NRF™ + GAWLI 2.0hoodie1.jpg', 'PRO-TECT DETACHABLE JACKET 0.jpg', 'PRO-TECT DETACHABLE JACKET 1.jpg', 'V1 INTRODUCTION Hoodie .jpg', 'V2 LOGO Hoodie 0.jpg', 'V2 LOGO Hoodie 1.jpg', 'V3 jacket olive green 0.jpg'];
-            const nrfHoodiesGrouped = groupImagesByBaseName(nrfHoodies, nrfHoodiesBasePath);
-            Object.keys(nrfHoodiesGrouped).forEach(baseName => {
-                products.push(createProductGroup('male', 'Hoodie', 'Nrf', baseName, nrfHoodiesGrouped[baseName], productIndex++));
-            });
+            // ------------------------------
+            // MALE — Burmese Dress
+            // ------------------------------
+            const burmese = [];
+            for (let i = 0; i < 14; i++) {
+                burmese.push(i < 6 ? `longyi${i}.jpg` : `shirt & longyi ${i-6}.jpg`);
+            }
+            pushGroups("male", "Burmese Dress", "Online Shop", "../assets/images/Male/Burmese dress for men", burmese);
 
-            // Nrf Tee
-            const nrfTeesBasePath = `../assets/images/Male/Nrf/Tee`;
-            const nrfTees = ['ABCD TEE.jpg', 'ABCD TEE0.jpg', 'ACID TSHIRT 0.jpg', 'ACID TSHIRT 1.jpg', 'AJOHN V4 0.jpg', 'AJOHN V4.jpg', 'AJOHN V41.jpg', 'LAPSES TSHIRT OATMEAL0.jpg', 'LAPSES TSHIRT OATMEAL1.jpg', 'LTTV 2.0 DOUBLELAYER 0.jpg', 'LTTV 2.0 DOUBLELAYER 1.jpg', 'nrf ajohn v4 tee.jpg', 'Nrf x rowska shirt 4 0.jpg', 'Nrf x rowska shirt 4 1.jpg', 'NRF+RG Premium tee0.jpg', 'NRF+RG Premium tee1.jpg', 'NRFC Jersey0.jpg', 'NRFC Jersey1.jpg', 'NRF™ + GAWLI 2.0 tee0.jpg', 'NRF™ + GAWLI 2.0 tee1.jpg', 'NRF™ + GAWLI 2.0 tee3.jpg', 'RUBBER TAG TSHIRT 0.jpg', 'RUBBER TAG TSHIRT 1.jpg', 'V4 logo tee0.jpg'];
-            const nrfTeesGrouped = groupImagesByBaseName(nrfTees, nrfTeesBasePath);
-            Object.keys(nrfTeesGrouped).forEach(baseName => {
-                products.push(createProductGroup('male', 'Tee', 'Nrf', baseName, nrfTeesGrouped[baseName], productIndex++));
-            });
+            // ------------------------------
+            // MALE — Malory Pants
+            // ------------------------------
+            pushGroups("male","Pants","Malory","../assets/images/Male/Malory/pants",
+                ['cargo pant.jpg','long pant 1.jpg','long pant 3.jpg','long pant 6.jpg','long pant 7.jpg','long pant0.jpg.jpg','long pant2.jpg.jpg','long pant4.jpg','long pant5.jpg','short pant0.jpg','short pant1.jpg','short pant2.jpg','short pant3.jpg','styple pant0.jpg','styple pant1.jpg']
+            );
 
-            // Set (outfit set from sian store)
-            const setBasePath = `../assets/images/Male/Set/outfit set from sian store`;
-            const setImages = Array.from({length: 23}, (_, i) => `set${i}.jpg`);
-            const setGrouped = groupImagesByBaseName(setImages, setBasePath);
-            Object.keys(setGrouped).forEach(baseName => {
-                products.push(createProductGroup('male', 'Set', 'outfit set from sian store', baseName, setGrouped[baseName], productIndex++));
-            });
+            // ------------------------------
+            // MALE — Malory Tees
+            // ------------------------------
+            pushGroups("male","T Shirt","Malory","../assets/images/Male/Malory/T shirt",
+                ['Bold prints tee0.jpg','Bold prints tee1.jpg','Dead Inside T-Shirt0.jpg','Dead Inside T-Shirt1.jpg','I LOVE HATERS TEE0.jpg','I LOVE HATERS TEE1.jpg','Let It Shine T-Shirt0.jpg','Let It Shine T-Shirt1.jpg','MENTAL TEE0.jpg','MENTAL TEE1.jpg','Myanmar Traditional Kayan People Tee0.jpg','Myanmar Traditional Kayan People Tee1.jpg','Myanmar Traditional Kayan People Tee2.jpg','Myanmar Traditional Kayan People Tee3.jpg','Purpose T-shirt0.jpg','Purpose T-shirt1.jpg','Traditional Burma\'s Puppet Tee0.jpg','Traditional Burma\'s Puppet Tee1.jpg']
+            );
 
-            // VAL3
-            // VAL3 Hoodie
-            const val3HoodiesBasePath = `../assets/images/Male/VAL3/Hoodie`;
-            const val3Hoodies = ['VAL3 crop hoodie 0.jpg', 'VAL3 crop hoodie 1.jpg', 'VAL3 crop hoodie 2.jpg', 'VAL3 hoodie 0.jpg', 'VAL3 hoodie 1.jpg', 'VAL3 hoodie 2.jpg'];
-            const val3HoodiesGrouped = groupImagesByBaseName(val3Hoodies, val3HoodiesBasePath);
-            Object.keys(val3HoodiesGrouped).forEach(baseName => {
-                products.push(createProductGroup('male', 'Hoodie', 'VAL3', baseName, val3HoodiesGrouped[baseName], productIndex++));
-            });
+            // ------------------------------
+            // MALE — NRF Hoodies
+            // ------------------------------
+            pushGroups("male","Hoodie","Nrf","../assets/images/Male/Nrf/Hoodie",
+                ['ABCD 2XL ZIP UP HOODIE0.jpg','ABCD 2XL ZIP UP HOODIE1.jpg','Aj V1 Hd 0.jpg','AJOHN V2 HOODIE.jpg','Bias Hd0.jpg','Lttv Hd 0.jpg','NRF Deathwish hoodie0.jpg','NRF Deathwish hoodie1.jpg','Nrf x Rowska shirt punk flower0.jpg','Nrf x Rowska shirt punk flower1.jpg','NRFC ZIP UP HOODIE GREY0.jpg','NRFC ZIP UP HOODIE GREY1.jpg','NRF™ + GAWLI 2.0hoodie0.jpg','NRF™ + GAWLI 2.0hoodie1.jpg','PRO-TECT DETACHABLE JACKET 0.jpg','PRO-TECT DETACHABLE JACKET 1.jpg','V1 INTRODUCTION Hoodie .jpg','V2 LOGO Hoodie 0.jpg','V2 LOGO Hoodie 1.jpg','V3 jacket olive green 0.jpg']
+            );
 
-            // VAL3 Pants
-            const val3PantsBasePath = `../assets/images/Male/VAL3/Pants`;
-            const val3Pants = ['VAL3 Sweat pants🍃0.jpg', 'VAL3 Sweat pants🍃1.jpg'];
-            const val3PantsGrouped = groupImagesByBaseName(val3Pants, val3PantsBasePath);
-            Object.keys(val3PantsGrouped).forEach(baseName => {
-                products.push(createProductGroup('male', 'Pants', 'VAL3', baseName, val3PantsGrouped[baseName], productIndex++));
-            });
+            // ------------------------------
+            // MALE — NRF Tee
+            // ------------------------------
+            pushGroups("male","Tee","Nrf","../assets/images/Male/Nrf/Tee",
+                ['ABCD TEE.jpg','ABCD TEE0.jpg','ACID TSHIRT 0.jpg','ACID TSHIRT 1.jpg','AJOHN V4 0.jpg','AJOHN V4.jpg','AJOHN V41.jpg','LAPSES TSHIRT OATMEAL0.jpg','LAPSES TSHIRT OATMEAL1.jpg','LTTV 2.0 DOUBLELAYER 0.jpg','LTTV 2.0 DOUBLELAYER 1.jpg','nrf ajohn v4 tee.jpg','Nrf x rowska shirt 4 0.jpg','Nrf x rowska shirt 4 1.jpg','NRF+RG Premium tee0.jpg','NRF+RG Premium tee1.jpg','NRFC Jersey0.jpg','NRFC Jersey1.jpg','NRF™ + GAWLI 2.0 tee0.jpg','NRF™ + GAWLI 2.0 tee1.jpg','NRF™ + GAWLI 2.0 tee3.jpg','RUBBER TAG TSHIRT 0.jpg','RUBBER TAG TSHIRT 1.jpg','V4 logo tee0.jpg']
+            );
 
-            // VAL3 T shirt
-            const val3TeesBasePath = `../assets/images/Male/VAL3/T shirt`;
-            const val3Tees = ['VAL3 03 tshirt 0.jpg', 'VAL3 03 tshirt 1.jpg', 'VAL3 03 tshirt 2.jpg', 'VAL3 ETHIC Tee0.jpg', 'VAL3 ETHIC Tee1.jpg', 'VAL3 Polo shirt.jpg', 'VAL3🌀Spiral tee0.jpg', 'VAL3🌀Spiral tee1.jpg', 'VAL3爱 Tee 0.jpg', 'VAL3爱 Tee 1.png', 'VAL3爱 Tee 2.jpg'];
-            const val3TeesGrouped = groupImagesByBaseName(val3Tees, val3TeesBasePath);
-            Object.keys(val3TeesGrouped).forEach(baseName => {
-                products.push(createProductGroup('male', 'T Shirt', 'VAL3', baseName, val3TeesGrouped[baseName], productIndex++));
-            });
+            // ------------------------------
+            // MALE — Sets
+            // ------------------------------
+            pushGroups("male","Set","outfit set from sian store","../assets/images/Male/Set/outfit set from sian store",
+                Array.from({length:23}, (_,i)=>`set${i}.jpg`)
+            );
+
+            // ------------------------------
+            // MALE — VAL3 Hoodie
+            // ------------------------------
+            pushGroups("male","Hoodie","VAL3","../assets/images/Male/VAL3/Hoodie",
+                ['VAL3 crop hoodie 0.jpg','VAL3 crop hoodie 1.jpg','VAL3 crop hoodie 2.jpg','VAL3 hoodie 0.jpg','VAL3 hoodie 1.jpg','VAL3 hoodie 2.jpg']
+            );
+
+            // ------------------------------
+            // MALE — VAL3 Pants
+            // ------------------------------
+            pushGroups("male","Pants","VAL3","../assets/images/Male/VAL3/Pants",
+                ['VAL3 Sweat pants🍃0.jpg','VAL3 Sweat pants🍃1.jpg']
+            );
+
+            // ------------------------------
+            // MALE — VAL3 Tee
+            // ------------------------------
+            pushGroups("male","T Shirt","VAL3","../assets/images/Male/VAL3/T shirt",
+                ['VAL3 03 tshirt 0.jpg','VAL3 03 tshirt 1.jpg','VAL3 03 tshirt 2.jpg','VAL3 ETHIC Tee0.jpg','VAL3 ETHIC Tee1.jpg','VAL3 Polo shirt.jpg','VAL3🌀Spiral tee0.jpg','VAL3🌀Spiral tee1.jpg','VAL3爱 Tee 0.jpg','VAL3爱 Tee 1.png','VAL3爱 Tee 2.jpg']
+            );
 
             return products;
         }
