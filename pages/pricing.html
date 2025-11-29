@@ -11,16 +11,55 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="../css/tailwind.css">
+    <!-- Tailwind CSS (cache-busted) -->
+    <link rel="stylesheet" href="../css/tailwind.css?v=pricing-v1">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/main.css">
+    <!-- Custom CSS (cache-busted) -->
+    <link rel="stylesheet" href="../css/main.css?v=pricing-v1">
 
-    <!-- AOS CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <!-- AOS CSS (cache-busted) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css?v=pricing-v1">
+
+    <style>
+        /* Selected plan visual state */
+        #plans .product-card.selected-plan {
+            border-width: 2px !important;
+            border-color: rgb(59,130,246) !important; /* primary-500 */
+            box-shadow: 0 0 20px rgba(59,130,246,0.6) !important;
+            background-color: rgba(255,255,255,0.7) !important;
+            transform: translateY(-6px) !important;
+            transition: all 0.25s ease !important;
+        }
+        .dark #plans .product-card.selected-plan {
+            background-color: rgba(24,24,27,0.5) !important;
+        }
+        .plan-feature-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+        }
+        .plan-feature-row:first-child {
+            padding-top: 0;
+        }
+        .plan-feature-row-icon {
+            width: 0.4rem;
+            height: 0.4rem;
+            border-radius: 9999px;
+            background-color: rgb(139,92,246); /* violet-500-ish */
+        }
+        /* Ensure comparison table text is bright in dark mode */
+        .dark .pricing-compare-table th,
+        .dark .pricing-compare-table td {
+            color: #ffffff !important;
+        }
+        .dark .pricing-compare-table .pricing-compare-value {
+            color: #ffffff !important;
+        }
+    </style>
 </head>
-<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-white theme-transition">
     <!-- Navigation -->
     <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
         <nav class="container-custom">
@@ -154,57 +193,159 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Free Plan -->
-                <article class="product-card p-6 flex flex-col gap-4" data-aos="fade-up">
+                <article class="product-card p-6 flex flex-col gap-4 rounded-3xl shadow-xl dark:shadow-none hover:-translate-y-1 hover:shadow-2xl cursor-pointer transition-all duration-300 backdrop-blur-xl bg-white/40 dark:bg-dark-card/20 border border-white/50 dark:border-white/10" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
                     <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Starter</p>
-                    <h3 class="font-rufina text-2xl">Free</h3>
-                    <p class="text-3xl font-rufina">$0<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / forever</span></p>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Perfect for exploring your style and getting basic recommendations.</p>
-                    <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Basic style recommendations</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> 1 haircut blueprint monthly</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Access to basic fashion library</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Community style challenges</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Email support</li>
+                    <h3 class="font-rufina text-2xl tracking-tight">Free</h3>
+                    <p class="text-3xl font-rufina font-bold text-primary-600 dark:text-primary-400">0 MMK<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / forever</span></p>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Perfect for exploring your style with limited recommendations and try-ons.</p>
+                    <ul class="space-y-1.5 text-sm text-neutral-600 dark:text-neutral-400">
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                            <span>Style recommendations - 5 tries</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                            <span>Haircut Try-On (MediaPipe FaceMesh) - 1 try per month</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                            <span>Model Preview (2D) - Unlimited</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>AI Model Preview - 0 tries</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No fashion library</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No grooming kits</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No consultations</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No support features</span>
+                        </li>
                     </ul>
-                    <a href="signup.html" class="btn btn-secondary mt-2">Get Started Free</a>
+                    <a href="signup.html" class="btn btn-secondary mt-2 hover:bg-neutral-100 dark:hover:bg-dark-card">Get Started Free</a>
                 </article>
                 
                 <!-- Monthly Plan -->
-                <article class="product-card p-6 flex flex-col gap-4 border-2 border-primary-500/40 shadow-soft dark:shadow-soft-dark relative" data-aos="fade-up" data-aos-delay="50">
-                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <article class="product-card p-6 pt-8 flex flex-col gap-4 shadow-soft dark:shadow-soft-dark relative rounded-3xl shadow-xl dark:shadow-none hover:-translate-y-1 hover:shadow-2xl cursor-pointer transition-all duration-300 backdrop-blur-xl bg-white/40 dark:bg-dark-card/20 border border-white/50 dark:border-white/10" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
                         <span class="bg-primary-600 text-white text-xs px-3 py-1 rounded-full">Most Popular</span>
                     </div>
                     <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Premium</p>
-                    <h3 class="font-rufina text-2xl">Monthly</h3>
-                    <p class="text-3xl font-rufina">$29<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / month</span></p>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">For style enthusiasts who want personalized recommendations and premium features.</p>
-                    <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Unlimited style recommendations</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> 5 haircut blueprints monthly</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Full fashion library access</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Model Preview sessions</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Priority email & chat support</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Seasonal grooming kits</li>
+                    <h3 class="font-rufina text-2xl tracking-tight">Monthly Premium</h3>
+                    <p class="text-3xl font-rufina font-bold text-primary-600 dark:text-primary-400">30,000 MMK<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / month</span></p>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">For style enthusiasts who want unlimited recommendations and more try-ons.</p>
+                    <ul class="space-y-1.5 text-sm text-neutral-600 dark:text-neutral-400">
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                            <span>Style recommendations - Unlimited</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                            <span>Haircut Try-On (FaceMesh) - 20 tries per month</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                            <span>Model Preview (2D) - Unlimited</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                            <span>AI Model Preview - 10 tries</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No fashion library</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No grooming kits</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No consultations</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No support features</span>
+                        </li>
                     </ul>
-                    <a href="signup.html" class="btn btn-primary mt-2">Start Monthly Plan</a>
+                    <a href="signup.html" class="btn btn-secondary mt-2 hover:shadow-[0_0_15px_rgba(139,92,246,0.5)]">Start Monthly Plan</a>
                 </article>
                 
                 <!-- Yearly Plan -->
-                <article class="product-card p-6 flex flex-col gap-4" data-aos="fade-up" data-aos-delay="100">
+                <article class="product-card p-6 flex flex-col gap-4 rounded-3xl shadow-xl dark:shadow-none hover:-translate-y-1 hover:shadow-2xl cursor-pointer transition-all duration-300 backdrop-blur-xl bg-white/40 dark:bg-dark-card/20 border border-white/50 dark:border-white/10" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
                     <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Premium</p>
-                    <h3 class="font-rufina text-2xl">Yearly</h3>
-                    <p class="text-3xl font-rufina">$279<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / year</span></p>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Best value for committed style lovers with all premium features at a discount.</p>
-                    <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Everything in Monthly plan</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Unlimited haircut blueprints</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Premium fashion library access</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Unlimited Model Preview sessions</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> VIP support & styling consultations</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Exclusive seasonal grooming boxes</li>
-                        <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-500"></span> Early access to new features</li>
+                    <h3 class="font-rufina text-2xl tracking-tight">Yearly Premium</h3>
+                    <p class="text-3xl font-rufina font-bold text-primary-600 dark:text-primary-400">250,000 MMK<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / year</span></p>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Best value for committed style lovers with unlimited access.</p>
+                    <ul class="space-y-1.5 text-sm text-neutral-600 dark:text-neutral-400">
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                            <span>Style recommendations - Unlimited</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                            <span>Haircut Try-On (FaceMesh) - Unlimited</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                            <span>Model Preview (2D) - Unlimited</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                            <span>AI Model Preview - Unlimited</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No fashion library</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No grooming kits</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No consultations</span>
+                        </li>
+                        <li class="plan-feature-row">
+                            <span class="plan-feature-row-icon"></span>
+                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                            <span>No support features</span>
+                        </li>
                     </ul>
-                    <a href="signup.html" class="btn btn-secondary mt-2">Save 20% Yearly</a>
+                    <a href="signup.html" class="btn btn-secondary mt-2 hover:bg-neutral-100 dark:hover:bg-dark-card">Save with Yearly Plan</a>
                 </article>
             </div>
         </div>
@@ -216,100 +357,89 @@
             <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
                 <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Compare</p>
                 <h2 class="font-rufina text-3xl font-bold mb-3">See all features at a glance</h2>
-                <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Choose the plan that works best for your style journey. All plans include our core styling technology.</p>
             </div>
-            <div class="overflow-x-auto product-card p-0" data-aos="fade-up">
-                <table class="min-w-full text-sm border-separate border-spacing-y-1">
-                    <thead class="text-left text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400">
-                        <tr>
-                            <th class="px-4 py-3">Features</th>
-                            <th class="px-4 py-3">Free</th>
-                            <th class="px-4 py-3">Monthly</th>
-                            <th class="px-4 py-3">Yearly</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-neutral-50 dark:bg-dark-surface">
-                            <td class="px-4 py-3">Style recommendations</td>
-                            <td class="px-4 py-3">Basic</td>
-                            <td class="px-4 py-3">Unlimited</td>
-                            <td class="px-4 py-3">Unlimited Premium</td>
-                        </tr>
-                        <tr class="bg-neutral-50/70 dark:bg-dark-surface/70">
-                            <td class="px-4 py-3">Haircut blueprints</td>
-                            <td class="px-4 py-3">1 per month</td>
-                            <td class="px-4 py-3">5 per month</td>
-                            <td class="px-4 py-3">Unlimited</td>
-                        </tr>
-                        <tr class="bg-neutral-50 dark:bg-dark-surface">
-                            <td class="px-4 py-3">Fashion library</td>
-                            <td class="px-4 py-3">Basic access</td>
-                            <td class="px-4 py-3">Full access</td>
-                            <td class="px-4 py-3">Premium access</td>
-                        </tr>
-                        <tr class="bg-neutral-50/70 dark:bg-dark-surface/70">
-                            <td class="px-4 py-3">Model Preview</td>
-                            <td class="px-4 py-3">-</td>
-                            <td class="px-4 py-3">5 sessions/month</td>
-                            <td class="px-4 py-3">Unlimited</td>
-                        </tr>
-                        <tr class="bg-neutral-50 dark:bg-dark-surface">
-                            <td class="px-4 py-3">Grooming kits</td>
-                            <td class="px-4 py-3">-</td>
-                            <td class="px-4 py-3">Seasonal</td>
-                            <td class="px-4 py-3">Exclusive boxes</td>
-                        </tr>
-                        <tr class="bg-neutral-50/70 dark:bg-dark-surface/70">
-                            <td class="px-4 py-3">Support</td>
-                            <td class="px-4 py-3">Email</td>
-                            <td class="px-4 py-3">Priority</td>
-                            <td class="px-4 py-3">VIP</td>
-                        </tr>
-                        <tr class="bg-neutral-50 dark:bg-dark-surface">
-                            <td class="px-4 py-3">Style consultations</td>
-                            <td class="px-4 py-3">-</td>
-                            <td class="px-4 py-3">-</td>
-                            <td class="px-4 py-3">Quarterly</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="overflow-x-auto" data-aos="fade-up">
+                <div class="inline-block min-w-full align-middle">
+                    <div class="overflow-hidden rounded-[32px] border border-[rgba(0,0,0,0.15)] dark:border-[rgba(255,255,255,0.1)] bg-white dark:bg-dark-card">
+                      <div class="px-4 sm:px-6">
+                        <table class="w-full text-sm border-collapse pricing-compare-table">
+                            <thead>
+                                <tr class="text-left text-sm font-medium uppercase tracking-wide text-neutral-700 dark:text-white">
+                                    <th class="pl-12 pr-5 py-3 border-b border-neutral-200 dark:border-neutral-800">Features</th>
+                                    <th class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800">Free</th>
+                                    <th class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800">Monthly</th>
+                                    <th class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800">Yearly</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-aos="fade-left" data-aos-duration="600" data-aos-delay="0">
+                                    <td class="pl-12 pr-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base font-medium text-neutral-900 dark:text-white">Style recommendations</td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base text-neutral-700 dark:text-white">5</td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base">
+                                        <div class="flex items-center gap-2 text-neutral-900 dark:text-white">
+                                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                            <span class="pricing-compare-value">Unlimited</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base">
+                                        <div class="flex items-center gap-2 text-neutral-900 dark:text-white">
+                                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                            <span class="pricing-compare-value">Unlimited</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr data-aos="fade-left" data-aos-duration="600" data-aos-delay="100">
+                                    <td class="pl-12 pr-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base font-medium text-neutral-900 dark:text-white">Haircut Try-On (FaceMesh)</td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base text-neutral-700 dark:text-white">1 / month</td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base text-neutral-700 dark:text-white">20 / month</td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base">
+                                        <div class="flex items-center gap-2 text-neutral-900 dark:text-white">
+                                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                            <span class="pricing-compare-value">Unlimited</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr data-aos="fade-left" data-aos-duration="600" data-aos-delay="200">
+                                    <td class="pl-12 pr-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base font-medium text-neutral-900 dark:text-white">Model Preview (2D)</td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base">
+                                        <div class="flex items-center gap-2 text-neutral-900 dark:text-white">
+                                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                            <span class="pricing-compare-value">Unlimited</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base">
+                                        <div class="flex items-center gap-2 text-neutral-900 dark:text-white">
+                                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                            <span class="pricing-compare-value">Unlimited</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base">
+                                        <div class="flex items-center gap-2 text-neutral-900 dark:text-white">
+                                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                            <span class="pricing-compare-value">Unlimited</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr data-aos="fade-left" data-aos-duration="600" data-aos-delay="300">
+                                    <td class="pl-12 pr-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base font-medium text-neutral-900 dark:text-white">AI Model Preview</td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base text-neutral-700 dark:text-white">0</td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base text-neutral-700 dark:text-white">10 / month</td>
+                                    <td class="px-5 py-3 border-b border-neutral-200 dark:border-neutral-800 text-base">
+                                        <div class="flex items-center gap-2 text-neutral-900 dark:text-white">
+                                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                            <span class="pricing-compare-value">Unlimited</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                       </div> 
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
-        <div class="container-custom max-w-3xl mx-auto">
-            <div class="text-center mb-10" data-aos="fade-up">
-                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">FAQ</p>
-                <h2 class="font-rufina text-3xl font-bold mb-3">Frequently asked questions</h2>
-                <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Everything you need to know about our plans and services.</p>
-            </div>
-            
-            <div class="space-y-4" data-aos="fade-up">
-                <div class="product-card p-6">
-                    <h3 class="font-rufina text-lg mb-2">Can I change plans anytime?</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Yes! You can upgrade, downgrade, or cancel your plan at any time. Changes take effect at the start of your next billing cycle.</p>
-                </div>
-                
-                <div class="product-card p-6">
-                    <h3 class="font-rufina text-lg mb-2">Is there a free trial for paid plans?</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">We offer a 14-day free trial for both Monthly and Yearly plans. No credit card required to start with our Free plan.</p>
-                </div>
-                
-                <div class="product-card p-6">
-                    <h3 class="font-rufina text-lg mb-2">What payment methods do you accept?</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">We accept all major credit cards, PayPal, and in some regions, Apple Pay and Google Pay.</p>
-                </div>
-                
-                <div class="product-card p-6">
-                    <h3 class="font-rufina text-lg mb-2">Do you offer refunds?</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">We offer a 30-day money-back guarantee if you're not satisfied with our service. Contact our support team for assistance.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
     <!-- CTA -->
     <section class="py-12 md:py-16 bg-gradient-to-r from-primary-600 to-purple-700 text-white">
         <div class="container-custom flex flex-col md:flex-row md:items-center md:justify-between gap-6">
@@ -337,13 +467,48 @@
                 <a href="terms.html" class="hover:text-white">Terms</a>
                 <a href="contact.html" class="hover:text-white">Contact</a>
             </div>
-            <div class="text-neutral-500 dark:text-neutral-400 text-xs">© 2025 Pyin Mal. All rights reserved.</div>
+            <div class="text-neutral-500 dark:text-neutral-400 text-xs"> 2025 Pyin Mal. All rights reserved.</div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/animations.js"></script>
+    <!-- Scripts (cache-busted) -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js?v=pricing-v1"></script>
+    <script src="../js/main.js?v=pricing-v1"></script>
+    <script src="../js/animations.js?v=pricing-v1"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const planCards = document.querySelectorAll('#plans .product-card');
+
+            function resetCards() {
+                planCards.forEach(card => {
+                    card.classList.remove('selected-plan');
+                    const btn = card.querySelector('a.btn');
+                    if (btn) {
+                        btn.classList.remove('btn-primary');
+                        if (!btn.classList.contains('btn-secondary')) {
+                            btn.classList.add('btn-secondary');
+                        }
+                    }
+                });
+            }
+
+            planCards.forEach(card => {
+                card.addEventListener('click', function (event) {
+                    // If clicking on the button itself, allow navigation and still show selection first
+                    if (!(event.target.tagName === 'A' && event.target.classList.contains('btn'))) {
+                        event.preventDefault();
+                    }
+
+                    resetCards();
+                    this.classList.add('selected-plan');
+                    const btn = this.querySelector('a.btn');
+                    if (btn) {
+                        btn.classList.remove('btn-secondary');
+                        btn.classList.add('btn-primary');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
