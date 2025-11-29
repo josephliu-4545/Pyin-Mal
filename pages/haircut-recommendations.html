@@ -1,9 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Face Analysis & Haircut Recommendations</title>
+    <meta name="description" content="Get personalized haircut recommendations based on your face shape and preferences.">
+    <title>Haircut Recommendations - Pyin Mal</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <style>
         /* Global Styles */
         * {
@@ -122,12 +137,18 @@
         }
         
         .btn-secondary {
-            background-color: transparent;
-            color: var(--primary);
+            background-color: #f3f4f6;
+            color: #1f2937;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.2s ease;
             border: 1px solid var(--primary);
+            border-radius: 8px;
+            font-weight: 500;
         }
         
         .btn-secondary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             background-color: rgba(139, 92, 246, 0.1);
         }
         
@@ -179,85 +200,12 @@
             color: var(--accent);
         }
         
-        /* Navigation */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 40;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--light-border);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .dark header {
-            background-color: rgba(31, 41, 55, 0.95);
-            border-bottom: 1px solid var(--dark-border);
-        }
-        
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 4rem;
-            gap: 1.5rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-        }
-        
-        .logo-icon {
-            display: inline-flex;
-            height: 2.25rem;
-            width: 2.25rem;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-lg);
-            background-color: var(--primary);
-            color: white;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .theme-toggle, .cart-btn {
-            padding: 0.5rem;
-            border-radius: var(--radius);
-            background: transparent;
-            border: none;
-            color: currentColor;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .theme-toggle:hover, .cart-btn:hover {
-            background-color: var(--neutral-100);
-        }
-        
-        .dark .theme-toggle:hover, .dark .cart-btn:hover {
-            background-color: var(--dark-card);
-        }
-        
         /* Section 1: Face Scan */
         .face-scan {
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
             text-align: center;
+            padding-top: 2rem;
         }
         
         .face-scan-content {
@@ -561,59 +509,291 @@
         }
         
         .hairstyle-card {
-            background-color: var(--light-surface);
-            border-radius: var(--radius-xl);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 20rem;
+            margin: 0 auto;
+            border-radius: 0.75rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
         }
         
         .dark .hairstyle-card {
-            background-color: var(--dark-card);
+            background: #1e293b;
         }
         
         .hairstyle-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
-        .hairstyle-image {
-            height: 16rem;
-            overflow: hidden;
+        .hairstyle-header {
             position: relative;
+            margin: 1rem 1rem -1.5rem;
+            height: 10rem;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background: linear-gradient(to right, #3b82f6, #2563eb);
         }
         
-        .hairstyle-image img {
+        .hairstyle-header img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
+            opacity: 0.8;
         }
         
-        .hairstyle-card:hover .hairstyle-image img {
+        .hairstyle-card:hover .hairstyle-header img {
             transform: scale(1.05);
-        }
-        
-        .hairstyle-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7));
-            display: flex;
-            align-items: flex-end;
-            padding: 1rem;
-        }
-        
-        .hairstyle-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            opacity: 1;
         }
         
         .hairstyle-content {
             padding: 1.5rem;
+            padding-top: 2rem;
+        }
+        
+        .hairstyle-title {
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
+            line-height: 1.4;
+        }
+        
+        .dark .hairstyle-title {
+            color: #f8fafc;
+        }
+        
+        .hairstyle-description {
+            color: #64748b;
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .dark .hairstyle-description {
+            color: #94a3b8;
+        }
+        
+        .hairstyle-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .hairstyle-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            background-color: #3b82f6;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2), 0 2px 4px -1px rgba(59, 130, 246, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .hairstyle-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3), 0 4px 6px -2px rgba(59, 130, 246, 0.15);
+            background-color: #2563eb;
+        }
+        
+        .hairstyle-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px -1px rgba(59, 130, 246, 0.2);
+        }
+        
+        .carousel nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 16px;
+        }
+        
+        .carousel nav button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel nav button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* 3D Carousel Styles */
+        .carousel-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        
+        .carousel figure {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            transform-style: preserve-3d;
+            transition: transform 0.7s ease-in-out;
+        }
+        
+        .carousel-item {
+            position: absolute;
+            width: 320px;
+            height: 400px;
+            left: 50%;
+            top: 50%;
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            cursor: pointer;
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-content {
+            padding: 20px;
+            background: #fff;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .carousel-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 8px;
+            line-height: 1.3;
+        }
+        
+        .carousel-content p {
+            color: #6b7280;
+            margin: 0 0 16px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .view-more {
+            display: inline-flex;
+            align-items: center;
+            color: #3b82f6;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+        
+        .view-more:hover {
+            color: #2563eb;
+            transform: translateX(3px);
+        }
+        
+        .view-more svg {
+            margin-left: 6px;
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            z-index: 10;
+        }
+        
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #f9fafb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-btn svg {
+            width: 20px;
+            height: 20px;
+            color: #4b5563;
+        }
+        
+        .carousel-indicators {
+            display: flex;
+            gap: 8px;
+            margin: 0 16px;
+        }
+        
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            background: #e5e7eb;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background: #3b82f6;
+            width: 24px;
         }
         
         .hairstyle-title {
@@ -796,36 +976,108 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
     <!-- Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">
-                    <span class="logo-icon">PM</span>
-                    <span class="logo-text">Pyin Mal</span>
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
                 </a>
-                
-                <div class="nav-actions">
-                    <button class="theme-toggle" id="theme-toggle">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                        </svg>
-                    </button>
-                    <button class="cart-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-                        </svg>
-                    </button>
-                    <a href="#" class="btn btn-secondary">Sign In</a>
-                    <a href="#" class="btn btn-primary">Get Started</a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </nav>
-        </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
+                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="reviews.html" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link nav-link-active">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <!-- Section 1: Face Scan -->
-    <section class="face-scan">
+    <section class="face-scan" style="padding-top: 2rem; margin-top: 1rem;">
         <div class="container">
             <div class="face-scan-content">
                 <p class="face-scan-subtitle">Face Analysis</p>
@@ -859,6 +1111,95 @@
             </div>
         </div>
     </section>
+
+    <!-- Hairstyle Recommendations Section -->
+    <section id="hairstyle-recommendations" class="hairstyle-recommendations py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="section-header text-center mb-12">
+                <p class="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-3">TRENDING NOW</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Hairstyles</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Discover the most sought-after hairstyles of the season</p>
+            </div>
+            
+            <div class="carousel-container">
+                <div class="carousel">
+                    <figure>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=600&h=400&q=80" alt="Modern Fade">
+                            <div class="carousel-content">
+                                <h3>Modern Fade</h3>
+                                <p>Classic fade with a modern twist that suits any occasion and face shape</p>
+                                <a href="#hairstyle-recommendations" class="view-more">
+                                    View More
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=400&q=80" alt="Textured Crop">
+                            <div class="carousel-content">
+                                <h3>Textured Crop</h3>
+                                <p>Perfect for all face shapes with easy maintenance and styling</p>
+                                <a href="#hairstyle-recommendations" class="view-more">
+                                    View More
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1522556189639-b150ed9b433f?auto=format&fit=crop&w=600&h=400&q=80" alt="Pompadour">
+                            <div class="carousel-content">
+                                <h3>Pompadour</h3>
+                                <p>Vintage style with modern appeal and voluminous look</p>
+                                <a href="#hairstyle-recommendations" class="view-more">
+                                    View More
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&h=400&q=80" alt="Undercut">
+                            <div class="carousel-content">
+                                <h3>Undercut</h3>
+                                <p>Edgy and stylish with clean lines and sharp contrast</p>
+                                <a href="#hairstyle-recommendations" class="view-more">
+                                    View More
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </figure>
+                    <div class="carousel-nav">
+                        <button class="nav-btn nav-prev" aria-label="Previous">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <div class="carousel-indicators">
+                            <button class="indicator active" aria-label="Slide 1"></button>
+                            <button class="indicator" aria-label="Slide 2"></button>
+                            <button class="indicator" aria-label="Slide 3"></button>
+                            <button class="indicator" aria-label="Slide 4"></button>
+                        </div>
+                        <button class="nav-btn nav-next" aria-label="Next">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
 
     <!-- Section 2: Face Shape Analysis -->
     <section class="face-analysis">
@@ -992,7 +1333,7 @@
     </section>
 
     <!-- Section 4: Hairstyle Recommendations -->
-    <section class="hairstyle-recommendations">
+    <section class="hairstyle-recommendations mt-16">
         <div class="container">
             <div class="section-header">
                 <p class="section-subtitle">Recommendations</p>
@@ -1003,27 +1344,21 @@
             <div class="hairstyles-grid">
 
                 <!-- Card -->
+                <!-- Card 1 -->
                 <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
-                    <div class="hairstyle-image">
-                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond  - Textured Crop.jpg">
-                        <div class="hairstyle-overlay">
-                            <div class="hairstyle-tags">
-                                <span class="badge badge-primary">Diamond Face</span>
-                            </div>
-                        </div>
+                    <div class="hairstyle-header">
+                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Textured Crop.jpg" alt="Textured Crop">
                     </div>
                     <div class="hairstyle-content">
                         <h3 class="hairstyle-title">Textured Crop</h3>
                         <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
-                        <div class="hairstyle-meta">
-                        </div>
                         <div class="hairstyle-actions">
-                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
-
+                            <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                         </div>
                     </div>
                 </div>
 
+                <!-- Card 2 -->
                 <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
                     <div class="hairstyle-image">
                         <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Classic Side Part.jpg">
@@ -1034,12 +1369,12 @@
                         </div>
                     </div>
                     <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <h3 class="hairstyle-title">Classic Side Part</h3>
                         <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
                         <div class="hairstyle-meta">
                         </div>
                         <div class="hairstyle-actions">
-                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+                            <a href="shop-browsing.html?tab=barbers" class="btn btn-secondary">Find Shops</a>
 
                         </div>
                     </div>
@@ -1055,12 +1390,12 @@
                         </div>
                     </div>
                     <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <h3 class="hairstyle-title">Crew Cut</h3>
                         <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
                         <div class="hairstyle-meta">
                         </div>
                         <div class="hairstyle-actions">
-                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+                            <a href="shop-browsing.html?tab=barbers" class="btn btn-secondary">Find Shops</a>
 
                         </div>
                     </div>
@@ -1076,12 +1411,12 @@
                         </div>
                     </div>
                     <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <h3 class="hairstyle-title">Faux Hawk</h3>
                         <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
                         <div class="hairstyle-meta">
                         </div>
                         <div class="hairstyle-actions">
-                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+                            <a href="shop-browsing.html?tab=barbers" class="btn btn-secondary">Find Shops</a>
 
                         </div>
                     </div>
@@ -1097,12 +1432,12 @@
                         </div>
                     </div>
                     <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <h3 class="hairstyle-title">Long Side Part</h3>
                         <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
                         <div class="hairstyle-meta">
                         </div>
                         <div class="hairstyle-actions">
-                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+                            <a href="shop-browsing.html?tab=barbers" class="btn btn-secondary">Find Shops</a>
 
                         </div>
                     </div>
@@ -1118,12 +1453,12 @@
                         </div>
                     </div>
                     <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <h3 class="hairstyle-title">Sweeping Fringe</h3>
                         <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
                         <div class="hairstyle-meta">
                         </div>
                         <div class="hairstyle-actions">
-                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+                            <a href="shop-browsing.html?tab=barbers" class="btn btn-secondary">Find Shops</a>
 
                         </div>
                     </div>
@@ -1139,12 +1474,12 @@
                         </div>
                     </div>
                     <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <h3 class="hairstyle-title">Textured Quiff</h3>
                         <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
                         <div class="hairstyle-meta">
                         </div>
                         <div class="hairstyle-actions">
-                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+                            <a href="shop-browsing.html?tab=barbers" class="btn btn-secondary">Find Shops</a>
 
                         </div>
                     </div>
@@ -1152,7 +1487,7 @@
 
                 <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
                     <div class="hairstyle-image">
-                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Textured Quiff.jpg">
+                        <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Undercut.jpg">
                         <div class="hairstyle-overlay">
                             <div class="hairstyle-tags">
                                 <span class="badge badge-primary">Diamond Face</span>
@@ -1160,186 +1495,18 @@
                         </div>
                     </div>
                     <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Textured Crop</h3>
+                        <h3 class="hairstyle-title">Undercut</h3>
                         <p class="hairstyle-description">A modern take on the classic bob with soft layers that add movement and texture.</p>
                         <div class="hairstyle-meta">
                         </div>
                         <div class="hairstyle-actions">
-                            <a href="shop-browsing.html#sectionbarbers" class="btn btn-secondary">Find Shops</a>
+                            <a href="shop-browsing.html?tab=barbers" class="btn btn-secondary">Find Shops</a>
 
                         </div>
                     </div>
                 </div>
                 
-                <!-- Card 2 -->
-                <div class="hairstyle-card" data-gender="female" data-face-shape="round">
-                    <div class="hairstyle-image">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80" alt="Textured Shag">
-                        <div class="hairstyle-overlay">
-                            <div class="hairstyle-tags">
-                                <span class="badge badge-primary">Round Face</span>
-                                <span class="badge badge-accent">Long</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Textured Shag</h3>
-                        <p class="hairstyle-description">Layered cut with plenty of texture and movement, perfect for adding volume.</p>
-                        <div class="hairstyle-meta">
-                            <div class="hairstyle-maintenance">Medium Maintenance</div>
-                        </div>
-                        <div class="hairstyle-actions">
-                            <a href="#" class="btn btn-primary">View Details</a>
-                            <a href="#" class="btn btn-secondary">Find Shops</a>
-                        </div>
-                    </div>
-                </div>
                 
-                <!-- Card 3 -->
-                <div class="hairstyle-card" data-gender="male" data-face-shape="square">
-                    <div class="hairstyle-image">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Modern Pompadour">
-                        <div class="hairstyle-overlay">
-                            <div class="hairstyle-tags">
-                                <span class="badge badge-primary">Square Face</span>
-                                <span class="badge badge-accent">Short</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Modern Pompadour</h3>
-                        <p class="hairstyle-description">A contemporary version of the classic pompadour with textured top and faded sides.</p>
-                        <div class="hairstyle-meta">
-                            <div class="hairstyle-maintenance">High Maintenance</div>
-                        </div>
-                        <div class="hairstyle-actions">
-                            <a href="#" class="btn btn-primary">View Details</a>
-                            <a href="#" class="btn btn-secondary">Find Shops</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Card 4 -->
-                <div class="hairstyle-card" data-gender="female" data-face-shape="heart">
-                    <div class="hairstyle-image">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Soft Layers">
-                        <div class="hairstyle-overlay">
-                            <div class="hairstyle-tags">
-                                <span class="badge badge-primary">Heart Face</span>
-                                <span class="badge badge-accent">Medium Length</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Soft Layers</h3>
-                        <p class="hairstyle-description">Face-framing layers that soften the forehead and add balance to the chin area.</p>
-                        <div class="hairstyle-meta">
-                            <div class="hairstyle-maintenance">Low Maintenance</div>
-                        </div>
-                        <div class="hairstyle-actions">
-                            <a href="#" class="btn btn-primary">View Details</a>
-                            <a href="#" class="btn btn-secondary">Find Shops</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Card 5 -->
-                <div class="hairstyle-card" data-gender="male" data-face-shape="diamond">
-                    <div class="hairstyle-image">
-                        <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?auto=format&fit=crop&w=800&q=80" alt="Textured Crop">
-                        <div class="hairstyle-overlay">
-                            <div class="hairstyle-tags">
-                                <span class="badge badge-primary">Diamond Face</span>
-                                <span class="badge badge-accent">Short</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Textured Crop</h3>
-                        <p class="hairstyle-description">Short, textured cut that adds width to the forehead and balances cheekbones.</p>
-                        <div class="hairstyle-meta">
-                            <div class="hairstyle-maintenance">Medium Maintenance</div>
-                        </div>
-                        <div class="hairstyle-actions">
-                            <a href="#" class="btn btn-primary">View Details</a>
-                            <a href="#" class="btn btn-secondary">Find Shops</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Card 6 -->
-                <div class="hairstyle-card" data-gender="female" data-face-shape="triangle">
-                    <div class="hairstyle-image">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Side-Swept Bangs">
-                        <div class="hairstyle-overlay">
-                            <div class="hairstyle-tags">
-                                <span class="badge badge-primary">Triangle Face</span>
-                                <span class="badge badge-accent">Long</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Side-Swept Bangs</h3>
-                        <p class="hairstyle-description">Long layers with side-swept bangs that add width to the forehead area.</p>
-                        <div class="hairstyle-meta">
-                            <div class="hairstyle-maintenance">Medium Maintenance</div>
-                        </div>
-                        <div class="hairstyle-actions">
-                            <a href="#" class="btn btn-primary">View Details</a>
-                            <a href="#" class="btn btn-secondary">Find Shops</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Card 7 -->
-                <div class="hairstyle-card" data-gender="male" data-face-shape="oval">
-                    <div class="hairstyle-image">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Classic Fade">
-                        <div class="hairstyle-overlay">
-                            <div class="hairstyle-tags">
-                                <span class="badge badge-primary">Oval Face</span>
-                                <span class="badge badge-accent">Short</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Classic Fade</h3>
-                        <p class="hairstyle-description">Clean fade with textured top that works well with oval face proportions.</p>
-                        <div class="hairstyle-meta">
-                            <div class="hairstyle-maintenance">Low Maintenance</div>
-                        </div>
-                        <div class="hairstyle-actions">
-                            <a href="#" class="btn btn-primary">View Details</a>
-                            <a href="#" class="btn btn-secondary">Find Shops</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Card 8 -->
-                <div class="hairstyle-card" data-gender="female" data-face-shape="diamond">
-                    <div class="hairstyle-image">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80" alt="Chin-Length Bob">
-                        <div class="hairstyle-overlay">
-                            <div class="hairstyle-tags">
-                                <span class="badge badge-primary">Diamond Face</span>
-                                <span class="badge badge-accent">Short</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hairstyle-content">
-                        <h3 class="hairstyle-title">Chin-Length Bob</h3>
-                        <p class="hairstyle-description">Blunt bob that hits at chin level to add width to the narrow jawline.</p>
-                        <div class="hairstyle-meta">
-                            <div class="hairstyle-maintenance">Low Maintenance</div>
-                        </div>
-                        <div class="hairstyle-actions">
-                            <a href="#" class="btn btn-primary">View Details</a>
-                            <a href="#" class="btn btn-secondary">Find Shops</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- Footer -->
@@ -1355,12 +1522,232 @@
                     <a href="#">Terms</a>
                     <a href="#">Contact</a>
                 </div>
-                <div class="footer-copyright">© 2025 Pyin Mal. All rights reserved.</div>
+                <div class="footer-copyright"> 2025 Pyin Mal. All rights reserved.</div>
             </div>
         </div>
     </footer>
 
+    <!-- 3D Carousel Script -->
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const figure = carousel.querySelector('figure');
+            const items = figure.querySelectorAll('.carousel-item');
+            const prevBtn = carousel.querySelector('.nav-prev');
+            const nextBtn = carousel.querySelector('.nav-next');
+            const indicators = carousel.querySelectorAll('.indicator');
+            const totalItems = items.length;
+            let currentIndex = 0;
+            let autoRotateInterval;
+            
+            // Position items in a 3D carousel
+            function positionItems() {
+                const radius = 400; // Radius of the carousel
+                const angle = (2 * Math.PI) / totalItems;
+                const centerIndex = currentIndex;
+                
+                items.forEach((item, index) => {
+                    // Calculate position in the circle
+                    const relativeIndex = (index - centerIndex + totalItems) % totalItems;
+                    let x = 0, z = 0, rotation = 0, scale = 1, opacity = 1;
+                    
+                    if (totalItems === 4) {
+                        // Special positioning for 4 items
+                        switch(relativeIndex) {
+                            case 0: // Center
+                                x = 0;
+                                z = 0;
+                                rotation = 0;
+                                scale = 1;
+                                opacity = 1;
+                                break;
+                            case 1: // Right
+                                x = 320;
+                                z = -50;
+                                rotation = -20;
+                                scale = 0.9;
+                                opacity = 0.9;
+                                break;
+                            case 2: // Far right
+                                x = 200;
+                                z = -200;
+                                rotation = -40;
+                                scale = 0.8;
+                                opacity = 0.7;
+                                break;
+                            case 3: // Left
+                                x = -320;
+                                z = -50;
+                                rotation = 20;
+                                scale = 0.9;
+                                opacity = 0.9;
+                                break;
+                        }
+                    } else {
+                        // Fallback for other numbers of items
+                        x = Math.sin(angle * relativeIndex) * radius;
+                        z = Math.cos(angle * relativeIndex) * radius - radius;
+                        rotation = (angle * relativeIndex * 180 / Math.PI) - 90;
+                        const distanceFromCenter = Math.abs(relativeIndex);
+                        scale = 1 - (distanceFromCenter * 0.1);
+                        opacity = 1 - (distanceFromCenter * 0.3);
+                    }
+                    
+                    // Apply 3D transform
+                    item.style.transform = `
+                        translate3d(calc(-50% + ${x}px), -50%, ${z}px)
+                        rotateY(${rotation}deg)
+                        scale(${scale})
+                    `;
+                    
+                    item.style.opacity = opacity.toString();
+                    item.style.zIndex = (100 - relativeIndex).toString();
+                    item.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                    
+                    // Disable pointer events for non-active items
+                    item.style.pointerEvents = relativeIndex === 0 ? 'auto' : 'none';
+                });
+                
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            // Go to specific slide
+            function goToSlide(index) {
+                currentIndex = (index + totalItems) % totalItems;
+                positionItems();
+            }
+            
+            // Navigation
+            function goToNext() {
+                goToSlide(currentIndex + 1);
+            }
+            
+            function goToPrev() {
+                goToSlide(currentIndex - 1);
+            }
+            
+            // Auto-rotate
+            function startAutoRotate() {
+                stopAutoRotate();
+                autoRotateInterval = setInterval(goToNext, 5000);
+            }
+            
+            function stopAutoRotate() {
+                clearInterval(autoRotateInterval);
+            }
+            
+            // Event listeners
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                goToPrev();
+                startAutoRotate();
+            });
+            
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                goToNext();
+                startAutoRotate();
+            });
+            
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    goToSlide(index);
+                    startAutoRotate();
+                });
+            });
+            
+            // Initialize
+            positionItems();
+            startAutoRotate();
+            
+            // Pause on hover
+            carousel.addEventListener('mouseenter', stopAutoRotate);
+            carousel.addEventListener('mouseleave', startAutoRotate);
+            
+            // Handle window resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    positionItems();
+                }, 250);
+            });
+            
+            // Touch support
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            carousel.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                stopAutoRotate();
+            }, { passive: true });
+            
+            carousel.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].clientX;
+                handleSwipe();
+                startAutoRotate();
+            }, { passive: true });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const difference = touchStartX - touchEndX;
+                
+                if (Math.abs(difference) > swipeThreshold) {
+                    if (difference > 0) {
+                        // Swipe left
+                        goToNext();
+                    } else {
+                        // Swipe right
+                        goToPrev();
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        // Handle Find Shops button clicks
+        document.addEventListener('DOMContentLoaded', function() {
+            const findShopsButtons = document.querySelectorAll('a[href*="shop-browsing.html"]');
+            
+            findShopsButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get the parent hairstyle card
+                    const card = this.closest('.hairstyle-card');
+                    if (!card) return;
+                    
+                    // Get hairstyle details
+                    const title = card.querySelector('.hairstyle-title')?.textContent || 'Recommended Hairstyle';
+                    const description = card.querySelector('.hairstyle-description')?.textContent || 'Check out our recommended barber shops for this style.';
+                    const image = card.querySelector('img')?.src || '';
+                    
+                    // Get tags if they exist
+                    const tags = [];
+                    const tagElements = card.querySelectorAll('.hairstyle-tag');
+                    tagElements.forEach(tag => {
+                        tags.push(tag.textContent.trim());
+                    });
+                    
+                    // Create hairstyle data object
+                    const hairstyleData = {
+                        name: title,
+                        description: description,
+                        image: image,
+                        tags: tags.length ? tags : ['Trending', 'Popular']
+                    };
+                    
+                    // Encode and navigate
+                    const encodedData = encodeURIComponent(JSON.stringify(hairstyleData));
+                    window.location.href = `shop-browsing.html?tab=barbers&hairstyle=${encodedData}`;
+                });
+            });
+        });
+
         // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
@@ -1427,6 +1814,51 @@
             });
         });
         
+    </script>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({ duration: 600, once: true });
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true' || false;
+                    mobileMenuBtn.setAttribute('aria-expanded', !expanded);
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Dropdown menus
+            document.querySelectorAll('[data-dropdown]').forEach(dropdown => {
+                const toggle = dropdown.querySelector('[data-dropdown-toggle]');
+                const menu = document.getElementById(toggle.getAttribute('aria-controls'));
+                
+                if (toggle && menu) {
+                    toggle.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const expanded = toggle.getAttribute('aria-expanded') === 'true' || false;
+                        toggle.setAttribute('aria-expanded', !expanded);
+                        menu.classList.toggle('hidden');
+                    });
+                    
+                    // Close when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!dropdown.contains(e.target)) {
+                            toggle.setAttribute('aria-expanded', 'false');
+                            menu.classList.add('hidden');
+                        }
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
