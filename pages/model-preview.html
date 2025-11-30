@@ -174,7 +174,6 @@
                         <!-- AI Mode Instructions (shown only in AI mode) -->
                         <div id="ai-mode-instructions" class="hidden text-center text-sm text-neutral-600 dark:text-neutral-400 px-4 py-10">
                             <p>To use AI Real View, please upload your photo and select an outfit item in the panel on the right.</p>
-                            <p class="mt-2">This feature uses pre-generated AI results because we do not use any paid APIs in this demo.</p>
                         </div>
                         
                         <!-- Model Preview Container -->
@@ -232,10 +231,20 @@
                                     <option value="">Select from your wardrobe</option>
                                 </select>
                                 <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Shows items that support mannequin try-on.</p>
+
+                                <p class="font-semibold mt-4 mb-2 text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                                    or upload mannequin screenshot
+                                </p>
+                                <input type="file"
+                                       id="ai-mannequin-input"
+                                       accept="image/*"
+                                       class="block w-full text-xs">
+                                <div id="ai-mannequin-preview"
+                                     class="mt-1 text-[11px] text-neutral-500 dark:text-neutral-400"></div>
                             </div>
                             <button id="ai-generate-btn" class="btn btn-primary w-full text-sm">Generate Demo Result</button>
                             <div id="ai-demo-result" class="mt-4 hidden">
-                                <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-surface rounded-xl overflow-hidden mb-3">
+                                <div class="bg-white dark:bg-dark-card rounded-2xl p-4 max-w-xs w-[90%] shadow-soft dark:shadow-soft-dark">
                                     <img id="ai-demo-image" src="" alt="AI Demo Result" class="w-full h-full object-cover">
                                 </div>
                                 <p class="text-xs text-neutral-500 dark:text-neutral-400 mb-3">This is a pre-generated AI demo result for illustration.</p>
@@ -243,33 +252,201 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Tips & Info -->
-                    <div class="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
-                        <h3 class="font-rufina text-xl font-bold mb-4">Tips</h3>
-                        <ul class="space-y-3 text-sm text-neutral-700 dark:text-neutral-300">
-                            <li class="flex items-start">
-                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
-                                <span>Mix and match different items to create unique looks</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
-                                <span>Try different hairstyles to see what suits you best</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
-                                <span>Save your favorite combinations to your favorites</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-primary-600 dark:text-primary-400 mr-2">•</span>
-                                <span>Use the reset button to start over anytime</span>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
     </main>
+    <!-- Outfit Generator Hero & Section (embedded from outfit-generator.html) -->
+    <section class="py-12 md:py-16 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div data-aos="fade-right">
+                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Outfit generator</p>
+                <h2 class="font-rufina text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">Pick pieces, let AI finish the look</h2>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-6 max-w-xl">
+                    Combine tops, bottoms, shoes, and accessories. Our engine scores the pairing, suggests alternates, and sends them to your virtual wardrobe.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#outfit-generator-section" class="btn btn-primary w-full sm:w-auto">Start building</a>
+                    <a href="#model-preview-container" class="btn btn-secondary w-full sm:w-auto">Preview on model</a>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-dark-card rounded-3xl p-6 shadow-soft dark:shadow-soft-dark" data-aos="fade-left">
+                <h3 class="font-rufina text-2xl font-semibold mb-4">Today’s prompts</h3>
+                <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
+                    <li>• “Hybrid office, 28°C” – minimal + breathable</li>
+                    <li>• “Gallery date night” – bold prints + comfy shoes</li>
+                    <li>• “Weekend getaway” – layers that pack light</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="outfit-generator-section" class="py-12 md:py-16">
+        <div class="container-custom grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Selection panel -->
+            <div class="space-y-6 order-2 lg:order-1" data-aos="fade-right">
+                <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="font-rufina text-2xl font-bold">Select pieces</h2>
+                        <button class="text-sm text-primary-600 dark:text-primary-400 hover:underline" onclick="outfitGenerator?.generateOutfit()">Auto pick</button>
+                    </div>
+                    <div class="space-y-5">
+                        <!-- dynamic categories -->
+                        <div>
+                            <h3 class="font-semibold text-lg mb-3">Tops</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <button class="outfit-item product-card p-3 text-center text-sm"
+                                        data-category="top"
+                                        data-item-id="top-white-shirt"
+                                        data-item-name="White Shirt"
+                                        data-item-image="../assets/images/outfits/top-1.png">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2">
+                                        <img src="../assets/images/outfits/top-1.png"
+                                            alt="White Shirt"
+                                            class="w-full h-full object-cover rounded-lg">
+                                    </div>
+                                    White Shirt
+                                </button>
+                                <button class="outfit-item product-card p-3 text-center text-sm"
+                                        data-category="top"
+                                        data-item-id="top-knit"
+                                        data-item-name="Knit Tank"
+                                        data-item-image="../assets/images/outfits/top-2.png">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2">
+                                        <img src="../assets/images/outfits/top-2.png"
+                                            alt="Knit Tank"
+                                            class="w-full h-full object-cover rounded-lg">
+                                    </div>
+                                    Knit Tank
+                                </button>
+                                <button class="outfit-item product-card p-3 text-center text-sm"
+                                        data-category="top"
+                                        data-item-id="top-striped-tee"
+                                        data-item-name="Striped Tee"
+                                        data-item-image="../assets/images/outfits/top-3.png">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2">
+                                        <img src="../assets/images/outfits/top-3.png" alt="Striped Tee" class="w-full h-full object-cover rounded-lg">
+                                    </div>
+                                    Striped Tee
+                                </button>
+
+                                <button class="outfit-item product-card p-3 text-center text-sm"
+                                        data-category="top"
+                                        data-item-id="top-blouse"
+                                        data-item-name="Flowy Blouse"
+                                        data-item-image="../assets/images/outfits/top-4.png">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2">
+                                        <img src="../assets/images/outfits/top-4.png" alt="Flowy Blouse" class="w-full h-full object-cover rounded-lg">
+                                    </div>
+                                    Flowy Blouse
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-3">Bottoms</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <!-- Wide Trousers -->
+                                <button class="outfit-item product-card p-3 text-center text-sm"
+                                        data-category="bottom"
+                                        data-item-id="bottom-wide"
+                                        data-item-name="Wide Trousers"
+                                        data-item-image="../assets/images/outfits/bottom-1.png">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2">
+                                        <img src="../assets/images/outfits/bottom-1.png"
+                                            alt="Wide Trousers"
+                                            class="w-full h-full object-cover rounded-lg">
+                                    </div>
+                                    Wide Trousers
+                                </button>
+
+                                <!-- Relaxed Denim -->
+                                <button class="outfit-item product-card p-3 text-center text-sm"
+                                        data-category="bottom"
+                                        data-item-id="bottom-denim"
+                                        data-item-name="Relaxed Denim"
+                                        data-item-image="../assets/images/outfits/bottom-2.png">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2">
+                                        <img src="../assets/images/outfits/bottom-2.png"
+                                            alt="Relaxed Denim"
+                                            class="w-full h-full object-cover rounded-lg">
+                                    </div>
+                                    Relaxed Denim
+                                </button>
+
+                                <!-- Midi Skirt (if you have it) -->
+                                <button class="outfit-item product-card p-3 text-center text-sm"
+                                        data-category="bottom"
+                                        data-item-id="bottom-midi-skirt"
+                                        data-item-name="Midi Skirt"
+                                        data-item-image="../assets/images/outfits/bottom-3.png">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2">
+                                        <img src="../assets/images/outfits/bottom-3.png"
+                                            alt="Midi Skirt"
+                                            class="w-full h-full object-cover rounded-lg">
+                                    </div>
+                                    Midi Skirt
+                                </button>
+
+                                <!-- Tailored Pants (if you have it) -->
+                                <button class="outfit-item product-card p-3 text-center text-sm"
+                                        data-category="bottom"
+                                        data-item-id="bottom-tailored"
+                                        data-item-name="Tailored Pants"
+                                        data-item-image="../assets/images/outfits/bottom-4.png">
+                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2">
+                                        <img src="../assets/images/outfits/bottom-4.png"
+                                            alt="Tailored Pants"
+                                            class="w-full h-full object-cover rounded-lg">
+                                    </div>
+                                    Tailored Pants
+                                </button>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="flex flex-col gap-3">
+                            <button id="generate-outfit" class="btn btn-primary w-full">Generate outfit</button>
+                            <button id="save-outfit" class="btn btn-secondary w-full">Save selection</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
+                    <h3 class="font-rufina text-xl font-semibold mb-4">Activity history</h3>
+                    <div id="activity-history" class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
+                        <p>No outfits generated yet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="order-3 lg:order-3 lg:col-span-1 lg:col-start-auto">
+                <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="font-rufina text-2xl font-bold">AI suggestions</h2>
+                        <span class="text-sm text-neutral-500 dark:text-neutral-400">v0.1</span>
+                    </div>
+                    <div id="outfit-results" class="space-y-4">
+                        <p class="text-sm text-neutral-500 dark:text-neutral-400">Generate an outfit to see curated suggestions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Demo Result Modal -->
+    <div id="ai-image-modal"
+         class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
+        <div class="bg-white dark:bg-dark-card rounded-2xl p-4 max-w-sm w-[90%] shadow-soft dark:shadow-soft-dark">
+            <div class="rounded-xl overflow-hidden mb-3 bg-neutral-100 dark:bg-dark-surface" style="height: 260px;">
+                <img id="ai-modal-image" src="" alt="AI Demo Full Result" class="w-full h-full object-cover">
+            </div>
+            <div class="flex gap-3 mt-2">
+                <button id="ai-modal-close" class="btn btn-secondary w-full text-sm">Close</button>
+                <button id="ai-modal-save" class="btn btn-primary w-full text-sm">Save image</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text mt-20">
@@ -342,10 +519,11 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/outfit-generator.js"></script>
     <script src="../js/model-preview.js"></script>
     <script src="../js/animations.js"></script>
     <script src="../js/tryon-utils.js"></script>
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <!-- Model Preview Page Specific Script -->
@@ -825,9 +1003,16 @@
             const aiUploadInput = document.getElementById('ai-upload-input');
             const aiUploadPreview = document.getElementById('ai-upload-preview');
             const aiItemSelect = document.getElementById('ai-item-select');
+            const aiMannequinInput = document.getElementById('ai-mannequin-input');
+            const aiMannequinPreview = document.getElementById('ai-mannequin-preview');
             const aiGenerateBtn = document.getElementById('ai-generate-btn');
             const aiDemoResult = document.getElementById('ai-demo-result');
             const aiDemoImage = document.getElementById('ai-demo-image');
+            const aiImageModal = document.getElementById('ai-image-modal');
+            const aiModalImage = document.getElementById('ai-modal-image');
+            const aiModalClose = document.getElementById('ai-modal-close');
+            const aiModalSave = document.getElementById('ai-modal-save');
+
 
             function applyPreviewModeUI(mode) {
                 const isAi = mode === 'ai';
@@ -918,17 +1103,66 @@
 
             if (aiGenerateBtn && aiItemSelect && aiDemoResult && aiDemoImage) {
                 aiGenerateBtn.addEventListener('click', () => {
-                    const file = aiUploadInput && aiUploadInput.files && aiUploadInput.files[0];
-                    const itemId = aiItemSelect.value;
-                    if (!file || !itemId) {
-                        showNotification('Upload a photo and choose an item first.', 'warning');
+                    // Step 1: base photo is required
+                    const baseFile = aiUploadInput && aiUploadInput.files && aiUploadInput.files[0];
+                    if (!baseFile) {
+                        showNotification('Upload a base photo first (you or your mannequin screenshot).', 'warning');
                         return;
                     }
-                    const demoPath = `/public/ai-demo-results/${encodeURIComponent(itemId)}.png`;
+
+                    // Step 2: wardrobe item OR mannequin screenshot
+                    const itemId = aiItemSelect.value;
+                    const mannequinShot = aiMannequinInput && aiMannequinInput.files && aiMannequinInput.files[0];
+
+                    if (!itemId && !mannequinShot) {
+                        showNotification('Choose an item from your wardrobe or upload a mannequin screenshot.', 'warning');
+                        return;
+                    }
+
+                    // For the fake AI: use wardrobe item ID if present, else a generic mannequin demo
+                    const demoKey = itemId || 'mannequin-default';
+                    const demoPath = `/public/ai-demo-results/${encodeURIComponent(demoKey)}.png`;
+
                     aiDemoImage.src = demoPath;
-                    aiDemoImage.alt = `AI demo try-on for ${itemId}`;
+                    aiDemoImage.alt = `AI demo try-on for ${demoKey}`;
                     aiDemoResult.classList.remove('hidden');
+
+                    if (aiModalImage) {
+                        aiModalImage.src = demoPath;
+                        aiModalImage.alt = `AI demo try-on for ${demoKey}`;
+                    }
+                    if (aiImageModal) {
+                        aiImageModal.classList.remove('hidden');
+                        aiImageModal.classList.add('flex');
+                    }
+
                     showNotification('AI demo result loaded.', 'success');
+                });
+            }
+
+            if (aiModalClose && aiImageModal) {
+                aiModalClose.addEventListener('click', () => {
+                    aiImageModal.classList.add('hidden');
+                    aiImageModal.classList.remove('flex');
+                });
+            }
+
+            if (aiModalSave && aiModalImage) {
+                aiModalSave.addEventListener('click', () => {
+                    if (!aiModalImage.src) return;
+                    const link = document.createElement('a');
+                    link.href = aiModalImage.src;
+                    link.download = 'ai-demo-result.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                });
+            }
+
+            if (aiMannequinInput && aiMannequinPreview) {
+                aiMannequinInput.addEventListener('change', () => {
+                    const file = aiMannequinInput.files && aiMannequinInput.files[0];
+                    aiMannequinPreview.textContent = file ? `Selected mannequin: ${file.name}` : '';
                 });
             }
 

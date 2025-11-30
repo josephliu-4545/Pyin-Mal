@@ -367,9 +367,21 @@
     <!-- Cart Page Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            AOS.init();
+            if (typeof AOS !== 'undefined') {
+                AOS.init();
+            }
 
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            function loadCartFromStorage() {
+                try {
+                    const raw = localStorage.getItem('cart');
+                    return raw ? JSON.parse(raw) : [];
+                } catch (e) {
+                    console.error('Invalid cart data in localStorage. Resetting cart.', e);
+                    return [];
+                }
+            }
+
+            let cart = loadCartFromStorage() || [];
 
             const cartListEl = document.getElementById('cart-list');
             const emptyStateEl = document.getElementById('cart-empty-state');
@@ -426,7 +438,7 @@
             }
 
             function renderCart() {
-                cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart = loadCartFromStorage() || [];
 
                 if (!cart || cart.length === 0) {
                     if (emptyStateEl) emptyStateEl.classList.remove('hidden');
@@ -565,7 +577,7 @@
                     }
                 });
             }
-
+        }
             // Checkout button is UI-only for now
             const checkoutBtn = document.getElementById('checkout-btn');
             if (checkoutBtn) {
