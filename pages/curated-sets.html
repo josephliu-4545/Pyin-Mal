@@ -74,8 +74,9 @@
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                         </span>
                     </button>
-                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                    <button class="theme-toggle p-1.5 sm:p-2 relative" aria-label="Cart" id="cart-btn">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
                     </button>
                     <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
                     <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
@@ -131,26 +132,29 @@
                 </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Set 1 -->
+                <!-- Set  -->
                 <article class="product-card p-0 overflow-hidden group h-full flex flex-col" data-aos="fade-up" data-aos-delay="300">
                     <div class="aspect-[3/4] bg-neutral-100 dark:bg-dark-card relative overflow-hidden flex-shrink-0">
-                        <img src="../assets/images/19_MaleAbstractMannequinMM-WEN4EG-removebg-preview.png" alt="Travel essentials collection" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-sm font-medium">View Collection</span>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=1067&q=80" alt="Elegant evening wear" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     </div>
-                    <div class="p-5 space-y-2">
-                        <h3 class="font-rufina text-xl">Soft Structure Office Set</h3>
-                        <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Work days</p>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Blazers, trousers, and shirts mapped to hybrid weeks.</p>
-                        <div class="flex items-center justify-between text-xs mt-2">
-                            <div class="space-y-0.5">
-                                <p class="font-semibold text-neutral-900 dark:text-dark-text">$289</p>
-                                <p class="text-neutral-500 dark:text-neutral-400">Shop: Studio Lane</p>
-                            </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-rufina text-2xl">Soft Structure Office Set</h3>
+                        <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">Work days</p>
+                        <p class="text-base text-neutral-600 dark:text-neutral-400">Blazers, trousers, and shirts mapped to hybrid weeks.</p>
+                        <div class="text-sm mt-2 space-y-0.5">
+                            <p class="font-semibold text-neutral-900 dark:text-dark-text">89,000 MMK</p>
+                            <p class="text-neutral-500 dark:text-neutral-400">Shop: Junction City, Yangon</p>
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
                             <button
                                 type="button"
-                                class="text-primary-600 dark:text-primary-400 hover:underline text-sm favorite-link"
+                                class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary-600 text-white text-sm font-semibold shadow hover:bg-primary-700 hover:-translate-y-0.5 transform transition"
+                            >
+                                Add to cart
+                            </button>
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center px-3 py-2 rounded-full border border-primary-600 text-primary-600 dark:text-primary-400 text-sm font-semibold bg-white dark:bg-dark-card hover:bg-primary-50 dark:hover:bg-dark-card/80 transition favorite-link"
                                 data-favorite-id="set-soft-office"
                                 data-favorite-title="Soft Structure Office Set"
                                 data-favorite-category="work"
@@ -160,26 +164,29 @@
                         </div>
                     </div>
                 </article>
-                <!-- Set 2 -->
+                
                 <article class="product-card p-0 overflow-hidden group h-full flex flex-col" data-aos="fade-up" data-aos-delay="100">
                     <div class="aspect-[3/4] bg-neutral-100 dark:bg-dark-card relative overflow-hidden flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=1067&q=80" alt="Casual weekend wear" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-sm font-medium">View Collection</span>
-                        </div>
+                        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=1067&q=80" alt="Elegant evening wear" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     </div>
-                    <div class="p-5 space-y-2">
-                        <h3 class="font-rufina text-xl">Weekend Cafe Street Set</h3>
-                        <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Off-duty</p>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Relaxed denim, knits, and sneakers ready for quick trips.</p>
-                        <div class="flex items-center justify-between text-xs mt-2">
-                            <div class="space-y-0.5">
-                                <p class="font-semibold text-neutral-900 dark:text-dark-text">$219</p>
-                                <p class="text-neutral-500 dark:text-neutral-400">Shop: Urban Ground</p>
-                            </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-rufina text-2xl">Weekend Cafe Street Set</h3>
+                        <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">Off-duty</p>
+                        <p class="text-base text-neutral-600 dark:text-neutral-400">Relaxed denim, knits, and sneakers ready for quick trips.</p>
+                        <div class="text-sm mt-2 space-y-0.5">
+                            <p class="font-semibold text-neutral-900 dark:text-dark-text">79,000 MMK</p>
+                            <p class="text-neutral-500 dark:text-neutral-400">Shop: Myanmar Plaza, Yangon</p>
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
                             <button
                                 type="button"
-                                class="text-primary-600 dark:text-primary-400 hover:underline text-sm favorite-link"
+                                class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary-600 text-white text-sm font-semibold shadow hover:bg-primary-700 hover:-translate-y-0.5 transform transition"
+                            >
+                                Add to cart
+                            </button>
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center px-3 py-2 rounded-full border border-primary-600 text-primary-600 dark:text-primary-400 text-sm font-semibold bg-white dark:bg-dark-card hover:bg-primary-50 dark:hover:bg-dark-card/80 transition favorite-link"
                                 data-favorite-id="set-weekend-cafe"
                                 data-favorite-title="Weekend Cafe Street Set"
                                 data-favorite-category="weekend"
@@ -189,26 +196,29 @@
                         </div>
                     </div>
                 </article>
-                <!-- Set 3 -->
+                
                 <article class="product-card p-0 overflow-hidden group h-full flex flex-col" data-aos="fade-up" data-aos-delay="200">
                     <div class="aspect-[3/4] bg-neutral-100 dark:bg-dark-card relative overflow-hidden flex-shrink-0">
                         <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=1067&q=80" alt="Elegant evening wear" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-sm font-medium">View Collection</span>
-                        </div>
                     </div>
-                    <div class="p-5 space-y-2">
-                        <h3 class="font-rufina text-xl">Launch Night Capsule</h3>
-                        <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Events</p>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Statement looks and accessories tuned for evening light.</p>
-                        <div class="flex items-center justify-between text-xs mt-2">
-                            <div class="space-y-0.5">
-                                <p class="font-semibold text-neutral-900 dark:text-dark-text">$349</p>
-                                <p class="text-neutral-500 dark:text-neutral-400">Shop: Night Studio</p>
-                            </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-rufina text-2xl">Launch Night Capsule</h3>
+                        <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">Events</p>
+                        <p class="text-base text-neutral-600 dark:text-neutral-400">Statement looks and accessories tuned for evening light.</p>
+                        <div class="text-sm mt-2 space-y-0.5">
+                            <p class="font-semibold text-neutral-900 dark:text-dark-text">129,000 MMK</p>
+                            <p class="text-neutral-500 dark:text-neutral-400">Shop: Junction Square, Yangon</p>
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
                             <button
                                 type="button"
-                                class="text-primary-600 dark:text-primary-400 hover:underline text-sm favorite-link"
+                                class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary-600 text-white text-sm font-semibold shadow hover:bg-primary-700 hover:-translate-y-0.5 transform transition"
+                            >
+                                Add to cart
+                            </button>
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center px-3 py-2 rounded-full border border-primary-600 text-primary-600 dark:text-primary-400 text-sm font-semibold bg-white dark:bg-dark-card hover:bg-primary-50 dark:hover:bg-dark-card/80 transition favorite-link"
                                 data-favorite-id="set-launch-night"
                                 data-favorite-title="Launch Night Capsule"
                                 data-favorite-category="event"
@@ -218,23 +228,125 @@
                         </div>
                     </div>
                 </article>
-                <!-- Set 4 -->
-                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="150">
-                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card">
-                        <img src="../assets/images/looks/curated-travel-01.jpg" alt="Carry-on travel set" class="w-full h-full object-cover">
+                
+                <article class="product-card p-0 overflow-hidden group h-full flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                    <div class="aspect-[3/4] bg-neutral-100 dark:bg-dark-card relative overflow-hidden flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=1067&q=80" alt="Elegant evening wear" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     </div>
-                    <div class="p-5 space-y-2">
-                        <h3 class="font-rufina text-xl">Carry‑On Travel Set</h3>
-                        <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Travel</p>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Layerable pieces that cover flights, meetings, and nights out.</p>
-                        <div class="flex items-center justify-between text-xs mt-2">
-                            <div class="space-y-0.5">
-                                <p class="font-semibold text-neutral-900 dark:text-dark-text">$279</p>
-                                <p class="text-neutral-500 dark:text-neutral-400">Shop: Transit Room</p>
-                            </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-rufina text-2xl">Launch Night Capsule</h3>
+                        <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">Events</p>
+                        <p class="text-base text-neutral-600 dark:text-neutral-400">Statement looks and accessories tuned for evening light.</p>
+                        <div class="text-sm mt-2 space-y-0.5">
+                            <p class="font-semibold text-neutral-900 dark:text-dark-text">129,000 MMK</p>
+                            <p class="text-neutral-500 dark:text-neutral-400">Shop: Junction Square, Yangon</p>
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
                             <button
                                 type="button"
-                                class="text-primary-600 dark:text-primary-400 hover:underline text-sm favorite-link"
+                                class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary-600 text-white text-sm font-semibold shadow hover:bg-primary-700 hover:-translate-y-0.5 transform transition"
+                            >
+                                Add to cart
+                            </button>
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center px-3 py-2 rounded-full border border-primary-600 text-primary-600 dark:text-primary-400 text-sm font-semibold bg-white dark:bg-dark-card hover:bg-primary-50 dark:hover:bg-dark-card/80 transition favorite-link"
+                                data-favorite-id="set-launch-night"
+                                data-favorite-title="Launch Night Capsule"
+                                data-favorite-category="event"
+                            >
+                                ♡ Favorite
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="product-card p-0 overflow-hidden group h-full flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                    <div class="aspect-[3/4] bg-neutral-100 dark:bg-dark-card relative overflow-hidden flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=1067&q=80" alt="Elegant evening wear" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-rufina text-2xl">Launch Night Capsule</h3>
+                        <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">Events</p>
+                        <p class="text-base text-neutral-600 dark:text-neutral-400">Statement looks and accessories tuned for evening light.</p>
+                        <div class="text-sm mt-2 space-y-0.5">
+                            <p class="font-semibold text-neutral-900 dark:text-dark-text">129,000 MMK</p>
+                            <p class="text-neutral-500 dark:text-neutral-400">Shop: Junction Square, Yangon</p>
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary-600 text-white text-sm font-semibold shadow hover:bg-primary-700 hover:-translate-y-0.5 transform transition"
+                            >
+                                Add to cart
+                            </button>
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center px-3 py-2 rounded-full border border-primary-600 text-primary-600 dark:text-primary-400 text-sm font-semibold bg-white dark:bg-dark-card hover:bg-primary-50 dark:hover:bg-dark-card/80 transition favorite-link"
+                                data-favorite-id="set-launch-night"
+                                data-favorite-title="Launch Night Capsule"
+                                data-favorite-category="event"
+                            >
+                                ♡ Favorite
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="product-card p-0 overflow-hidden group h-full flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                    <div class="aspect-[3/4] bg-neutral-100 dark:bg-dark-card relative overflow-hidden flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=1067&q=80" alt="Elegant evening wear" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-rufina text-2xl">Launch Night Capsule</h3>
+                        <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">Events</p>
+                        <p class="text-base text-neutral-600 dark:text-neutral-400">Statement looks and accessories tuned for evening light.</p>
+                        <div class="text-sm mt-2 space-y-0.5">
+                            <p class="font-semibold text-neutral-900 dark:text-dark-text">129,000 MMK</p>
+                            <p class="text-neutral-500 dark:text-neutral-400">Shop: Junction Square, Yangon</p>
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary-600 text-white text-sm font-semibold shadow hover:bg-primary-700 hover:-translate-y-0.5 transform transition"
+                            >
+                                Add to cart
+                            </button>
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center px-3 py-2 rounded-full border border-primary-600 text-primary-600 dark:text-primary-400 text-sm font-semibold bg-white dark:bg-dark-card hover:bg-primary-50 dark:hover:bg-dark-card/80 transition favorite-link"
+                                data-favorite-id="set-launch-night"
+                                data-favorite-title="Launch Night Capsule"
+                                data-favorite-category="event"
+                            >
+                                ♡ Favorite
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="150">
+                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card relative overflow-hidden flex-shrink-0">
+                        <img src="../assets/images/looks/curated-travel-01.jpg" alt="Carry-on travel set" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-rufina text-2xl">Carry‑On Travel Set</h3>
+                        <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">Travel</p>
+                        <p class="text-base text-neutral-600 dark:text-neutral-400">Layerable pieces that cover flights, meetings, and nights out.</p>
+                        <div class="text-sm mt-2 space-y-0.5">
+                            <p class="font-semibold text-neutral-900 dark:text-dark-text">99,000 MMK</p>
+                            <p class="text-neutral-500 dark:text-neutral-400">Shop: City Mall St. John, Yangon</p>
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary-600 text-white text-sm font-semibold shadow hover:bg-primary-700 hover:-translate-y-0.5 transform transition"
+                            >
+                                Add to cart
+                            </button>
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center px-3 py-2 rounded-full border border-primary-600 text-primary-600 dark:text-primary-400 text-sm font-semibold bg-white dark:bg-dark-card hover:bg-primary-50 dark:hover:bg-dark-card/80 transition favorite-link"
                                 data-favorite-id="set-carry-on"
                                 data-favorite-title="Carry‑On Travel Set"
                                 data-favorite-category="travel"
@@ -244,23 +356,29 @@
                         </div>
                     </div>
                 </article>
-                <!-- Set 5   -->
+                
                 <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="150">
-                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card">
+                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card relative overflow-hidden flex-shrink-0">
                         <img src="../assets/images/looks/curated-travel-01.jpg" alt="Carry-on travel set" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-5 space-y-2">
-                        <h3 class="font-rufina text-xl">Carry‑On Travel Set</h3>
-                        <p class="text-xs uppercase tracking-[0.3em] text-neutral-400">Travel</p>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Layerable pieces that cover flights, meetings, and nights out.</p>
-                        <div class="flex items-center justify-between text-xs mt-2">
-                            <div class="space-y-0.5">
-                                <p class="font-semibold text-neutral-900 dark:text-dark-text">$279</p>
-                                <p class="text-neutral-500 dark:text-neutral-400">Shop: Transit Room</p>
-                            </div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="font-rufina text-2xl">Carry‑On Travel Set</h3>
+                        <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">Travel</p>
+                        <p class="text-base text-neutral-600 dark:text-neutral-400">Layerable pieces that cover flights, meetings, and nights out.</p>
+                        <div class="text-sm mt-2 space-y-0.5">
+                            <p class="font-semibold text-neutral-900 dark:text-dark-text">279,000 MMK</p>
+                            <p class="text-neutral-500 dark:text-neutral-400">Shop: Yangon Transit Hub</p>
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
                             <button
                                 type="button"
-                                class="text-primary-600 dark:text-primary-400 hover:underline text-sm favorite-link"
+                                class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary-600 text-white text-sm font-semibold shadow hover:bg-primary-700 hover:-translate-y-0.5 transform transition"
+                            >
+                                Add to cart
+                            </button>
+                            <button
+                                type="button"
+                                class="inline-flex items-center justify-center px-3 py-2 rounded-full border border-primary-600 text-primary-600 dark:text-primary-400 text-sm font-semibold bg-white dark:bg-dark-card hover:bg-primary-50 dark:hover:bg-dark-card/80 transition favorite-link"
                                 data-favorite-id="set-carry-on"
                                 data-favorite-title="Carry‑On Travel Set"
                                 data-favorite-category="travel"
@@ -274,131 +392,53 @@
         </div>
     </section>
 
-    <!-- Grooming Kits -->
-    <section id="grooming-kits" class="py-10 sm:py-14 bg-neutral-900 text-white">
+    
+
+    <!-- Accessories -->
+    <section id="accessories" class="py-10 sm:py-14 bg-white dark:bg-dark-bg">
         <div class="container-custom space-y-8">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Grooming Kits</p>
-                    <h2 class="font-rufina text-3xl font-bold">Hair & skin routines that match your outfits</h2>
+                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 dark:text-neutral-600 mb-3">Accessories</p>
+                    <h2 class="font-rufina text-3xl font-bold text-neutral-900 dark:text-dark-text">Complete your look with essentials</h2>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <article class="product-card bg-white/5 border-white/10 p-6 flex flex-col justify-between" data-aos="fade-up">
+                <article class="product-card bg-neutral-50 dark:bg-dark-card border border-neutral-200 dark:border-neutral-800 p-6 flex flex-col justify-between" data-aos="fade-up">
                     <div class="space-y-3">
-                        <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Office ready</p>
-                        <h3 class="font-rufina text-2xl mb-1">Desk‑to‑Dinner Kit</h3>
-                        <p class="text-sm text-white/80 mb-2">Dry shampoo, texture spray, and blotting essentials for long hybrid days.</p>
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 dark:text-neutral-600 mb-2">Everyday carry</p>
+                        <h3 class="font-rufina text-2xl mb-1 text-neutral-900 dark:text-dark-text">Leather Belt & Wallet Set</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-2">Premium leather accessories that age beautifully with daily use.</p>
                     </div>
-                    <div class="mt-4 flex items-center justify-between text-xs">
-                        <div class="space-y-0.5">
-                            <p class="font-semibold text-white">$79</p>
-                            <p class="text-white/70">Shop: Glow Bar</p>
-                        </div>
-                        <button
-                            type="button"
-                            class="text-white hover:underline text-sm favorite-link"
-                            data-favorite-id="kit-desk-dinner"
-                            data-favorite-title="Desk‑to‑Dinner Kit"
-                            data-favorite-category="grooming"
-                        >
-                            ♡ Favorite
-                        </button>
+                    <div class="mt-4 flex items-center justify-center">
+                        <span class="text-primary-600 dark:text-primary-400 font-semibold text-sm">Coming Soon</span>
                     </div>
                 </article>
-                <article class="product-card bg-white/5 border-white/10 p-6 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="50">
+                <article class="product-card bg-neutral-50 dark:bg-dark-card border border-neutral-200 dark:border-neutral-800 p-6 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="50">
                     <div class="space-y-3">
-                        <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Weekend reset</p>
-                        <h3 class="font-rufina text-2xl mb-1">Hair + Skin Reset</h3>
-                        <p class="text-sm text-white/80 mb-2">Clarifying wash, mask, and moisturizer routine to close your week.</p>
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 dark:text-neutral-600 mb-2">Tech essentials</p>
+                        <h3 class="font-rufina text-2xl mb-1 text-neutral-900 dark:text-dark-text">Smartphone & Watch Band Set</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-2">Coordinated tech accessories in premium materials with secure fittings.</p>
                     </div>
-                    <div class="mt-4 flex items-center justify-between text-xs">
-                        <div class="space-y-0.5">
-                            <p class="font-semibold text-white">$65</p>
-                            <p class="text-white/70">Shop: Sunday Lab</p>
-                        </div>
-                        <button
-                            type="button"
-                            class="text-white hover:underline text-sm favorite-link"
-                            data-favorite-id="kit-hair-skin-reset"
-                            data-favorite-title="Hair + Skin Reset"
-                            data-favorite-category="grooming"
-                        >
-                            ♡ Favorite
-                        </button>
+                    <div class="mt-4 flex items-center justify-center">
+                        <span class="text-primary-600 dark:text-primary-400 font-semibold text-sm">Coming Soon</span>
                     </div>
                 </article>
-                <article class="product-card bg-white/5 border-white/10 p-6 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                <article class="product-card bg-neutral-50 dark:bg-dark-card border border-neutral-200 dark:border-neutral-800 p-6 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
                     <div class="space-y-3">
-                        <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-2">Shoot day</p>
-                        <h3 class="font-rufina text-2xl mb-1">On‑Set Touch‑Up Kit</h3>
-                        <p class="text-sm text-white/80 mb-2">Finishing sprays, shine balms, and emergency fixes from our studio bags.</p>
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 dark:text-neutral-600 mb-2">Travel ready</p>
+                        <h3 class="font-rufina text-2xl mb-1 text-neutral-900 dark:text-dark-text">Luggage Tag & Passport Holder</h3>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-2">Durable travel essentials with RFID protection and classic styling.</p>
                     </div>
-                    <div class="mt-4 flex items-center justify-between text-xs">
-                        <div class="space-y-0.5">
-                            <p class="font-semibold text-white">$92</p>
-                            <p class="text-white/70">Shop: Studio Cart</p>
-                        </div>
-                        <button
-                            type="button"
-                            class="text-white hover:underline text-sm favorite-link"
-                            data-favorite-id="kit-on-set"
-                            data-favorite-title="On‑Set Touch‑Up Kit"
-                            data-favorite-category="grooming"
-                        >
-                            ♡ Favorite
-                        </button>
+                    <div class="mt-4 flex items-center justify-center">
+                        <span class="text-primary-600 dark:text-primary-400 font-semibold text-sm">Coming Soon</span>
                     </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- Partner shops -->
-    <section id="partner-shops" class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
-        <div class="container-custom">
-            <div class="space-y-8">
-                <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
-                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Partner Shops</p>
-                    <h2 class="font-rufina text-3xl font-bold mb-3">Studios we love to curate from</h2>
-                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">
-                        Explore racks and grooming bars from our favorite partners—many of the pieces in your sets start here.
-                    </p>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6" data-aos="fade-up" data-aos-delay="50">
-                    <article class="product-card p-3 sm:p-4 text-center">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-neutral-100 dark:bg-dark-card">
-                            <img src="../assets/images/shops/shop-01.jpg" alt="Studio Lane" class="w-full h-full object-cover">
-                        </div>
-                        <p class="font-rufina text-lg">Studio Lane</p>
-                    </article>
-                    <article class="product-card p-3 sm:p-4 text-center">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-neutral-100 dark:bg-dark-card">
-                            <img src="../assets/images/shops/shop-02.jpg" alt="Urban Ground" class="w-full h-full object-cover">
-                        </div>
-                        <p class="font-rufina text-lg">Urban Ground</p>
-                    </article>
-                    <article class="product-card p-3 sm:p-4 text-center">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-neutral-100 dark:bg-dark-card">
-                            <img src="../assets/images/shops/shop-03.jpg" alt="Glow Bar" class="w-full h-full object-cover">
-                        </div>
-                        <p class="font-rufina text-lg">Glow Bar</p>
-                    </article>
-                    <article class="product-card p-3 sm:p-4 text-center">
-                        <div class="aspect-square rounded-2xl overflow-hidden mb-3 bg-neutral-100 dark:bg-dark-card">
-                            <img src="../assets/images/shops/shop-04.jpg" alt="Transit Room" class="w-full h-full object-cover">
-                        </div>
-                        <p class="font-rufina text-lg">Transit Room</p>
-                    </article>
-                </div>
-                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-                    <a href="shop-browsing.html" class="btn btn-secondary inline-flex items-center justify-center px-6">
-                        Browse more shops
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
     <!-- Footer -->
     <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
