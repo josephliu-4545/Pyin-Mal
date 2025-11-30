@@ -19,6 +19,34 @@
 
     <!-- AOS CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        /* Saved Fashion: layout for favorites page */
+        .saved-card {
+            display: flex;
+            flex-direction: column;
+            height: 26rem; /* fixed card height */
+        }
+
+        /* Dedicated image wrapper so every card image uses the exact same box */
+        .saved-card-image {
+            position: relative;
+            width: 100%;
+            height: 100rem; /* exactly half of card height */
+            overflow: hidden;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+        }
+
+        .saved-card-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.06);
+            transform-origin: center;
+        }
+    </style>
 </head>
 <body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
     <!-- Navigation -->
@@ -123,53 +151,30 @@
 
     <!-- Hero -->
     <section class="py-10 sm:py-14 md:py-16 bg-neutral-900 text-white">
-        <div class="container-custom space-y-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                <div data-aos="fade-right">
-                    <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Saved fashion</p>
-                    <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Your approved outfits and grooming combos, all in one clipboard.</h1>
-                    <p class="text-sm sm:text-base text-white/80">Everything you’ve favorited from the generator, shop, and curated sets lands here—ready for re-use, styling tweaks, or sending to your stylist.</p>
-                </div>
-                add photo 
+        <div class="container-custom space-y-6">
+            <div class="max-w-3xl" data-aos="fade-up">
+                <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Saved fashion</p>
+                <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-3">Your saved outfits and fashion picks.</h1>
+                <p class="text-sm sm:text-base text-white/80">Every fashion look you favorite across Pyin Mal appears here in one clean, easy-to-browse grid.</p>
             </div>
-            
         </div>
     </section>
 
-    <!-- Filters -->
-    <section class="py-8 bg-neutral-50 dark:bg-dark-surface">
-        <div class="container-custom" data-aos="fade-up">
-            <div class="product-card p-5 flex flex-col gap-4">
-                <!-- Category Filters -->
-                <div class="flex flex-wrap items-center gap-2 mb-4">
-                    <span class="text-sm font-medium text-neutral-600 dark:text-neutral-300 mr-2">Categories:</span>
-                    <div class="flex flex-wrap gap-2">
-                        <button class="category-filter active px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 bg-primary-600 text-white" data-category="all">
-                            All Items
-                        </button>
-                        <button class="category-filter px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 text-neutral-600 dark:text-neutral-300 hover:bg-white dark:hover:bg-dark-surface hover:text-primary-600 dark:hover:text-primary-400" data-category="haircut">
-                            Haircut
-                        </button>
-                        <button class="category-filter px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 text-neutral-600 dark:text-neutral-300 hover:bg-white dark:hover:bg-dark-surface hover:text-primary-600 dark:hover:text-primary-400" data-category="outfit">
-                            Outfit
-                        </button>
-                        <button class="category-filter px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 text-neutral-600 dark:text-neutral-300 hover:bg-white dark:hover:bg-dark-surface hover:text-primary-600 dark:hover:text-primary-400" data-category="set">
-                            Sets
-                        </button>
-                    </div>
+    <!-- Search -->
+    <section class="py-6 bg-neutral-50 dark:bg-dark-surface border-b border-neutral-200/70 dark:border-dark-border">
+        <div class="container-custom max-w-4xl" data-aos="fade-up">
+            <div class="product-card p-4 sm:p-5 flex flex-col gap-3">
+                <div class="flex items-center justify-between gap-2 mb-1">
+                    <h2 class="font-rufina text-lg sm:text-xl font-semibold text-neutral-900 dark:text-dark-text">Saved looks</h2>
+                    <p class="text-xs text-neutral-500 dark:text-neutral-400" id="saved-count-label"></p>
                 </div>
-                
-                <!-- Search Bar -->
                 <div class="flex flex-col sm:flex-row gap-3 w-full">
                     <div class="relative flex-1">
-                        <input type="search" id="saved-search" class="form-input w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 dark:border-dark-border bg-white dark:bg-dark-card text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Search saved looks by name or tag">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="h-4 w-4 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
+                        <input type="search" id="saved-search" class="form-input w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 dark:border-dark-border bg-white dark:bg-dark-card text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Search by name, ID, description, or shop">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         </div>
                     </div>
-                    <button class="btn btn-primary px-6 whitespace-nowrap" type="button">
+                    <button id="saved-search-btn" class="btn btn-primary px-6 whitespace-nowrap text-sm" type="button">
                         <span>Search</span>
                     </button>
                 </div>
@@ -181,23 +186,6 @@
     <section class="py-10">
         <div class="container-custom">
             <div id="saved-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-        </div>
-    </section>
-
-    <!-- CTA strip -->
-    <section class="py-12 md:py-16 bg-neutral-50 dark:bg-dark-surface">
-        <div class="container-custom">
-            <div class="rounded-[32px] bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-8 md:p-12 flex flex-col lg:flex-row gap-6 md:gap-10 items-center">
-                <div class="space-y-3 lg:w-2/3">
-                    <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400">Next</p>
-                    <h2 class="font-rufina text-3xl font-bold">Want us to turn these saved looks into a physical drop?</h2>
-                    <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Share your size data and timing. We’ll either ship a curated trunk or send shoppable links to your local boutiques.</p>
-                </div>
-                <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-                    <button onclick="window.location.href='shop-browsing.html'" class="btn btn-primary text-sm px-4 py-2 w-full sm:w-auto transform transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/20 dark:hover:shadow-primary-900/30 hover:bg-primary-600 dark:hover:bg-primary-500">Add more looks</button>
-                    <button onclick="window.location.href='contact.html'" class="btn btn-primary text-sm px-4 py-2 w-full sm:w-auto transform transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/20 dark:hover:shadow-primary-900/30 hover:bg-primary-600 dark:hover:bg-primary-500">Request styling drop</button>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -223,179 +211,140 @@
     <script src="../js/animations.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const FAVORITES_KEY = 'pyinmal_favorites';
-            const HAIRSTYLE_FAVORITES_KEY = 'favoriteHairstyles';
+            const STORAGE_KEY_PRIMARY = 'pyinmal_favorites';
+            const STORAGE_KEY_FALLBACK = 'favorites';
+
             const grid = document.getElementById('saved-grid');
             const searchInput = document.getElementById('saved-search');
-            const searchButton = document.querySelector('button[type="button"]');
-            const categoryFilters = Array.from(document.querySelectorAll('.category-filter'));
-            let activeCategory = 'all';
+            const searchButton = document.getElementById('saved-search-btn');
+            const countLabel = document.getElementById('saved-count-label');
 
-            function clearAllFavorites() {
-                localStorage.removeItem(FAVORITES_KEY);
-                localStorage.removeItem(HAIRSTYLE_FAVORITES_KEY);
-                renderFavorites();
-                applyFilters();
-                showNotification('All favorites cleared', 'success');
-            }
-
-            function getFavorites() {
-                try { 
-                    const regularFavorites = JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
-                    const hairstyleFavorites = JSON.parse(localStorage.getItem(HAIRSTYLE_FAVORITES_KEY)) || [];
-                    
-                    // Convert hairstyle favorites to the expected format
-                    const convertedHairstyles = hairstyleFavorites.map((item, index) => ({
-                        id: `hairstyle_${index}`,
-                        title: item.name,
-                        image: item.image,
-                        category: 'hairstyle',
-                        description: item.description,
-                        tags: item.tags || []
-                    }));
-                    
-                    return [...regularFavorites, ...convertedHairstyles]; 
-                } catch { return []; }
-            }
-
-            function categoryMap(raw) {
-                if (raw === 'hairstyle' || raw === 'haircut') return 'haircut';
-                if (raw === 'outfit') return 'outfit';
-                return 'set';
-            }
-
-            function removeFavorite(id) {
-                // Check if it's a hairstyle favorite
-                if (id.startsWith('hairstyle_')) {
-                    const hairstyleFavorites = JSON.parse(localStorage.getItem(HAIRSTYLE_FAVORITES_KEY)) || [];
-                    const index = parseInt(id.split('_')[1]);
-                    hairstyleFavorites.splice(index, 1);
-                    localStorage.setItem(HAIRSTYLE_FAVORITES_KEY, JSON.stringify(hairstyleFavorites));
-                } else {
-                    // Regular favorite
-                    const remaining = getFavorites().filter(i => i.id !== id);
-                    localStorage.setItem(FAVORITES_KEY, JSON.stringify(remaining));
+            function loadFavorites() {
+                try {
+                    let items = JSON.parse(localStorage.getItem(STORAGE_KEY_PRIMARY) || 'null');
+                    if (!Array.isArray(items)) {
+                        items = JSON.parse(localStorage.getItem(STORAGE_KEY_FALLBACK) || '[]');
+                    }
+                    return Array.isArray(items) ? items : [];
+                } catch {
+                    return [];
                 }
-                renderFavorites();
-                applyFilters();
             }
 
-            function renderFavorites() {
-                const items = getFavorites();
+            function saveFavorites(items) {
+                localStorage.setItem(STORAGE_KEY_PRIMARY, JSON.stringify(items));
+            }
+
+            function normalizeItem(raw, index) {
+                return {
+                    id: raw.id ?? `item_${index}`,
+                    title: raw.title ?? raw.name ?? 'Saved Item',
+                    description: raw.description ?? '',
+                    image: raw.image ?? '',
+                    category: raw.category ?? 'set',
+                    shop: raw.shop ?? raw.shopName ?? ''
+                };
+            }
+
+            function render(items) {
                 grid.innerHTML = '';
 
-                if (items.length === 0) {
-                    grid.innerHTML = `
-                        <div class="col-span-full text-center py-12">
-                            <div class="text-neutral-400 dark:text-neutral-500 mb-4">
-                                <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                                </svg>
-                                <p class="text-lg font-medium">No saved items yet</p>
-                                <p class="text-sm mt-2">Start favoriting hairstyles and outfits to see them here</p>
-                            </div>
-                            
-                        </div>
+                countLabel.textContent = items.length
+                    ? `${items.length} saved look${items.length === 1 ? '' : 's'}`
+                    : 'No saved looks yet';
+
+                if (!items.length) {
+                    const empty = document.createElement('div');
+                    empty.className = 'col-span-full text-center py-12 text-neutral-500 dark:text-neutral-400';
+                    empty.innerHTML = `
+                        <p class="text-lg font-medium mb-1">No saved fashion yet</p>
+                        <p class="text-sm">Browse outfits and tap the heart icon to see them here.</p>
                     `;
+                    grid.appendChild(empty);
                     return;
                 }
 
-                items.forEach((item, index) => {
-                    const cat = categoryMap(item.category);
+                items.forEach((raw, index) => {
+                    const item = normalizeItem(raw, index);
                     const card = document.createElement('article');
-                    card.className = 'product-card overflow-hidden rounded-2xl bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark transition hover:shadow-lg hover:-translate-y-0.5 group';
-                    card.setAttribute('data-saved-card', '');
-                    card.setAttribute('data-category', cat);
-                    card.setAttribute('data-id', item.id || `hairstyle_${index}`);
-                    
-                    // Special handling for hairstyle cards
-                    const isHairstyle = item.category === 'hairstyle';
-                    
+                    card.className = 'product-card saved-card overflow-hidden rounded-2xl bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark transition hover:shadow-lg hover:-translate-y-0.5 group';
+                    card.dataset.savedCard = '';
+                    card.dataset.id = item.id;
+
                     card.innerHTML = `
-                        <div class="relative aspect-[3/4] bg-neutral-100 dark:bg-dark-card overflow-hidden">
-                            <img src="${item.image || 'https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=800&h=1067&q=80'}" alt="${item.title || ''}" class="w-full h-full object-cover">
-                            <button class="unfav-btn absolute top-3 right-3 text-xs px-3 py-1 rounded-full bg-red-500 text-white shadow hover:bg-red-600 hover:scale-[1.02] active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-300 transition-all duration-200">
-                                Remove
-                            </button>
-                            ${isHairstyle ? `
-                                <div class="absolute bottom-3 left-3 right-3">
-                                    <div class="flex flex-wrap gap-1">
-                                        ${(item.tags || []).map(tag => `<span class="text-xs px-2 py-1 rounded-full bg-white/90 dark:bg-black/90 text-neutral-800 dark:text-white">${tag}</span>`).join('')}
-                                    </div>
-                                </div>
-                            ` : ''}
+                        <div class="saved-card-image bg-neutral-100 dark:bg-dark-surface">
+                            <img src="${item.image || 'https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=800&h=1067&q=80'}" alt="${item.title}">
                         </div>
-                        <div class="p-4">
-                            <h3 class="font-rufina text-base card-title">${item.title || 'Saved Item'}</h3>
-                            ${item.description ? `<p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1 line-clamp-2">${item.description}</p>` : ''}
-                            <div class="mt-2 flex items-center justify-between">
-                                <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400 card-tags">${cat}</p>
-                                ${isHairstyle ? `
-                                    
-                                ` : ''}
+                        <div class="p-4 flex flex-col h-full">
+                            <div>
+                                <h3 class="font-rufina text-base font-semibold card-title line-clamp-2">${item.title}</h3>
+                                ${item.description ? `<p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1 line-clamp-2">${item.description}</p>` : ''}
+                                <div class="mt-2 flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-400">
+                                    <span class="uppercase tracking-[0.3em] card-category">${(item.category || 'set').toString().toUpperCase()}</span>
+                                    ${item.shop ? `<span class="truncate max-w-[9rem] text-right card-shop">${item.shop}</span>` : ''}
+                                </div>
                             </div>
+                            <button class="unfav-btn btn btn-secondary w-full text-sm mt-4" type="button">Remove</button>
                         </div>
                     `;
+
                     grid.appendChild(card);
                 });
 
-                // Wire up Unfavorite buttons
                 grid.querySelectorAll('.unfav-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.preventDefault();
-                        e.stopPropagation();
-                        const card = btn.closest('[data-saved-card]');
-                        const id = card ? card.getAttribute('data-id') : '';
-                        if (id) removeFavorite(id);
+                        const card = btn.closest('article');
+                        if (!card) return;
+                        const id = card.dataset.id;
+                        let items = loadFavorites();
+                        items = items.filter((raw, index) => {
+                            const normalized = normalizeItem(raw, index);
+                            return normalized.id !== id;
+                        });
+                        saveFavorites(items);
+                        applySearch();
                     });
                 });
             }
 
-            function matchesCategory(card) {
-                if (activeCategory === 'all') return true;
-                return card.dataset.category === activeCategory;
-            }
-
-            function matchesSearch(card) {
-                const term = searchInput.value.trim().toLowerCase();
+            function itemMatchesSearch(raw, index, term) {
                 if (!term) return true;
-                const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
-                const tags = card.querySelector('.card-tags')?.textContent.toLowerCase() || '';
-                return title.includes(term) || tags.includes(term);
+                const item = normalizeItem(raw, index);
+                const haystack = [
+                    item.id,
+                    item.title,
+                    item.description,
+                    item.shop,
+                    item.category
+                ].join(' ').toLowerCase();
+                return haystack.includes(term);
             }
 
-            function applyFilters() {
-                const cards = Array.from(document.querySelectorAll('[data-saved-card]'));
-                cards.forEach(card => {
-                    const vis = matchesCategory(card) && matchesSearch(card);
-                    card.classList.toggle('hidden', !vis);
-                });
-                if (typeof AOS !== 'undefined') { AOS.refresh(); }
+            function applySearch() {
+                const term = searchInput.value.trim().toLowerCase();
+                const all = loadFavorites();
+                const filtered = all.filter((raw, index) => itemMatchesSearch(raw, index, term));
+                render(filtered);
             }
 
-            let searchTimeout;
             searchInput.addEventListener('input', () => {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(applyFilters, 200);
-            });
-            searchButton.addEventListener('click', applyFilters);
-            searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') applyFilters(); });
-
-            categoryFilters.forEach(filter => {
-                filter.addEventListener('click', () => {
-                    categoryFilters.forEach(f => {
-                        f.classList.remove('active', 'bg-primary-600', 'text-white');
-                        f.classList.add('text-neutral-600', 'dark:text-neutral-300', 'hover:bg-white', 'dark:hover:bg-dark-surface', 'hover:text-primary-600', 'dark:hover:text-primary-400');
-                    });
-                    filter.classList.add('active', 'bg-primary-600', 'text-white');
-                    filter.classList.remove('text-neutral-600', 'dark:text-neutral-300', 'hover:bg-white', 'dark:hover:bg-dark-surface', 'hover:text-primary-600', 'dark:hover:text-primary-400');
-                    activeCategory = filter.dataset.category;
-                    applyFilters();
-                });
+                applySearch();
             });
 
-            renderFavorites();
-            applyFilters();
+            searchButton.addEventListener('click', () => {
+                applySearch();
+            });
+
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    applySearch();
+                }
+            });
+
+            // Initial render
+            applySearch();
         });
     </script>
 </body>
