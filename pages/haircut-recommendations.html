@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Learn more about Pyin Mal, the fashion and grooming studio behind the virtual styling experience.">
-    <title>About - Pyin Mal</title>
+    <title>Hairstyle - Pyin Mal</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,6 +25,15 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <style>
+        /* Ensure sticky navigation works properly */
+        header {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 40 !important;
+        }
+        
+       
+
         /* Scope Swiper styles to the Hairstyle Recommendations section */
         #hairstyle-recommendations .swiper-container {
             width: 100%;
@@ -36,6 +45,7 @@
             background-position: center;
             background-size: cover;
             width: 320px;
+            max-width: 100vw;
             background-color: #fff;
             overflow: hidden;
             border-radius: 8px;
@@ -50,6 +60,7 @@
 
         #hairstyle-recommendations .picture {
             width: 320px;
+            max-width: 100vw;
             height: 320px;
             overflow: hidden;
         }
@@ -380,8 +391,8 @@
         .hairstyle-button {
             display: inline-block;
             padding: 0.75rem 1.5rem;
-            background-color: #3b82f6;
-            color: white;
+            background-color: #e5e7eb;
+            color: #1f2937;
             text-decoration: none;
             border-radius: 0.5rem;
             font-weight: 500;
@@ -391,8 +402,17 @@
         }
 
         .hairstyle-button:hover {
-            background-color: #2563eb;
+            background-color: #d1d5db;
             transform: translateY(-1px);
+        }
+
+        .dark .hairstyle-button {
+            background-color: #374151;
+            color: #f3f4f6;
+        }
+
+        .dark .hairstyle-button:hover {
+            background-color: #4b5563;
         }
 
         .try-on-button {
@@ -400,7 +420,7 @@
             align-items: center;
             justify-content: center;
             padding: 0.75rem 1rem;
-            background-color: #10b981;
+            background-color: #3b82f6;
             color: white;
             text-decoration: none;
             border-radius: 0.5rem;
@@ -411,7 +431,7 @@
         }
 
         .try-on-button:hover {
-            background-color: #059669;
+            background-color: #2563eb;
             transform: translateY(-1px);
         }
 
@@ -855,12 +875,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="../hair_overlay_test/index.html" target="_blank" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
                 <!-- Male Diamond Face Hairstyles -->
@@ -879,12 +894,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -903,12 +913,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -927,12 +932,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -951,12 +951,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -975,12 +970,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -999,12 +989,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1023,12 +1008,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1047,12 +1027,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1071,12 +1046,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1096,12 +1066,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1120,12 +1085,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1145,12 +1105,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1169,12 +1124,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1194,12 +1144,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1218,12 +1163,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1242,12 +1182,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1266,12 +1201,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1290,12 +1220,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1314,12 +1239,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1338,12 +1258,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1362,12 +1277,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1386,12 +1296,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1411,12 +1316,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1435,12 +1335,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1459,12 +1354,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1484,12 +1374,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1508,12 +1393,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1532,12 +1412,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1556,12 +1431,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1580,12 +1450,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1604,12 +1469,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1628,12 +1488,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1653,12 +1508,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1677,12 +1527,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1701,12 +1546,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1725,12 +1565,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1749,12 +1584,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1773,12 +1603,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1797,12 +1622,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1821,12 +1641,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1845,12 +1660,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1870,12 +1680,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1894,12 +1699,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1918,12 +1718,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1942,12 +1737,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1966,12 +1756,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -1990,12 +1775,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2014,12 +1794,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2038,12 +1813,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2062,12 +1832,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2086,12 +1851,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2110,12 +1870,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2135,12 +1890,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2159,12 +1909,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2183,12 +1928,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2207,12 +1947,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2231,12 +1966,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2255,12 +1985,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2279,12 +2004,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2303,12 +2023,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2327,12 +2042,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2351,12 +2061,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2375,12 +2080,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2399,12 +2099,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2424,12 +2119,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2448,12 +2138,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2472,12 +2157,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2496,12 +2176,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2520,12 +2195,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2544,12 +2214,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2568,12 +2233,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2592,12 +2252,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2616,12 +2271,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2640,12 +2290,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2665,12 +2310,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2689,12 +2329,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2713,12 +2348,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2737,12 +2367,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2761,12 +2386,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2785,12 +2405,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2809,12 +2424,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2833,12 +2443,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2857,12 +2462,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2881,12 +2481,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2906,12 +2501,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2930,12 +2520,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2954,12 +2539,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -2978,12 +2558,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3002,12 +2577,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3026,12 +2596,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3050,12 +2615,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3074,12 +2634,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3098,12 +2653,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3122,12 +2672,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3147,12 +2692,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3171,12 +2711,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3195,12 +2730,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3219,12 +2749,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3243,12 +2768,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3267,12 +2787,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3291,12 +2806,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3315,12 +2825,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3340,12 +2845,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3364,12 +2864,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3388,12 +2883,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3412,12 +2902,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3436,12 +2921,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3460,12 +2940,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3484,12 +2959,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3509,12 +2979,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3533,12 +2998,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3557,12 +3017,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3581,12 +3036,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3605,12 +3055,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3629,12 +3074,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3653,12 +3093,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3677,12 +3112,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3701,12 +3131,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3725,12 +3150,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
 
@@ -3749,12 +3169,7 @@
                         <div class="hairstyle-actions">
                             <a href="shop-browsing.html?tab=barbers" class="hairstyle-button">Find Shops</a>
                             <a href="#" class="try-on-button">Try On</a>
-                            <button class="favorite-button" onclick="toggleFavorite(this)">
-                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
-                        </div>
+                                                    </div>
                     </div>
                 </div>
             </div>
