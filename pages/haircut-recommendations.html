@@ -17,6 +17,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/main.css">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- AOS CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <!-- Swiper CSS -->
@@ -672,10 +675,10 @@
                             </div>
                             <div class="swiper-slide">
                                 <div class="picture">
-                                    <img src="../assets/images/HairStyle/Male/Diamond Face/Diamond - Undercut.jpg" alt="Undercut">
+                                    <img src="../assets/images/HairStyle/Male/Triangle Face/Triangle - Buzz Cut.jpg" alt="Undercut">
                                 </div>
                                 <div class="detail">
-                                    <h3>Undercut</h3>
+                                    <h3>Buzz cut</h3>
                                     <span>Edgy and stylish with clean lines</span>
                                 </div>
                             </div>
@@ -3759,42 +3762,71 @@
     </section>
 
      <!-- Footer -->
-    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-12 mt-20">
-        <div class="container-custom">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="font-rufina text-xl font-bold mb-4">StyleHub</h3>
-                    <p class="text-neutral-400 dark:text-neutral-500 text-sm">
-                        Your personal fashion and grooming assistant
-                    </p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
-                        <li><a href="about.html" class="hover:text-white dark:hover:text-dark-text">About</a></li>
-                        <li><a href="services.html" class="hover:text-white dark:hover:text-dark-text">Services</a></li>
-                        <li><a href="faq.html" class="hover:text-white dark:hover:text-dark-text">FAQ</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Legal</h4>
-                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
-                        <li><a href="privacy.html" class="hover:text-white dark:hover:text-dark-text">Privacy Policy</a></li>
-                        <li><a href="terms.html" class="hover:text-white dark:hover:text-dark-text">Terms & Conditions</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Contact</h4>
-                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
-                        <li><a href="contact.html" class="hover:text-white dark:hover:text-dark-text">Contact Us</a></li>
-                    </ul>
+<footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text mt-20">
+    <!-- Accent Strip -->
+    <div class="h-1 bg-gradient-to-r from-indigo-500 via-pink-500 to-orange-400"></div>
+
+    <div class="container-custom py-14">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+            
+            <div>
+                <h3 class="font-rufina text-2xl font-bold tracking-wide mb-3">Pyin Mal</h3>
+                <p class="text-neutral-400 dark:text-neutral-500 text-sm leading-relaxed">
+                    Curated style. Smarter grooming. Confidence that lasts.
+                </p>
+
+                <!-- Social -->
+                <div class="flex gap-4 mt-5">
+                    <a href="https://www.instagram.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.twitter.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
-            <div class="border-t border-neutral-800 dark:border-dark-border mt-8 pt-8 text-center text-sm text-neutral-400 dark:text-neutral-500">
-                <p>&copy; 2025 StyleHub. All rights reserved.</p>
+
+            <!-- Explore -->
+            <div>
+                <h4 class="font-semibold mb-4 text-indigo-400">Explore</h4>
+                <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                    <li><a href="about.html" class="hover:text-white transition">Who We Are</a></li>
+                    <li><a href="privacy.html" class="hover:text-white transition">Privacy & Data</a></li>
+                    <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                    <li><a href="faq.html" class="hover:text-white transition">Help Center</a></li>
+                </ul>
             </div>
+
+            
+            <div>
+                <h4 class="font-semibold mb-4 text-indigo-400">Feature</h4>
+                <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                    <li><a href="model-preview.html" class="hover:text-white transition">Outfit preview</a></li>
+                    <li><a href="haircut-recommendations.html" class="hover:text-white transition">HairStyle and Face-analysis</a></li>
+                </ul>
+            </div>
+
+            
+            <div>
+                <h4 class="font-semibold mb-4 text-indigo-400">Stay Sharp</h4>
+                <p class="text-sm text-neutral-400 dark:text-neutral-500 mb-3">
+                    Weekly style tips directly to your inbox.
+                </p>
+                <form class="flex">
+                    <input type="email" placeholder="Your email"
+                        class="w-full px-3 py-2 rounded-l bg-neutral-800 dark:bg-dark-card text-sm text-white outline-none">
+                    <a href="contact.html"><button
+                        class="bg-indigo-500 hover:bg-indigo-600 transition px-4 py-2 text-sm rounded-r font-semibold">
+                        Join
+                    </button></a>
+                </form>
+            </div>
+
         </div>
-    </footer>
+
+        <!-- Bottom -->
+        <div class="border-t border-neutral-800 dark:border-dark-border mt-10 pt-6 text-center text-sm text-neutral-500">
+            <p>© 2025 <span class="font-semibold text-white">Pyin Mal</span> — Designed for those who stand out.</p>
+        </div>
+    </div>
+</footer>
     
 
     <!-- Scripts -->

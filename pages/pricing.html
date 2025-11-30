@@ -24,9 +24,9 @@
         /* Selected plan visual state */
         #plans .product-card.selected-plan {
             border-width: 2px !important;
-            border-color: rgb(59,130,246) !important; /* primary-500 */
-            box-shadow: 0 0 20px rgba(59,130,246,0.6) !important;
-            background-color: rgba(255,255,255,0.7) !important;
+            border-color: #2D9CDB !important;
+            box-shadow: 0 0 20px rgba(45,156,219,0.6) !important;
+            background-color: rgba(15,32,39,0.7) !important;
             transform: translateY(-6px) !important;
             transition: all 0.25s ease !important;
         }
@@ -161,14 +161,19 @@
     </header>
 
     <!-- Hero -->
-    <section class="py-10 sm:py-14 md:py-16 bg-gradient-to-br from-primary-600 via-primary-700 to-purple-800 text-white">
-        <div class="container-custom max-w-3xl mx-auto text-center">
+    <section class="py-10 sm:py-14 md:py-16 relative overflow-hidden">
+        
+        
+        <!-- Background photo -->
+        <img src="../assets/images/Hero/Pricing.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60 blur-sm">
+        
+        <div class="relative container-custom max-w-3xl mx-auto text-center text-white">
             <div data-aos="fade-up">
                 <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Pricing</p>
                 <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Style that grows with you. Choose your plan.</h1>
                 <p class="text-sm sm:text-base text-white/80 mb-6">From free discovery to premium styling, find the perfect plan for your fashion journey. No commitments, just great style.</p>
                 <div class="flex flex-wrap gap-4 justify-center">
-                    <a href="#plans" class="btn btn-primary bg-white text-primary-700 hover:bg-neutral-100">View plans</a>
+                    <a href="#plans" class="btn btn-primary bg-white text-white hover:bg-neutral-100">View plans</a>
                     <a href="contact.html" class="btn btn-ghost border-white text-white hover:bg-white/10">Talk to our team</a>
                 </div>
             </div>
@@ -184,13 +189,7 @@
                 <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Start free, upgrade as your style needs grow. Cancel anytime.</p>
             </div>
             
-            <!-- Billing Toggle -->
-            <div class="flex justify-center" data-aos="fade-up">
-                <div class="inline-flex rounded-xl bg-white dark:bg-dark-card p-1.5 shadow-sm border border-neutral-200 dark:border-dark-border">
-                    <button class="billing-toggle billing-toggle-active px-4 py-2 rounded-lg text-sm font-medium">Monthly</button>
-                    <button class="billing-toggle px-4 py-2 rounded-lg text-sm font-medium">Yearly <span class="text-primary-600 ml-1">Save 20%</span></button>
-                </div>
-            </div>
+           
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Free Plan -->
@@ -201,43 +200,35 @@
                     <p class="text-sm text-neutral-600 dark:text-neutral-400">Perfect for exploring your style with limited recommendations and try-ons.</p>
                     <ul class="space-y-1.5 text-sm text-neutral-600 dark:text-neutral-400">
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
                             <span class="text-primary-600 dark:text-primary-400">✔</span>
                             <span>Style recommendations - 5 tries</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
                             <span class="text-primary-600 dark:text-primary-400">✔</span>
                             <span>Haircut Try-On (MediaPipe FaceMesh) - 1 try per month</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                                        <span class="text-primary-600 dark:text-primary-400">✔</span>
                             <span>Model Preview (2D) - Unlimited</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
                             <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>AI Model Preview - 0 tries</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No fashion library</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No grooming kits</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No consultations</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No support features</span>
                         </li>
                     </ul>
@@ -255,43 +246,35 @@
                     <p class="text-sm text-neutral-600 dark:text-neutral-400">For style enthusiasts who want unlimited recommendations and more try-ons.</p>
                     <ul class="space-y-1.5 text-sm text-neutral-600 dark:text-neutral-400">
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                                        <span class="text-primary-600 dark:text-primary-400">✔</span>
                             <span>Style recommendations - Unlimited</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                                        <span class="text-primary-600 dark:text-primary-400">✔</span>
                             <span>Haircut Try-On (FaceMesh) - 20 tries per month</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                                        <span class="text-primary-600 dark:text-primary-400">✔</span>
                             <span>Model Preview (2D) - Unlimited</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                                        <span class="text-primary-600 dark:text-primary-400">✔</span>
                             <span>AI Model Preview - 10 tries</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No fashion library</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No grooming kits</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No consultations</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No support features</span>
                         </li>
                     </ul>
@@ -306,43 +289,35 @@
                     <p class="text-sm text-neutral-600 dark:text-neutral-400">Best value for committed style lovers with unlimited access.</p>
                     <ul class="space-y-1.5 text-sm text-neutral-600 dark:text-neutral-400">
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                                        <span class="text-primary-600 dark:text-primary-400">✔</span>
                             <span>Style recommendations - Unlimited</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                                        <span class="text-primary-600 dark:text-primary-400">✔</span>
                             <span>Haircut Try-On (FaceMesh) - Unlimited</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                                        <span class="text-primary-600 dark:text-primary-400">✔</span>
                             <span>Model Preview (2D) - Unlimited</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-primary-600 dark:text-primary-400">✔</span>
+                                                        <span class="text-primary-600 dark:text-primary-400">✔</span>
                             <span>AI Model Preview - Unlimited</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No fashion library</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No grooming kits</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No consultations</span>
                         </li>
                         <li class="plan-feature-row">
-                            <span class="plan-feature-row-icon"></span>
-                            <span class="text-neutral-400 dark:text-neutral-500">✖</span>
+                                                        <span class="text-neutral-400 dark:text-neutral-500">✖</span>
                             <span>No support features</span>
                         </li>
                     </ul>
@@ -457,20 +432,72 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-10">
-        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between text-sm">
+<footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text mt-20">
+    <!-- Accent Strip -->
+    <div class="h-1 bg-gradient-to-r from-indigo-500 via-pink-500 to-orange-400"></div>
+
+    <div class="container-custom py-14">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+            
             <div>
-                <p class="font-rufina text-2xl">Pyin Mal</p>
-                <p class="text-neutral-400 dark:text-neutral-500">Wardrobe & grooming intelligence.</p>
+                <h3 class="font-rufina text-2xl font-bold tracking-wide mb-3">Pyin Mal</h3>
+                <p class="text-neutral-400 dark:text-neutral-500 text-sm leading-relaxed">
+                    Curated style. Smarter grooming. Confidence that lasts.
+                </p>
+
+                <!-- Social -->
+                <div class="flex gap-4 mt-5">
+                    <a href="https://www.instagram.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.twitter.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
-            <div class="flex flex-wrap gap-6 text-neutral-400 dark:text-neutral-500">
-                <a href="privacy.html" class="hover:text-white">Privacy</a>
-                <a href="terms.html" class="hover:text-white">Terms</a>
-                <a href="contact.html" class="hover:text-white">Contact</a>
+
+            <!-- Explore -->
+            <div>
+                <h4 class="font-semibold mb-4 text-indigo-400">Explore</h4>
+                <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                    <li><a href="about.html" class="hover:text-white transition">Who We Are</a></li>
+                    <li><a href="privacy.html" class="hover:text-white transition">Privacy & Data</a></li>
+                    <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                    <li><a href="faq.html" class="hover:text-white transition">Help Center</a></li>
+                </ul>
             </div>
-            <div class="text-neutral-500 dark:text-neutral-400 text-xs"> 2025 Pyin Mal. All rights reserved.</div>
+
+            
+            <div>
+                <h4 class="font-semibold mb-4 text-indigo-400">Feature</h4>
+                <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                    <li><a href="model-preview.html" class="hover:text-white transition">Outfit preview</a></li>
+                    <li><a href="haircut-recommendations.html" class="hover:text-white transition">HairStyle and Face-analysis</a></li>
+                </ul>
+            </div>
+
+            
+            <div>
+                <h4 class="font-semibold mb-4 text-indigo-400">Stay Sharp</h4>
+                <p class="text-sm text-neutral-400 dark:text-neutral-500 mb-3">
+                    Weekly style tips directly to your inbox.
+                </p>
+                <form class="flex">
+                    <input type="email" placeholder="Your email"
+                        class="w-full px-3 py-2 rounded-l bg-neutral-800 dark:bg-dark-card text-sm text-white outline-none">
+                    <a href="contact.html"><button
+                        class="bg-indigo-500 hover:bg-indigo-600 transition px-4 py-2 text-sm rounded-r font-semibold">
+                        Join
+                    </button></a>
+                </form>
+            </div>
+
         </div>
-    </footer>
+
+        <!-- Bottom -->
+        <div class="border-t border-neutral-800 dark:border-dark-border mt-10 pt-6 text-center text-sm text-neutral-500">
+            <p>© 2025 <span class="font-semibold text-white">Pyin Mal</span> — Designed for those who stand out.</p>
+        </div>
+    </div>
+</footer>
 
     <!-- Scripts (cache-busted) -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js?v=pricing-v1"></script>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Fashion and grooming styling platform with AI-powered outfit recommendations">
-    <title>Fashion Styling Platform - Home</title>
+    <title> Home</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +16,9 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/main.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Swiper CSS (CDN) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -60,13 +63,13 @@
     <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
         <nav class="container-custom">
             <div class="flex items-center justify-between h-16 gap-6">
-                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                <a href="index.html" class="flex items-center space-x-1.5 sm:space-x-2">
                     <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
                     <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
                 </a>
 
                 <div class="hidden lg:flex items-center space-x-6">
-                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="index.html" class="nav-link">Home</a>
                     <div class="relative" data-dropdown="features">
                         <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
                             Features
@@ -74,14 +77,14 @@
                         </button>
                         <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
                             <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
-                                <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
-                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
-                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                                <li><a href="pages/haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="pages/digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="pages/model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
                             </ul>
                         </div>
                     </div>
-                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
-                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <a href="pages/saved-fashion.html" class="nav-link">Favorites</a>
+                    <a href="pages/shop-browsing.html" class="nav-link">Shop</a>
                     <div class="relative" data-dropdown="more">
                         <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
                             More
@@ -89,15 +92,15 @@
                         </button>
                         <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
                             <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
-                                <a href="reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
-                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
-                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
-                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <a href="pages/reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="pages/contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="pages/about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="pages/faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
                                 <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
-                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
-                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
-                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
-                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                                <a href="pages/pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="pages/testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="pages/blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="pages/locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
                             </div>
                         </div>
                     </div>
@@ -112,8 +115,8 @@
                     <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
                     </button>
-                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
-                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <a href="pages/login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="pages/signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
                     <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
@@ -122,33 +125,33 @@
 
             <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
                 <div class="pt-4 space-y-4">
-                    <a href="../index.html" class="block nav-link">Home</a>
+                    <a href="index.html" class="block nav-link">Home</a>
                     <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
                         <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
                         <div class="flex flex-col space-y-2">
-                            <a href="haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
-                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
-                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                            <a href="pages/haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
+                            <a href="pages/digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="pages/model-preview.html" class="nav-link">Model Preview</a>
                         </div>
                     </div>
-                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
-                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <a href="pages/saved-fashion.html" class="block nav-link">Favorites</a>
+                    <a href="pages/shop-browsing.html" class="block nav-link">Shop</a>
                     <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
                         <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
                         <div class="flex flex-col space-y-2">
-                            <a href="reviews.html" class="nav-link">Reviews</a>
-                            <a href="contact.html" class="nav-link">Contact</a>
-                            <a href="about.html" class="nav-link nav-link-active">About us</a>
-                            <a href="faq.html" class="nav-link">FAQ</a>
-                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
-                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
-                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
-                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                            <a href="pages/reviews.html" class="nav-link">Reviews</a>
+                            <a href="pages/contact.html" class="nav-link">Contact</a>
+                            <a href="pages/about.html" class="nav-link">About us</a>
+                            <a href="pages/faq.html" class="nav-link">FAQ</a>
+                            <a href="pages/pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="pages/testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="pages/blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="pages/locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
                         </div>
                     </div>
                     <div class="flex flex-col gap-3">
-                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
-                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                        <a href="pages/login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="pages/signup.html" class="btn btn-primary w-full text-center">Get Started</a>
                     </div>
                 </div>
             </div>
@@ -168,10 +171,11 @@
                         AI-powered outfit recommendations and grooming suggestions tailored just for you
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="pages/outfit-generator.html" class="btn btn-primary bg-white text-primary-600 hover:bg-neutral-100 w-full sm:w-auto">
-                            Generate Outfit
+                        
+                        <a href="pages/haircut-recommendations.html#face-analysis" class="btn btn-primary bg-blue-600 text-white hover:bg-blue-700 w-full sm:w-auto rounded-full px-6 py-3 font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                            HairStyle Try on
                         </a>
-                        <a href="pages/shop-browsing.html" class="btn btn-outline border-white text-white hover:bg-white hover:text-primary-600 w-full sm:w-auto">
+                        <a href="pages/shop-browsing.html" class="btn btn-primary bg-blue-600 text-white hover:bg-blue-700 w-full sm:w-auto rounded-full px-6 py-3 font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                             Browse Shop
                         </a>
                     </div>
@@ -180,33 +184,43 @@
         </section>
 
         <!-- Features Section -->
-        <section id="features" class="py-16 bg-white dark:bg-dark-bg">
-            <div class="container-custom">
-                <h2 class="font-rufina text-3xl md:text-4xl font-bold text-center mb-4">Our Amazing Features</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="feature-card section-card" data-aos="fade-up" data-aos-delay="0">
-                        <img src="./assets/images/Hero/ai hair recommendation.jpg" alt="AI Hair Recommendations" class="w-full h-40 rounded-xl mb-4 object-cover">
-                        <h3 class="font-rufina text-xl font-semibold mb-3">AI Hair Recommendations</h3>
-                        <p class="text-neutral-600 dark:text-neutral-400 mb-4">
-                            Get personalized hairstyle suggestions based on your face shape and preferences
+        <section id="features" class="mt-20 py-20 bg-white dark:bg-dark-bg">
+            <div class="container-custom px-4">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="font-rufina text-4xl md:text-5xl font-bold mb-6">Our Amazing Features</h2>
+                        <p class="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+                            Discover how our AI-powered platform can transform your style journey
                         </p>
-                        <a href="pages/haircut-recommendations.html" class="btn btn-primary w-full">Explore Hair Styles</a>
                     </div>
-                    <div class="feature-card section-card" data-aos="fade-up" data-aos-delay="100">
-                        <img src="./assets/images/Photo/Unconfirmed 991804.crdownload" alt="Curated Fashion Sets" class="w-full h-40 rounded-xl mb-4 object-cover">
-                        <h3 class="font-rufina text-xl font-semibold mb-3">Curated Fashion Sets</h3>
-                        <p class="text-neutral-600 dark:text-neutral-400 mb-4">
-                            Complete outfits curated by AI to match your style, occasion, and preferences
-                        </p>
-                        <a href="pages/digital-outfit.html" class="btn btn-secondary w-full">View Fashion Sets</a>
-                    </div>
-                    <div class="feature-card section-card" data-aos="fade-up" data-aos-delay="200">
-                        <img src="./assets/images/Photo/virtual try on.jpg" alt="Virtual Try-On" class="w-full h-40 rounded-xl mb-4 object-cover">
-                        <h3 class="font-rufina text-xl font-semibold mb-3">Virtual Try-On</h3>
-                        <p class="text-neutral-600 dark:text-neutral-400 mb-4">
-                            See how outfits and hairstyles look on you with our advanced model preview
-                        </p>
-                        <a href="pages/model-preview.html" class="btn btn-accent w-full">Try It On</a>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                        <div class="feature-card section-card p-8" data-aos="fade-up" data-aos-delay="0">
+                            <div class="mb-6">
+                                <img src="./assets/images/Hero/ai hair recommendation.jpg" alt="AI Hair Recommendations" class="w-full h-48 rounded-xl object-cover">
+                            </div>
+                            <h3 class="font-rufina text-2xl font-semibold mb-4">HairStyle Booking</h3>
+                            <p class="text-neutral-600 dark:text-neutral-400 mb-6 text-lg leading-relaxed">
+                                Get personalized hairstyle suggestions based on your face shape and preferences
+                            </p>
+                        </div>
+                        <div class="feature-card section-card p-8" data-aos="fade-up" data-aos-delay="100">
+                            <div class="mb-6">
+                                <img src="./assets/images/Photo/Unconfirmed 991804.crdownload" alt="Curated Fashion Sets" class="w-full h-48 rounded-xl object-cover">
+                            </div>
+                            <h3 class="font-rufina text-2xl font-semibold mb-4">Outfit Preview</h3>
+                            <p class="text-neutral-600 dark:text-neutral-400 mb-6 text-lg leading-relaxed">
+                                Complete outfits curated by AI to match your style, occasion, and preferences
+                            </p>
+                        </div>
+                        <div class="feature-card section-card p-8" data-aos="fade-up" data-aos-delay="200">
+                            <div class="mb-6">
+                                <img src="./assets/images/Hero/ai hair recommendation.jpg" alt="Virtual Try-On" class="w-full h-48 rounded-xl object-cover">
+                            </div>
+                            <h3 class="font-rufina text-2xl font-semibold mb-4">Virtual Try-On</h3>
+                            <p class="text-neutral-600 dark:text-neutral-400 mb-6 text-lg leading-relaxed">
+                                See how hairstyles look on you by using our website
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -215,7 +229,8 @@
         <!-- New Arrivals Section -->
         <section id="new-arrivals" class="py-16 bg-neutral-50 dark:bg-dark-surface">
             <div class="container-custom">
-                <h2 class="font-rufina text-3xl md:text-4xl font-bold text-center mb-4">New Arrivals</h2>
+                <h2 class="font-rufina text-3xl md:text-4xl font-bold text-center mb-4">Trending</h2>
+                
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="product-card section-card" data-aos="fade-up" data-aos-delay="0">
                         <div class="product-card-image bg-gradient-bg-2 h-64 flex items-center justify-center text-white text-4xl">
@@ -234,7 +249,7 @@
                         <div class="product-card-content">
                             <h3 class="product-card-title">Trending Now</h3>
                             <p class="text-neutral-600 dark:text-neutral-400 mb-4">What's hot in the fashion world right now</p>
-                            <a href="pages/shop-browsing.html" class="btn btn-secondary w-full">Shop Now</a>
+                            <a href="pages/shop-browsing.html" class="btn btn-primary w-full">Shop Now</a>
                         </div>
                     </div>
                     <div class="product-card section-card" data-aos="fade-up" data-aos-delay="200">
@@ -243,8 +258,8 @@
                         </div>
                         <div class="product-card-content">
                             <h3 class="product-card-title">Featured Styles</h3>
-                            <p class="text-neutral-600 dark:text-neutral-400 mb-4">Editor's picks for this season</p>
-                            <a href="pages/shop-browsing.html" class="btn btn-accent w-full">Shop Now</a>
+                            <p class="text-neutral-600 dark:text-neutral-400 mb-4">Most Popular picks for this Year</p>
+                            <a href="pages/shop-browsing.html" class="btn btn-primary w-full">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -258,16 +273,16 @@
                     <div class="lg:w-1/2" data-aos="fade-right">
                         <h2 class="font-rufina text-3xl md:text-4xl font-bold mb-4">Face Analysis & Perfect Haircut</h2>
                         <p class="text-neutral-600 dark:text-neutral-400 mb-6">
-                            Our advanced AI analyzes your facial features to recommend the perfect haircut that complements your unique face shape, hair type, and personal style.
+                            Analyzes your facial features to recommend the perfect haircut that complements your unique face shape, hair type, and personal style.
                         </p>
                         <ul class="space-y-3 mb-8">
                             <li class="flex items-start">
                                 <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>AI-powered face shape detection</span>
+                                <span>Analyzes face shape detection</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span>Personalized haircut recommendations</span>
+                                <span>Personalized haircut Style based on hair cut</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
@@ -275,8 +290,8 @@
                             </li>
                         </ul>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="pages/face-analysis.html" class="btn btn-primary">Analyze My Face</a>
-                            <a href="pages/haircut-recommendations.html" class="btn btn-outline">View Hair Styles</a>
+                            <a href="pages/haircut-recommendations.html#face-analysis" class="btn btn-primary">Analyze My Face</a>
+                            <a href="pages/haircut-recommendations.html#" class="btn btn-outline">View Hair Styles</a>
                         </div>
                     </div>
                     <div class="lg:w-1/2" data-aos="fade-left">
@@ -290,163 +305,70 @@
             </div>
         </section>
 
-        <!-- Our Partner Shop Section -->
-        <section id="partner-shop" class="py-16 bg-neutral-50 dark:bg-dark-surface">
-            <div class="container-custom">
-                <h2 class="font-rufina text-3xl md:text-4xl font-bold text-center mb-4">Our Partner Shop</h2>
-                <p class="text-center text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-12">
-                    Discover exclusive collections from our trusted fashion partners
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                    <div class="partner-card section-card text-center p-6" data-aos="zoom-in" data-aos-delay="0">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-bg flex items-center justify-center text-white text-2xl">
-                            🛍️
-                        </div>
-                        <h3 class="font-semibold mb-2">Trendy Threads</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Latest fashion trends</p>
-                    </div>
-                    <div class="partner-card section-card text-center p-6" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-bg-2 flex items-center justify-center text-white text-2xl">
-                            👔
-                        </div>
-                        <h3 class="font-semibold mb-2">Elite Attire</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Premium formal wear</p>
-                    </div>
-                    <div class="partner-card section-card text-center p-6" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-bg-3 flex items-center justify-center text-white text-2xl">
-                            👟
-                        </div>
-                        <h3 class="font-semibold mb-2">Urban Steps</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Streetwear & sneakers</p>
-                    </div>
-                    <div class="partner-card section-card text-center p-6" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-bg-4 flex items-center justify-center text-white text-2xl">
-                            💎
-                        </div>
-                        <h3 class="font-semibold mb-2">Glamour Accessories</h3>
-                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Jewelry & accessories</p>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <a href="pages/shop-browsing.html" class="btn btn-primary">Explore All Partners</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Curated Sets & Grooming Kit Section -->
-        <section id="curated-sets" class="py-16 bg-white dark:bg-dark-bg">
-            <div class="container-custom">
-                <h2 class="font-rufina text-3xl md:text-4xl font-bold text-center mb-4">Curated Sets & Grooming Kits</h2>
-                <p class="text-center text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-12">
-                    Complete style solutions with perfectly matched outfits and grooming essentials
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="curated-set section-card p-6" data-aos="fade-up" data-aos-delay="0">
-                        <div class="flex items-start mb-4">
-                            <div class="w-12 h-12 rounded-lg bg-gradient-bg flex items-center justify-center text-white text-xl mr-4">
-                                👔
-                            </div>
-                            <div>
-                                <h3 class="font-rufina text-xl font-semibold">Professional Collection</h3>
-                                <p class="text-neutral-600 dark:text-neutral-400">Perfect for office and business meetings</p>
-                            </div>
-                        </div>
-                        <p class="mb-4">Includes tailored suits, dress shirts, ties, and matching accessories for a polished professional look.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-semibold">$249.99</span>
-                            <a href="pages/digital-outfit.html" class="btn btn-primary">View Set</a>
-                        </div>
-                    </div>
-                    <div class="curated-set section-card p-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="flex items-start mb-4">
-                            <div class="w-12 h-12 rounded-lg bg-gradient-bg-2 flex items-center justify-center text-white text-xl mr-4">
-                                🏖️
-                            </div>
-                            <div>
-                                <h3 class="font-rufina text-xl font-semibold">Weekend Getaway</h3>
-                                <p class="text-neutral-600 dark:text-neutral-400">Casual and comfortable for leisure time</p>
-                            </div>
-                        </div>
-                        <p class="mb-4">Relaxed outfits perfect for weekends, vacations, or casual outings with friends and family.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-semibold">$179.99</span>
-                            <a href="pages/digital-outfit.html" class="btn btn-secondary">View Set</a>
-                        </div>
-                    </div>
-                    <div class="curated-set section-card p-6" data-aos="fade-up" data-aos-delay="0">
-                        <div class="flex items-start mb-4">
-                            <div class="w-12 h-12 rounded-lg bg-gradient-bg-3 flex items-center justify-center text-white text-xl mr-4">
-                                ✨
-                            </div>
-                            <div>
-                                <h3 class="font-rufina text-xl font-semibold">Essential Grooming Kit</h3>
-                                <p class="text-neutral-600 dark:text-neutral-400">Complete skincare and haircare routine</p>
-                            </div>
-                        </div>
-                        <p class="mb-4">Premium grooming products selected based on your skin type and hair needs for a complete self-care routine.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-semibold">$89.99</span>
-                            <a href="pages/grooming-kit.html" class="btn btn-accent">View Kit</a>
-                        </div>
-                    </div>
-                    <div class="curated-set section-card p-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="flex items-start mb-4">
-                            <div class="w-12 h-12 rounded-lg bg-gradient-bg-4 flex items-center justify-center text-white text-xl mr-4">
-                                🎉
-                            </div>
-                            <div>
-                                <h3 class="font-rufina text-xl font-semibold">Date Night Special</h3>
-                                <p class="text-neutral-600 dark:text-neutral-400">Make a lasting impression</p>
-                            </div>
-                        </div>
-                        <p class="mb-4">Stylish and sophisticated outfits perfect for romantic dinners, special occasions, or nights out.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="font-semibold">$199.99</span>
-                            <a href="pages/digital-outfit.html" class="btn btn-primary">View Set</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center mt-12">
-                    <a href="pages/curated-sets.html" class="btn btn-outline">View All Curated Sets</a>
-                </div>
-            </div>
-        </section>
-    </main>
 
     <!-- Footer -->
-    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-12 mt-20">
-        <div class="container-custom">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="text-center md:text-left">
-                    <h3 class="font-rufina text-xl font-bold mb-4">Pyin Mal</h3>
-                    <p class="text-neutral-400 dark:text-neutral-500 text-sm">
-                        Your personal fashion and grooming assistant
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text mt-20">
+        <!-- Accent Strip -->
+        <div class="h-1 bg-gradient-to-r from-indigo-500 via-pink-500 to-orange-400"></div>
+
+        <div class="container-custom py-14">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                
+                <div>
+                    <h3 class="font-rufina text-2xl font-bold tracking-wide mb-3">Pyin Mal</h3>
+                    <p class="text-neutral-400 dark:text-neutral-500 text-sm leading-relaxed">
+                        Curated style. Smarter grooming. Confidence that lasts.
                     </p>
+
+                    <!-- Social -->
+                    <div class="flex gap-4 mt-5">
+                        <a href="https://www.instagram.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.twitter.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-linkedin"></i></a>
+                    </div>
                 </div>
-                <div class="text-center md:text-left">
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
+
+                <!-- Explore -->
+                <div>
+                    <h4 class="font-semibold mb-4 text-indigo-400">Explore</h4>
                     <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
-                        <li><a href="pages/about.html" class="hover:text-white dark:hover:text-dark-text">About</a></li>
-                        <li><a href="pages/services.html" class="hover:text-white dark:hover:text-dark-text">Services</a></li>
-                        <li><a href="pages/faq.html" class="hover:text-white dark:hover:text-dark-text">FAQ</a></li>
+                        <li><a href="pages/about.html" class="hover:text-white transition">Who We Are</a></li>
+                        <li><a href="pages/privacy.html" class="hover:text-white transition">Privacy & Data</a></li>
+                        <li><a href="pages/contact.html" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="pages/faq.html" class="hover:text-white transition">Help Center</a></li>
                     </ul>
                 </div>
-                <div class="text-center md:text-left">
-                    <h4 class="font-semibold mb-4">Legal</h4>
+
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-indigo-400">Feature</h4>
                     <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
-                        <li><a href="pages/privacy.html" class="hover:text-white dark:hover:text-dark-text">Privacy Policy</a></li>
-                        <li><a href="pages/terms.html" class="hover:text-white dark:hover:text-dark-text">Terms & Conditions</a></li>
+                        <li><a href="pages/model-preview.html" class="hover:text-white transition">Outfit preview</a></li>
+                        <li><a href="pages/haircut-recommendations.html" class="hover:text-white transition">HairStyle and Face-analysis</a></li>
                     </ul>
                 </div>
-                <div class="text-center md:text-left">
-                    <h4 class="font-semibold mb-4">Contact</h4>
-                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
-                        <li><a href="pages/contact.html" class="hover:text-white dark:hover:text-dark-text">Contact Us</a></li>
-                    </ul>
+
+                
+                <div>
+                    <h4 class="font-semibold mb-4 text-indigo-400">Stay Sharp</h4>
+                    <p class="text-sm text-neutral-400 dark:text-neutral-500 mb-3">
+                        Weekly style tips directly to your inbox.
+                    </p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email"
+                            class="w-full px-3 py-2 rounded-l bg-neutral-800 dark:bg-dark-card text-sm text-white outline-none">
+                        <a href="pages/contact.html"><button
+                            class="bg-indigo-500 hover:bg-indigo-600 transition px-4 py-2 text-sm rounded-r font-semibold">
+                            Join
+                        </button></a>
+                    </form>
                 </div>
+
             </div>
-            <div class="border-t border-neutral-800 dark:border-dark-border mt-8 pt-8 text-center text-sm text-neutral-400 dark:text-neutral-500">
-                <p>&copy; 2025 Pyin Mal. All rights reserved.</p>
+
+            <!-- Bottom -->
+            <div class="border-t border-neutral-800 dark:border-dark-border mt-10 pt-6 text-center text-sm text-neutral-500">
+                <p> 2025 <span class="font-semibold text-white">Pyin Mal</span> — Designed for those who stand out.</p>
             </div>
         </div>
     </footer>
