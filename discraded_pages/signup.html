@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Build, generate, and save AI-assisted outfits with StyleHub.">
-    <title>Outfit Generator - StyleHub</title>
+    <meta name="description" content="Create your StyleHub account to unlock personalized styling tools">
+    <title>Sign Up - StyleHub</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../css/main.css">
 
     <!-- AOS CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
     <!-- Navigation -->
@@ -45,7 +45,7 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="saved-fashion.html" class="nav-link">Favorites</a>
                     <a href="shop-browsing.html" class="nav-link">Shop</a>
                     <div class="relative" data-dropdown="more">
                         <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
@@ -74,9 +74,8 @@
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                         </span>
                     </button>
-                    <button class="theme-toggle p-1.5 sm:p-2 relative" aria-label="Cart" id="cart-btn">
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
-                        <span id="cart-count" class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
                     </button>
                     <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
                     <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
@@ -97,7 +96,7 @@
                             <a href="model-preview.html" class="nav-link">Model Preview</a>
                         </div>
                     </div>
-                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="saved-fashion.html" class="block nav-link">Favorites</a>
                     <a href="shop-browsing.html" class="block nav-link">Shop</a>
                     <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
                         <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
@@ -121,133 +120,83 @@
         </nav>
     </header>
 
-    <!-- Hero -->
-    <section class="py-12 md:py-16 bg-neutral-50 dark:bg-dark-surface">
-        <div class="container-custom flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div data-aos="fade-right">
-                <p class="text-xs uppercase tracking-[0.4em] text-primary-600 dark:text-primary-400 mb-3">Outfit generator</p>
-                <h1 class="font-rufina text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">Pick pieces, let AI finish the look</h1>
-                <p class="text-neutral-600 dark:text-neutral-400 mb-6 max-w-xl">
-                    Combine tops, bottoms, shoes, and accessories. Our engine scores the pairing, suggests alternates, and sends them to your virtual wardrobe.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#outfit-generator-section" class="btn btn-primary w-full sm:w-auto">Start building</a>
-                    <a href="model-preview.html" class="btn btn-secondary w-full sm:w-auto">Preview on model</a>
-                </div>
-            </div>
-            <div class="bg-white dark:bg-dark-card rounded-3xl p-6 shadow-soft dark:shadow-soft-dark" data-aos="fade-left">
-                <h3 class="font-rufina text-2xl font-semibold mb-4">Today’s prompts</h3>
-                <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
-                    <li>• “Hybrid office, 28°C” – minimal + breathable</li>
-                    <li>• “Gallery date night” – bold prints + comfy shoes</li>
-                    <li>• “Weekend getaway” – layers that pack light</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Generator -->
-    <main id="outfit-generator-section" class="py-12 md:py-16">
-        <div class="container-custom grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Selection panel -->
-            <div class="space-y-6 order-2 lg:order-1" data-aos="fade-right">
-                <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="font-rufina text-2xl font-bold">Select pieces</h2>
-                        <button class="text-sm text-primary-600 dark:text-primary-400 hover:underline" onclick="outfitGenerator?.generateOutfit()">Auto pick</button>
+    <!-- Sign Up Section -->
+    <main class="min-h-[calc(100vh-10rem)] flex items-center justify-center py-16 px-4 bg-gradient-to-b from-neutral-50 via-white to-neutral-50 dark:from-dark-bg dark:via-dark-surface dark:to-dark-bg">
+        <div class="container-custom max-w-6xl mx-auto" data-aos="fade-up">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark overflow-hidden border border-neutral-100 dark:border-dark-border">
+                <!-- Form -->
+                <div class="p-8 sm:p-10 lg:p-12">
+                    <div class="mb-8 text-center lg:text-left">
+                        <p class="text-xs sm:text-sm uppercase tracking-[0.3em] text-primary-500 dark:text-primary-300 mb-3">Join the Collective</p>
+                        <h1 class="font-rufina text-3xl sm:text-4xl font-bold leading-tight mb-2">Create your StyleHub account</h1>
+                        <p class="text-neutral-500 dark:text-neutral-400 text-sm sm:text-base">Unlock personalized outfits, AI recommendations, and exclusive drops.</p>
                     </div>
-                    <div class="space-y-5">
-                        <!-- dynamic categories -->
-                        <div>
-                            <h3 class="font-semibold text-lg mb-3">Tops</h3>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                                <button class="outfit-item product-card p-3 text-center text-sm" data-category="top" data-item-id="top-white-shirt" data-item-name="White Shirt" data-item-image="../assets/images/outfits/top-1.png">
-                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
-                                    White Shirt
-                                </button>
-                                <button class="outfit-item product-card p-3 text-center text-sm" data-category="top" data-item-id="top-knit" data-item-name="Knit Tank" data-item-image="../assets/images/outfits/top-2.png">
-                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
-                                    Knit Tank
-                                </button>
+                    <form class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="first-name" class="form-label">First Name</label>
+                                <input type="text" id="first-name" class="form-input" placeholder="Aye" required>
+                            </div>
+                            <div>
+                                <label for="last-name" class="form-label">Last Name</label>
+                                <input type="text" id="last-name" class="form-input" placeholder="Chan" required>
                             </div>
                         </div>
                         <div>
-                            <h3 class="font-semibold text-lg mb-3">Bottoms</h3>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                                <button class="outfit-item product-card p-3 text-center text-sm" data-category="bottom" data-item-id="bottom-wide" data-item-name="Wide Trousers" data-item-image="../assets/images/outfits/bottom-1.png">
-                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
-                                    Wide Trousers
-                                </button>
-                                <button class="outfit-item product-card p-3 text-center text-sm" data-category="bottom" data-item-id="bottom-denim" data-item-name="Relaxed Denim" data-item-image="../assets/images/outfits/bottom-2.png">
-                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
-                                    Relaxed Denim
-                                </button>
-                            </div>
+                            <label for="email-signup" class="form-label">Email address</label>
+                            <input type="email" id="email-signup" class="form-input" placeholder="you@email.com" required>
                         </div>
                         <div>
-                            <h3 class="font-semibold text-lg mb-3">Shoes</h3>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                                <button class="outfit-item product-card p-3 text-center text-sm" data-category="shoes" data-item-id="shoes-loafers" data-item-name="Loafers" data-item-image="../assets/images/outfits/shoes-1.png">
-                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
-                                    Loafers
-                                </button>
-                                <button class="outfit-item product-card p-3 text-center text-sm" data-category="shoes" data-item-id="shoes-sneaker" data-item-name="Minimal Sneaker" data-item-image="../assets/images/outfits/shoes-2.png">
-                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
-                                    Minimal Sneaker
-                                </button>
-                            </div>
+                            <label for="password-signup" class="form-label">Password</label>
+                            <input type="password" id="password-signup" class="form-input" placeholder="Create a strong password" required>
                         </div>
                         <div>
-                            <h3 class="font-semibold text-lg mb-3">Accessories</h3>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                                <button class="outfit-item product-card p-3 text-center text-sm" data-category="accessories" data-item-id="acc-bag" data-item-name="Structured Bag" data-item-image="../assets/images/outfits/acc-1.png">
-                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
-                                    Structured Bag
-                                </button>
-                                <button class="outfit-item product-card p-3 text-center text-sm" data-category="accessories" data-item-id="acc-watch" data-item-name="Minimal Watch" data-item-image="../assets/images/outfits/acc-2.png">
-                                    <div class="w-full aspect-square bg-neutral-100 dark:bg-dark-surface rounded-lg mb-2"></div>
-                                    Minimal Watch
-                                </button>
-                            </div>
+                            <label for="confirm-password" class="form-label">Confirm Password</label>
+                            <input type="password" id="confirm-password" class="form-input" placeholder="Re-enter password" required>
                         </div>
-                        <div class="flex flex-col gap-3">
-                            <button id="generate-outfit" class="btn btn-primary w-full">Generate outfit</button>
-                            <button id="save-outfit" class="btn btn-secondary w-full">Save selection</button>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm">
+                            <label class="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400">
+                                <input type="checkbox" class="filter-checkbox" required>
+                                <span>I agree to the <a href="terms.html" class="text-primary-600 dark:text-primary-400 underline">Terms & Conditions</a></span>
+                            </label>
+                            <a href="privacy.html" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Privacy Policy</a>
                         </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary w-full">Create Account</button>
+                    </form>
+                    <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-6 text-center lg:text-left">
+                        Already have an account?
+                        <a href="login.html" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Log in</a>
+                    </p>
                 </div>
 
-                <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
-                    <h3 class="font-rufina text-xl font-semibold mb-4">Activity history</h3>
-                    <div id="activity-history" class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
-                        <p>No outfits generated yet.</p>
+                <!-- Highlights Panel -->
+                <div class="bg-gradient-to-br from-primary-500 via-primary-600 to-accent-500 text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <div>
+                            <p class="uppercase text-xs tracking-[0.4em] text-white/70 mb-3">Benefits</p>
+                            <h2 class="font-rufina text-2xl sm:text-3xl font-bold leading-snug">Why join StyleHub?</h2>
+                        </div>
+                        <ul class="space-y-4 text-sm sm:text-base text-white/90">
+                            <li class="flex items-start space-x-3">
+                                <span class="text-2xl">✨</span>
+                                <span>Personalized outfit recommendations based on your style profile.</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-2xl">🧠</span>
+                                <span>AI-powered grooming and look suggestions updated weekly.</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-2xl">🛍️</span>
+                                <span>Shop curated looks and save your favorites for later.</span>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-
-            <!-- Preview & Insights -->
-            <div class="order-1 lg:order-2 bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark" data-aos="fade-up">
-                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-                    <div>
-                        <h2 class="font-rufina text-2xl font-bold">Live preview</h2>
-                        <p class="text-sm text-neutral-500 dark:text-neutral-400">Mirror selections to the model preview page.</p>
-                    </div>
-                    <button class="text-sm text-primary-600 dark:text-primary-400 hover:underline" onclick="window.location.href='model-preview.html'">Open model preview</button>
-                </div>
-                <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-6 text-center">
-                    <p class="text-sm text-neutral-500 dark:text-neutral-400">Selections will appear on the model preview when linked.</p>
-                </div>
-            </div>
-
-            <!-- Results -->
-            <div class="order-3 lg:order-3 lg:col-span-1 lg:col-start-auto">
-                <div class="bg-white dark:bg-dark-card rounded-2xl p-6 shadow-soft dark:shadow-soft-dark">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="font-rufina text-2xl font-bold">AI suggestions</h2>
-                        <span class="text-sm text-neutral-500 dark:text-neutral-400">v0.1</span>
-                    </div>
-                    <div id="outfit-results" class="space-y-4">
-                        <p class="text-sm text-neutral-500 dark:text-neutral-400">Generate an outfit to see curated suggestions.</p>
+                    <div class="mt-10">
+                        <div class="bg-white/10 border border-white/30 rounded-2xl p-5 backdrop-blur">
+                            <p class="text-sm uppercase tracking-[0.3em] text-white/70 mb-2">Exclusive</p>
+                            <p class="font-rufina text-lg mb-3">Get 15% off your first curated look</p>
+                            <button class="btn btn-ghost border-white text-white w-full">Unlock Offer</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -264,7 +213,6 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/outfit-generator.js"></script>
     <script src="../js/animations.js"></script>
 </body>
 </html>
