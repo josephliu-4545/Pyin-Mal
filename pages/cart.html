@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View and manage the items currently in your cart.">
+    <title>Your Cart - Pyin Mal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+    /* Cart page dark mode text refinements */
+    .dark #cart-page h1,
+    .dark #cart-page h2,
+    .dark #cart-page h3,
+    .dark #cart-page h4,
+    .dark #cart-page h5,
+    .dark #cart-page h6,
+    .dark #cart-page p,
+    .dark #cart-page span,
+    .dark #cart-page li,
+    .dark #cart-page .font-rufina {
+        color: #f9fafb !important;
+    }
+
+    .dark #cart-page .text-neutral-600,
+    .dark #cart-page .text-neutral-500,
+    .dark #cart-page .text-neutral-400 {
+        color: #e5e7eb !important;
+    }
+    /* Override for quantity number so it stays dark on light in dark mode */
+    .dark #cart-page .cart-qty-number {
+        color: #020617 !important; /* near-black */
+        background-color: #f9fafb !important; /* light circle */
+    }
+    </style>
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <!-- Same cart button structure as shop-browsing -->
+                    <button class="theme-toggle p-1.5 sm:p-2 relative" aria-label="Cart" id="cart-btn">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/>
+                        </svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
+                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="reviews.html" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <main id="cart-page" class="pb-16">
+        <!-- Hero with glassmorphism -->
+        <section class="relative overflow-hidden">
+            <!-- Soft gradient background -->
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-600 via-accent-500 to-neutral-900 opacity-80 dark:opacity-90"></div>
+
+            <!-- Subtle floating shapes -->
+            <div class="pointer-events-none absolute -top-24 -right-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
+            <div class="pointer-events-none absolute -bottom-32 -left-10 w-80 h-80 rounded-full bg-primary-400/20 blur-3xl"></div>
+
+            <div class="relative container-custom py-14 sm:py-18 md:py-20">
+                <div class="max-w-3xl mx-auto">
+                    <div class="rounded-[32px] bg-white/10 dark:bg-black/20 border border-white/20 backdrop-blur-2xl px-6 py-8 sm:px-10 sm:py-10 text-center shadow-soft dark:shadow-soft-dark" data-aos="fade-up">
+                        <p class="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-white/70 mb-3">Cart</p>
+                        <h1 class="font-rufina text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+                            Your Cart
+                        </h1>
+                        <p class="font-orbit text-sm sm:text-base text-white/80 max-w-xl mx-auto">
+                            Review your selected items before checkout. Edit, refine, and make sure everything
+                            aligns with your next style chapter.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Content -->
+        <section class="py-10 sm:py-12 bg-neutral-50 dark:bg-dark-bg">
+            <div class="container-custom grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
+                <!-- Cart items -->
+                <div class="lg:col-span-2 space-y-6" id="cart-content">
+                    <!-- Empty state -->
+                    <div id="cart-empty-state" class="hidden">
+                        <div class="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-neutral-100 via-white to-neutral-50 dark:from-dark-card/80 dark:via-dark-bg dark:to-dark-card/80 border border-neutral-200/60 dark:border-dark-border shadow-soft dark:shadow-soft-dark px-6 py-12 sm:px-10 sm:py-16 flex flex-col items-center justify-center text-center" data-aos="fade-up">
+                            <div class="absolute inset-0 pointer-events-none opacity-50">
+                                <div class="absolute -top-32 right-0 w-72 h-72 bg-primary-200/40 dark:bg-primary-500/10 rounded-full blur-3xl"></div>
+                                <div class="absolute bottom-[-5rem] left-[-2rem] w-80 h-80 bg-accent-200/40 dark:bg-accent-500/10 rounded-full blur-3xl"></div>
+                            </div>
+
+                            <div class="relative z-10 flex flex-col items-center">
+                                <!-- Outline shopping bag icon -->
+                                <div class="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white dark:bg-dark-card shadow-md mb-5">
+                                    <svg class="w-8 h-8 text-neutral-400 dark:text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                              d="M6 7l1-3h10l1 3m-12 0h12l-1 13H7L6 7zm4 3a2 2 0 104 0"/>
+                                    </svg>
+                                </div>
+
+                                <h2 class="font-rufina text-2xl sm:text-3xl font-bold mb-2 text-neutral-900 dark:text-white">
+                                    Your cart is empty
+                                </h2>
+                                <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 mb-6 max-w-md">
+                                    You haven’t added anything yet. Explore curated outfits, grooming kits, and partner shops to fill your cart.
+                                </p>
+                                <a href="shop-browsing.html" class="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-sm font-medium bg-gradient-to-r from-primary-600 via-accent-500 to-primary-500 text-white shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 hover:-translate-y-0.5 transition-all duration-200">
+                                    Browse Shop
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Items list -->
+                    <div id="cart-list" class="space-y-4"></div>
+                </div>
+
+                <!-- Summary -->
+                <aside class="lg:col-span-1 lg:sticky lg:top-28 h-fit" data-aos="fade-left">
+                    <!-- Gradient border + glass card -->
+                    <div class="rounded-[28px] bg-gradient-to-br from-primary-500/70 via-accent-500/70 to-primary-700/70 p-[1px] shadow-xl shadow-primary-500/25 dark:shadow-primary-900/40">
+                        <div class="rounded-[26px] bg-white/85 dark:bg-dark-card/90 backdrop-blur-2xl px-5 py-6 sm:px-6 sm:py-7 space-y-5">
+                            <div class="flex items-center justify-between gap-3">
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.3em] text-neutral-400 dark:text-neutral-500 mb-1">
+                                        Order summary
+                                    </p>
+                                    <h2 class="font-rufina text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white">
+                                        Almost there
+                                    </h2>
+                                </div>
+                                <div class="inline-flex items-center justify-center w-10 h-10 rounded-2xl bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-300">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3 pt-3 border-t border-neutral-100 dark:border-dark-border/80">
+                                <!-- Items row -->
+                                <div class="flex items-center justify-between text-sm text-neutral-600 dark:text-neutral-300">
+                                    <div class="inline-flex items-center gap-2">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-neutral-100 dark:bg-dark-bg">
+                                            <svg class="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                      d="M3 3h2l.4 2M7 13h10M7 13L5.4 5m1.2 8l-2 9m15-9l2-9m-2 9l2 9m-7-4a2 2 0 11-4 0"/>
+                                            </svg>
+                                        </span>
+                                        <span>Items</span>
+                                    </div>
+                                    <span id="cart-item-count" class="font-medium text-neutral-800 dark:text-neutral-100">0</span>
+                                </div>
+
+                                <!-- Subtotal row -->
+                                <div class="flex items-center justify-between text-sm text-neutral-600 dark:text-neutral-300">
+                                    <div class="inline-flex items-center gap-2">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-neutral-100 dark:bg-dark-bg">
+                                            <svg class="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.6 1M12 8V6m0 10v-2m0 6a9 9 0 110-18 9 9 0 010 18z"/>
+                                            </svg>
+                                        </span>
+                                        <span>Subtotal</span>
+                                    </div>
+                                    <span id="cart-subtotal" class="font-semibold text-primary-600 dark:text-primary-400">0 MMK</span>
+                                </div>
+
+                                <!-- Tax row (informational only) -->
+                                <div class="flex items-center justify-between text-xs sm:text-[13px] text-neutral-500 dark:text-neutral-400">
+                                    <div class="inline-flex items-center gap-2">
+                                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-neutral-100 dark:bg-dark-bg">
+                                            <svg class="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                      d="M9 14l6-6M9 8h6m-3-5a9 9 0 11-9 9 9 9 0 019-9z"/>
+                                            </svg>
+                                        </span>
+                                        <span>Tax & shipping</span>
+                                    </div>
+                                    <span class="text-right">
+                                        Calculated at checkout
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Divider & total -->
+                            <div class="pt-4 mt-2 border-t border-dashed border-neutral-200 dark:border-neutral-700/80">
+                                <div class="flex items-baseline justify-between">
+                                    <span class="text-xs uppercase tracking-[0.35em] text-neutral-400 dark:text-neutral-500">
+                                        Estimated total
+                                    </span>
+                                    <span id="cart-total-display" class="font-rufina text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white">
+                                        0 MMK
+                                    </span>
+                                </div>
+                                <p class="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
+                                    This is an estimate based on your current selection. Final total may adjust with services or promotions.
+                                </p>
+                            </div>
+
+                            <!-- Checkout button -->
+                            <button
+                                id="checkout-btn"
+                                type="button"
+                                class="relative mt-4 inline-flex w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-primary-600 via-accent-500 to-primary-500 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-primary-500/30 transition-all duration-200 hover:shadow-primary-500/45 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                            >
+                                <span class="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-200 bg-gradient-to-r from-primary-500 via-accent-400 to-primary-600"></span>
+                                <span class="relative flex items-center justify-center gap-2">
+                                    <span>Proceed to Checkout</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                              d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (same style as other pages) -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-12 mt-20">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-rufina text-xl font-bold mb-4">Pyin Mal</h3>
+                    <p class="text-neutral-400 dark:text-neutral-500 text-sm">
+                        Your personal fashion and grooming assistant
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="about.html" class="hover:text-white dark:hover:text-dark-text">About</a></li>
+                        <li><a href="services.html" class="hover:text-white dark:hover:text-dark-text">Services</a></li>
+                        <li><a href="faq.html" class="hover:text-white dark:hover:text-dark-text">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="privacy.html" class="hover:text-white dark:hover:text-dark-text">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white dark:hover:text-dark-text">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="contact.html" class="hover:text-white dark:hover:text-dark-text">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-neutral-800 dark:border-dark-border mt-8 pt-8 text-center text-sm text-neutral-400 dark:text-neutral-500">
+                <p>&copy; 2025 Pyin Mal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+
+    <!-- Cart Page Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init();
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const cartListEl = document.getElementById('cart-list');
+            const emptyStateEl = document.getElementById('cart-empty-state');
+            const itemCountEl = document.getElementById('cart-item-count');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const totalDisplayEl = document.getElementById('cart-total-display');
+
+            function saveCart() {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+
+            function updateCartCountBadge() {
+                const countEl = document.getElementById('cart-count');
+                if (!countEl) return;
+
+                const totalQty = cart.reduce((sum, item) => {
+                    const qty = item.quantity && item.quantity > 0 ? item.quantity : 1;
+                    return sum + qty;
+                }, 0);
+
+                countEl.textContent = totalQty;
+                countEl.classList.toggle('hidden', totalQty === 0);
+            }
+
+            function formatPrice(amount) {
+                if (typeof amount !== 'number') return amount || '0';
+                return amount.toLocaleString() + ' MMK';
+            }
+
+            function recalculateSummary() {
+                if (!cart || cart.length === 0) {
+                    if (itemCountEl) itemCountEl.textContent = '0';
+                    if (subtotalEl) subtotalEl.textContent = '0 MMK';
+                    if (totalDisplayEl) totalDisplayEl.textContent = '0 MMK';
+                    updateCartCountBadge();
+                    return;
+                }
+
+                const subtotal = cart.reduce((sum, item) => {
+                    const qty = item.quantity && item.quantity > 0 ? item.quantity : 1;
+                    return sum + (item.price || 0) * qty;
+                }, 0);
+
+                const totalQty = cart.reduce((sum, item) => {
+                    const qty = item.quantity && item.quantity > 0 ? item.quantity : 1;
+                    return sum + qty;
+                }, 0);
+
+                if (itemCountEl) itemCountEl.textContent = String(totalQty);
+                if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
+                if (totalDisplayEl) totalDisplayEl.textContent = formatPrice(subtotal);
+
+                updateCartCountBadge();
+            }
+
+            function renderCart() {
+                cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                if (!cart || cart.length === 0) {
+                    if (emptyStateEl) emptyStateEl.classList.remove('hidden');
+                    if (cartListEl) cartListEl.innerHTML = '';
+                    if (itemCountEl) itemCountEl.textContent = '0';
+                    if (subtotalEl) subtotalEl.textContent = '0 MMK';
+                    if (totalDisplayEl) totalDisplayEl.textContent = '0 MMK';
+                    updateCartCountBadge();
+                    return;
+                }
+
+                if (emptyStateEl) emptyStateEl.classList.add('hidden');
+
+                const itemsHtml = cart.map((item, index) => {
+                    const name = item.name || item.title || 'Item';
+                    const price = item.price || 0;
+                    const image = item.image || 'https://via.placeholder.com/400x300?text=No+Image';
+                    const shop = item.shop || '';
+                    const quantity = item.quantity && item.quantity > 0 ? item.quantity : 1;
+
+                    return `
+                        <article
+                            class="relative overflow-hidden rounded-[28px] bg-white/80 dark:bg-dark-card/90 backdrop-blur-xl border border-neutral-100/80 dark:border-dark-border shadow-soft dark:shadow-soft-dark p-4 sm:p-5 flex gap-4 sm:gap-6"
+                            data-aos="fade-up"
+                        >
+                            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl overflow-hidden flex-shrink-0 bg-neutral-100 dark:bg-dark-bg">
+                                <img src="${image}" alt="${name}" class="w-full h-full object-cover"
+                                     onerror="this.src='https://via.placeholder.com/200x200?text=Image+Not+Found'">
+                            </div>
+
+                            <div class="flex-1 min-w-0 flex flex-col gap-2">
+                                <div class="flex items-start justify-between gap-3">
+                                    <div class="min-w-0">
+                                        <h3 class="font-rufina text-base sm:text-lg font-semibold truncate">
+                                            ${name}
+                                        </h3>
+                                        <p class="mt-1 text-xs sm:text-[13px] text-neutral-500 dark:text-neutral-400 truncate">
+                                            ${shop}
+                                        </p>
+                                    </div>
+                                    <p class="text-sm sm:text-base font-semibold text-primary-600 dark:text-primary-400 whitespace-nowrap">
+                                        ${price.toLocaleString()} MMK
+                                    </p>
+                                </div>
+
+                                <div class="flex items-center justify-between gap-3 pt-1">
+                                    <!-- Quantity control -->
+                                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-200 dark:border-neutral-700 bg-neutral-50/80 dark:bg-dark-bg/80 text-[11px] sm:text-xs text-neutral-600 dark:text-neutral-300 transition-colors duration-150">
+                                        <button
+                                            type="button"
+                                            class="inline-flex items-center justify-center w-5 h-5 rounded-full border border-neutral-300 dark:border-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-200 text-xs"
+                                            data-qty-action="dec"
+                                            data-index="${index}"
+                                            aria-label="Decrease quantity"
+                                        >
+                                            -
+                                        </button>
+                                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary-100 dark:bg-primary-900/60 text-primary-700 dark:text-white text-[11px] font-semibold cart-qty-number">
+                                            ${quantity}
+                                        </span>
+                                        <button
+                                            type="button"
+                                            class="inline-flex items-center justify-center w-5 h-5 rounded-full border border-neutral-300 dark:border-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-200 text-xs"
+                                            data-qty-action="inc"
+                                            data-index="${index}"
+                                            aria-label="Increase quantity"
+                                        >
+                                            +
+                                        </button>
+                                        <span class="uppercase tracking-[0.2em] ml-1">Quantity</span>
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-neutral-200 dark:border-neutral-700 hover:bg-red-50 dark:hover:bg-red-900/20 text-neutral-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-150"
+                                        data-remove-index="${index}"
+                                        aria-label="Remove item"
+                                    >
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                  d="M6 7h12m-9 0v10m6-10v10M9 7l1-3h4l1 3m-9 0l1 13h8l1-13"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+
+                if (cartListEl) cartListEl.innerHTML = itemsHtml;
+
+                recalculateSummary();
+
+            // Quantity & remove (delegated)
+            if (cartListEl) {
+                cartListEl.addEventListener('click', (e) => {
+                    const removeBtn = e.target.closest('[data-remove-index]');
+                    const qtyBtn = e.target.closest('[data-qty-action]');
+
+                    // Handle remove
+                    if (removeBtn) {
+                        const index = parseInt(removeBtn.getAttribute('data-remove-index'), 10);
+                        if (!Number.isNaN(index)) {
+                            cart.splice(index, 1);
+                            saveCart();
+                            renderCart();
+                        }
+                        return;
+                    }
+
+                    // Handle quantity +/-
+                    // Handle quantity +/- without full re-render
+                    if (qtyBtn) {
+                        const action = qtyBtn.getAttribute('data-qty-action');
+                        const index = parseInt(qtyBtn.getAttribute('data-index'), 10);
+                        if (Number.isNaN(index) || !cart[index]) return;
+
+                        const current = cart[index].quantity && cart[index].quantity > 0 ? cart[index].quantity : 1;
+                        let next = current;
+
+                        if (action === 'inc') next = current + 1;
+                        if (action === 'dec') next = Math.max(1, current - 1);
+
+                        cart[index].quantity = next;
+                        saveCart();
+
+                        // Update just this quantity badge text
+                        const qtyWrapper = qtyBtn.closest('div');
+                        if (qtyWrapper) {
+                            const badge = qtyWrapper.querySelector('.cart-qty-number');
+                            if (badge) badge.textContent = String(next);
+                        }
+
+                        // Recalculate sidebar + badge only
+                        recalculateSummary();
+                    }
+                });
+            }
+
+            // Checkout button is UI-only for now
+            const checkoutBtn = document.getElementById('checkout-btn');
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', () => {
+                    alert('Checkout flow is not implemented in this demo.');
+                });
+            }
+
+            // Initialize
+            renderCart();
+        });
+    </script>
+
+</body>
+</html>
