@@ -165,7 +165,7 @@
                             </div>
                         </div>
                         <h2 class="font-rufina text-2xl font-bold mb-4 text-center">Preview</h2>
-                        <button id="fit-adjust-btn" class="btn btn-secondary w-full text-xs">Adjust Fit Mode</button>
+                        <button id="fit-adjust-btn" class="btn btn-secondary w-full text-xs mb-6">Adjust Fit Mode</button>
 
                         <!-- AI Mode Instructions (shown only in AI mode) -->
                         <div id="ai-mode-instructions" class="hidden text-center text-sm text-neutral-600 dark:text-neutral-400 px-4 py-10">
@@ -174,7 +174,7 @@
                         </div>
                         
                         <!-- Model Preview Container -->
-                        <div id="model-preview-container" class="preview-container relative overflow-auto">
+                        <div id="model-preview-container" class="preview-container relative overflow-auto mt-8">
                             <!-- Base Model -->
                             <img 
                                 id="mannequin-base"
@@ -312,6 +312,8 @@
     <script src="../js/model-preview.js"></script>
     <script src="../js/animations.js"></script>
     <script src="../js/tryon-utils.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <!-- Model Preview Page Specific Script -->
     <script>
@@ -690,9 +692,10 @@
             const saveScreenshotBtn = document.getElementById('save-screenshot');
             if (saveScreenshotBtn) {
                 saveScreenshotBtn.addEventListener('click', () => {
-                    if (window.modelPreview) {
+                    if (window.html2canvas && window.modelPreview) {
                         window.modelPreview.saveScreenshot();
-                        showNotification('Screenshot saved!', 'success');
+                    } else {
+                        alert("Screenshot feature is not available — html2canvas failed to load.");
                     }
                 });
             }
