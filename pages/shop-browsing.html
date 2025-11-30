@@ -1988,7 +1988,7 @@
                     <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                         <a href="model-preview.html?mode=haircut" class="btn btn-secondary w-full sm:w-auto text-center">Preview haircut</a>
                         <a href="Order.html" id="continue-btn" class="btn btn-primary w-full sm:w-auto text-center opacity-70 pointer-events-none">Continue to booking</a>
-                    </div>
+                </div>
             </div>
         </div>
         </div>
@@ -3170,18 +3170,54 @@
                     if (count > 0) {
                         continueBtn.classList.remove('opacity-70', 'pointer-events-none');
                         continueBtn.classList.add('btn-hover-scale');
+                        
+                        // Add click handler to save services and redirect
+                        continueBtn.onclick = (e) => {
+                            e.preventDefault();
+                            // Format services for Order.html
+                            const formattedServices = selectedServices.map(service => ({
+                                id: service.service,
+                                name: service.service.split('-').map(word => 
+                                    word.charAt(0).toUpperCase() + word.slice(1)
+                                ).join(' '),
+                                price: service.price,
+                                barber: service.barber
+                            }));
+                            
+                            // Save to localStorage
+                            localStorage.setItem('selectedServices', JSON.stringify(formattedServices));
+                            
+                            // Get the barber shop info
+                            const barberCard = document.querySelector(`[data-barber="${selectedBarber}"]`);
+                            const barberName = barberCard ? barberCard.querySelector('.font-rufina')?.textContent : 'Barber';
+                            // Get the shop photo URL (look for an image in the card)
+                            const barberPhoto = barberCard ? barberCard.querySelector('img')?.src : '';
+                            
+                            // Save barber info with photo
+                            localStorage.setItem('selectedBarber', JSON.stringify({
+                                id: selectedBarber,
+                                name: barberName,
+                                photo: barberPhoto
+                            }));
+                            
+                            console.log('Saved barber info:', {
+                                id: selectedBarber,
+                                name: barberName,
+                                photo: barberPhoto
+                            });
+                            
+                            // Navigate to Order.html
+                            window.location.href = 'Order.html';
+                        };
                     } else {
                         continueBtn.classList.add('opacity-70', 'pointer-events-none');
                         continueBtn.classList.remove('btn-hover-scale');
+                        continueBtn.onclick = null;
                     }
                 }
 
-                // Persist selection for Order.html checkout page
                 localStorage.setItem('selectedBarberServices', JSON.stringify(selectedServices));
                 localStorage.setItem('selectedBarberShop', selectedBarber);
-                // Keys expected by Order.html
-                localStorage.setItem('selectedServices', JSON.stringify(selectedServices));
-                localStorage.setItem('selectedBarber', selectedBarber);
             };
 
             const updateServiceAvailability = () => {

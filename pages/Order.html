@@ -3,231 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn more about Pyin Mal, the fashion and grooming studio behind the virtual styling experience.">
-    <title>Order - Pyin Mal</title>
+    <meta name="description" content="Complete your booking at Pyin Mal barbershop - Modern checkout experience">
+    <title>Checkout - Pyin Mal</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="../css/tailwind.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/main.css">
+    
+    <!-- Custom Checkout Styles -->
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+            --primary-color: #8B5CF6;
+            --secondary-color: #EC4899;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-bg {
+            background: var(--primary-gradient);
+        }
+
+        .payment-method {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.15);
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .service-item {
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .success-modal {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .toast {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .checkout-btn {
+            background: var(--primary-gradient);
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Dark mode specific styles */
+        .dark .payment-method {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .dark .payment-method.selected {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%);
+        }
+
+        .dark .service-item:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+    </style>
 
     <!-- AOS CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-    <style>
-        /* Variables */
-        
-        :root {
-            --primary: #8B5CF6;
-            --primary-light: #A78BFA;
-            --primary-dark: #7C3AED;
-            --accent: #EC4899;
-            --accent-light: #F472B6;
-            --dark-bg: #111827;
-            --dark-surface: #1F2937;
-            --dark-card: #374151;
-            --dark-border: #4B5563;
-            --dark-text: #F9FAFB;
-            --light-bg: #F9FAFB;
-            --light-surface: #FFFFFF;
-            --light-card: #F3F4F6;
-            --light-border: #E5E7EB;
-            --light-text: #111827;
-            --neutral-100: #F3F4F6;
-            --neutral-200: #E5E7EB;
-            --neutral-300: #D1D5DB;
-            --neutral-400: #9CA3AF;
-            --neutral-500: #6B7280;
-            --neutral-600: #4B5563;
-            --neutral-700: #374151;
-            --neutral-800: #1F2937;
-            --neutral-900: #111827;
-            --radius-sm: 0.375rem;
-            --radius: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            --radius-2xl: 1.5rem;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --gradient-primary: linear-gradient(135deg, var(--primary), var(--accent));
-            --gradient-card: linear-gradient(135deg, #ffffff, #f8faff);
-        }
-        body {
-            background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
-            color: var(--light-text);
-            line-height: 1.6;
-            transition: all 0.3s ease;
-            min-height: 100vh;
-        }
-        body.dark {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: var(--dark-text);
-        }
-        main {
-            color: #000000;
-        }
-        body.dark main {
-            color: #ffffff;
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-        
-        section { padding: 3rem 0; }
-        @media (min-width: 768px){ section { padding: 4rem 0; } }
-        h1, h2, h3 { font-weight: 700; line-height: 1.2; margin-bottom: 1.25rem; }
-        .btn { display:inline-flex; align-items:center; justify-content:center; padding:0.75rem 1.5rem; border-radius:var(--radius); font-weight:600; text-decoration:none; transition:all .3s ease; cursor:pointer; border:none; font-size:.875rem; gap:.5rem; }
-        .btn-primary { background: var(--gradient-primary); color:#fff; box-shadow:0 4px 15px rgba(139,92,246,.3); }
-        .btn-secondary { background: transparent; color: var(--primary); border:1px solid var(--primary); }
-        .btn-secondary:hover { background-color: rgba(139,92,246,.1); transform: translateY(-2px); }
-        .card { background: var(--gradient-card); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); overflow:hidden; transition:all .3s ease; border:1px solid rgba(255,255,255,.8); backdrop-filter: blur(10px); }
-        .dark .card { background: linear-gradient(135deg, var(--dark-card), var(--dark-surface)); border:1px solid rgba(255,255,255,.05); }
-        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
-        /* Hero */
-        .hero { background: var(--gradient-primary); color:#fff; text-align:center; padding:3rem 0; position:relative; overflow:hidden; }
-        .hero::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"); opacity:.3; }
-        .hero-content { max-width:800px; margin:0 auto; position:relative; z-index:1; }
-        .hero-subtitle { font-size:.875rem; text-transform:uppercase; letter-spacing:.1em; opacity:.8; margin-bottom:1rem; }
-        .hero-title { font-size:2.5rem; margin-bottom:1.5rem; }
-        @media (min-width:768px){ .hero-title{ font-size:3rem; } }
-        .hero-description { opacity:.9; margin-bottom:2rem; font-size:1.125rem; }
-        /* Checkout layout */
-        .checkout-layout { display:grid; grid-template-columns:1fr; gap:2.25rem; }
-        @media (min-width:1024px){ .checkout-layout{ grid-template-columns:2fr 1fr; gap:3rem; } }
-        .order-summary, .customer-info, .payment-method, .checkout-summary { background:var(--gradient-card); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); padding:1.5rem; border:1px solid rgba(255,255,255,.8); backdrop-filter: blur(10px); }
-        .order-summary, .customer-info, .payment-method { padding: 1.75rem; margin-bottom: 2rem; }
-        .checkout-summary { padding: 1.5rem; }
-        .checkout-right { margin-top: 0.75rem; }
-        @media (min-width:1024px){ .checkout-right{ margin-top: 0; } }
-        .order-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:1px solid var(--light-border); }
-        .dark .order-header { border-bottom-color: var(--dark-border); }
-        .order-title, .section-title, .summary-title { color:#000000; }
-        body.dark .order-title,
-        body.dark .section-title,
-        body.dark .summary-title { color:#ffffff; }
-        .section-title { margin-bottom: 1.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--light-border); }
-        .dark .section-title { border-bottom-color: var(--dark-border); }
-        .order-edit { color:#000000; text-decoration:none; font-weight:600; display:flex; align-items:center; gap:.5rem; transition: all .3s ease; }
-        body.dark .order-edit { color:#ffffff; }
-        .order-edit:hover { text-decoration:underline; transform: translateX(-2px); }
-        
-        .barber-info { display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.5rem; padding:1rem; border-radius: var(--radius); background-color: var(--light-card); box-shadow: var(--shadow-sm); }
-        .dark .barber-info { background-color: var(--dark-surface); }
-        .barber-logo { width:60px; height:60px; border-radius: var(--radius); overflow:hidden; flex-shrink:0; border:2px solid var(--primary); }
-        .barber-logo img { width:100%; height:100%; object-fit:cover; }
-        .services-list { margin-bottom:1.5rem; }
-        .service-item { display:flex; justify-content:space-between; align-items:center; padding:1rem; border-radius: var(--radius); background-color: var(--light-card); margin-bottom:.5rem; transition: all .3s ease; border-left:3px solid transparent; }
-        .dark .service-item { background-color: var(--dark-surface); }
-        .service-item:hover { transform: translateX(5px); border-left-color: var(--primary); box-shadow: var(--shadow-sm); }
-        .service-name { font-weight:600; margin-bottom:.25rem; }
-        .service-description { color:#000000; font-size:.875rem; }
-        .dark .service-description { color:#ffffff; }
-        .service-price { font-weight:700; color:#000000; }
-        .dark .service-price { color:#ffffff; }
-        
-        .order-totals { border-top:1px solid var(--light-border); padding-top:1.5rem; }
-        .dark .order-totals { border-top-color: var(--dark-border); }
-        .total-row { display:flex; justify-content:space-between; margin-bottom:.75rem; padding:.75rem 0; }
-        .total-row.final { font-weight:700; font-size:1.125rem; border-top:1px solid var(--light-border); padding-top:1rem; margin-top:1rem; color:#000000; }
-        .dark .total-row.final { border-top-color: var(--dark-border); color:#ffffff; }
-        .form-group { margin-bottom:1.75rem; }
-        .form-label { display:block; margin-bottom:.5rem; font-weight:600; }
-        .form-input { width:100%; padding:.75rem 1rem; border-radius: var(--radius); border:1px solid var(--light-border); background-color: var(--light-surface); color: var(--light-text); transition: all .3s ease; font-size:1rem; }
-        .dark .form-input { background-color: var(--dark-surface); border-color: var(--dark-border); color: var(--dark-text); }
-        .form-input:focus { outline:none; border-color: var(--primary); box-shadow:0 0 0 3px rgba(139,92,246,.1); transform: translateY(-2px); }
-        .form-row { display:grid; grid-template-columns:1fr; gap:1.5rem; }
-        @media (min-width: 768px){ .form-row{ grid-template-columns:1fr 1fr; } }
-        .payment-options { display:flex; flex-direction:column; gap:1.25rem; }
-        .payment-option { display:flex; align-items:center; gap:1rem; padding:1rem; border-radius: var(--radius); border:1px solid var(--light-border); cursor:pointer; transition: all .3s ease; }
-        .dark .payment-option { border-color: var(--dark-border); }
-        .payment-option:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-        .payment-option.selected { border-color: var(--primary); background: linear-gradient(135deg, rgba(139,92,246,.05), rgba(236,72,153,.05)); }
-        .payment-icon { width:40px; height:40px; border-radius: var(--radius); background: var(--gradient-primary); display:flex; align-items:center; justify-content:center; color:#fff; }
-        .payment-radio { width:1.25rem; height:1.25rem; border-radius:50%; border:2px solid var(--neutral-300); display:flex; align-items:center; justify-content:center; transition: all .3s ease; }
-        .payment-radio.selected { border-color: var(--primary); }
-        .payment-radio.selected::after { content:""; width:.75rem; height:.75rem; border-radius:50%; background: var(--gradient-primary); }
-        /* Payment text colors for visibility */
-        .payment-name { color:#000000; }
-        .dark .payment-name { color:#ffffff; }
-        .payment-description { color:#000000; }
-        .dark .payment-description { color:#ffffff; }
-        /* Improve address contrast in dark */
-        .dark .barber-address { color:#ffffff; }
-        /* Input placeholder visibility */
-        .form-input::placeholder { color:#000000; opacity: 1; }
-        .dark .form-input::placeholder { color:#ffffff; opacity: 1; }
-        /* Summary item contrast in dark */
-        .dark .summary-item span { color:#ffffff; }
-        /* Ensure overall card text uses readable color in dark */
-        .dark .order-summary,
-        .dark .customer-info,
-        .dark .payment-method,
-        .dark .checkout-summary { color:#ffffff; }
-        /* Form labels in dark */
-        .dark .form-label { color:#ffffff; }
-        /* Make booking summary total readable in dark */
-        .dark .summary-total { background: none; color:#ffffff; }
-        .summary-item { display:flex; justify-content:space-between; margin-bottom:.75rem; padding:.5rem 0; }
-        .summary-total { display:flex; justify-content:space-between; font-weight:700; font-size:1.125rem; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--light-border); color:#000000; }
-        .dark .summary-total { border-top-color: var(--dark-border); color:#ffffff; }
-        .security-note { font-size:0.75rem; color:var(--light-text); }
-        body.dark .security-note { color:var(--dark-text); }
-        .checkout-btn { width:100%; margin-top:1.5rem; padding:1rem; font-size:1rem; position:relative; overflow:hidden; }
-        
-        .checkout-btn::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent); transition:.5s; }
-        .checkout-btn:hover::after { left:100%; }
-        /* Animations */
-        .fade-in { animation: fadeIn .5s ease-in-out; }
-        .slide-up { animation: slideUp .5s ease-out; }
-        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-        @keyframes slideUp { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
-        /* Success checkmark */
-        .success-checkmark { width:80px; height:80px; margin:0 auto; position:relative; }
-        .check-icon { width:80px; height:80px; position:relative; border-radius:50%; box-sizing:content-box; border:4px solid var(--primary); }
-        .dark .check-icon::before, .dark .check-icon::after { background: var(--dark-bg); }
-        .icon-line { height:5px; background-color: var(--primary); display:block; border-radius:2px; position:absolute; z-index:10; }
-        .icon-line.line-tip { top:46px; left:14px; width:25px; transform: rotate(45deg); }
-        .icon-line.line-long { top:38px; right:8px; width:47px; transform: rotate(-45deg); }
-        /* Toast */
-        .toast { position:fixed; bottom:100px; left:50%; transform:translateX(-50%); background: var(--gradient-primary); color:#fff; padding:.75rem 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-lg); z-index:50; opacity:0; transition:opacity .3s ease; }
-        .toast.show { opacity:1; }
-        /* Modal */
-        .modal { position:fixed; inset:0; background-color: rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:100; opacity:0; visibility:hidden; transition: all .3s ease; backdrop-filter: blur(5px); }
-        .modal.show { opacity:1; visibility:visible; }
-        .modal-content { background: var(--gradient-card); border-radius: var(--radius-xl); padding:2rem; max-width:500px; width:90%; text-align:center; transform: translateY(20px); transition: transform .3s ease; box-shadow: var(--shadow-xl); border:1px solid rgba(255,255,255,.8); }
-        .dark .modal-content { background: linear-gradient(135deg, var(--dark-card), var(--dark-surface)); border:1px solid rgba(255,255,255,.05); }
-        .modal.show .modal-content { transform: translateY(0); }
-        .modal-title { font-size:1.5rem; margin-bottom:1rem; color:#000000; }
-        .dark .modal-title { color:#ffffff; }
-        .modal-message { margin-bottom:2rem; color:#000000; }
-        .dark .modal-message { color:#ffffff; }
-        /* Progress */
-        .progress-steps { display:flex; justify-content:center; margin-bottom:3rem; position:relative; }
-        .progress-step { display:flex; flex-direction:column; align-items:center; position:relative; z-index:2; }
-        .step-number { width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; background: var(--light-card); border:2px solid var(--neutral-300); font-weight:700; margin-bottom:.5rem; transition: all .3s ease; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
-        .step-label { font-size:.9rem; font-weight:600; color:#000000; margin-top:.25rem; }
-        .dark .step-label { color:#ffffff; }
-        .dark .step-number { background: var(--dark-surface); border-color: var(--dark-border); }
-        
-        .step-number.active { background: var(--gradient-primary); border-color: var(--primary); color:#fff; }
-        .step-number.completed { background: var(--primary); border-color: var(--primary); color:#fff; box-shadow: 0 4px 10px rgba(139,92,246,.25); }
-        .progress-line { position:absolute; top:22px; left:0; right:0; height:4px; background: var(--neutral-300); z-index:1; border-radius: 2px; }
-        .dark .progress-line { background: var(--dark-border); }
-        .progress-fill { position:absolute; top:22px; left:0; height:4px; background: var(--gradient-primary); z-index:1; transition: width .5s ease; border-radius: 2px; }
-        /* Empty state */
-        .empty-state { text-align:center; padding:3rem 1rem; color:#000000; }
-        .empty-state i { font-size:3rem; margin-bottom:1rem; opacity:.5; }
-        .empty-state p { margin-bottom:1.5rem; }
-        .dark .empty-state { color:#ffffff; }
-        
-    </style>
 </head>
 <body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
     <!-- Navigation -->
@@ -254,7 +154,7 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="saved-fashion.html" class="nav-link">Favorites</a>
                     <a href="shop-browsing.html" class="nav-link">Shop</a>
                     <div class="relative" data-dropdown="more">
                         <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
@@ -301,25 +201,12 @@
                         <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
                         <div class="flex flex-col space-y-2">
                             <a href="haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
-                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="curated-sets.html" class="nav-link">Curated Fashion Sets</a>
                             <a href="model-preview.html" class="nav-link">Model Preview</a>
                         </div>
                     </div>
                     <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
                     <a href="shop-browsing.html" class="block nav-link">Shop</a>
-                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
-                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
-                        <div class="flex flex-col space-y-2">
-                            <a href="reviews.html" class="nav-link">Reviews</a>
-                            <a href="contact.html" class="nav-link">Contact</a>
-                            <a href="about.html" class="nav-link nav-link-active">About us</a>
-                            <a href="faq.html" class="nav-link">FAQ</a>
-                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
-                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
-                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
-                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
-                        </div>
-                    </div>
                     <div class="flex flex-col gap-3">
                         <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
                         <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
@@ -329,243 +216,325 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <p class="hero-subtitle">Complete Your Booking</p>
-                    <h1 class="hero-title">Confirm & Checkout</h1>
-                    <p class="hero-description">Review your selected services and complete your booking</p>
-                </div>
-            </div>
-        </section>
-
+    <!-- Hero Section -->
+    <section class="relative py-12 sm:py-16 overflow-hidden">
+        <!-- Floating Background Elements -->
+        <div class="floating-element w-32 h-32 top-10 left-10"></div>
+        <div class="floating-element w-24 h-24 top-20 right-20" style="animation-delay: 2s;"></div>
+        <div class="floating-element w-40 h-40 bottom-10 left-1/4" style="animation-delay: 4s;"></div>
         
-
-        <!-- Checkout Section -->
-        <section>
-            <div class="container">
-                <div class="checkout-layout">
-                    <!-- Left Column - Order Details and Forms -->
-                    <div class="checkout-left">
-                        <!-- Order Summary -->
-                        <div class="order-summary slide-up">
-                            <div class="order-header">
-                                <h2 class="order-title">Order Summary</h2>
-                                <a href="shop-browsing.html?tab=barbers" class="order-edit">
-                                    <i class="fas fa-edit"></i>
-                                    Edit Services
-                                </a>
-                            </div>
-                            
-                            <div id="barber-info-container">
-                                <!-- Dynamic content will be inserted here -->
-                            </div>
-                            
-                            <div class="services-list" id="services-list-container">
-                                <!-- Dynamic content will be inserted here -->
-                            </div>
-                            
-                            <div class="order-totals" id="order-totals-container">
-                                <!-- Dynamic content will be inserted here -->
-                            </div>
-                        </div>
-                        
-                        <!-- Customer Information -->
-                        <div class="customer-info slide-up">
-                            <h2 class="section-title">Your Information</h2>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="full-name">Full Name</label>
-                                <input type="text" id="full-name" class="form-input" placeholder="Enter your full name">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="phone">Phone Number</label>
-                                <input type="tel" id="phone" class="form-input" placeholder="Enter your phone number">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="email">Email Address</label>
-                                <input type="email" id="email" class="form-input" placeholder="Enter your email address">
-                            </div>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label" for="date">Preferred Date</label>
-                                    <input type="date" id="date" class="form-input">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label" for="time">Preferred Time</label>
-                                    <select id="time" class="form-input">
-                                        <option value="">Select a time</option>
-                                        <option value="09:00">09:00 AM</option>
-                                        <option value="10:00">10:00 AM</option>
-                                        <option value="11:00">11:00 AM</option>
-                                        <option value="12:00">12:00 PM</option>
-                                        <option value="13:00">01:00 PM</option>
-                                        <option value="14:00">02:00 PM</option>
-                                        <option value="15:00">03:00 PM</option>
-                                        <option value="16:00">04:00 PM</option>
-                                        <option value="17:00">05:00 PM</option>
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="form-label" for="notes">Special Requests (Optional)</label>
-                                <textarea id="notes" class="form-input" rows="3" placeholder="Any special requests or notes for your barber"></textarea>
-                            </div>
-                        </div>
-                        
-                        <!-- Payment Method -->
-                        <div class="payment-method slide-up">
-                            <h2 class="section-title">Payment Method</h2>
-                            
-                            <div class="payment-options">
-                                <div class="payment-option selected" data-payment="card">
-                                    <div class="payment-icon">
-                                        <i class="far fa-credit-card"></i>
-                                    </div>
-                                    <div class="payment-details">
-                                        <div class="payment-name">Credit/Debit Card</div>
-                                        <div class="payment-description">Pay securely with your card</div>
-                                    </div>
-                                    <div class="payment-radio selected"></div>
-                                </div>
-                                
-                                <div class="payment-option" data-payment="kbz">
-                                    <div class="payment-icon">
-                                        <i class="fas fa-mobile-alt"></i>
-                                    </div>
-                                    <div class="payment-details">
-                                        <div class="payment-name">KBZ Pay</div>
-                                        <div class="payment-description">Pay with your KBZ Pay account</div>
-                                    </div>
-                                    <div class="payment-radio"></div>
-                                </div>
-                                
-                                <div class="payment-option" data-payment="wave">
-                                    <div class="payment-icon">
-                                        <i class="fas fa-wallet"></i>
-                                    </div>
-                                    <div class="payment-details">
-                                        <div class="payment-name">Wave Money</div>
-                                        <div class="payment-description">Pay with your Wave Money account</div>
-                                    </div>
-                                    <div class="payment-radio"></div>
-                                </div>
-                                
-                                <div class="payment-option" data-payment="cash">
-                                    <div class="payment-icon">
-                                        <i class="fas fa-money-bill-wave"></i>
-                                    </div>
-                                    <div class="payment-details">
-                                        <div class="payment-name">Cash Payment</div>
-                                        <div class="payment-description">Pay in cash at the barber shop</div>
-                                    </div>
-                                    <div class="payment-radio"></div>
-                                </div>
-                            </div>
-                            
-                            <!-- Card Payment Form (shown when card is selected) -->
-                            <div id="card-form" class="form-group mt-4">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label class="form-label" for="card-number">Card Number</label>
-                                        <input type="text" id="card-number" class="form-input" placeholder="1234 5678 9012 3456">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label class="form-label" for="card-name">Name on Card</label>
-                                        <input type="text" id="card-name" class="form-input" placeholder="John Doe">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label class="form-label" for="card-expiry">Expiry Date</label>
-                                        <input type="text" id="card-expiry" class="form-input" placeholder="MM/YY">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label class="form-label" for="card-cvc">CVC</label>
-                                        <input type="text" id="card-cvc" class="form-input" placeholder="123">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="container-custom relative z-10">
+            <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
+                <h1 class="font-rufina text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                    Complete Your <span class="gradient-text">Booking</span>
+                </h1>
+                <p class="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 mb-8">
+                    Review your selected services and secure your appointment at Pyin Mal
+                </p>
+                <div class="flex items-center justify-center gap-4 text-sm text-neutral-500 dark:text-neutral-400">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        <span>Secure Payment</span>
                     </div>
-                    
-                    <!-- Right Column - Order Summary -->
-                    <div class="checkout-right">
-                        <div class="checkout-summary slide-up">
-                            <h2 class="summary-title">Booking Summary</h2>
-                            
-                            <div class="summary-item">
-                                <span>Services (<span id="services-count">0</span>)</span>
-                                <span id="services-subtotal">0 MMK</span>
-                            </div>
-                            
-                            <div class="summary-item">
-                                <span>Service Fee</span>
-                                <span id="service-fee">0 MMK</span>
-                            </div>
-                            
-                            <div class="summary-total">
-                                <span>Total</span>
-                                <span id="order-total">0 MMK</span>
-                            </div>
-                            
-                            <button class="btn btn-primary checkout-btn" id="complete-booking">
-                                <i class="fas fa-lock"></i>
-                                Complete Booking
-                            </button>
-                            
-                            <p class="text-center mt-4 security-note">
-                                <i class="fas fa-shield-alt"></i>
-                                Your payment is secure and encrypted
-                            </p>
-                        </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        <span>Instant Confirmation</span>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Confirmation Modal -->
-        <div class="modal" id="confirmation-modal">
-            <div class="modal-content">
-                <div class="success-checkmark">
-                    <div class="check-icon">
-                        <span class="icon-line line-tip"></span>
-                        <span class="icon-line line-long"></span>
-                        <div class="icon-circle"></div>
-                        <div class="icon-fix"></div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        <span>Expert Stylists</span>
                     </div>
-                </div>
-                <h2 class="modal-title">Booking Confirmed!</h2>
-                <p class="modal-message">Your appointment has been successfully booked. You will receive a confirmation email shortly.</p>
-                <div class="flex gap-4">
-                    <a href="../index.html" class="btn btn-secondary w-full">Return Home</a>
-                    <a href="bookings.html" class="btn btn-primary w-full">View My Bookings</a>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Toast Notification -->
-        <div class="toast" id="toast"></div>
+    <!-- Checkout Main Content -->
+    <main class="py-12">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column: Order Details & Form -->
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- Order Summary -->
+                    <div class="bg-white dark:bg-dark-card rounded-2xl border border-neutral-200 dark:border-neutral-800 p-6 md:p-8" data-aos="fade-right">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                            <svg class="w-6 h-6 gradient-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                            Order Summary
+                        </h2>
+                        
+                        <div id="selected-services" class="space-y-4 mb-6">
+                            <!-- Services will be populated here -->
+                        </div>
+
+                        
+                    </div>
+
+                    <!-- Customer Information -->
+                    <div class="bg-white dark:bg-dark-card rounded-2xl border border-neutral-200 dark:border-neutral-800 p-6 md:p-8" data-aos="fade-right" data-aos-delay="100">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                            <svg class="w-6 h-6 gradient-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                            Customer Information
+                        </h2>
+
+                        <form id="customer-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">First Name *</label>
+                                    <input type="text" id="first-name" required class="form-input w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark-surface focus:outline-none transition">
+                                    <span class="text-red-500 text-sm hidden" id="first-name-error">Please enter your first name</span>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Last Name *</label>
+                                    <input type="text" id="last-name" required class="form-input w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark-surface focus:outline-none transition">
+                                    <span class="text-red-500 text-sm hidden" id="last-name-error">Please enter your last name</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email Address *</label>
+                                <input type="email" id="email" required class="form-input w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark-surface focus:outline-none transition">
+                                <span class="text-red-500 text-sm hidden" id="email-error">Please enter a valid email</span>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Phone Number *</label>
+                                <input type="tel" id="phone" required class="form-input w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark-surface focus:outline-none transition">
+                                <span class="text-red-500 text-sm hidden" id="phone-error">Please enter your phone number</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Appointment Date *</label>
+                                    <input type="date" id="appointment-date" required class="form-input w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark-surface focus:outline-none transition">
+                                    <span class="text-red-500 text-sm hidden" id="date-error">Please select a valid date</span>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Preferred Time *</label>
+                                    <select id="appointment-time" required class="form-input w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark-surface focus:outline-none transition">
+                                        <option value="">Select a time</option>
+                                        <option value="09:00">9:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="13:00">1:00 PM</option>
+                                        <option value="14:00">2:00 PM</option>
+                                        <option value="15:00">3:00 PM</option>
+                                        <option value="16:00">4:00 PM</option>
+                                        <option value="17:00">5:00 PM</option>
+                                        <option value="18:00">6:00 PM</option>
+                                    </select>
+                                    <span class="text-red-500 text-sm hidden" id="time-error">Please select a time</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Special Requests (Optional)</label>
+                                <textarea id="special-requests" rows="3" class="form-input w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark-surface focus:outline-none transition resize-none" placeholder="Any special requirements or preferences..."></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="bg-white dark:bg-dark-card rounded-2xl border border-neutral-200 dark:border-neutral-800 p-6 md:p-8" data-aos="fade-right" data-aos-delay="200">
+                        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                            <svg class="w-6 h-6 gradient-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                            Payment Method
+                        </h2>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="payment-method rounded-xl p-4 border border-neutral-200 dark:border-neutral-600" data-payment="card">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Credit/Debit Card</h3>
+                                        <p class="text-sm text-neutral-500 dark:text-neutral-400">Visa, Mastercard, AMEX</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payment-method rounded-xl p-4 border border-neutral-200 dark:border-neutral-600" data-payment="mobile">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zm3 14a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Mobile Payment</h3>
+                                        <p class="text-sm text-neutral-500 dark:text-neutral-400">WavePay, KBZ Pay</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payment-method rounded-xl p-4 border border-neutral-200 dark:border-neutral-600" data-payment="cash">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Pay at Shop</h3>
+                                        <p class="text-sm text-neutral-500 dark:text-neutral-400">Cash on arrival</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payment-method rounded-xl p-4 border border-neutral-200 dark:border-neutral-600" data-payment="bank">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold">Bank Transfer</h3>
+                                        <p class="text-sm text-neutral-500 dark:text-neutral-400">Direct bank payment</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Details (shown when card is selected) -->
+                        <div id="card-details" class="hidden mt-6 p-4 bg-neutral-50 dark:bg-dark-surface rounded-lg">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Card Number</label>
+                                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456" class="form-input w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark-bg focus:outline-none transition">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Expiry Date</label>
+                                        <input type="text" id="card-expiry" placeholder="MM/YY" class="form-input w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark-bg focus:outline-none transition">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">CVV</label>
+                                        <input type="text" id="card-cvv" placeholder="123" class="form-input w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-dark-bg focus:outline-none transition">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Booking Summary -->
+                <div class="lg:col-span-1">
+                    <div class="sticky top-24 space-y-6">
+                        <!-- Booking Summary Card -->
+                        <div class="bg-white dark:bg-dark-card rounded-2xl border border-neutral-200 dark:border-neutral-800 p-6 shadow-lg" data-aos="fade-left">
+                            <h3 class="text-xl font-bold mb-4">Booking Summary</h3>
+                            
+                            <div class="space-y-4 mb-6">
+                                <!-- Shop Info Section -->
+                                <div id="shop-info" class="flex items-center gap-3 p-3 bg-neutral-50 dark:bg-dark-surface rounded-lg">
+                                    <div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center">
+                                        <img id="shop-photo" src="" alt="Shop" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                        <div id="shop-icon" class="hidden w-full h-full items-center justify-center">
+                                            <svg class="w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 id="shop-name" class="font-semibold">Loading shop...</h4>
+                                        <p class="text-sm text-neutral-500 dark:text-neutral-400">Your selected barber</p>
+                                    </div>
+                                </div>
+
+                                <div id="summary-services" class="space-y-2">
+                                    <!-- Services will be populated here -->
+                                </div>
+
+                                <div class="border-t border-neutral-200 dark:border-neutral-700 pt-4 space-y-2">
+                                    <div class="flex justify-between text-sm">
+                                        <span>Subtotal</span>
+                                        <span id="subtotal">0 MMK</span>
+                                    </div>
+                                    <div class="flex justify-between text-sm">
+                                        <span>Service Fee (10%)</span>
+                                        <span id="service-fee">0 MMK</span>
+                                    </div>
+                                    <div class="flex justify-between font-bold text-lg pt-2 border-t border-neutral-200 dark:border-neutral-700">
+                                        <span>Total</span>
+                                        <span id="total" class="gradient-text">0 MMK</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button id="checkout-btn" class="checkout-btn w-full py-4 rounded-xl text-white font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                                Complete Booking
+                            </button>
+
+                            <p class="text-xs text-neutral-500 dark:text-neutral-400 text-center mt-4">
+                                By completing this booking, you agree to our terms of service and privacy policy
+                            </p>
+                        </div>
+
+                        <!-- Trust Badges -->
+                        <div class="bg-white dark:bg-dark-card rounded-2xl border border-neutral-200 dark:border-neutral-800 p-6" data-aos="fade-left" data-aos-delay="100">
+                            <h4 class="font-semibold mb-4">Why Choose Us?</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    <span class="text-sm">Expert Stylists</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    <span class="text-sm">Premium Products</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    <span class="text-sm">Satisfaction Guaranteed</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    <span class="text-sm">Flexible Scheduling</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-     <!-- Footer -->
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="hidden fixed inset-0 z-50 success-modal">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="fixed inset-0 bg-black/50" onclick="closeSuccessModal()"></div>
+            <div class="relative bg-white dark:bg-dark-card rounded-2xl p-8 max-w-md w-full shadow-2xl" data-aos="zoom-in">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full gradient-bg flex items-center justify-center">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Booking Confirmed!</h3>
+                    <p class="text-neutral-600 dark:text-neutral-300 mb-6">
+                        Your appointment has been successfully booked. We've sent a confirmation email with all the details.
+                    </p>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-lg p-4 mb-6 text-left">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-2">Booking Reference:</p>
+                        <p class="font-mono font-bold text-lg" id="booking-reference">#PM202503001</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="closeSuccessModal()" class="flex-1 px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-dark-surface transition">
+                            View Details
+                        </button>
+                        <button onclick="window.location.href='../index.html'" class="flex-1 px-4 py-3 rounded-lg gradient-bg text-white font-semibold hover:opacity-90 transition">
+                            Back Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-20 right-4 z-50 space-y-2"></div>
+
+    <!-- Footer -->
     <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-12 mt-20">
         <div class="container-custom">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="font-rufina text-xl font-bold mb-4">StyleHub</h3>
+                    <h3 class="font-rufina text-xl font-bold mb-4">Pyin Mal</h3>
                     <p class="text-neutral-400 dark:text-neutral-500 text-sm">
-                        Your personal fashion and grooming assistant
+                        Premium barbershop experience with expert stylists and modern grooming services
                     </p>
                 </div>
                 <div>
@@ -591,238 +560,516 @@
                 </div>
             </div>
             <div class="border-t border-neutral-800 dark:border-dark-border mt-8 pt-8 text-center text-sm text-neutral-400 dark:text-neutral-500">
-                <p>&copy; 2025 StyleHub. All rights reserved.</p>
+                <p>&copy; 2025 Pyin Mal. All rights reserved.</p>
             </div>
         </div>
     </footer>
     
-
     <!-- Scripts -->
-    <script>
-        // Theme Toggle (safe if missing)
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                body.classList.toggle('dark');
-            });
-        }
-
-        // Payment Method Selection
-        document.addEventListener('DOMContentLoaded', () => {
-            const paymentOptions = document.querySelectorAll('.payment-option');
-            const cardForm = document.getElementById('card-form');
-            paymentOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    paymentOptions.forEach(opt => {
-                        opt.classList.remove('selected');
-                        const r = opt.querySelector('.payment-radio');
-                        if (r) r.classList.remove('selected');
-                    });
-                    option.classList.add('selected');
-                    const radio = option.querySelector('.payment-radio');
-                    if (radio) radio.classList.add('selected');
-                    const method = option.dataset.payment;
-                    if (cardForm) cardForm.style.display = (method === 'card') ? 'block' : 'none';
-                });
-            });
-        });
-
-        // Toast helper
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            if (!toast) return;
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
-        // Booking flow + data
-        const completeBookingInit = () => {
-            const completeBookingBtn = document.getElementById('complete-booking');
-            const confirmationModal = document.getElementById('confirmation-modal');
-            if (!completeBookingBtn || !confirmationModal) return;
-            completeBookingBtn.addEventListener('click', () => {
-                const fullName = document.getElementById('full-name')?.value;
-                const phone = document.getElementById('phone')?.value;
-                const email = document.getElementById('email')?.value;
-                const date = document.getElementById('date')?.value;
-                const time = document.getElementById('time')?.value;
-                if (!fullName || !phone || !email || !date || !time) {
-                    showToast('Please fill in all required fields');
-                    return;
-                }
-                confirmationModal.classList.add('show');
-            });
-        };
-
-        const setMinDate = () => {
-            const dateInput = document.getElementById('date');
-            if (!dateInput) return;
-            const today = new Date();
-            const yyyy = today.getFullYear();
-            let mm = today.getMonth() + 1;
-            let dd = today.getDate();
-            if (mm < 10) mm = '0' + mm;
-            if (dd < 10) dd = '0' + dd;
-            dateInput.min = `${yyyy}-${mm}-${dd}`;
-        };
-
-        const barberShops = {
-            'elite-cuts': {
-                name: 'Elite Cuts',
-                address: '123 Fashion Street, Downtown',
-                logo: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=400&q=80',
-                services: {
-                    'classic-haircut': { name: 'Classic Haircut', description: 'Precision cut with scissor and clipper work', price: 65000 },
-                    'beard-trim': { name: 'Beard Trim & Shape', description: 'Professional beard shaping and trimming', price: 35000 },
-                    'full-color': { name: 'Full Color', description: 'Complete hair coloring service', price: 125000 },
-                    'highlights': { name: 'Highlights', description: 'Partial or full highlights', price: 110000 },
-                    'conditioning': { name: 'Deep Conditioning', description: 'Nourishing hair treatment', price: 50000 }
-                }
-            },
-            'urban-grooming': {
-                name: 'Urban Grooming',
-                address: '456 Modern Avenue, Midtown',
-                logo: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=400&q=80',
-                services: {
-                    'signature-cut': { name: 'Signature Cut', description: 'Custom haircut with styling consultation', price: 80000 },
-                    'skin-fade': { name: 'Skin Fade', description: 'Precision fade with detailed work', price: 60000 },
-                    'balayage': { name: 'Balayage', description: 'Hand-painted highlighting technique', price: 175000 },
-                    'blowout': { name: 'Blowout & Style', description: 'Professional blow dry and styling', price: 50000 },
-                    'scalp-treatment': { name: 'Scalp Treatment', description: 'Therapeutic scalp massage and treatment', price: 65000 }
-                }
-            },
-            'gentleman-barbers': {
-                name: 'Gentleman Barbers',
-                address: '789 Classic Road, Uptown',
-                logo: 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=400&q=80',
-                services: {
-                    'traditional-cut': { name: 'Traditional Cut', description: 'Classic barber cut with hot towel finish', price: 75000 },
-                    'beard-grooming': { name: 'Beard Grooming', description: 'Full beard service with oils and balms', price: 45000 },
-                    'gray-coverage': { name: 'Gray Coverage', description: 'Professional gray hair coverage', price: 95000 },
-                    'traditional-shave': { name: 'Traditional Shave', description: 'Straight razor shave with hot towels', price: 60000 },
-                    'hair-scalp-treatment': { name: 'Hair & Scalp Treatment', description: 'Comprehensive hair and scalp care', price: 80000 }
-                }
-            },
-            'style-lab': {
-                name: 'Style Lab',
-                address: '321 Creative Lane, Arts District',
-                logo: 'https://images.unsplash.com/photo-1593705114312-a0ee03a3f7d0?auto=format&fit=crop&w=400&q=80',
-                services: {
-                    'creative-cut': { name: 'Creative Cut', description: 'Artistic cut with personalized styling', price: 95000 },
-                    'texture-cut': { name: 'Texture Cut', description: 'Specialized cutting for texture and movement', price: 105000 },
-                    'creative-color': { name: 'Creative Color', description: 'Custom color design and application', price: 140000 },
-                    'color-correction': { name: 'Color Correction', description: 'Fixing previous color issues', price: 175000 },
-                    'special-styling': { name: 'Special Occasion Styling', description: 'Formal or event styling', price: 110000 }
-                }
-            },
-            'precision-cuts': {
-                name: 'Precision Cuts',
-                address: '654 Sharp Street, Business District',
-                logo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
-                services: {
-                    'executive-cut': { name: 'Executive Cut', description: 'Sharp, professional haircut', price: 75000 },
-                    'express-cut': { name: 'Express Cut', description: 'Quick service for busy professionals', price: 50000 },
-                    'toning': { name: 'Toning Service', description: 'Color toning and gloss treatment', price: 65000 },
-                    'corporate-styling': { name: 'Corporate Styling', description: 'Professional styling for business', price: 60000 },
-                    'express-treatment': { name: 'Express Treatment', description: 'Quick conditioning and revitalizing', price: 35000 }
-                }
-            }
-        };
-
-        function loadOrderSummary() {
-            const selectedServices = JSON.parse(localStorage.getItem('selectedServices') || '[]');
-            const selectedBarber = localStorage.getItem('selectedBarber');
-            const barberInfoContainer = document.getElementById('barber-info-container');
-            const servicesListContainer = document.getElementById('services-list-container');
-            const orderTotalsContainer = document.getElementById('order-totals-container');
-            const servicesCount = document.getElementById('services-count');
-            const servicesSubtotal = document.getElementById('services-subtotal');
-            const serviceFee = document.getElementById('service-fee');
-            const orderTotal = document.getElementById('order-total');
-            if (!barberInfoContainer || !servicesListContainer || !orderTotalsContainer) return;
-            if (selectedServices.length === 0 || !selectedBarber) {
-                barberInfoContainer.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-shopping-cart"></i>
-                        <h3>No Services Selected</h3>
-                        <p>You haven't selected any services yet.</p>
-                        <a href="shop-browsing.html?tab=barbers" class="btn btn-primary">Select Services</a>
-                    </div>
-                `;
-                servicesListContainer.innerHTML = '';
-                orderTotalsContainer.innerHTML = '';
-                if (servicesCount) servicesCount.textContent = '0';
-                if (servicesSubtotal) servicesSubtotal.textContent = '0 MMK';
-                if (serviceFee) serviceFee.textContent = '0 MMK';
-                if (orderTotal) orderTotal.textContent = '0 MMK';
-                return;
-            }
-            const barberShop = barberShops[selectedBarber];
-            if (!barberShop) return;
-            barberInfoContainer.innerHTML = `
-                <div class="barber-info">
-                    <div class="barber-logo">
-                        <img src="${barberShop.logo}" alt="${barberShop.name}">
-                    </div>
-                    <div class="barber-details">
-                        <h3 class="barber-name">${barberShop.name}</h3>
-                        <p class="barber-address">
-                            <i class="fas fa-map-marker-alt"></i>
-                            ${barberShop.address}
-                        </p>
-                    </div>
-                </div>
-            `;
-            let subtotal = 0;
-            servicesListContainer.innerHTML = '';
-            selectedServices.forEach(service => {
-                const info = barberShop.services[service.service];
-                if (info) {
-                    const el = document.createElement('div');
-                    el.className = 'service-item';
-                    el.innerHTML = `
-                        <div class="service-info">
-                            <div class="service-name">${info.name}</div>
-                            <div class="service-description">${info.description}</div>
-                        </div>
-                        <div class="service-price">${info.price.toLocaleString()} MMK</div>
-                    `;
-                    servicesListContainer.appendChild(el);
-                    subtotal += info.price;
-                }
-            });
-            const serviceFeeAmount = Math.round(subtotal * 0.1);
-            const total = subtotal + serviceFeeAmount;
-            orderTotalsContainer.innerHTML = `
-                <div class="total-row">
-                    <span>Subtotal</span>
-                    <span>${subtotal.toLocaleString()} MMK</span>
-                </div>
-                <div class="total-row">
-                    <span>Service Fee</span>
-                    <span>${serviceFeeAmount.toLocaleString()} MMK</span>
-                </div>
-                <div class="total-row final">
-                    <span>Total</span>
-                    <span>${total.toLocaleString()} MMK</span>
-                </div>
-            `;
-            if (servicesCount) servicesCount.textContent = selectedServices.length;
-            if (servicesSubtotal) servicesSubtotal.textContent = `${subtotal.toLocaleString()} MMK`;
-            if (serviceFee) serviceFee.textContent = `${serviceFeeAmount.toLocaleString()} MMK`;
-            if (orderTotal) orderTotal.textContent = `${total.toLocaleString()} MMK`;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadOrderSummary();
-            completeBookingInit();
-            setMinDate();
-        });
-    </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/animations.js"></script>
+    
+    <!-- Checkout Page Script -->
+    <script>
+        // Sample data structure
+        const barberShops = {
+            'pyin-mal-main': {
+                name: 'Pyin Mal',
+                address: '123 Fashion Street, Yangon',
+                logo: '/images/logo.png',
+                services: {
+                    'haircut': { name: 'Classic Haircut', description: 'Traditional haircut with styling', price: 15000 },
+                    'beard-trim': { name: 'Beard Trim & Shape', description: 'Professional beard grooming', price: 10000 },
+                    'hair-color': { name: 'Hair Coloring', description: 'Full hair color service', price: 35000 },
+                    'facial': { name: 'Gentlemen\'s Facial', description: 'Deep cleansing facial treatment', price: 20000 },
+                    'head-massage': { name: 'Head Massage', description: 'Relaxing head massage', price: 8000 },
+                    'shave': { name: 'Traditional Shave', description: 'Hot towel straight razor shave', price: 12000 }
+                }
+            }
+        };
+
+        // State management
+        let selectedServices = [];
+        let selectedPaymentMethod = null;
+        let isProcessing = false;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the page - this will call all necessary setup functions
+            initializePage();
+            
+            // Debug: Check if elements exist
+            console.log('Elements found:', {
+                selectedServices: document.getElementById('selected-services'),
+                summaryServices: document.getElementById('summary-services'),
+                subtotal: document.getElementById('subtotal'),
+                serviceFee: document.getElementById('service-fee'),
+                total: document.getElementById('total')
+            });
+        });
+
+        // Load and display the selected shop information
+        function loadSelectedShop() {
+            try {
+                // Get the saved shop info from localStorage
+                const savedShop = localStorage.getItem('selectedBarber');
+                console.log('Loaded shop data from localStorage:', savedShop);
+                
+                if (savedShop) {
+                    const shopInfo = JSON.parse(savedShop);
+                    console.log('Parsed shop info:', shopInfo);
+                    
+                    // Update the shop name
+                    const shopNameEl = document.getElementById('shop-name');
+                    if (shopNameEl) {
+                        shopNameEl.textContent = shopInfo.name || 'Barber Shop';
+                    }
+                    
+                    // Try to set the shop photo (if available)
+                    const shopPhotoEl = document.getElementById('shop-photo');
+                    const shopIconEl = document.getElementById('shop-icon');
+                    
+                    if (shopPhotoEl && shopInfo.photo) {
+                        shopPhotoEl.src = shopInfo.photo;
+                        shopPhotoEl.alt = shopInfo.name || 'Shop Photo';
+                        shopPhotoEl.style.display = 'block';
+                        if (shopIconEl) shopIconEl.style.display = 'none';
+                    } else {
+                        // If no photo, show the icon
+                        if (shopPhotoEl) shopPhotoEl.style.display = 'none';
+                        if (shopIconEl) shopIconEl.style.display = 'flex';
+                    }
+                    
+                    return true;
+                }
+            } catch (error) {
+                console.error('Error loading shop info:', error);
+            }
+            
+            // If we get here, there was an error or no shop data
+            const shopNameEl = document.getElementById('shop-name');
+            if (shopNameEl) {
+                shopNameEl.textContent = 'Barber Shop';
+            }
+            return false;
+        }
+
+        function initializePage() {
+            // Set minimum date for appointment
+            setMinDate();
+            
+            // Load selected services and shop info
+            loadSelectedServices();
+            loadSelectedShop();
+            
+            // Update summary with loaded services
+            updateSummary();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Debug: Log the selected services
+            console.log('Initialized page with services:', selectedServices);
+        }
+
+        function setupEventListeners() {
+            // Payment method selection
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    selectPaymentMethod(this.dataset.payment);
+                });
+            });
+
+            // Form submission
+            document.getElementById('checkout-btn').addEventListener('click', handleCheckout);
+
+            // Add service button
+            document.getElementById('add-service-btn').addEventListener('click', function() {
+                // Add a test service for debugging
+                selectedServices.push({
+                    id: 'test-' + Date.now(),
+                    name: 'Test Service',
+                    price: 25000,
+                    description: 'Test service for debugging'
+                });
+                renderSelectedServices();
+                updateSummary();
+                showToast('Test service added for debugging', 'info');
+                console.log('Services after adding:', selectedServices);
+            });
+
+            // Real-time validation
+            const formInputs = ['first-name', 'last-name', 'email', 'phone', 'appointment-date', 'appointment-time'];
+            formInputs.forEach(id => {
+                document.getElementById(id).addEventListener('blur', function() {
+                    validateField(id);
+                });
+            });
+        }
+
+        function loadSelectedServices() {
+            try {
+                // Load from localStorage
+                const savedServices = localStorage.getItem('selectedServices');
+                console.log('Loaded services from localStorage:', savedServices);
+                
+                if (savedServices) {
+                    selectedServices = JSON.parse(savedServices);
+                    console.log('Parsed services:', selectedServices);
+                    
+                    // Ensure all services have required fields
+                    selectedServices = selectedServices.map(service => ({
+                        id: service.id || 'service-' + Math.random().toString(36).substr(2, 9),
+                        name: service.name || 'Unnamed Service',
+                        price: Number(service.price) || 0,
+                        description: service.description || 'Professional service'
+                    }));
+                } else {
+                    // No saved services, use empty array instead of sample data
+                    selectedServices = [];
+                    console.log('No saved services found in localStorage');
+                }
+                
+                // Update the UI
+                renderSelectedServices();
+                updateSummary();
+                
+            } catch (error) {
+                console.error('Error loading services:', error);
+                // Fallback to empty array on error
+                selectedServices = [];
+                renderSelectedServices();
+                updateSummary();
+            }
+        }
+
+        function renderSelectedServices() {
+            const container = document.getElementById('selected-services');
+            const summaryContainer = document.getElementById('summary-services');
+            
+            console.log('Rendering services:', {
+                services: selectedServices,
+                containerExists: !!container,
+                summaryContainerExists: !!summaryContainer
+            });
+            
+            try {
+                if (!Array.isArray(selectedServices) || selectedServices.length === 0) {
+                    console.log('No services to display');
+                    if (container) {
+                        container.innerHTML = '<p class="text-neutral-500 dark:text-neutral-400">No services selected. Please go back and select services.</p>';
+                    }
+                    if (summaryContainer) {
+                        summaryContainer.innerHTML = '<p class="text-sm text-neutral-500">No services selected</p>';
+                    }
+                    return;
+                }
+
+                // Render detailed service list
+                if (container) {
+                    container.innerHTML = selectedServices.map(service => {
+                        // Ensure service has required properties
+                        const serviceId = service.id || 'service-' + Math.random().toString(36).substr(2, 9);
+                        const serviceName = service.name || 'Unnamed Service';
+                        const servicePrice = Number(service.price) || 0;
+                        const serviceDesc = service.description || 'Professional service';
+                        
+                        return `
+                            <div class="service-item flex items-center justify-between p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 mb-3">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold">${serviceName}</h4>
+                                    <p class="text-sm text-neutral-500 dark:text-neutral-400">${serviceDesc}</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="font-bold whitespace-nowrap">${servicePrice.toLocaleString()} MMK</span>
+                                    <button onclick="removeService('${serviceId}')" class="text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" aria-label="Remove service">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+
+                // Render summary
+                if (summaryContainer) {
+                    summaryContainer.innerHTML = selectedServices.map(service => {
+                        const serviceName = service.name || 'Service';
+                        const servicePrice = Number(service.price) || 0;
+                        
+                        return `
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="truncate max-w-[180px]">${serviceName}</span>
+                                <span class="font-medium whitespace-nowrap ml-2">${servicePrice.toLocaleString()} MMK</span>
+                            </div>
+                        `;
+                    }).join('');
+                }
+                
+                console.log('Services rendered successfully');
+                
+            } catch (error) {
+                console.error('Error rendering services:', error);
+                if (container) {
+                    container.innerHTML = '<p class="text-red-500">Error loading services. Please try again.</p>';
+                }
+                if (summaryContainer) {
+                    summaryContainer.innerHTML = '<p class="text-sm text-red-500">Error loading services</p>';
+                }
+            }
+        }
+
+        function removeService(serviceId) {
+            selectedServices = selectedServices.filter(service => service.id !== serviceId);
+            
+            // Update localStorage immediately
+            try {
+                localStorage.setItem('selectedServices', JSON.stringify(selectedServices));
+            } catch (error) {
+                console.error('Failed to update localStorage:', error);
+            }
+            
+            renderSelectedServices();
+            updateSummary();
+            showToast('Service removed', 'success');
+        }
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            
+            // Update UI
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.querySelector(`[data-payment="${method}"]`).classList.add('selected');
+
+            // Show/hide card details
+            const cardDetails = document.getElementById('card-details');
+            if (method === 'card') {
+                cardDetails.classList.remove('hidden');
+            } else {
+                cardDetails.classList.add('hidden');
+            }
+        }
+
+        function updateSummary() {
+            const subtotal = selectedServices.reduce((sum, service) => sum + service.price, 0);
+            const serviceFee = Math.round(subtotal * 0.1);
+            const total = subtotal + serviceFee;
+
+            console.log('Updating summary:', { subtotal, serviceFee, total });
+
+            const subtotalEl = document.getElementById('subtotal');
+            const serviceFeeEl = document.getElementById('service-fee');
+            const totalEl = document.getElementById('total');
+
+            if (subtotalEl) subtotalEl.textContent = `${subtotal.toLocaleString()} MMK`;
+            if (serviceFeeEl) serviceFeeEl.textContent = `${serviceFee.toLocaleString()} MMK`;
+            if (totalEl) totalEl.textContent = `${total.toLocaleString()} MMK`;
+        }
+
+        function setMinDate() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const dateStr = tomorrow.toISOString().split('T')[0];
+            document.getElementById('appointment-date').setAttribute('min', dateStr);
+        }
+
+        function validateField(fieldId) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(`${fieldId}-error`);
+            let isValid = true;
+
+            // Add null guard for error element
+            if (!field) {
+                console.warn(`Field not found: ${fieldId}`);
+                return false;
+            }
+            
+            if (!error) {
+                console.warn(`Error element not found: ${fieldId}-error`);
+                return false;
+            }
+
+            if (!field.value.trim()) {
+                error.classList.remove('hidden');
+                isValid = false;
+            } else {
+                error.classList.add('hidden');
+            }
+
+            // Email validation
+            if (fieldId === 'email' && field.value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(field.value)) {
+                    error.classList.remove('hidden');
+                    error.textContent = 'Please enter a valid email';
+                    isValid = false;
+                }
+            }
+
+            // Date validation
+            if (fieldId === 'appointment-date' && field.value) {
+                const selectedDate = new Date(field.value);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                if (selectedDate <= today) {
+                    error.classList.remove('hidden');
+                    error.textContent = 'Please select a future date';
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
+        function validateForm() {
+            const requiredFields = ['first-name', 'last-name', 'email', 'phone', 'appointment-date'];
+            let isValid = true;
+
+            requiredFields.forEach(fieldId => {
+                if (!validateField(fieldId)) {
+                    isValid = false;
+                }
+            });
+
+            // Check if services are selected
+            if (selectedServices.length === 0) {
+                showToast('Please select at least one service', 'error');
+                isValid = false;
+            }
+
+            // Check if payment method is selected
+            if (!selectedPaymentMethod) {
+                showToast('Please select a payment method', 'error');
+                isValid = false;
+            }
+
+            // Card validation for card payment
+            if (selectedPaymentMethod === 'card') {
+                const cardNumber = document.getElementById('card-number');
+                const expiry = document.getElementById('card-expiry');
+                const cvv = document.getElementById('card-cvv');
+                
+                if (!cardNumber?.value.trim() || !expiry?.value.trim() || !cvv?.value.trim()) {
+                    showToast('Please fill in all card details', 'error');
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
+        function generateBookingId() {
+            const timestamp = Date.now();
+            const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+            return `PM${timestamp}${random}`;
+        }
+
+        async function handleCheckout() {
+            if (isProcessing || !validateForm()) {
+                return;
+            }
+
+            isProcessing = true;
+            const btn = document.getElementById('checkout-btn');
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+
+            try {
+                // Generate unique booking ID
+                const bookingId = generateBookingId();
+                
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Store booking data
+                const bookingData = {
+                    id: bookingId,
+                    services: selectedServices,
+                    customer: {
+                        firstName: document.getElementById('first-name')?.value,
+                        lastName: document.getElementById('last-name')?.value,
+                        email: document.getElementById('email')?.value,
+                        phone: document.getElementById('phone')?.value
+                    },
+                    appointment: {
+                        date: document.getElementById('appointment-date')?.value,
+                        time: document.getElementById('appointment-time')?.value
+                    },
+                    payment: selectedPaymentMethod,
+                    total: selectedServices.reduce((sum, service) => sum + service.price, 0) * 1.1,
+                    timestamp: new Date().toISOString()
+                };
+
+                // Save to localStorage
+                localStorage.setItem('lastBooking', JSON.stringify(bookingData));
+                
+                // Clear selected services after successful booking
+                localStorage.removeItem('selectedServices');
+                
+                // Show success
+                showSuccessModal(bookingId);
+                
+                console.log('Booking confirmed:', bookingData);
+            } catch (error) {
+                console.error('Booking error:', error);
+                showToast('Booking failed. Please try again.', 'error');
+            } finally {
+                isProcessing = false;
+                btn.disabled = false;
+                btn.textContent = originalText;
+            }
+        }
+
+        function showSuccessModal(bookingId) {
+            const modal = document.getElementById('success-modal');
+            const referenceEl = document.getElementById('booking-reference');
+            
+            if (referenceEl) {
+                referenceEl.textContent = `#${bookingId}`;
+            }
+            
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const bgColor = type === 'success' ? 'bg-green-500' : 
+                           type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+            
+            toast.className = `toast ${bgColor} text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-2`;
+            toast.innerHTML = `
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    ${type === 'success' ? '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>' :
+                      type === 'error' ? '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>' :
+                      '<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>'}
+                </svg>
+                <span>${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
+
