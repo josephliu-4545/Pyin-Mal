@@ -9,17 +9,52 @@
   const MANNEQUIN_ROOT = '/public/mannequins';
   const FIT_ADJUST_KEY = 'fitAdjustments';
 
-  // Check if a transparent PNG exists for this item id
-  async function hasTransparentVersion(itemId) {
-    if (!itemId) return false;
-    const url = `${TRANSPARENT_ROOT}/${encodeURIComponent(itemId)}.png`;
-    try {
-      const res = await fetch(url, { method: 'HEAD' });
-      return res.ok;
-    } catch (err) {
-      // Network or local file error – treat as not available
-      return false;
+  // Normalize a key so it matches our transparent PNG naming convention
+  function normalizeKey(name) {
+    return String(name || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
+  // Find a matching transparent PNG for a given logical item key (group id / prefix)
+  // Strategy for each logical key:
+  //   1) Try exact match:  key.png
+  //   2) Try indexed variants: key0.png, key1.png, ... key9.png
+  // Keys themselves should already be normalized-ish (id, filename, name), but we
+  // still run them through normalizeKey to match the rename-transparent.js script.
+  async function findTransparentForItem(rawKey) {
+    if (!rawKey) return null;
+    const key = normalizeKey(rawKey);
+    if (!key) return null;
+
+    const candidates = [];
+
+    // Exact key.png
+    candidates.push(`${TRANSPARENT_ROOT}/${encodeURIComponent(key)}.png`);
+
+    // Indexed suffixes key0.png ... key9.png
+    for (let i = 0; i < 10; i++) {
+      candidates.push(`${TRANSPARENT_ROOT}/${encodeURIComponent(key + i)}.png`);
     }
+
+    for (const url of candidates) {
+      try {
+        const res = await fetch(url, { method: 'HEAD' });
+        if (res.ok) return url;
+      } catch (err) {
+        // ignore network errors and try next candidate
+      }
+    }
+
+    return null;
+  }
+
+  // Backwards-compatible boolean helper
+  async function hasTransparentVersion(itemId) {
+    const path = await findTransparentForItem(itemId);
+    return !!path;
   }
 
   function getWardrobeItems() {
@@ -54,11 +89,33 @@
 
     const itemId = item.id;
     const bgImg = item.image;
-    const transparentPath = `${TRANSPARENT_ROOT}/${encodeURIComponent(itemId)}.png`;
-    const canTryOn = await hasTransparentVersion(itemId);
+
+    // Try multiple logical keys to locate the correct transparent PNG.
+    const candidateKeys = [];
+    if (itemId) candidateKeys.push(itemId);
+    if (bgImg) {
+      const file = bgImg.split('/').pop() || '';
+      const withoutExt = file.replace(/\.(png|jpe?g|webp)$/i, '');
+      if (withoutExt) candidateKeys.push(withoutExt);
+    }
+    if (item.name) {
+      candidateKeys.push(item.name);
+    }
+
+    let transparentPath = null;
+    for (const key of candidateKeys) {
+      transparentPath = await findTransparentForItem(key);
+      if (transparentPath) break;
+    }
+
+    const canTryOn = !!transparentPath;
 
     if (!canTryOn && typeof console !== 'undefined' && console.warn) {
-      console.warn(`No transparent PNG found for: ${itemId}  → expected at /public/items/transparent/${itemId}.png`);
+      console.warn(
+        `No transparent PNG found for item id="${itemId}"; tried keys: ${candidateKeys
+          .map(k => `${k} -> ${normalizeKey(k)}`)
+          .join(', ')} under ${TRANSPARENT_ROOT}`
+      );
     }
 
     const entry = {
@@ -248,6 +305,7 @@
 
   // Expose helpers on window for inline scripts
   window.hasTransparentVersion = hasTransparentVersion;
+  window.findTransparentForItem = findTransparentForItem;
   window.getWardrobeItems = getWardrobeItems;
   window.addToWardrobeAsync = addToWardrobe;
   window.filterTryOnItems = filterTryOnItems;
