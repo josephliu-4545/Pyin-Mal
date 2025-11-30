@@ -129,7 +129,7 @@
                 <p class="text-neutral-600 dark:text-neutral-400 mb-6">Look through common questions about wardrobe planning, hair simulations, pricing, and client flows. Need a deeper dive? Book a 15-minute call and we’ll tailor the process to your studio or personal wardrobe.</p>
                 <div class="flex flex-wrap gap-4">
                     <a href="contact.html" class="btn btn-primary">Talk to our team</a>
-                    <a href="../index.html#wish-list" class="btn btn-secondary">Explore lookbook</a>
+                    
                 </div>
             </div>
             <div class="bg-white dark:bg-dark-card rounded-3xl shadow-soft dark:shadow-soft-dark p-8" data-aos="fade-left">
@@ -143,104 +143,349 @@
         </div>
     </section>
 
-    <!-- Filter tabs -->
-    <section class="py-6">
-        <div class="container-custom" data-aos="fade-up">
-            <div class="product-card p-3 sm:p-4 flex flex-wrap gap-3 sm:gap-4 text-sm">
-                <button class="faq-filter active">General</button>
-                <button class="faq-filter">Styling & Grooming</button>
-                <button class="faq-filter">Digital Preview</button>
-                <button class="faq-filter">Membership</button>
-                <button class="faq-filter">Support</button>
+    <!-- FAQ -->
+    <section class="py-10 sm:py-14 bg-neutral-50 dark:bg-dark-surface">
+        <div class="container-custom max-w-4xl mx-auto">
+            <div class="text-center mb-10" data-aos="fade-up">
+                <h2 class="font-rufina text-3xl font-bold mb-3">Frequently asked questions</h2>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Everything you need to know about our services and how we can help you.</p>
+            </div>
+            
+            <!-- FAQ Categories -->
+            <div class="flex flex-wrap gap-2 justify-center mb-10" data-aos="fade-up">
+                
+                <button class="faq-category-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-primary-600 hover:text-white hover:shadow-lg hover:-translate-y-0.5" data-category="account">Account</button>
+                <button class="faq-category-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-primary-600 hover:text-white hover:shadow-lg hover:-translate-y-0.5" data-category="billing">Billing</button>
+                <button class="faq-category-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-primary-600 hover:text-white hover:shadow-lg hover:-translate-y-0.5" data-category="features">Features</button>
+                <button class="faq-category-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-primary-600 hover:text-white hover:shadow-lg hover:-translate-y-0.5" data-category="support">Support</button>
+            </div>
+
+            <!-- FAQ Accordion -->
+            <div class="space-y-4" data-aos="fade-up">
+                <!-- Account Questions -->
+                <div class="faq-item product-card p-6" data-category="account">
+                    <button class="faq-question w-full flex justify-between items-center text-left">
+                        <h3 class="font-rufina text-lg">How do I create an account?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer mt-4 hidden">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Creating an account is simple! Click on the 'Sign Up' button in the top right corner, fill in your details, and verify your email address. You'll be ready to explore our services in just a few minutes.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item product-card p-6" data-category="account">
+                    <button class="faq-question w-full flex justify-between items-center text-left">
+                        <h3 class="font-rufina text-lg">How do I reset my password?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer mt-4 hidden">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">If you've forgotten your password, click on 'Forgot Password' on the login page. Enter your email address, and we'll send you a link to reset your password. The link will be valid for 24 hours.</p>
+                    </div>
+                </div>
+
+                <!-- Billing Questions -->
+                <div class="faq-item product-card p-6" data-category="billing">
+                    <button class="faq-question w-full flex justify-between items-center text-left">
+                        <h3 class="font-rufina text-lg">Can I change plans anytime?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer mt-4 hidden">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Yes! You can upgrade, downgrade, or cancel your plan at any time. Changes take effect at the start of your next billing cycle. Your payment method will be charged or credited the prorated amount.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item product-card p-6" data-category="billing">
+                    <button class="faq-question w-full flex justify-between items-center text-left">
+                        <h3 class="font-rufina text-lg">What payment methods do you accept?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer mt-4 hidden">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, and in some regions, Apple Pay and Google Pay. All payments are processed securely through our payment processor.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item product-card p-6" data-category="billing">
+                    <button class="faq-question w-full flex justify-between items-center text-left">
+                        <h3 class="font-rufina text-lg">Do you offer refunds?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer mt-4 hidden">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">We offer a 30-day money-back guarantee if you're not satisfied with our service. Contact our support team within 30 days of your purchase for a full refund. After 30 days, we offer prorated refunds for the remaining unused portion of your subscription.</p>
+                    </div>
+                </div>
+
+                <!-- Features Questions -->
+                <div class="faq-item product-card p-6" data-category="features">
+                    <button class="faq-question w-full flex justify-between items-center text-left">
+                        <h3 class="font-rufina text-lg">How does the virtual try-on feature work?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer mt-4 hidden">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Our virtual try-on uses advanced AI and augmented reality to show you how different styles will look on you. Simply upload a photo or use your camera, and our technology will map the clothing or hairstyle onto your image with realistic lighting and shadows.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item product-card p-6" data-category="features">
+                    <button class="faq-question w-full flex justify-between items-center text-left">
+                        <h3 class="font-rufina text-lg">Can I save my favorite styles?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer mt-4 hidden">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Yes! You can save any style you like to your 'Favorites' section by clicking the heart icon. You can organize your saved styles into different collections and share them with friends or your stylist.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item product-card p-6" data-category="features">
+                    <button class="faq-question w-full flex justify-between items-center text-left">
+                        <h3 class="font-rufina text-lg">How accurate are the style recommendations?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer mt-4 hidden">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Our AI analyzes your body type, personal style preferences, and current fashion trends to provide highly accurate recommendations. The more you use the app and provide feedback, the better our recommendations become. Many users report over 85% satisfaction with our style suggestions.</p>
+                    </div>
+                </div>
+
+                <!-- Support Questions -->
+                <div class="faq-item product-card p-6" data-category="support">
+                    <button class="faq-question w-full flex justify-between items-center text-left">
+                        <h3 class="font-rufina text-lg">How can I contact customer support?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer mt-4 hidden">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">You can reach our customer support team 24/7 through the following channels:<br>
+                        - Live chat: Available in the app or on our website<br>
+                        - Email: support@pyinmal.com<br>
+                        - Phone: 1-800-PYINMAL (Monday-Friday, 9am-6pm EST)<br>
+                        - Help Center: Browse our extensive knowledge base for instant answers</p>
+                    </div>
+                </div>
+
+                <div class="faq-item product-card p-6" data-category="support">
+                    <button class="faq-question w-full flex justify-between items-center text-left">
+                        <h3 class="font-rufina text-lg">Do you offer style consultations?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer mt-4 hidden">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Yes! We offer personalized style consultations with our expert stylists. These can be booked through the app and are available in 30-minute or 60-minute sessions. Our stylists can help you with everything from building a capsule wardrobe to preparing for a special event.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item product-card p-6" data-category="features">
+                    <button class="faq-question w-full flex justify-between items-center text-left">
+                        <h3 class="font-rufina text-lg">Is there a mobile app available?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 dark:text-primary-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="faq-answer mt-4 hidden">
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Yes! Our mobile app is available for both iOS and Android devices. You can download it from the App Store or Google Play Store. The app includes all the features of our web platform plus some mobile-exclusive features like AR try-on and offline access to your saved styles.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ accordion -->
-    <section class="py-10 sm:py-14">
-        <div class="container-custom grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 space-y-4" data-aos="fade-right">
-                <!-- Each item -->
-                <article class="accordion-card">
-                    <button class="accordion-trigger">
-                        <div>
-                            <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">General</p>
-                            <h3>What’s included in a standard styling sprint?</h3>
-                        </div>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-panel">
-                        <p>We gather your wardrobe goals, body/face data, and calendar. Then stylists prep mood boards, outfit stacks, grooming plans, and a model preview session. You receive shoppable links or ready-to-wear deliveries at the end.</p>
-                    </div>
-                </article>
-                <article class="accordion-card">
-                    <button class="accordion-trigger">
-                        <div>
-                            <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Digital preview</p>
-                            <h3>How accurate is the Model Preview try-on?</h3>
-                        </div>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-panel">
-                        <p>We work with calibrated silhouettes and layered PNGs. Outfits are scaled 1:1 to your measurements. Haircuts use MediaPipe data to place overlays so you can sign off before we book salon time.</p>
-                    </div>
-                </article>
-                <article class="accordion-card">
-                    <button class="accordion-trigger">
-                        <div>
-                            <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Styling & grooming</p>
-                            <h3>Can you collaborate with my existing salon or tailor?</h3>
-                        </div>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-panel">
-                        <p>Absolutely. We send lookbooks and technical drawings to your preferred partners. Our team can also attend fittings virtually to ensure proportions and textures match the preview.</p>
-                    </div>
-                </article>
-                <article class="accordion-card">
-                    <button class="accordion-trigger">
-                        <div>
-                            <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Membership</p>
-                            <h3>Do you offer retainers for ongoing wardrobe drops?</h3>
-                        </div>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-panel">
-                        <p>Yes. Our Capsule Membership includes quarterly wardrobe drops, monthly haircut refresh plans, and unlimited digital previews. Custom retainers are available for studios or content teams.</p>
-                    </div>
-                </article>
-                <article class="accordion-card">
-                    <button class="accordion-trigger">
-                        <div>
-                            <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Support</p>
-                            <h3>What if I need revisions after approving a look?</h3>
-                        </div>
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-panel">
-                        <p>Every sprint includes two revision windows. If you need further changes, we simply add another micro-sprint focusing on the looks or grooming rituals you want to adjust.</p>
-                    </div>
-                </article>
-            </div>
-            <aside class="space-y-6" data-aos="fade-left">
-                <div class="product-card p-6">
-                    <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Need more?</p>
-                    <h3 class="font-rufina text-2xl mb-3">Send us your scenario</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-5">Not seeing your answer? Drop your styling challenge and we’ll respond within one business day.</p>
-                    <a href="contact.html" class="btn btn-primary w-full">Ask a question</a>
-                </div>
-                <div class="product-card p-6 space-y-4">
-                    <h4 class="font-rufina text-xl">Quick links</h4>
-                    <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-400">
-                        <li><a href="pricing.html" class="hover:text-primary-600 dark:hover:text-primary-300">Pricing plans</a></li>
-                        <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300">Haircut recommendations</a></li>
-                        <li><a href="curated-sets.html" class="hover:text-primary-600 dark:hover:text-primary-300">Curated fashion sets</a></li>
-                        <li><a href="face-scan.html" class="hover:text-primary-600 dark:hover:text-primary-300">Face scan preview</a></li>
-                    </ul>
-                </div>
-            </aside>
-        </div>
-    </section>
+    <script>
+        // FAQ Accordion Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            const categoryButtons = document.querySelectorAll('.faq-category-btn');
+            
+            // Toggle FAQ answers
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.closest('.faq-item');
+                    const answer = faqItem.querySelector('.faq-answer');
+                    const icon = question.querySelector('.faq-icon');
+                    
+                    // Toggle the answer
+                    answer.classList.toggle('hidden');
+                    
+                    // Rotate the icon
+                    icon.classList.toggle('rotate-180');
+                    
+                    // Close other open answers in the same category
+                    const category = faqItem.dataset.category;
+                    document.querySelectorAll(`.faq-item[data-category="${category}"]`).forEach(item => {
+                        if (item !== faqItem) {
+                            item.querySelector('.faq-answer').classList.add('hidden');
+                            item.querySelector('.faq-icon').classList.remove('rotate-180');
+                        }
+                    });
+                });
+            });
+            
+            // Filter by category
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const category = button.dataset.category;
+                    
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('bg-primary-600', 'text-white'));
+                    button.classList.add('bg-primary-600', 'text-white');
+                    
+                    // Show/hide questions based on category
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    
+    <style>
+        /* FAQ Category Buttons */
+        .faq-category-btn {
+            position: relative;
+            background-color: #f3f4f6;
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 9999px;
+            opacity: 0.9;
+        }
+
+        .faq-category-btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .faq-category-btn:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .faq-category-btn:active {
+            transform: translateY(0);
+            transition: transform 0.1s ease;
+        }
+
+        .faq-category-btn.active {
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Dark mode styles */
+        .dark .faq-category-btn {
+            background-color: #1f2937;
+            color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark .faq-category-btn:hover {
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        }
+
+        .dark .faq-category-btn.active {
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Animation for button click */
+        @keyframes buttonPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.98); }
+            100% { transform: scale(1); }
+        }
+
+        .faq-category-btn:active {
+            animation: buttonPulse 0.3s ease;
+        }
+
+        /* Hover effect for buttons */
+        .faq-category-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq-category-btn span {
+            position: relative;
+            z-index: 2;
+            transition: color 0.3s ease;
+        }
+
+        /* Ripple effect */
+        .faq-category-btn::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 0.5s, opacity 1s;
+            border-radius: 50%;
+        }
+
+        .faq-category-btn:active::after {
+            transform: scale(2);
+            opacity: 0;
+            transition: 0s;
+        }
+
+        /* FAQ icon animations */
+        .faq-icon {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-answer:not(.hidden) {
+            max-height: 500px;
+        }
+
+        /* Staggered animation for category buttons */
+        .faq-category-btn {
+            animation: slideUp 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .faq-category-btn:nth-child(1) { animation-delay: 0.1s; }
+        .faq-category-btn:nth-child(2) { animation-delay: 0.2s; }
+        .faq-category-btn:nth-child(3) { animation-delay: 0.3s; }
+        .faq-category-btn:nth-child(4) { animation-delay: 0.4s; }
+        .faq-category-btn:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 
     <!-- Contact strip -->
     <section class="py-12 bg-neutral-50 dark:bg-dark-surface">

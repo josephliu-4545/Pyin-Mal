@@ -132,9 +132,12 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Set 1 -->
-                <article class="product-card p-0 overflow-hidden" data-aos="fade-up">
-                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card">
-                        <img src="../assets/images/looks/curated-work-01.jpg" alt="Soft structure office set" class="w-full h-full object-cover">
+                <article class="product-card p-0 overflow-hidden group h-full flex flex-col" data-aos="fade-up" data-aos-delay="300">
+                    <div class="aspect-[3/4] bg-neutral-100 dark:bg-dark-card relative overflow-hidden flex-shrink-0">
+                        <img src="../assets/images/19_MaleAbstractMannequinMM-WEN4EG-removebg-preview.png" alt="Travel essentials collection" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <span class="text-white text-sm font-medium">View Collection</span>
+                        </div>
                     </div>
                     <div class="p-5 space-y-2">
                         <h3 class="font-rufina text-xl">Soft Structure Office Set</h3>
@@ -158,9 +161,12 @@
                     </div>
                 </article>
                 <!-- Set 2 -->
-                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="50">
-                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card">
-                        <img src="../assets/images/looks/curated-weekend-01.jpg" alt="Weekend cafe set" class="w-full h-full object-cover">
+                <article class="product-card p-0 overflow-hidden group h-full flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aspect-[3/4] bg-neutral-100 dark:bg-dark-card relative overflow-hidden flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=1067&q=80" alt="Casual weekend wear" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <span class="text-white text-sm font-medium">View Collection</span>
+                        </div>
                     </div>
                     <div class="p-5 space-y-2">
                         <h3 class="font-rufina text-xl">Weekend Cafe Street Set</h3>
@@ -184,9 +190,12 @@
                     </div>
                 </article>
                 <!-- Set 3 -->
-                <article class="product-card p-0 overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                    <div class="aspect-[4/5] bg-neutral-100 dark:bg-dark-card">
-                        <img src="../assets/images/looks/curated-event-01.jpg" alt="Launch night set" class="w-full h-full object-cover">
+                <article class="product-card p-0 overflow-hidden group h-full flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                    <div class="aspect-[3/4] bg-neutral-100 dark:bg-dark-card relative overflow-hidden flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=1067&q=80" alt="Elegant evening wear" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <span class="text-white text-sm font-medium">View Collection</span>
+                        </div>
                     </div>
                     <div class="p-5 space-y-2">
                         <h3 class="font-rufina text-xl">Launch Night Capsule</h3>
@@ -249,7 +258,15 @@
                                 <p class="font-semibold text-neutral-900 dark:text-dark-text">$279</p>
                                 <p class="text-neutral-500 dark:text-neutral-400">Shop: Transit Room</p>
                             </div>
-                            <a href="saved-fashion.html" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">♡ Favorite</a>
+                            <button
+                                type="button"
+                                class="text-primary-600 dark:text-primary-400 hover:underline text-sm favorite-link"
+                                data-favorite-id="set-carry-on"
+                                data-favorite-title="Carry‑On Travel Set"
+                                data-favorite-category="travel"
+                            >
+                                ♡ Favorite
+                            </button>
                         </div>
                     </div>
                 </article>
@@ -426,9 +443,14 @@
                     const title = btn.dataset.favoriteTitle || '';
                     const category = btn.dataset.favoriteCategory || 'work';
 
+                    // Try to capture a representative image from the card
+                    const article = btn.closest('article');
+                    const imgEl = article ? article.querySelector('img') : null;
+                    const image = imgEl ? imgEl.getAttribute('src') : '';
+
                     const favorites = getFavorites();
                     if (!favorites.some(item => item.id === id)) {
-                        favorites.push({ id, title, category });
+                        favorites.push({ id, title, category, image });
                         saveFavorites(favorites);
                     }
 

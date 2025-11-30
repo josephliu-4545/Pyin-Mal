@@ -129,179 +129,57 @@
                     <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Your approved outfits and grooming combos, all in one clipboard.</h1>
                     <p class="text-sm sm:text-base text-white/80">Everything you’ve favorited from the generator, shop, and curated sets lands here—ready for re-use, styling tweaks, or sending to your stylist.</p>
                 </div>
-                <div class="product-card bg-white/5 border-white/10 text-sm w-full md:max-w-sm" data-aos="fade-left">
-                    <p class="text-xs uppercase tracking-[0.3em] text-white/60 mb-3">Overview</p>
-                    <div class="grid grid-cols-3 gap-3 text-center text-white/80">
-                        <div>
-                            <p class="font-rufina text-2xl">09</p>
-                            <p class="text-[11px] uppercase tracking-[0.2em] text-white/60 mt-1">Saved looks</p>
-                        </div>
-                        <div>
-                            <p class="font-rufina text-2xl">04</p>
-                            <p class="text-[11px] uppercase tracking-[0.2em] text-white/60 mt-1">Hair presets</p>
-                        </div>
-                        <div>
-                            <p class="font-rufina text-2xl">03</p>
-                            <p class="text-[11px] uppercase tracking-[0.2em] text-white/60 mt-1">Grooming kits</p>
-                        </div>
-                    </div>
-                </div>
+                add photo 
             </div>
-            <div class="product-card p-4 bg-white/5 border-white/10 flex flex-wrap gap-3 text-xs text-white/80" data-aos="fade-up">
-                <span class="px-3 py-1 rounded-full bg-white/10">Work</span>
-                <span class="px-3 py-1 rounded-full bg-white/10">Weekend</span>
-                <span class="px-3 py-1 rounded-full bg-white/10">Events</span>
-                <span class="px-3 py-1 rounded-full bg-white/10">Hair</span>
-                <span class="px-3 py-1 rounded-full bg-white/10">Grooming</span>
-            </div>
+            
         </div>
     </section>
 
     <!-- Filters -->
     <section class="py-8 bg-neutral-50 dark:bg-dark-surface">
         <div class="container-custom" data-aos="fade-up">
-            <div class="product-card p-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                <div class="flex flex-wrap gap-3 text-sm">
-                    <button class="filter-chip active" data-filter="all">All</button>
-                    <button class="filter-chip" data-filter="work">Work</button>
-                    <button class="filter-chip" data-filter="weekend">Weekend</button>
-                    <button class="filter-chip" data-filter="event">Event</button>
-                    <button class="filter-chip" data-filter="hair">Hair</button>
-                    <button class="filter-chip" data-filter="grooming">Grooming</button>
+            <div class="product-card p-5 flex flex-col gap-4">
+                <!-- Category Filters -->
+                <div class="flex flex-wrap items-center gap-2 mb-4">
+                    <span class="text-sm font-medium text-neutral-600 dark:text-neutral-300 mr-2">Categories:</span>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="category-filter active px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 bg-primary-600 text-white" data-category="all">
+                            All Items
+                        </button>
+                        <button class="category-filter px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 text-neutral-600 dark:text-neutral-300 hover:bg-white dark:hover:bg-dark-surface hover:text-primary-600 dark:hover:text-primary-400" data-category="haircut">
+                            Haircut
+                        </button>
+                        <button class="category-filter px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 text-neutral-600 dark:text-neutral-300 hover:bg-white dark:hover:bg-dark-surface hover:text-primary-600 dark:hover:text-primary-400" data-category="outfit">
+                            Outfit
+                        </button>
+                        <button class="category-filter px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 text-neutral-600 dark:text-neutral-300 hover:bg-white dark:hover:bg-dark-surface hover:text-primary-600 dark:hover:text-primary-400" data-category="set">
+                            Sets
+                        </button>
+                    </div>
                 </div>
-                <div class="flex gap-3 w-full lg:w-auto">
-                    <input type="search" id="saved-search" class="form-input flex-1" placeholder="Search saved looks by name or tag">
-                    <button class="btn btn-secondary px-4" type="button">Search</button>
+                
+                <!-- Search Bar -->
+                <div class="flex flex-col sm:flex-row gap-3 w-full">
+                    <div class="relative flex-1">
+                        <input type="search" id="saved-search" class="form-input w-full pl-10 pr-4 py-2.5 rounded-lg border border-neutral-200 dark:border-dark-border bg-white dark:bg-dark-card text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Search saved looks by name or tag">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-4 w-4 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary px-6 whitespace-nowrap" type="button">
+                        <span>Search</span>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Saved looks grid -->
-    <section class="py-10 sm:py-14">
-        <div class="container-custom space-y-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Card 1 -->
-                <article class="shop-card" data-saved-card data-category="work" data-aos="fade-up">
-                    <div class="shop-card-media">
-                        <img src="../assets/images/looks/saved-look-work-01.jpg" alt="Saved work look 1">
-                        <button class="shop-favorite saved" aria-label="Saved look">
-                            <span>♥</span>
-                        </button>
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Work</p>
-                            <h3>Boardroom soft suit</h3>
-                            <p class="shop-card-desc">Tailored blazer, pleated trouser, knit tank, and glass hair preset.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Work capsule</span>
-                            <a href="model-preview.html" class="btn btn-secondary px-3 py-1.5 text-xs">Open in preview</a>
-                        </div>
-                    </div>
-                </article>
-                <!-- Card 2 -->
-                <article class="shop-card" data-saved-card data-category="weekend" data-aos="fade-up" data-aos-delay="50">
-                    <div class="shop-card-media">
-                        <img src="../assets/images/looks/saved-look-weekend-01.jpg" alt="Saved weekend look 1">
-                        <button class="shop-favorite saved" aria-label="Saved look">
-                            <span>♥</span>
-                        </button>
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Weekend</p>
-                            <h3>Denim + knit cafe set</h3>
-                            <p class="shop-card-desc">Relaxed denim, ribbed knit, sneakers, and air-dry wave hair preset.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Weekend capsule</span>
-                            <a href="model-preview.html" class="btn btn-secondary px-3 py-1.5 text-xs">Open in preview</a>
-                        </div>
-                    </div>
-                </article>
-                <!-- Card 3 -->
-                <article class="shop-card" data-saved-card data-category="event" data-aos="fade-up" data-aos-delay="100">
-                    <div class="shop-card-media">
-                        <img src="../assets/images/looks/saved-look-event-01.jpg" alt="Saved event look 1">
-                        <button class="shop-favorite saved" aria-label="Saved look">
-                            <span>♥</span>
-                        </button>
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Event</p>
-                            <h3>Chrome hour launch look</h3>
-                            <p class="shop-card-desc">Statement dress, chrome accessories, and evening grooming kit.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Event capsule</span>
-                            <a href="model-preview.html" class="btn btn-secondary px-3 py-1.5 text-xs">Open in preview</a>
-                        </div>
-                    </div>
-                </article>
-                <!-- Card 4 -->
-                <article class="shop-card" data-saved-card data-category="hair" data-aos="fade-up">
-                    <div class="shop-card-media">
-                        <img src="../assets/images/looks/saved-look-hair-01.jpg" alt="Saved haircut preset 1">
-                        <button class="shop-favorite saved" aria-label="Saved look">
-                            <span>♥</span>
-                        </button>
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Hair</p>
-                            <h3>Fluid long layers preset</h3>
-                            <p class="shop-card-desc">Cut notes and product combo saved from Haircut Recommendations.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Haircut recs</span>
-                            <a href="haircut-recommendations.html" class="btn btn-secondary px-3 py-1.5 text-xs">View cut notes</a>
-                        </div>
-                    </div>
-                </article>
-                <!-- Card 5 -->
-                <article class="shop-card" data-saved-card data-category="grooming" data-aos="fade-up" data-aos-delay="50">
-                    <div class="shop-card-media">
-                        <img src="../assets/images/looks/saved-look-grooming-01.jpg" alt="Saved grooming kit 1">
-                        <button class="shop-favorite saved" aria-label="Saved look">
-                            <span>♥</span>
-                        </button>
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Grooming</p>
-                            <h3>Reset ritual kit</h3>
-                            <p class="shop-card-desc">Clarifying wash + mask combo that anchors your weekly reset.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Grooming packages</span>
-                            <a href="curated-sets.html#events" class="btn btn-secondary px-3 py-1.5 text-xs">See package</a>
-                        </div>
-                    </div>
-                </article>
-                <!-- Card 6 -->
-                <article class="shop-card" data-saved-card data-category="work" data-aos="fade-up" data-aos-delay="100">
-                    <div class="shop-card-media">
-                        <img src="../assets/images/looks/saved-look-work-02.jpg" alt="Saved work look 2">
-                        <button class="shop-favorite saved" aria-label="Saved look">
-                            <span>♥</span>
-                        </button>
-                    </div>
-                    <div class="shop-card-body">
-                        <div>
-                            <p class="shop-card-tag">Work</p>
-                            <h3>Keynote stage look</h3>
-                            <p class="shop-card-desc">Structured suit, pointed heels, and light-reflecting skin preset.</p>
-                        </div>
-                        <div class="shop-card-footer">
-                            <span class="text-xs text-neutral-500 dark:text-neutral-400">From: Live experience</span>
-                            <a href="model-preview.html" class="btn btn-secondary px-3 py-1.5 text-xs">Open in preview</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
+    <section class="py-10">
+        <div class="container-custom">
+            <div id="saved-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
     </section>
 
@@ -315,8 +193,8 @@
                     <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Share your size data and timing. We’ll either ship a curated trunk or send shoppable links to your local boutiques.</p>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-                    <a href="shop-browsing.html" class="btn btn-secondary w-full sm:w-auto">Add more looks</a>
-                    <a href="contact.html" class="btn btn-primary w-full sm:w-auto">Request styling drop</a>
+                    <button onclick="window.location.href='shop-browsing.html'" class="btn btn-primary text-sm px-4 py-2 w-full sm:w-auto transform transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/20 dark:hover:shadow-primary-900/30 hover:bg-primary-600 dark:hover:bg-primary-500">Add more looks</button>
+                    <button onclick="window.location.href='contact.html'" class="btn btn-primary text-sm px-4 py-2 w-full sm:w-auto transform transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/20 dark:hover:shadow-primary-900/30 hover:bg-primary-600 dark:hover:bg-primary-500">Request styling drop</button>
                 </div>
             </div>
         </div>
@@ -344,40 +222,179 @@
     <script src="../js/animations.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const FAVORITES_KEY = 'pyinmal_favorites';
+            const HAIRSTYLE_FAVORITES_KEY = 'favoriteHairstyles';
+            const grid = document.getElementById('saved-grid');
             const searchInput = document.getElementById('saved-search');
-            const cards = Array.from(document.querySelectorAll('[data-saved-card]'));
-            const filterChips = Array.from(document.querySelectorAll('.filter-chip[data-filter]'));
-            let activeFilter = 'all';
+            const searchButton = document.querySelector('button[type="button"]');
+            const categoryFilters = Array.from(document.querySelectorAll('.category-filter'));
+            let activeCategory = 'all';
 
-            function matchesFilter(card) {
-                const category = card.dataset.category;
-                return activeFilter === 'all' || category === activeFilter;
+            function clearAllFavorites() {
+                localStorage.removeItem(FAVORITES_KEY);
+                localStorage.removeItem(HAIRSTYLE_FAVORITES_KEY);
+                renderFavorites();
+                applyFilters();
+                showNotification('All favorites cleared', 'success');
+            }
+
+            function getFavorites() {
+                try { 
+                    const regularFavorites = JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
+                    const hairstyleFavorites = JSON.parse(localStorage.getItem(HAIRSTYLE_FAVORITES_KEY)) || [];
+                    
+                    // Convert hairstyle favorites to the expected format
+                    const convertedHairstyles = hairstyleFavorites.map((item, index) => ({
+                        id: `hairstyle_${index}`,
+                        title: item.name,
+                        image: item.image,
+                        category: 'hairstyle',
+                        description: item.description,
+                        tags: item.tags || []
+                    }));
+                    
+                    return [...regularFavorites, ...convertedHairstyles]; 
+                } catch { return []; }
+            }
+
+            function categoryMap(raw) {
+                if (raw === 'hairstyle' || raw === 'haircut') return 'haircut';
+                if (raw === 'outfit') return 'outfit';
+                return 'set';
+            }
+
+            function removeFavorite(id) {
+                // Check if it's a hairstyle favorite
+                if (id.startsWith('hairstyle_')) {
+                    const hairstyleFavorites = JSON.parse(localStorage.getItem(HAIRSTYLE_FAVORITES_KEY)) || [];
+                    const index = parseInt(id.split('_')[1]);
+                    hairstyleFavorites.splice(index, 1);
+                    localStorage.setItem(HAIRSTYLE_FAVORITES_KEY, JSON.stringify(hairstyleFavorites));
+                } else {
+                    // Regular favorite
+                    const remaining = getFavorites().filter(i => i.id !== id);
+                    localStorage.setItem(FAVORITES_KEY, JSON.stringify(remaining));
+                }
+                renderFavorites();
+                applyFilters();
+            }
+
+            function renderFavorites() {
+                const items = getFavorites();
+                grid.innerHTML = '';
+
+                if (items.length === 0) {
+                    grid.innerHTML = `
+                        <div class="col-span-full text-center py-12">
+                            <div class="text-neutral-400 dark:text-neutral-500 mb-4">
+                                <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                                <p class="text-lg font-medium">No saved items yet</p>
+                                <p class="text-sm mt-2">Start favoriting hairstyles and outfits to see them here</p>
+                            </div>
+                            
+                        </div>
+                    `;
+                    return;
+                }
+
+                items.forEach((item, index) => {
+                    const cat = categoryMap(item.category);
+                    const card = document.createElement('article');
+                    card.className = 'product-card overflow-hidden rounded-2xl bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark transition hover:shadow-lg hover:-translate-y-0.5 group';
+                    card.setAttribute('data-saved-card', '');
+                    card.setAttribute('data-category', cat);
+                    card.setAttribute('data-id', item.id || `hairstyle_${index}`);
+                    
+                    // Special handling for hairstyle cards
+                    const isHairstyle = item.category === 'hairstyle';
+                    
+                    card.innerHTML = `
+                        <div class="relative aspect-[3/4] bg-neutral-100 dark:bg-dark-card overflow-hidden">
+                            <img src="${item.image || 'https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=800&h=1067&q=80'}" alt="${item.title || ''}" class="w-full h-full object-cover">
+                            <button class="unfav-btn absolute top-3 right-3 text-xs px-3 py-1 rounded-full bg-red-500 text-white shadow hover:bg-red-600 hover:scale-[1.02] active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-300 transition-all duration-200">
+                                Remove
+                            </button>
+                            ${isHairstyle ? `
+                                <div class="absolute bottom-3 left-3 right-3">
+                                    <div class="flex flex-wrap gap-1">
+                                        ${(item.tags || []).map(tag => `<span class="text-xs px-2 py-1 rounded-full bg-white/90 dark:bg-black/90 text-neutral-800 dark:text-white">${tag}</span>`).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-rufina text-base card-title">${item.title || 'Saved Item'}</h3>
+                            ${item.description ? `<p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1 line-clamp-2">${item.description}</p>` : ''}
+                            <div class="mt-2 flex items-center justify-between">
+                                <p class="text-[11px] uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400 card-tags">${cat}</p>
+                                ${isHairstyle ? `
+                                    
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                // Wire up Unfavorite buttons
+                grid.querySelectorAll('.unfav-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const card = btn.closest('[data-saved-card]');
+                        const id = card ? card.getAttribute('data-id') : '';
+                        if (id) removeFavorite(id);
+                    });
+                });
+            }
+
+            function matchesCategory(card) {
+                if (activeCategory === 'all') return true;
+                return card.dataset.category === activeCategory;
             }
 
             function matchesSearch(card) {
                 const term = searchInput.value.trim().toLowerCase();
                 if (!term) return true;
-                const text = card.innerText.toLowerCase();
-                return text.includes(term);
+                const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+                const tags = card.querySelector('.card-tags')?.textContent.toLowerCase() || '';
+                return title.includes(term) || tags.includes(term);
             }
 
             function applyFilters() {
+                const cards = Array.from(document.querySelectorAll('[data-saved-card]'));
                 cards.forEach(card => {
-                    const visible = matchesFilter(card) && matchesSearch(card);
-                    card.classList.toggle('hidden', !visible);
+                    const vis = matchesCategory(card) && matchesSearch(card);
+                    card.classList.toggle('hidden', !vis);
                 });
+                if (typeof AOS !== 'undefined') { AOS.refresh(); }
             }
 
-            searchInput.addEventListener('input', applyFilters);
+            let searchTimeout;
+            searchInput.addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(applyFilters, 200);
+            });
+            searchButton.addEventListener('click', applyFilters);
+            searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') applyFilters(); });
 
-            filterChips.forEach(chip => {
-                chip.addEventListener('click', () => {
-                    activeFilter = chip.dataset.filter;
-                    filterChips.forEach(c => c.classList.remove('active'));
-                    chip.classList.add('active');
+            categoryFilters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    categoryFilters.forEach(f => {
+                        f.classList.remove('active', 'bg-primary-600', 'text-white');
+                        f.classList.add('text-neutral-600', 'dark:text-neutral-300', 'hover:bg-white', 'dark:hover:bg-dark-surface', 'hover:text-primary-600', 'dark:hover:text-primary-400');
+                    });
+                    filter.classList.add('active', 'bg-primary-600', 'text-white');
+                    filter.classList.remove('text-neutral-600', 'dark:text-neutral-300', 'hover:bg-white', 'dark:hover:bg-dark-surface', 'hover:text-primary-600', 'dark:hover:text-primary-400');
+                    activeCategory = filter.dataset.category;
                     applyFilters();
                 });
             });
+
+            renderFavorites();
+            applyFilters();
         });
     </script>
 </body>

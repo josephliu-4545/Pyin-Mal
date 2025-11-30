@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about Pyin Mal, the fashion and grooming studio behind the virtual styling experience.">
+    <title>Order - Pyin Mal</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Rufina:wght@400;700&family=Orbit&family=Jomolhari&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        /* Variables */
+        
+        :root {
+            --primary: #8B5CF6;
+            --primary-light: #A78BFA;
+            --primary-dark: #7C3AED;
+            --accent: #EC4899;
+            --accent-light: #F472B6;
+            --dark-bg: #111827;
+            --dark-surface: #1F2937;
+            --dark-card: #374151;
+            --dark-border: #4B5563;
+            --dark-text: #F9FAFB;
+            --light-bg: #F9FAFB;
+            --light-surface: #FFFFFF;
+            --light-card: #F3F4F6;
+            --light-border: #E5E7EB;
+            --light-text: #111827;
+            --neutral-100: #F3F4F6;
+            --neutral-200: #E5E7EB;
+            --neutral-300: #D1D5DB;
+            --neutral-400: #9CA3AF;
+            --neutral-500: #6B7280;
+            --neutral-600: #4B5563;
+            --neutral-700: #374151;
+            --neutral-800: #1F2937;
+            --neutral-900: #111827;
+            --radius-sm: 0.375rem;
+            --radius: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--accent));
+            --gradient-card: linear-gradient(135deg, #ffffff, #f8faff);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
+            color: var(--light-text);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+        body.dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--dark-text);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        section { padding: 3rem 0; }
+        @media (min-width: 768px){ section { padding: 4rem 0; } }
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; margin-bottom: 1.25rem; }
+        .btn { display:inline-flex; align-items:center; justify-content:center; padding:0.75rem 1.5rem; border-radius:var(--radius); font-weight:600; text-decoration:none; transition:all .3s ease; cursor:pointer; border:none; font-size:.875rem; gap:.5rem; }
+        .btn-primary { background: var(--gradient-primary); color:#fff; box-shadow:0 4px 15px rgba(139,92,246,.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow:0 8px 25px rgba(139,92,246,.4); }
+        .btn-secondary { background: transparent; color: var(--primary); border:1px solid var(--primary); }
+        .btn-secondary:hover { background-color: rgba(139,92,246,.1); transform: translateY(-2px); }
+        .card { background: var(--gradient-card); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); overflow:hidden; transition:all .3s ease; border:1px solid rgba(255,255,255,.8); backdrop-filter: blur(10px); }
+        .dark .card { background: linear-gradient(135deg, var(--dark-card), var(--dark-surface)); border:1px solid rgba(255,255,255,.05); }
+        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
+        /* Hero */
+        .hero { background: var(--gradient-primary); color:#fff; text-align:center; padding:3rem 0; position:relative; overflow:hidden; }
+        .hero::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E"); opacity:.3; }
+        .hero-content { max-width:800px; margin:0 auto; position:relative; z-index:1; }
+        .hero-subtitle { font-size:.875rem; text-transform:uppercase; letter-spacing:.1em; opacity:.8; margin-bottom:1rem; }
+        .hero-title { font-size:2.5rem; margin-bottom:1.5rem; }
+        @media (min-width:768px){ .hero-title{ font-size:3rem; } }
+        .hero-description { opacity:.9; margin-bottom:2rem; font-size:1.125rem; }
+        /* Checkout layout */
+        .checkout-layout { display:grid; grid-template-columns:1fr; gap:2.25rem; }
+        @media (min-width:1024px){ .checkout-layout{ grid-template-columns:2fr 1fr; gap:3rem; } }
+        .order-summary, .customer-info, .payment-method, .checkout-summary { background:var(--gradient-card); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); padding:1.5rem; border:1px solid rgba(255,255,255,.8); backdrop-filter: blur(10px); }
+        .order-summary, .customer-info, .payment-method { padding: 1.75rem; margin-bottom: 2rem; }
+        .checkout-summary { padding: 1.5rem; }
+        .checkout-right { margin-top: 0.75rem; }
+        @media (min-width:1024px){ .checkout-right{ margin-top: 0; } }
+        .order-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:1px solid var(--light-border); }
+        .dark .order-header { border-bottom-color: var(--dark-border); }
+        .order-title, .section-title, .summary-title { background: var(--gradient-primary); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+        .section-title { margin-bottom: 1.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--light-border); }
+        .dark .section-title { border-bottom-color: var(--dark-border); }
+        .order-edit { color: var(--primary); text-decoration:none; font-weight:600; display:flex; align-items:center; gap:.5rem; transition: all .3s ease; }
+        .order-edit:hover { text-decoration:underline; transform: translateX(-2px); }
+        .barber-info { display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.5rem; padding:1rem; border-radius: var(--radius); background-color: var(--light-card); box-shadow: var(--shadow-sm); }
+        .dark .barber-info { background-color: var(--dark-surface); }
+        .barber-logo { width:60px; height:60px; border-radius: var(--radius); overflow:hidden; flex-shrink:0; border:2px solid var(--primary); }
+        .barber-logo img { width:100%; height:100%; object-fit:cover; }
+        .services-list { margin-bottom:1.5rem; }
+        .service-item { display:flex; justify-content:space-between; align-items:center; padding:1rem; border-radius: var(--radius); background-color: var(--light-card); margin-bottom:.5rem; transition: all .3s ease; border-left:3px solid transparent; }
+        .dark .service-item { background-color: var(--dark-surface); }
+        .service-item:hover { transform: translateX(5px); border-left-color: var(--primary); box-shadow: var(--shadow-sm); }
+        .service-name { font-weight:600; margin-bottom:.25rem; }
+        .service-description { color: var(--neutral-600); font-size:.875rem; }
+        .dark .service-description { color: var(--neutral-300); }
+        .service-price { font-weight:700; color: var(--primary); }
+        .order-totals { border-top:1px solid var(--light-border); padding-top:1.5rem; }
+        .dark .order-totals { border-top-color: var(--dark-border); }
+        .total-row { display:flex; justify-content:space-between; margin-bottom:.75rem; padding:.75rem 0; }
+        .total-row.final { font-weight:700; font-size:1.125rem; border-top:1px solid var(--light-border); padding-top:1rem; margin-top:1rem; background: var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .dark .total-row.final { border-top-color: var(--dark-border); }
+        .form-group { margin-bottom:1.75rem; }
+        .form-label { display:block; margin-bottom:.5rem; font-weight:600; }
+        .form-input { width:100%; padding:.75rem 1rem; border-radius: var(--radius); border:1px solid var(--light-border); background-color: var(--light-surface); color: var(--light-text); transition: all .3s ease; font-size:1rem; }
+        .dark .form-input { background-color: var(--dark-surface); border-color: var(--dark-border); color: var(--dark-text); }
+        .form-input:focus { outline:none; border-color: var(--primary); box-shadow:0 0 0 3px rgba(139,92,246,.1); transform: translateY(-2px); }
+        .form-row { display:grid; grid-template-columns:1fr; gap:1.5rem; }
+        @media (min-width: 768px){ .form-row{ grid-template-columns:1fr 1fr; } }
+        .payment-options { display:flex; flex-direction:column; gap:1.25rem; }
+        .payment-option { display:flex; align-items:center; gap:1rem; padding:1rem; border-radius: var(--radius); border:1px solid var(--light-border); cursor:pointer; transition: all .3s ease; }
+        .dark .payment-option { border-color: var(--dark-border); }
+        .payment-option:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+        .payment-option.selected { border-color: var(--primary); background: linear-gradient(135deg, rgba(139,92,246,.05), rgba(236,72,153,.05)); }
+        .payment-icon { width:40px; height:40px; border-radius: var(--radius); background: var(--gradient-primary); display:flex; align-items:center; justify-content:center; color:#fff; }
+        .payment-radio { width:1.25rem; height:1.25rem; border-radius:50%; border:2px solid var(--neutral-300); display:flex; align-items:center; justify-content:center; transition: all .3s ease; }
+        .payment-radio.selected { border-color: var(--primary); }
+        .payment-radio.selected::after { content:""; width:.75rem; height:.75rem; border-radius:50%; background: var(--gradient-primary); }
+        /* Payment text colors for visibility */
+        .payment-name { color: var(--neutral-900); }
+        .dark .payment-name { color: var(--dark-text); }
+        .payment-description { color: var(--neutral-600); }
+        .dark .payment-description { color: var(--neutral-300); }
+        /* Improve address contrast in dark */
+        .dark .barber-address { color: var(--neutral-300); }
+        /* Input placeholder visibility */
+        .form-input::placeholder { color: var(--neutral-500); opacity: 1; }
+        .dark .form-input::placeholder { color: var(--neutral-300); opacity: 1; }
+        /* Summary item contrast in dark */
+        .dark .summary-item span { color: var(--dark-text); }
+        /* Ensure overall card text uses readable color in dark */
+        .dark .order-summary,
+        .dark .customer-info,
+        .dark .payment-method,
+        .dark .checkout-summary { color: var(--dark-text); }
+        /* Form labels in dark */
+        .dark .form-label { color: var(--dark-text); }
+        /* Make booking summary total readable in dark */
+        .dark .summary-total { background: none; color: var(--dark-text); }
+        .summary-item { display:flex; justify-content:space-between; margin-bottom:.75rem; padding:.5rem 0; }
+        .summary-total { display:flex; justify-content:space-between; font-weight:700; font-size:1.125rem; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--light-border); background: var(--gradient-primary); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+        .dark .summary-total { border-top-color: var(--dark-border); }
+        .checkout-btn { width:100%; margin-top:1.5rem; padding:1rem; font-size:1rem; position:relative; overflow:hidden; }
+        .checkout-btn::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent); transition:.5s; }
+        .checkout-btn:hover::after { left:100%; }
+        /* Animations */
+        .fade-in { animation: fadeIn .5s ease-in-out; }
+        .slide-up { animation: slideUp .5s ease-out; }
+        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+        @keyframes slideUp { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+        /* Success checkmark */
+        .success-checkmark { width:80px; height:80px; margin:0 auto; position:relative; }
+        .check-icon { width:80px; height:80px; position:relative; border-radius:50%; box-sizing:content-box; border:4px solid var(--primary); }
+        .check-icon::before, .check-icon::after { content:''; height:100px; position:absolute; background: var(--light-bg); transform: rotate(-45deg); }
+        .dark .check-icon::before, .dark .check-icon::after { background: var(--dark-bg); }
+        .icon-line { height:5px; background-color: var(--primary); display:block; border-radius:2px; position:absolute; z-index:10; }
+        .icon-line.line-tip { top:46px; left:14px; width:25px; transform: rotate(45deg); }
+        .icon-line.line-long { top:38px; right:8px; width:47px; transform: rotate(-45deg); }
+        /* Toast */
+        .toast { position:fixed; bottom:100px; left:50%; transform:translateX(-50%); background: var(--gradient-primary); color:#fff; padding:.75rem 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-lg); z-index:50; opacity:0; transition:opacity .3s ease; }
+        .toast.show { opacity:1; }
+        /* Modal */
+        .modal { position:fixed; inset:0; background-color: rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:100; opacity:0; visibility:hidden; transition: all .3s ease; backdrop-filter: blur(5px); }
+        .modal.show { opacity:1; visibility:visible; }
+        .modal-content { background: var(--gradient-card); border-radius: var(--radius-xl); padding:2rem; max-width:500px; width:90%; text-align:center; transform: translateY(20px); transition: transform .3s ease; box-shadow: var(--shadow-xl); border:1px solid rgba(255,255,255,.8); }
+        .dark .modal-content { background: linear-gradient(135deg, var(--dark-card), var(--dark-surface)); border:1px solid rgba(255,255,255,.05); }
+        .modal.show .modal-content { transform: translateY(0); }
+        .modal-title { font-size:1.5rem; margin-bottom:1rem; background: var(--gradient-primary); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+        .modal-message { margin-bottom:2rem; color: var(--neutral-600); }
+        .dark .modal-message { color: var(--neutral-300); }
+        /* Progress */
+        .progress-steps { display:flex; justify-content:center; margin-bottom:3rem; position:relative; }
+        .progress-step { display:flex; flex-direction:column; align-items:center; position:relative; z-index:2; }
+        .step-number { width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; background: var(--light-card); border:2px solid var(--neutral-300); font-weight:700; margin-bottom:.5rem; transition: all .3s ease; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+        .step-label { font-size:.9rem; font-weight:600; color: var(--neutral-800); margin-top:.25rem; }
+        .dark .step-label { color: var(--dark-text); }
+        .dark .step-number { background: var(--dark-surface); border-color: var(--dark-border); }
+        .step-number.active { background: var(--gradient-primary); border-color: var(--primary); color:#fff; }
+        .step-number.completed { background: var(--primary); border-color: var(--primary); color:#fff; box-shadow: 0 4px 10px rgba(139,92,246,.25); }
+        .progress-line { position:absolute; top:22px; left:0; right:0; height:4px; background: var(--neutral-300); z-index:1; border-radius: 2px; }
+        .dark .progress-line { background: var(--dark-border); }
+        .progress-fill { position:absolute; top:22px; left:0; height:4px; background: var(--gradient-primary); z-index:1; transition: width .5s ease; border-radius: 2px; }
+        /* Empty state */
+        .empty-state { text-align:center; padding:3rem 1rem; color: var(--neutral-500); }
+        .empty-state i { font-size:3rem; margin-bottom:1rem; opacity:.5; }
+        .empty-state p { margin-bottom:1.5rem; }
+        .dark .empty-state { color: var(--neutral-300); }
+    </style>
+</head>
+<body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 dark:bg-dark-surface/95 backdrop-blur border-b border-neutral-100 dark:border-dark-border shadow-sm dark:shadow-soft-dark">
+        <nav class="container-custom">
+            <div class="flex items-center justify-between h-16 gap-6">
+                <a href="../index.html" class="flex items-center space-x-1.5 sm:space-x-2">
+                    <span class="inline-flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl bg-primary-600 text-white font-semibold text-xs sm:text-sm">PM</span>
+                    <span class="font-rufina text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400">Pyin Mal</span>
+                </a>
+
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <div class="relative" data-dropdown="features">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="features-menu" aria-expanded="false">
+                            Features
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="features-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <ul class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <li><a href="haircut-recommendations.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2"><span>Hair Recommendations</span></a></li>
+                                <li><a href="digital-outfit.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Curated Fashion Sets</a></li>
+                                <li><a href="model-preview.html" class="hover:text-primary-600 dark:hover:text-primary-300 flex items-center gap-2">Model Preview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="nav-link">Shop</a>
+                    <div class="relative" data-dropdown="more">
+                        <button class="nav-link flex items-center gap-1" data-dropdown-toggle="more-menu" aria-expanded="false">
+                            More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div id="more-menu" class="hidden absolute top-full left-0 mt-3 w-64 rounded-2xl border border-neutral-100 dark:border-dark-border bg-white dark:bg-dark-card shadow-soft dark:shadow-soft-dark p-4">
+                            <div class="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
+                                <a href="reviews.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Reviews</a>
+                                <a href="contact.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Contact</a>
+                                <a href="about.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">About us</a>
+                                <a href="faq.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">FAQ</a>
+                                <div class="pt-3 mt-3 border-t border-neutral-100 dark:border-dark-border text-xs uppercase text-neutral-400">Future links</div>
+                                <a href="pricing.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Pricing</a>
+                                <a href="testimonials.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Testimonials</a>
+                                <a href="blog.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Blog</a>
+                                <a href="locations.html" class="flex items-center gap-2 hover:text-primary-600 dark:hover:text-primary-300">Store Locator</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="theme-toggle p-1.5 sm:p-2" aria-label="Toggle theme">
+                        <span id="theme-icon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        </span>
+                    </button>
+                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                    </button>
+                    <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
+                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden lg:hidden pb-6 border-t border-neutral-100 dark:border-dark-border mt-3">
+                <div class="pt-4 space-y-4">
+                    <a href="../index.html" class="block nav-link">Home</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">Features</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="haircut-recommendations.html" class="nav-link">Hair Recommendations</a>
+                            <a href="digital-outfit.html" class="nav-link">Curated Fashion Sets</a>
+                            <a href="model-preview.html" class="nav-link">Model Preview</a>
+                        </div>
+                    </div>
+                    <a href="../index.html#wish-list" class="block nav-link">Favorites</a>
+                    <a href="shop-browsing.html" class="block nav-link">Shop</a>
+                    <div class="bg-neutral-50 dark:bg-dark-surface rounded-2xl p-4">
+                        <p class="text-xs uppercase tracking-[0.4em] text-neutral-400 mb-2">More</p>
+                        <div class="flex flex-col space-y-2">
+                            <a href="reviews.html" class="nav-link">Reviews</a>
+                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="about.html" class="nav-link nav-link-active">About us</a>
+                            <a href="faq.html" class="nav-link">FAQ</a>
+                            <a href="pricing.html" class="nav-link text-neutral-500 dark:text-neutral-400">Pricing (soon)</a>
+                            <a href="testimonials.html" class="nav-link text-neutral-500 dark:text-neutral-400">Testimonials (soon)</a>
+                            <a href="blog.html" class="nav-link text-neutral-500 dark:text-neutral-400">Blog (soon)</a>
+                            <a href="locations.html" class="nav-link text-neutral-500 dark:text-neutral-400">Store Locator (soon)</a>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
+                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <p class="hero-subtitle">Complete Your Booking</p>
+                    <h1 class="hero-title">Confirm & Checkout</h1>
+                    <p class="hero-description">Review your selected services and complete your booking</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Steps -->
+        <section>
+            <div class="container">
+                <div class="progress-steps">
+                    <div class="progress-line"></div>
+                    <div class="progress-fill" style="width: 66%;"></div>
+                    
+                    <div class="progress-step">
+                        <div class="step-number completed">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="step-label">Select Services</div>
+                    </div>
+                    
+                    <div class="progress-step">
+                        <div class="step-number active">2</div>
+                        <div class="step-label">Confirm & Pay</div>
+                    </div>
+                    
+                    <div class="progress-step">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Booking Confirmed</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Section -->
+        <section>
+            <div class="container">
+                <div class="checkout-layout">
+                    <!-- Left Column - Order Details and Forms -->
+                    <div class="checkout-left">
+                        <!-- Order Summary -->
+                        <div class="order-summary slide-up">
+                            <div class="order-header">
+                                <h2 class="order-title">Order Summary</h2>
+                                <a href="select-barber.html" class="order-edit">
+                                    <i class="fas fa-edit"></i>
+                                    Edit Services
+                                </a>
+                            </div>
+                            
+                            <div id="barber-info-container">
+                                <!-- Dynamic content will be inserted here -->
+                            </div>
+                            
+                            <div class="services-list" id="services-list-container">
+                                <!-- Dynamic content will be inserted here -->
+                            </div>
+                            
+                            <div class="order-totals" id="order-totals-container">
+                                <!-- Dynamic content will be inserted here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Customer Information -->
+                        <div class="customer-info slide-up">
+                            <h2 class="section-title">Your Information</h2>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="full-name">Full Name</label>
+                                <input type="text" id="full-name" class="form-input" placeholder="Enter your full name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-input" placeholder="Enter your phone number">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email Address</label>
+                                <input type="email" id="email" class="form-input" placeholder="Enter your email address">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="date">Preferred Date</label>
+                                    <input type="date" id="date" class="form-input">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="time">Preferred Time</label>
+                                    <select id="time" class="form-input">
+                                        <option value="">Select a time</option>
+                                        <option value="09:00">09:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="13:00">01:00 PM</option>
+                                        <option value="14:00">02:00 PM</option>
+                                        <option value="15:00">03:00 PM</option>
+                                        <option value="16:00">04:00 PM</option>
+                                        <option value="17:00">05:00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="notes">Special Requests (Optional)</label>
+                                <textarea id="notes" class="form-input" rows="3" placeholder="Any special requests or notes for your barber"></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Payment Method -->
+                        <div class="payment-method slide-up">
+                            <h2 class="section-title">Payment Method</h2>
+                            
+                            <div class="payment-options">
+                                <div class="payment-option selected" data-payment="card">
+                                    <div class="payment-icon">
+                                        <i class="far fa-credit-card"></i>
+                                    </div>
+                                    <div class="payment-details">
+                                        <div class="payment-name">Credit/Debit Card</div>
+                                        <div class="payment-description">Pay securely with your card</div>
+                                    </div>
+                                    <div class="payment-radio selected"></div>
+                                </div>
+                                
+                                <div class="payment-option" data-payment="kbz">
+                                    <div class="payment-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="payment-details">
+                                        <div class="payment-name">KBZ Pay</div>
+                                        <div class="payment-description">Pay with your KBZ Pay account</div>
+                                    </div>
+                                    <div class="payment-radio"></div>
+                                </div>
+                                
+                                <div class="payment-option" data-payment="wave">
+                                    <div class="payment-icon">
+                                        <i class="fas fa-wallet"></i>
+                                    </div>
+                                    <div class="payment-details">
+                                        <div class="payment-name">Wave Money</div>
+                                        <div class="payment-description">Pay with your Wave Money account</div>
+                                    </div>
+                                    <div class="payment-radio"></div>
+                                </div>
+                                
+                                <div class="payment-option" data-payment="cash">
+                                    <div class="payment-icon">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </div>
+                                    <div class="payment-details">
+                                        <div class="payment-name">Cash Payment</div>
+                                        <div class="payment-description">Pay in cash at the barber shop</div>
+                                    </div>
+                                    <div class="payment-radio"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card Payment Form (shown when card is selected) -->
+                            <div id="card-form" class="form-group mt-4">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="card-number">Card Number</label>
+                                        <input type="text" id="card-number" class="form-input" placeholder="1234 5678 9012 3456">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="card-name">Name on Card</label>
+                                        <input type="text" id="card-name" class="form-input" placeholder="John Doe">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="card-expiry">Expiry Date</label>
+                                        <input type="text" id="card-expiry" class="form-input" placeholder="MM/YY">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label" for="card-cvc">CVC</label>
+                                        <input type="text" id="card-cvc" class="form-input" placeholder="123">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Order Summary -->
+                    <div class="checkout-right">
+                        <div class="checkout-summary slide-up">
+                            <h2 class="summary-title">Booking Summary</h2>
+                            
+                            <div class="summary-item">
+                                <span>Services (<span id="services-count">0</span>)</span>
+                                <span id="services-subtotal">0 MMK</span>
+                            </div>
+                            
+                            <div class="summary-item">
+                                <span>Service Fee</span>
+                                <span id="service-fee">0 MMK</span>
+                            </div>
+                            
+                            <div class="summary-total">
+                                <span>Total</span>
+                                <span id="order-total">0 MMK</span>
+                            </div>
+                            
+                            <button class="btn btn-primary checkout-btn" id="complete-booking">
+                                <i class="fas fa-lock"></i>
+                                Complete Booking
+                            </button>
+                            
+                            <p class="text-center mt-4" style="font-size: 0.75rem; color: var(--neutral-500);">
+                                <i class="fas fa-shield-alt"></i>
+                                Your payment is secure and encrypted
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Confirmation Modal -->
+        <div class="modal" id="confirmation-modal">
+            <div class="modal-content">
+                <div class="success-checkmark">
+                    <div class="check-icon">
+                        <span class="icon-line line-tip"></span>
+                        <span class="icon-line line-long"></span>
+                        <div class="icon-circle"></div>
+                        <div class="icon-fix"></div>
+                    </div>
+                </div>
+                <h2 class="modal-title">Booking Confirmed!</h2>
+                <p class="modal-message">Your appointment has been successfully booked. You will receive a confirmation email shortly.</p>
+                <div class="flex gap-4">
+                    <a href="../index.html" class="btn btn-secondary w-full">Return Home</a>
+                    <a href="bookings.html" class="btn btn-primary w-full">View My Bookings</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+    </main>
+     <!-- Footer -->
+    <footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text py-12 mt-20">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-rufina text-xl font-bold mb-4">StyleHub</h3>
+                    <p class="text-neutral-400 dark:text-neutral-500 text-sm">
+                        Your personal fashion and grooming assistant
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="about.html" class="hover:text-white dark:hover:text-dark-text">About</a></li>
+                        <li><a href="services.html" class="hover:text-white dark:hover:text-dark-text">Services</a></li>
+                        <li><a href="faq.html" class="hover:text-white dark:hover:text-dark-text">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="privacy.html" class="hover:text-white dark:hover:text-dark-text">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white dark:hover:text-dark-text">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
+                        <li><a href="contact.html" class="hover:text-white dark:hover:text-dark-text">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-neutral-800 dark:border-dark-border mt-8 pt-8 text-center text-sm text-neutral-400 dark:text-neutral-500">
+                <p>&copy; 2025 StyleHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+
+    <!-- Scripts -->
+    <script>
+        // Theme Toggle (safe if missing)
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark');
+            });
+        }
+
+        // Payment Method Selection
+        document.addEventListener('DOMContentLoaded', () => {
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            const cardForm = document.getElementById('card-form');
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    paymentOptions.forEach(opt => {
+                        opt.classList.remove('selected');
+                        const r = opt.querySelector('.payment-radio');
+                        if (r) r.classList.remove('selected');
+                    });
+                    option.classList.add('selected');
+                    const radio = option.querySelector('.payment-radio');
+                    if (radio) radio.classList.add('selected');
+                    const method = option.dataset.payment;
+                    if (cardForm) cardForm.style.display = (method === 'card') ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Toast helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Booking flow + data
+        const completeBookingInit = () => {
+            const completeBookingBtn = document.getElementById('complete-booking');
+            const confirmationModal = document.getElementById('confirmation-modal');
+            if (!completeBookingBtn || !confirmationModal) return;
+            completeBookingBtn.addEventListener('click', () => {
+                const fullName = document.getElementById('full-name')?.value;
+                const phone = document.getElementById('phone')?.value;
+                const email = document.getElementById('email')?.value;
+                const date = document.getElementById('date')?.value;
+                const time = document.getElementById('time')?.value;
+                if (!fullName || !phone || !email || !date || !time) {
+                    showToast('Please fill in all required fields');
+                    return;
+                }
+                confirmationModal.classList.add('show');
+            });
+        };
+
+        const setMinDate = () => {
+            const dateInput = document.getElementById('date');
+            if (!dateInput) return;
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            let mm = today.getMonth() + 1;
+            let dd = today.getDate();
+            if (mm < 10) mm = '0' + mm;
+            if (dd < 10) dd = '0' + dd;
+            dateInput.min = `${yyyy}-${mm}-${dd}`;
+        };
+
+        const barberShops = {
+            'elite-cuts': {
+                name: 'Elite Cuts',
+                address: '123 Fashion Street, Downtown',
+                logo: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=400&q=80',
+                services: {
+                    'classic-haircut': { name: 'Classic Haircut', description: 'Precision cut with scissor and clipper work', price: 65000 },
+                    'beard-trim': { name: 'Beard Trim & Shape', description: 'Professional beard shaping and trimming', price: 35000 },
+                    'full-color': { name: 'Full Color', description: 'Complete hair coloring service', price: 125000 },
+                    'highlights': { name: 'Highlights', description: 'Partial or full highlights', price: 110000 },
+                    'conditioning': { name: 'Deep Conditioning', description: 'Nourishing hair treatment', price: 50000 }
+                }
+            },
+            'urban-grooming': {
+                name: 'Urban Grooming',
+                address: '456 Modern Avenue, Midtown',
+                logo: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=400&q=80',
+                services: {
+                    'signature-cut': { name: 'Signature Cut', description: 'Custom haircut with styling consultation', price: 80000 },
+                    'skin-fade': { name: 'Skin Fade', description: 'Precision fade with detailed work', price: 60000 },
+                    'balayage': { name: 'Balayage', description: 'Hand-painted highlighting technique', price: 175000 },
+                    'blowout': { name: 'Blowout & Style', description: 'Professional blow dry and styling', price: 50000 },
+                    'scalp-treatment': { name: 'Scalp Treatment', description: 'Therapeutic scalp massage and treatment', price: 65000 }
+                }
+            },
+            'gentleman-barbers': {
+                name: 'Gentleman Barbers',
+                address: '789 Classic Road, Uptown',
+                logo: 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=400&q=80',
+                services: {
+                    'traditional-cut': { name: 'Traditional Cut', description: 'Classic barber cut with hot towel finish', price: 75000 },
+                    'beard-grooming': { name: 'Beard Grooming', description: 'Full beard service with oils and balms', price: 45000 },
+                    'gray-coverage': { name: 'Gray Coverage', description: 'Professional gray hair coverage', price: 95000 },
+                    'traditional-shave': { name: 'Traditional Shave', description: 'Straight razor shave with hot towels', price: 60000 },
+                    'hair-scalp-treatment': { name: 'Hair & Scalp Treatment', description: 'Comprehensive hair and scalp care', price: 80000 }
+                }
+            },
+            'style-lab': {
+                name: 'Style Lab',
+                address: '321 Creative Lane, Arts District',
+                logo: 'https://images.unsplash.com/photo-1593705114312-a0ee03a3f7d0?auto=format&fit=crop&w=400&q=80',
+                services: {
+                    'creative-cut': { name: 'Creative Cut', description: 'Artistic cut with personalized styling', price: 95000 },
+                    'texture-cut': { name: 'Texture Cut', description: 'Specialized cutting for texture and movement', price: 105000 },
+                    'creative-color': { name: 'Creative Color', description: 'Custom color design and application', price: 140000 },
+                    'color-correction': { name: 'Color Correction', description: 'Fixing previous color issues', price: 175000 },
+                    'special-styling': { name: 'Special Occasion Styling', description: 'Formal or event styling', price: 110000 }
+                }
+            },
+            'precision-cuts': {
+                name: 'Precision Cuts',
+                address: '654 Sharp Street, Business District',
+                logo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+                services: {
+                    'executive-cut': { name: 'Executive Cut', description: 'Sharp, professional haircut', price: 75000 },
+                    'express-cut': { name: 'Express Cut', description: 'Quick service for busy professionals', price: 50000 },
+                    'toning': { name: 'Toning Service', description: 'Color toning and gloss treatment', price: 65000 },
+                    'corporate-styling': { name: 'Corporate Styling', description: 'Professional styling for business', price: 60000 },
+                    'express-treatment': { name: 'Express Treatment', description: 'Quick conditioning and revitalizing', price: 35000 }
+                }
+            }
+        };
+
+        function loadOrderSummary() {
+            const selectedServices = JSON.parse(localStorage.getItem('selectedServices') || '[]');
+            const selectedBarber = localStorage.getItem('selectedBarber');
+            const barberInfoContainer = document.getElementById('barber-info-container');
+            const servicesListContainer = document.getElementById('services-list-container');
+            const orderTotalsContainer = document.getElementById('order-totals-container');
+            const servicesCount = document.getElementById('services-count');
+            const servicesSubtotal = document.getElementById('services-subtotal');
+            const serviceFee = document.getElementById('service-fee');
+            const orderTotal = document.getElementById('order-total');
+            if (!barberInfoContainer || !servicesListContainer || !orderTotalsContainer) return;
+            if (selectedServices.length === 0 || !selectedBarber) {
+                barberInfoContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>No Services Selected</h3>
+                        <p>You haven't selected any services yet.</p>
+                        <a href="select-barber.html" class="btn btn-primary">Select Services</a>
+                    </div>
+                `;
+                servicesListContainer.innerHTML = '';
+                orderTotalsContainer.innerHTML = '';
+                if (servicesCount) servicesCount.textContent = '0';
+                if (servicesSubtotal) servicesSubtotal.textContent = '0 MMK';
+                if (serviceFee) serviceFee.textContent = '0 MMK';
+                if (orderTotal) orderTotal.textContent = '0 MMK';
+                return;
+            }
+            const barberShop = barberShops[selectedBarber];
+            if (!barberShop) return;
+            barberInfoContainer.innerHTML = `
+                <div class="barber-info">
+                    <div class="barber-logo">
+                        <img src="${barberShop.logo}" alt="${barberShop.name}">
+                    </div>
+                    <div class="barber-details">
+                        <h3 class="barber-name">${barberShop.name}</h3>
+                        <p class="barber-address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${barberShop.address}
+                        </p>
+                    </div>
+                </div>
+            `;
+            let subtotal = 0;
+            servicesListContainer.innerHTML = '';
+            selectedServices.forEach(service => {
+                const info = barberShop.services[service.service];
+                if (info) {
+                    const el = document.createElement('div');
+                    el.className = 'service-item';
+                    el.innerHTML = `
+                        <div class="service-info">
+                            <div class="service-name">${info.name}</div>
+                            <div class="service-description">${info.description}</div>
+                        </div>
+                        <div class="service-price">${info.price.toLocaleString()} MMK</div>
+                    `;
+                    servicesListContainer.appendChild(el);
+                    subtotal += info.price;
+                }
+            });
+            const serviceFeeAmount = Math.round(subtotal * 0.1);
+            const total = subtotal + serviceFeeAmount;
+            orderTotalsContainer.innerHTML = `
+                <div class="total-row">
+                    <span>Subtotal</span>
+                    <span>${subtotal.toLocaleString()} MMK</span>
+                </div>
+                <div class="total-row">
+                    <span>Service Fee</span>
+                    <span>${serviceFeeAmount.toLocaleString()} MMK</span>
+                </div>
+                <div class="total-row final">
+                    <span>Total</span>
+                    <span>${total.toLocaleString()} MMK</span>
+                </div>
+            `;
+            if (servicesCount) servicesCount.textContent = selectedServices.length;
+            if (servicesSubtotal) servicesSubtotal.textContent = `${subtotal.toLocaleString()} MMK`;
+            if (serviceFee) serviceFee.textContent = `${serviceFeeAmount.toLocaleString()} MMK`;
+            if (orderTotal) orderTotal.textContent = `${total.toLocaleString()} MMK`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadOrderSummary();
+            completeBookingInit();
+            setMinDate();
+        });
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>
+
