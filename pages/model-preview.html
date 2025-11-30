@@ -456,7 +456,7 @@
                 const container = document.getElementById('model-preview-container');
                 if (!container) return;
 
-                const src = item.transparentImg || item.image;
+                const src = item.tryOnImage || item.transparentImg || item.image;
                 if (!src) return;
                 
                 // Remove existing layer of same category
@@ -591,14 +591,86 @@
                 window.modelPreview = new ModelPreview();
             }
 
-            // Fit Adjust Mode toggle
+            // ========== FIT ADJUST MODE TOGGLE ==========
             const fitAdjustBtn = document.getElementById('fit-adjust-btn');
             if (fitAdjustBtn) {
+                // Default to ON so users can immediately drag/resize.
+                if (typeof window.fitAdjustMode === 'undefined') {
+                    window.fitAdjustMode = true;
+                }
+                // Apply initial visual state to any existing layers
+                updateFitAdjustLayersUI();
+
                 fitAdjustBtn.addEventListener('click', () => {
                     window.fitAdjustMode = !window.fitAdjustMode;
                     updateFitAdjustLayersUI();
                 });
             }
+
+            // ========== AUTO-APPLY OUTFIT FROM URL (?item=) ==========
+            (async function initItemFromUrl() {
+                const rawItem = urlParams.get('item');
+                if (!rawItem) return;
+
+                let decoded = null;
+                try {
+                    decoded = JSON.parse(decodeURIComponent(rawItem));
+                } catch (err) {
+                    console.warn('Failed to parse item param for model preview:', err);
+                    return;
+                }
+
+                if (!decoded || !decoded.id) return;
+
+                const normalizedItem = {
+                    id: decoded.id,
+                    name: decoded.name || 'Selected Outfit',
+                    image: decoded.image || decoded.bgImg || '',
+                    tryOnImage: decoded.tryOnImage || null,
+                    transparentImg: decoded.transparentImg || null,
+                    category: decoded.category || 'top',
+                    gender: decoded.gender || null,
+                    shop: decoded.shop || '',
+                    fashionType: decoded.fashionType || ''
+                };
+
+                // If we still don't have a transparent path, try to resolve one
+                // using the same filename-based logic as tryon-utils.
+                if (!normalizedItem.tryOnImage && !normalizedItem.transparentImg && window.findTransparentForItem) {
+                    let key = normalizedItem.id;
+                    if (!key && normalizedItem.image) {
+                        const file = normalizedItem.image.split('/').pop() || '';
+                        key = file.replace(/\.(png|jpe?g|webp)$/i, '');
+                    }
+                    if (key) {
+                        try {
+                            const path = await window.findTransparentForItem(key);
+                            if (path) {
+                                normalizedItem.tryOnImage = path;
+                            }
+                        } catch (e) {
+                            // ignore lookup errors
+                        }
+                    }
+                }
+
+                // Merge into wardrobe so it appears in the sidebar and
+                // participates in future try-on flows.
+                const existing = wardrobe.find(w => w.id === normalizedItem.id);
+                if (!existing) {
+                    const entry = {
+                        ...normalizedItem,
+                        bgImg: normalizedItem.image,
+                        canTryOn: !!(normalizedItem.tryOnImage || normalizedItem.transparentImg)
+                    };
+                    wardrobe.push(entry);
+                    localStorage.setItem('wardrobe', JSON.stringify(wardrobe));
+                    renderWardrobeItems();
+                }
+
+                // Auto-apply the outfit layer to the mannequin
+                applyOutfitLayer(normalizedItem);
+            })();
 
             // Reset button
             const resetBtn = document.getElementById('reset-preview');

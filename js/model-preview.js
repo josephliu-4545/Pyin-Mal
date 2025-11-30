@@ -1,240 +1,236 @@
+// Lightweight Model Preview controller for the current HTML structure
+// - Works with #model-preview-container and #mannequin-base
+// - Makes .outfit-layer and .hairstyle-layer draggable and scalable
+// - Exposes window.modelPreview.reset() and .saveScreenshot()
+
 class ModelPreview {
-  constructor() {
-    this.stage = document.getElementById('silhouette-stage');
-    this.summary = document.getElementById('look-summary');
-    this.layerGroups = {
-      top: document.querySelector('[data-layer="top"]'),
-      bottom: document.querySelector('[data-layer="bottom"]')
-    };
-    this.imageLayers = {
-      top: document.querySelector('[data-layer-img="top"]'),
-      bottom: document.querySelector('[data-layer-img="bottom"]')
-    };
+    constructor() {
+        this.container = document.getElementById("model-preview-container");
+        this.mannequinImg = document.getElementById("mannequin-base");
 
-    if (!this.stage) {
-      return;
+        // State
+        this.currentOutfit = {};
+        this.currentHairstyle = null;
+        this.activeLayer = null;
+        this.dragState = null;
+
+        if (!this.container || !this.mannequinImg) {
+            console.warn("[ModelPreview] Preview container or mannequin not found.");
+            return;
+        }
+
+        // Make any existing layers interactive (e.g. if something is preloaded)
+        this.initExistingLayers();
+
+        // Watch for new outfit / hairstyle layers appended by applyOutfitLayer / applyHairstyleLayer
+        this.initMutationObserver();
+
+        // Global pointer listeners for dragging
+        this.initGlobalListeners();
     }
 
-    this.resetBtn = document.getElementById('reset-tryon');
-    this.saveBtn = document.getElementById('save-look');
-    this.selected = { top: null, bottom: null };
-    this.controlDefaults = { height: 185, shoulder: 120, hips: 110, torso: 180 };
-    this.controlBindings = {
-      height: '--silhouette-scale',
-      shoulder: '--top-width-scale',
-      hips: '--bottom-width-scale',
-      torso: '--torso-scale'
-    };
+    // --- Initialisation helpers -------------------------------------------
 
-    this.initWardrobe();
-    this.initControls();
-    this.initActions();
-    this.updateSummary();
-  }
+    initExistingLayers() {
+        const layers = this.container.querySelectorAll(".outfit-layer, .hairstyle-layer");
+        layers.forEach(layer => this.makeLayerInteractive(layer));
+    }
 
-  initWardrobe() {
-    this.wardrobeButtons = Array.from(document.querySelectorAll('[data-garment]'));
-    this.wardrobeButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const data = {
-          id: btn.dataset.garment,
-          type: btn.dataset.type,
-          label: btn.dataset.label,
-          primary: btn.dataset.primary || '#94a3b8',
-          secondary: btn.dataset.secondary || btn.dataset.primary || '#64748b',
-          texture: btn.dataset.texture || 'solid',
-          image: btn.dataset.outfitImage || ''
+    initMutationObserver() {
+        const observer = new MutationObserver(mutations => {
+            for (const mutation of mutations) {
+                mutation.addedNodes.forEach(node => {
+                    if (!(node instanceof HTMLElement)) return;
+
+                    // Directly-added layer
+                    if (node.matches(".outfit-layer, .hairstyle-layer")) {
+                        this.makeLayerInteractive(node);
+                    }
+
+                    // Layers added inside a wrapper
+                    const nestedLayers = node.querySelectorAll?.(".outfit-layer, .hairstyle-layer");
+                    nestedLayers?.forEach(el => this.makeLayerInteractive(el));
+                });
+            }
+        });
+
+        observer.observe(this.container, {
+            childList: true,
+            subtree: true
+        });
+
+        this.observer = observer;
+    }
+
+    initGlobalListeners() {
+        window.addEventListener("pointermove", e => this.onPointerMove(e));
+        window.addEventListener("pointerup", e => this.onPointerUp(e));
+        window.addEventListener("pointercancel", e => this.onPointerUp(e));
+    }
+
+    // --- Layer interaction --------------------------------------------------
+
+    makeLayerInteractive(layer) {
+        // If the shared try-on utilities are present, they will handle
+        // dragging, scaling and transform persistence. In that case we
+        // skip binding our own handlers to avoid conflicting behavior.
+        if (window && window.enableLayerDragging) {
+            return;
+        }
+        // Initialise transform data if missing
+        if (!layer.dataset.tx) {
+            layer.dataset.tx = "0";
+            layer.dataset.ty = "0";
+            layer.dataset.scale = "1";
+            layer.dataset.rotate = "0";
+            this.applyTransform(layer);
+        }
+
+        // Ensure pointer events reach this layer
+        layer.style.touchAction = "none";
+        layer.style.cursor = "grab";
+        layer.style.pointerEvents = "auto";
+
+        // Avoid duplicate handlers: assign directly
+        layer.onpointerdown = (event) => this.onPointerDown(event, layer);
+        layer.onwheel = (event) => this.onWheel(event, layer);
+    }
+
+    onPointerDown(event, layer) {
+        // Left button only
+        if (event.button !== 0) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.activeLayer = layer;
+
+        const tx = parseFloat(layer.dataset.tx || "0");
+        const ty = parseFloat(layer.dataset.ty || "0");
+
+        this.dragState = {
+            pointerId: event.pointerId,
+            startX: event.clientX,
+            startY: event.clientY,
+            startTx: tx,
+            startTy: ty
         };
-        this.applyGarment(data);
-      });
-    });
-  }
 
-  applyGarment(garment) {
-    if (!garment?.type || !this.layerGroups[garment.type]) return;
+        try {
+            layer.setPointerCapture(event.pointerId);
+        } catch (e) {
+            // Some browsers might complain, it's safe to ignore
+        }
 
-    const group = this.layerGroups[garment.type];
-    group.dataset.active = 'true';
-    group.dataset.texture = garment.texture || 'solid';
-    group.style.setProperty('--garment-main', garment.primary || '#94a3b8');
-    group.style.setProperty('--garment-secondary', garment.secondary || garment.primary || '#64748b');
-    group.setAttribute('aria-label', `${garment.label} layer`);
-
-    const imgLayer = this.imageLayers[garment.type];
-    if (imgLayer) {
-      if (garment.image && garment.image.trim() !== '') {
-        imgLayer.src = garment.image;
-        imgLayer.alt = garment.label;
-        imgLayer.dataset.visible = 'true';
-      } else {
-        imgLayer.removeAttribute('src');
-        imgLayer.alt = '';
-        imgLayer.dataset.visible = 'false';
-      }
+        layer.style.cursor = "grabbing";
     }
 
-    this.selected[garment.type] = { ...garment };
-    this.highlightSelection(garment.type, garment.id);
-    this.updateSummary();
-  }
+    onPointerMove(event) {
+        if (!this.activeLayer || !this.dragState) return;
+        if (event.pointerId !== this.dragState.pointerId) return;
 
-  highlightSelection(type, id) {
-    this.wardrobeButtons
-      .filter((btn) => btn.dataset.type === type)
-      .forEach((btn) => {
-        btn.dataset.selected = btn.dataset.garment === id ? 'true' : 'false';
-      });
-  }
+        event.preventDefault();
 
-  clearGarment(type, options = {}) {
-    if (!this.layerGroups[type]) return;
-    const group = this.layerGroups[type];
-    const imgLayer = this.imageLayers[type];
-    group.dataset.active = 'false';
-    group.dataset.texture = 'solid';
-    group.style.removeProperty('--garment-main');
-    group.style.removeProperty('--garment-secondary');
-    if (imgLayer) {
-      imgLayer.removeAttribute('src');
-      imgLayer.alt = '';
-      imgLayer.dataset.visible = 'false';
-    }
-    this.selected[type] = null;
-    this.highlightSelection(type, '');
-    if (!options.silent) {
-      this.updateSummary();
-    }
-  }
+        const dx = event.clientX - this.dragState.startX;
+        const dy = event.clientY - this.dragState.startY;
 
-  initControls() {
-    this.controls = Array.from(document.querySelectorAll('[data-control]'));
-    this.controls.forEach((input) => {
-      const control = input.dataset.control;
-      const defaultValue = Number(input.dataset.default || input.value);
-      input.value = defaultValue;
-      this.setMeasurement(control, defaultValue);
-      this.updateControlOutput(control, defaultValue);
+        const newTx = this.dragState.startTx + dx;
+        const newTy = this.dragState.startTy + dy;
 
-      input.addEventListener('input', (event) => {
-        const value = Number(event.target.value);
-        this.setMeasurement(control, value);
-        this.updateControlOutput(control, value);
-      });
-    });
-  }
-
-  updateControlOutput(control, value) {
-    const output = document.querySelector(`[data-output="${control}"]`);
-    if (output) {
-      output.textContent = control === 'torso' ? `${value} px` : `${value} cm`;
-    }
-  }
-
-  setMeasurement(control, value) {
-    const base = this.controlDefaults[control];
-    const cssVar = this.controlBindings[control];
-    if (!cssVar || !this.stage || !base) return;
-    const ratio = value / base;
-    this.stage.style.setProperty(cssVar, ratio.toFixed(3));
-  }
-
-  initActions() {
-    if (this.resetBtn) {
-      this.resetBtn.addEventListener('click', () => this.reset());
+        this.activeLayer.dataset.tx = String(newTx);
+        this.activeLayer.dataset.ty = String(newTy);
+        this.applyTransform(this.activeLayer);
     }
 
-    document.querySelectorAll('[data-remove]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const type = btn.dataset.remove;
-        if (!type) return;
-        this.clearGarment(type, { silent: false });
-        this.showToast(`Cleared ${type} layer`, 'info');
-      });
-    });
+    onPointerUp(event) {
+        if (!this.activeLayer || !this.dragState) return;
+        if (event.pointerId !== this.dragState.pointerId) return;
 
-    if (this.saveBtn) {
-      this.saveBtn.addEventListener('click', () => this.handleSaveLook());
+        try {
+            this.activeLayer.releasePointerCapture(event.pointerId);
+        } catch (e) {
+            // ignore
+        }
+
+        this.activeLayer.style.cursor = "grab";
+        this.activeLayer = null;
+        this.dragState = null;
     }
-  }
 
-  updateSummary() {
-    if (!this.summary) return;
-    ['top', 'bottom'].forEach((type) => {
-      const row = this.summary.querySelector(`[data-summary="${type}"]`);
-      if (!row) return;
-      const valueEl = row.querySelector('.summary-value');
-      const metaEl = row.querySelector('.summary-meta');
-      const colorDot = row.querySelector('[data-color]');
-      const removeBtn = row.querySelector(`[data-remove="${type}"]`);
-      const data = this.selected[type];
+    onWheel(event, layer) {
+        // Don’t interfere with browser zoom (Ctrl/Cmd + scroll)
+        if (event.ctrlKey || event.metaKey) return;
 
-      if (data) {
-        valueEl.textContent = data.label;
-        metaEl.textContent = 'Anchored & scaled';
-        if (colorDot) colorDot.style.background = data.primary;
-        if (removeBtn) removeBtn.disabled = false;
-      } else {
-        valueEl.textContent = 'Not selected';
-        metaEl.textContent = type === 'top' ? 'Choose a silhouette' : 'Ground the look';
-        if (colorDot) colorDot.style.background = '#e5e7eb';
-        if (removeBtn) removeBtn.disabled = true;
-      }
-    });
-  }
+        // Optional: make scaling feel “edit mode” only
+        // Honor the global fitAdjustMode flag when it exists so
+        // behavior matches the legacy try-on system.
+        if (typeof window !== 'undefined' && window.fitAdjustMode === false) return;
 
-  handleSaveLook() {
-    const snapshot = {
-      id: `look-${Date.now()}`,
-      savedAt: new Date().toISOString(),
-      selections: this.selected,
-      measurements: this.getMeasurementSnapshot()
-    };
-    const savedLooks = JSON.parse(localStorage.getItem('virtualLooks') || '[]');
-    savedLooks.unshift(snapshot);
-    localStorage.setItem('virtualLooks', JSON.stringify(savedLooks.slice(0, 12)));
-    this.showToast('Look saved locally', 'success');
-  }
+        event.preventDefault();
+        event.stopPropagation();
 
-  getMeasurementSnapshot() {
-    const result = {};
-    Object.keys(this.controlDefaults).forEach((key) => {
-      const control = this.controls.find((input) => input.dataset.control === key);
-      result[key] = Number(control?.value || this.controlDefaults[key]);
-    });
-    return result;
-  }
+        let scale = parseFloat(layer.dataset.scale || "1");
+        const factor = event.deltaY > 0 ? 0.95 : 1.05; // scroll down = smaller, up = bigger
+        scale *= factor;
 
-  showToast(message, variant = 'info') {
-    const toast = document.createElement('div');
-    toast.textContent = message;
-    toast.className = `fixed top-24 right-5 z-50 px-4 py-2 rounded-2xl text-sm text-white shadow-lg transition duration-300 translate-x-6 opacity-0 ${
-      variant === 'success' ? 'bg-emerald-500' : 'bg-slate-700'
-    }`;
-    document.body.appendChild(toast);
-    requestAnimationFrame(() => {
-      toast.classList.remove('translate-x-6', 'opacity-0');
-    });
-    setTimeout(() => {
-      toast.classList.add('translate-x-6', 'opacity-0');
-      setTimeout(() => toast.remove(), 300);
-    }, 2200);
-  }
+        // Clamp to a sensible range
+        scale = Math.min(Math.max(scale, 0.4), 2.5);
 
-  reset() {
-    Object.entries(this.controlDefaults).forEach(([control, value]) => {
-      const input = this.controls.find((c) => c.dataset.control === control);
-      if (input) {
-        input.value = value;
-      }
-      this.setMeasurement(control, value);
-      this.updateControlOutput(control, value);
-    });
-    ['top', 'bottom'].forEach((type) => this.clearGarment(type, { silent: true }));
-    this.updateSummary();
-    this.showToast('Silhouette reset', 'info');
-  }
+        layer.dataset.scale = String(scale);
+        this.applyTransform(layer);
+    }
+
+    applyTransform(layer) {
+        const tx = parseFloat(layer.dataset.tx || "0");
+        const ty = parseFloat(layer.dataset.ty || "0");
+        const scale = parseFloat(layer.dataset.scale || "1");
+        const rotate = parseFloat(layer.dataset.rotate || "0");
+
+        layer.style.transform = `translate(${tx}px, ${ty}px) rotate(${rotate}deg) scale(${scale})`;
+        layer.style.transformOrigin = "center center";
+    }
+
+    // --- Public API used by inline script ----------------------------------
+
+    reset() {
+        if (!this.container) return;
+
+        const layers = this.container.querySelectorAll(".outfit-layer, .hairstyle-layer");
+        layers.forEach(el => el.remove());
+
+        this.activeLayer = null;
+        this.dragState = null;
+        this.currentOutfit = {};
+        this.currentHairstyle = null;
+    }
+
+    async saveScreenshot() {
+        if (!this.container) return;
+
+        try {
+            if (window.html2canvas) {
+                const canvas = await window.html2canvas(this.container);
+                const link = document.createElement("a");
+                link.href = canvas.toDataURL("image/png");
+                link.download = "pyinmal-model-preview.png";
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            } else {
+                console.warn("[ModelPreview] html2canvas not found; screenshot disabled.");
+                alert("Screenshot feature is not available in this build.");
+            }
+        } catch (err) {
+            console.error("[ModelPreview] Failed to save screenshot", err);
+        }
+    }
+
+    // Stubs for backward compatibility (not strictly needed right now, but safe)
+    updateOutfit(/* item */) {}
+    updateHairstyle(/* item */) {}
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  window.modelPreview = new ModelPreview();
+// Expose a single global instance once DOM is ready
+window.addEventListener("DOMContentLoaded", () => {
+    window.modelPreview = new ModelPreview();
 });
