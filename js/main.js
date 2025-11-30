@@ -221,10 +221,20 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mainContent) {
     mainContent.classList.add('animate-fade-in');
   }
+
+  // Cart button navigation (shared across pages)
+  const cartBtn = document.getElementById('cart-btn');
+  if (cartBtn) {
+    cartBtn.addEventListener('click', () => {
+      const path = window.location.pathname.replace(/\\/g, '/');
+      const inPages = path.includes('/pages/');
+      const target = inPages ? 'cart.html' : 'pages/cart.html';
+      window.location.href = target;
+    });
+  }
 });
 
 // Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { ThemeManager, NavigationManager, ImagePreview, SmoothScroll };
 }
-

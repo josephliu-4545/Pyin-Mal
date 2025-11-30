@@ -86,8 +86,9 @@
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                         </span>
                     </button>
-                    <button class="theme-toggle p-1.5 sm:p-2" aria-label="Cart">
+                    <button class="theme-toggle p-1.5 sm:p-2 relative" aria-label="Cart" id="cart-btn">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-primary-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
                     </button>
                     <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
                     <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
