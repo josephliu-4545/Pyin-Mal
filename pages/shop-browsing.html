@@ -1987,8 +1987,8 @@
                 </div>
                     <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                         <a href="model-preview.html?mode=haircut" class="btn btn-secondary w-full sm:w-auto text-center">Preview haircut</a>
-                        <a href="Orders.html" id="continue-btn" class="btn btn-primary w-full sm:w-auto text-center opacity-70 pointer-events-none">Continue to booking</a>
-                </div>
+                        <a href="Order.html" id="continue-btn" class="btn btn-primary w-full sm:w-auto text-center opacity-70 pointer-events-none">Continue to booking</a>
+                    </div>
             </div>
         </div>
         </div>
@@ -3176,8 +3176,12 @@
                     }
                 }
 
+                // Persist selection for Order.html checkout page
                 localStorage.setItem('selectedBarberServices', JSON.stringify(selectedServices));
                 localStorage.setItem('selectedBarberShop', selectedBarber);
+                // Keys expected by Order.html
+                localStorage.setItem('selectedServices', JSON.stringify(selectedServices));
+                localStorage.setItem('selectedBarber', selectedBarber);
             };
 
             const updateServiceAvailability = () => {

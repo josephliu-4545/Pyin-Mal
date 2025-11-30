@@ -72,13 +72,19 @@
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: var(--dark-text);
         }
+        main {
+            color: #000000;
+        }
+        body.dark main {
+            color: #ffffff;
+        }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        
         section { padding: 3rem 0; }
         @media (min-width: 768px){ section { padding: 4rem 0; } }
         h1, h2, h3 { font-weight: 700; line-height: 1.2; margin-bottom: 1.25rem; }
         .btn { display:inline-flex; align-items:center; justify-content:center; padding:0.75rem 1.5rem; border-radius:var(--radius); font-weight:600; text-decoration:none; transition:all .3s ease; cursor:pointer; border:none; font-size:.875rem; gap:.5rem; }
         .btn-primary { background: var(--gradient-primary); color:#fff; box-shadow:0 4px 15px rgba(139,92,246,.3); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow:0 8px 25px rgba(139,92,246,.4); }
         .btn-secondary { background: transparent; color: var(--primary); border:1px solid var(--primary); }
         .btn-secondary:hover { background-color: rgba(139,92,246,.1); transform: translateY(-2px); }
         .card { background: var(--gradient-card); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); overflow:hidden; transition:all .3s ease; border:1px solid rgba(255,255,255,.8); backdrop-filter: blur(10px); }
@@ -102,11 +108,16 @@
         @media (min-width:1024px){ .checkout-right{ margin-top: 0; } }
         .order-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; padding-bottom:1rem; border-bottom:1px solid var(--light-border); }
         .dark .order-header { border-bottom-color: var(--dark-border); }
-        .order-title, .section-title, .summary-title { background: var(--gradient-primary); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+        .order-title, .section-title, .summary-title { color:#000000; }
+        body.dark .order-title,
+        body.dark .section-title,
+        body.dark .summary-title { color:#ffffff; }
         .section-title { margin-bottom: 1.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--light-border); }
         .dark .section-title { border-bottom-color: var(--dark-border); }
-        .order-edit { color: var(--primary); text-decoration:none; font-weight:600; display:flex; align-items:center; gap:.5rem; transition: all .3s ease; }
+        .order-edit { color:#000000; text-decoration:none; font-weight:600; display:flex; align-items:center; gap:.5rem; transition: all .3s ease; }
+        body.dark .order-edit { color:#ffffff; }
         .order-edit:hover { text-decoration:underline; transform: translateX(-2px); }
+        
         .barber-info { display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.5rem; padding:1rem; border-radius: var(--radius); background-color: var(--light-card); box-shadow: var(--shadow-sm); }
         .dark .barber-info { background-color: var(--dark-surface); }
         .barber-logo { width:60px; height:60px; border-radius: var(--radius); overflow:hidden; flex-shrink:0; border:2px solid var(--primary); }
@@ -116,14 +127,16 @@
         .dark .service-item { background-color: var(--dark-surface); }
         .service-item:hover { transform: translateX(5px); border-left-color: var(--primary); box-shadow: var(--shadow-sm); }
         .service-name { font-weight:600; margin-bottom:.25rem; }
-        .service-description { color: var(--neutral-600); font-size:.875rem; }
-        .dark .service-description { color: var(--neutral-300); }
-        .service-price { font-weight:700; color: var(--primary); }
+        .service-description { color:#000000; font-size:.875rem; }
+        .dark .service-description { color:#ffffff; }
+        .service-price { font-weight:700; color:#000000; }
+        .dark .service-price { color:#ffffff; }
+        
         .order-totals { border-top:1px solid var(--light-border); padding-top:1.5rem; }
         .dark .order-totals { border-top-color: var(--dark-border); }
         .total-row { display:flex; justify-content:space-between; margin-bottom:.75rem; padding:.75rem 0; }
-        .total-row.final { font-weight:700; font-size:1.125rem; border-top:1px solid var(--light-border); padding-top:1rem; margin-top:1rem; background: var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-        .dark .total-row.final { border-top-color: var(--dark-border); }
+        .total-row.final { font-weight:700; font-size:1.125rem; border-top:1px solid var(--light-border); padding-top:1rem; margin-top:1rem; color:#000000; }
+        .dark .total-row.final { border-top-color: var(--dark-border); color:#ffffff; }
         .form-group { margin-bottom:1.75rem; }
         .form-label { display:block; margin-bottom:.5rem; font-weight:600; }
         .form-input { width:100%; padding:.75rem 1rem; border-radius: var(--radius); border:1px solid var(--light-border); background-color: var(--light-surface); color: var(--light-text); transition: all .3s ease; font-size:1rem; }
@@ -141,30 +154,33 @@
         .payment-radio.selected { border-color: var(--primary); }
         .payment-radio.selected::after { content:""; width:.75rem; height:.75rem; border-radius:50%; background: var(--gradient-primary); }
         /* Payment text colors for visibility */
-        .payment-name { color: var(--neutral-900); }
-        .dark .payment-name { color: var(--dark-text); }
-        .payment-description { color: var(--neutral-600); }
-        .dark .payment-description { color: var(--neutral-300); }
+        .payment-name { color:#000000; }
+        .dark .payment-name { color:#ffffff; }
+        .payment-description { color:#000000; }
+        .dark .payment-description { color:#ffffff; }
         /* Improve address contrast in dark */
-        .dark .barber-address { color: var(--neutral-300); }
+        .dark .barber-address { color:#ffffff; }
         /* Input placeholder visibility */
-        .form-input::placeholder { color: var(--neutral-500); opacity: 1; }
-        .dark .form-input::placeholder { color: var(--neutral-300); opacity: 1; }
+        .form-input::placeholder { color:#000000; opacity: 1; }
+        .dark .form-input::placeholder { color:#ffffff; opacity: 1; }
         /* Summary item contrast in dark */
-        .dark .summary-item span { color: var(--dark-text); }
+        .dark .summary-item span { color:#ffffff; }
         /* Ensure overall card text uses readable color in dark */
         .dark .order-summary,
         .dark .customer-info,
         .dark .payment-method,
-        .dark .checkout-summary { color: var(--dark-text); }
+        .dark .checkout-summary { color:#ffffff; }
         /* Form labels in dark */
-        .dark .form-label { color: var(--dark-text); }
+        .dark .form-label { color:#ffffff; }
         /* Make booking summary total readable in dark */
-        .dark .summary-total { background: none; color: var(--dark-text); }
+        .dark .summary-total { background: none; color:#ffffff; }
         .summary-item { display:flex; justify-content:space-between; margin-bottom:.75rem; padding:.5rem 0; }
-        .summary-total { display:flex; justify-content:space-between; font-weight:700; font-size:1.125rem; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--light-border); background: var(--gradient-primary); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-        .dark .summary-total { border-top-color: var(--dark-border); }
+        .summary-total { display:flex; justify-content:space-between; font-weight:700; font-size:1.125rem; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--light-border); color:#000000; }
+        .dark .summary-total { border-top-color: var(--dark-border); color:#ffffff; }
+        .security-note { font-size:0.75rem; color:var(--light-text); }
+        body.dark .security-note { color:var(--dark-text); }
         .checkout-btn { width:100%; margin-top:1.5rem; padding:1rem; font-size:1rem; position:relative; overflow:hidden; }
+        
         .checkout-btn::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent); transition:.5s; }
         .checkout-btn:hover::after { left:100%; }
         /* Animations */
@@ -175,7 +191,6 @@
         /* Success checkmark */
         .success-checkmark { width:80px; height:80px; margin:0 auto; position:relative; }
         .check-icon { width:80px; height:80px; position:relative; border-radius:50%; box-sizing:content-box; border:4px solid var(--primary); }
-        .check-icon::before, .check-icon::after { content:''; height:100px; position:absolute; background: var(--light-bg); transform: rotate(-45deg); }
         .dark .check-icon::before, .dark .check-icon::after { background: var(--dark-bg); }
         .icon-line { height:5px; background-color: var(--primary); display:block; border-radius:2px; position:absolute; z-index:10; }
         .icon-line.line-tip { top:46px; left:14px; width:25px; transform: rotate(45deg); }
@@ -189,26 +204,29 @@
         .modal-content { background: var(--gradient-card); border-radius: var(--radius-xl); padding:2rem; max-width:500px; width:90%; text-align:center; transform: translateY(20px); transition: transform .3s ease; box-shadow: var(--shadow-xl); border:1px solid rgba(255,255,255,.8); }
         .dark .modal-content { background: linear-gradient(135deg, var(--dark-card), var(--dark-surface)); border:1px solid rgba(255,255,255,.05); }
         .modal.show .modal-content { transform: translateY(0); }
-        .modal-title { font-size:1.5rem; margin-bottom:1rem; background: var(--gradient-primary); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-        .modal-message { margin-bottom:2rem; color: var(--neutral-600); }
-        .dark .modal-message { color: var(--neutral-300); }
+        .modal-title { font-size:1.5rem; margin-bottom:1rem; color:#000000; }
+        .dark .modal-title { color:#ffffff; }
+        .modal-message { margin-bottom:2rem; color:#000000; }
+        .dark .modal-message { color:#ffffff; }
         /* Progress */
         .progress-steps { display:flex; justify-content:center; margin-bottom:3rem; position:relative; }
         .progress-step { display:flex; flex-direction:column; align-items:center; position:relative; z-index:2; }
         .step-number { width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; background: var(--light-card); border:2px solid var(--neutral-300); font-weight:700; margin-bottom:.5rem; transition: all .3s ease; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
-        .step-label { font-size:.9rem; font-weight:600; color: var(--neutral-800); margin-top:.25rem; }
-        .dark .step-label { color: var(--dark-text); }
+        .step-label { font-size:.9rem; font-weight:600; color:#000000; margin-top:.25rem; }
+        .dark .step-label { color:#ffffff; }
         .dark .step-number { background: var(--dark-surface); border-color: var(--dark-border); }
+        
         .step-number.active { background: var(--gradient-primary); border-color: var(--primary); color:#fff; }
         .step-number.completed { background: var(--primary); border-color: var(--primary); color:#fff; box-shadow: 0 4px 10px rgba(139,92,246,.25); }
         .progress-line { position:absolute; top:22px; left:0; right:0; height:4px; background: var(--neutral-300); z-index:1; border-radius: 2px; }
         .dark .progress-line { background: var(--dark-border); }
         .progress-fill { position:absolute; top:22px; left:0; height:4px; background: var(--gradient-primary); z-index:1; transition: width .5s ease; border-radius: 2px; }
         /* Empty state */
-        .empty-state { text-align:center; padding:3rem 1rem; color: var(--neutral-500); }
+        .empty-state { text-align:center; padding:3rem 1rem; color:#000000; }
         .empty-state i { font-size:3rem; margin-bottom:1rem; opacity:.5; }
         .empty-state p { margin-bottom:1.5rem; }
-        .dark .empty-state { color: var(--neutral-300); }
+        .dark .empty-state { color:#ffffff; }
+        
     </style>
 </head>
 <body class="bg-white dark:bg-dark-bg text-neutral-900 dark:text-dark-text theme-transition">
@@ -324,32 +342,7 @@
             </div>
         </section>
 
-        <!-- Progress Steps -->
-        <section>
-            <div class="container">
-                <div class="progress-steps">
-                    <div class="progress-line"></div>
-                    <div class="progress-fill" style="width: 66%;"></div>
-                    
-                    <div class="progress-step">
-                        <div class="step-number completed">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div class="step-label">Select Services</div>
-                    </div>
-                    
-                    <div class="progress-step">
-                        <div class="step-number active">2</div>
-                        <div class="step-label">Confirm & Pay</div>
-                    </div>
-                    
-                    <div class="progress-step">
-                        <div class="step-number">3</div>
-                        <div class="step-label">Booking Confirmed</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
 
         <!-- Checkout Section -->
         <section>
@@ -361,7 +354,7 @@
                         <div class="order-summary slide-up">
                             <div class="order-header">
                                 <h2 class="order-title">Order Summary</h2>
-                                <a href="select-barber.html" class="order-edit">
+                                <a href="shop-browsing.html?tab=barbers" class="order-edit">
                                     <i class="fas fa-edit"></i>
                                     Edit Services
                                 </a>
@@ -532,7 +525,7 @@
                                 Complete Booking
                             </button>
                             
-                            <p class="text-center mt-4" style="font-size: 0.75rem; color: var(--neutral-500);">
+                            <p class="text-center mt-4 security-note">
                                 <i class="fas fa-shield-alt"></i>
                                 Your payment is secure and encrypted
                             </p>
@@ -755,7 +748,7 @@
                         <i class="fas fa-shopping-cart"></i>
                         <h3>No Services Selected</h3>
                         <p>You haven't selected any services yet.</p>
-                        <a href="select-barber.html" class="btn btn-primary">Select Services</a>
+                        <a href="shop-browsing.html?tab=barbers" class="btn btn-primary">Select Services</a>
                     </div>
                 `;
                 servicesListContainer.innerHTML = '';
@@ -833,4 +826,3 @@
     <script src="../js/animations.js"></script>
 </body>
 </html>
-
