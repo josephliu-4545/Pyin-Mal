@@ -44,8 +44,9 @@
             transition: all 0.3s ease;
         }
         .tab-btn.active {
-            background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
-            color: white;
+            /* Exact same blue as primary-600 (#0284c7) used by btn-primary/search button */
+            background-color: #0284c7 !important;
+            color: #ffffff !important;
             transform: scale(1.02);
         }
         .tab-btn:hover:not(.active) {
@@ -1908,8 +1909,8 @@
             <button onclick="closeProductModal()" 
                     class="absolute top-4 right-4 z-30 w-9 h-9 sm:w-10 sm:h-10
                         bg-white/90 dark:bg-dark-surface rounded-full flex items-center justify-center
-                        transition-all duration-200 hover:bg-primary-500 hover:text-white hover:scale-110
-                        shadow-lg hover:shadow-[0_0_10px_rgba(0,175,255,0.6)]">
+                        transition-all duration-200 hover:bg-black hover:text-black dark:hover:bg-primary-500 dark:hover:text-white hover:scale-110
+                        shadow-lg">
                 <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M6 18L18 6M6 6l12 12"/>
@@ -1949,8 +1950,8 @@
                     <!-- Heart Button -->
                     <button id="modal-favorite-btn" 
                         class="absolute right-4 sm:right-6 z-20 w-9 h-9 sm:w-10 sm:h-10
-                            bg-white/90 dark:bg-dark-surface rounded-full flex items-center justify-center
-                            hover:bg-primary-500 hover:text-white transition-colors shadow-lg"
+                            bg-white/90 dark:bg-dark-surface rounded-full flex items-center justify-center text-black
+                            hover:bg-black hover:text-black dark:hover:bg-primary-500 dark:hover:text-white transition-colors shadow-lg"
                         style="top: 3rem;">
                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -2349,7 +2350,10 @@
                 // Turn heart red
                 if (buttonElement) {
                     buttonElement.classList.add('text-red-500');
-                    buttonElement.classList.remove('hover:bg-primary-500', 'hover:text-white');
+                    // For card hearts we remove the blue hover; modal heart already has its own hover
+                    if (buttonElement.id !== 'modal-favorite-btn') {
+                        buttonElement.classList.remove('hover:bg-primary-500', 'hover:text-white');
+                    }
                     buttonElement.classList.add('bg-red-50', 'dark:bg-red-900/20');
                 }
             } else {
@@ -2361,8 +2365,12 @@
                 // Turn heart back to normal
                 if (buttonElement) {
                     buttonElement.classList.remove('text-red-500');
-                    buttonElement.classList.add('hover:bg-primary-500', 'hover:text-white');
                     buttonElement.classList.remove('bg-red-50', 'dark:bg-red-900/20');
+
+                    // Restore blue hover only for card hearts, not for modal heart
+                    if (buttonElement.id !== 'modal-favorite-btn') {
+                        buttonElement.classList.add('hover:bg-primary-500', 'hover:text-white');
+                    }
                 }
             }
         }
@@ -2810,7 +2818,7 @@
                                                 <h3 class="font-medium text-sm">${product.name}</h3>
                                                 <p class="text-primary-600 dark:text-primary-400 font-bold">${product.price.toLocaleString()} MMK</p>
                                             </div>
-                                            <button class="flex-shrink-0 w-8 h-8 bg-white/90 dark:bg-dark-card/90 rounded-full flex items-center justify-center hover:bg-primary-500 hover:text-white transition-colors z-10 ${favorites.some(f => f.id === product.id) ? 'text-red-500 bg-red-50 dark:bg-red-900/20' : ''}" onclick="event.stopPropagation(); addToFavorites(${JSON.stringify(product).replace(/"/g, '&quot;')}, this)">
+                                            <button class="flex-shrink-0 w-8 h-8 bg-white/90 dark:bg-dark-card/90 rounded-full flex items-center justify-center text-black hover:bg-primary-500 hover:text-black transition-colors z-10 ${favorites.some(f => f.id === product.id) ? 'text-red-500 bg-red-50 dark:bg-red-900/20' : ''}" onclick="event.stopPropagation(); addToFavorites(${JSON.stringify(product).replace(/"/g, '&quot;')}, this)">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
                                             </button>
                                         </div>
@@ -2953,8 +2961,17 @@
                 };
             }
             if (favoriteBtn) {
+                // Sync initial visual state with favorites list
+                const isFavorited = favorites.some(f => f.id === product.id);
+                favoriteBtn.classList.toggle('text-red-500', isFavorited);
+                favoriteBtn.classList.toggle('bg-red-50', isFavorited);
+                favoriteBtn.classList.toggle('dark:bg-red-900/20', isFavorited);
+                if (isFavorited) {
+                    favoriteBtn.classList.remove('hover:bg-primary-500', 'hover:text-white');
+                }
+
                 favoriteBtn.onclick = () => {
-                    addToFavorites(product);
+                    addToFavorites(product, favoriteBtn);
                 };
             }
 

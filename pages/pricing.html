@@ -25,13 +25,11 @@
         #plans .product-card.selected-plan {
             border-width: 2px !important;
             border-color: #2D9CDB !important;
-            box-shadow: 0 0 20px rgba(45,156,219,0.6) !important;
-            background-color: rgba(15,32,39,0.7) !important;
             transform: translateY(-6px) !important;
             transition: all 0.25s ease !important;
         }
         .dark #plans .product-card.selected-plan {
-            background-color: rgba(24,24,27,0.5) !important;
+            border-color: #2D9CDB !important;
         }
         .plan-feature-row {
             display: flex;
@@ -56,6 +54,59 @@
         }
         .dark .pricing-compare-table .pricing-compare-value {
             color: #ffffff !important;
+        }
+        /* Pricing hero explicit theming */
+        .pricing-hero-text {
+            color: #111827; /* neutral-900 for light mode */
+        }
+        .dark .pricing-hero-text {
+            color: #ffffff;
+        }
+        .pricing-hero-eyebrow {
+            color: rgba(17,24,39,0.7); /* muted dark in light mode */
+        }
+        .dark .pricing-hero-eyebrow {
+            color: rgba(255,255,255,0.6);
+        }
+        .pricing-hero-body {
+            color: rgba(55,65,81,0.9);
+        }
+        .dark .pricing-hero-body {
+            color: rgba(255,255,255,0.8);
+        }
+        .pricing-hero-btn-primary {
+            background-color: #2563eb; /* blue-600 */
+            border-color: #000000;     /* black border in light mode */
+            color: #000000;            /* black text in light mode */
+        }
+        .pricing-hero-btn-primary:hover {
+            background-color: #1d4ed8; /* blue-700 */
+        }
+        .dark .pricing-hero-btn-primary {
+            background-color: #2563eb;
+            border-color: #1d4ed8;     /* blue border in dark mode */
+            color: #ffffff;            /* white text in dark mode */
+        }
+        .dark .pricing-hero-btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+
+        .pricing-hero-btn-secondary {
+            background-color: transparent;
+            border-color: #000000;     /* black border in light mode */
+            color: #000000;            /* black text in light mode */
+        }
+        .pricing-hero-btn-secondary:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .dark .pricing-hero-btn-secondary {
+            border-color: #ffffff;     /* white border in dark mode */
+            color: #ffffff;            /* white text in dark mode */
+        }
+        .dark .pricing-hero-btn-secondary:hover {
+            background-color: #ffffff;
+            color: #000000;
         }
     </style>
 </head>
@@ -167,14 +218,14 @@
         <!-- Background photo -->
         <img src="../assets/images/Hero/Pricing.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60 blur-sm">
         
-        <div class="relative container-custom max-w-3xl mx-auto text-center text-white">
+        <div class="relative container-custom max-w-3xl mx-auto text-center pricing-hero-text">
             <div data-aos="fade-up">
-                <p class="text-xs uppercase tracking-[0.4em] text-white/60 mb-3">Pricing</p>
+                <p class="text-xs uppercase tracking-[0.4em] pricing-hero-eyebrow mb-3">Pricing</p>
                 <h1 class="font-rufina text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">Style that grows with you. Choose your plan.</h1>
-                <p class="text-sm sm:text-base text-white/80 mb-6">From free discovery to premium styling, find the perfect plan for your fashion journey. No commitments, just great style.</p>
+                <p class="text-sm sm:text-base pricing-hero-body mb-6">From free discovery to premium styling, find the perfect plan for your fashion journey. No commitments, just great style.</p>
                 <div class="flex flex-wrap gap-4 justify-center">
-                    <a href="#plans" class="btn btn-primary bg-white text-white hover:bg-neutral-100">View plans</a>
-                    <a href="contact.html" class="btn btn-ghost border-white text-white hover:bg-white/10">Talk to our team</a>
+                    <a href="#plans" class="btn pricing-hero-btn-primary border">View plans</a>
+                    <a href="contact.html" class="btn pricing-hero-btn-secondary border">Talk to our team</a>
                 </div>
             </div>
         </div>
@@ -193,7 +244,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Free Plan -->
-                <article class="product-card p-6 flex flex-col gap-4 rounded-3xl shadow-xl dark:shadow-none hover:-translate-y-1 hover:shadow-2xl cursor-pointer transition-all duration-300 backdrop-blur-xl bg-white/40 dark:bg-dark-card/20 border border-white/50 dark:border-white/10" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
+                <article class="product-card p-6 flex flex-col gap-4 rounded-3xl hover:-translate-y-1 cursor-pointer transition-all duration-300 backdrop-blur-xl bg-white/40 dark:bg-dark-card/20 border border-white/50 dark:border-white/10" data-aos="fade-up" data-aos-duration="700" data-aos-delay="0">
                     <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Starter</p>
                     <h3 class="font-rufina text-2xl tracking-tight">Free</h3>
                     <p class="text-3xl font-rufina font-bold text-primary-600 dark:text-primary-400">0 MMK<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / forever</span></p>
@@ -236,7 +287,7 @@
                 </article>
                 
                 <!-- Monthly Plan -->
-                <article class="product-card p-6 pt-8 flex flex-col gap-4 shadow-soft dark:shadow-soft-dark relative rounded-3xl shadow-xl dark:shadow-none hover:-translate-y-1 hover:shadow-2xl cursor-pointer transition-all duration-300 backdrop-blur-xl bg-white/40 dark:bg-dark-card/20 border border-white/50 dark:border-white/10" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
+                <article class="product-card p-6 pt-8 flex flex-col gap-4 relative rounded-3xl hover:-translate-y-1 cursor-pointer transition-all duration-300 backdrop-blur-xl bg-white/40 dark:bg-dark-card/20 border border-white/50 dark:border-white/10" data-aos="fade-up" data-aos-duration="700" data-aos-delay="100">
                     <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
                         <span class="bg-primary-600 text-white text-xs px-3 py-1 rounded-full">Most Popular</span>
                     </div>
@@ -282,7 +333,7 @@
                 </article>
                 
                 <!-- Yearly Plan -->
-                <article class="product-card p-6 flex flex-col gap-4 rounded-3xl shadow-xl dark:shadow-none hover:-translate-y-1 hover:shadow-2xl cursor-pointer transition-all duration-300 backdrop-blur-xl bg-white/40 dark:bg-dark-card/20 border border-white/50 dark:border-white/10" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+                <article class="product-card p-6 flex flex-col gap-4 rounded-3xl hover:-translate-y-1 cursor-pointer transition-all duration-300 backdrop-blur-xl bg-white/40 dark:bg-dark-card/20 border border-white/50 dark:border-white/10" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
                     <p class="text-xs uppercase tracking-[0.4em] text-neutral-400">Premium</p>
                     <h3 class="font-rufina text-2xl tracking-tight">Yearly Premium</h3>
                     <p class="text-3xl font-rufina font-bold text-primary-600 dark:text-primary-400">250,000 MMK<span class="text-sm font-normal text-neutral-500 dark:text-neutral-400"> / year</span></p>
