@@ -182,7 +182,7 @@
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-4a2 2 0 11-4 0"/></svg>
                     </button>
                     <a href="login.html" class="btn btn-secondary hidden sm:inline-flex px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Sign In</a>
-                    <a href="signup.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
+                    <a href="login.html" class="btn btn-primary px-3 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm">Get Started</a>
                     <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-dark-card transition-colors" aria-label="Menu">
                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
@@ -203,7 +203,7 @@
                     <a href="shop-browsing.html" class="block nav-link">Shop</a>
                     <div class="flex flex-col gap-3">
                         <a href="login.html" class="btn btn-secondary w-full text-center">Sign In</a>
-                        <a href="signup.html" class="btn btn-primary w-full text-center">Get Started</a>
+                        <a href="login.html" class="btn btn-primary w-full text-center">Get Started</a>
                     </div>
                 </div>
             </div>
@@ -451,7 +451,7 @@
                                 </div>
                             </div>
 
-                            <button id="checkout-btn" class="checkout-btn w-full py-4 rounded-xl bg-blue-600 text-white font-semibold text-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <button id="checkout-btn" class="checkout-btn w-full py-4 rounded-xl bg-blue-600 text-white font-semibold text-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed" onclick="window.location.href='../index.html'">
                                 Complete Booking
                             </button>
 
@@ -497,7 +497,7 @@
                     <div class="w-20 h-20 mx-auto mb-6 rounded-full gradient-bg flex items-center justify-center">
                         <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Booking Confirmed!</h3>
+                    <a href="../index.html"><h3 class="text-2xl font-bold mb-4">Booking Confirmed!</h3>
                     <p class="text-neutral-600 dark:text-neutral-300 mb-6">
                         Your appointment has been successfully booked. We've sent a confirmation email with all the details.
                     </p>
@@ -532,72 +532,7 @@
     <!-- Toast Container -->
     <div id="toast-container" class="fixed top-20 right-4 z-50 space-y-2"></div>
 
-    <!-- Footer -->
-<footer class="bg-neutral-900 dark:bg-dark-bg text-white dark:text-dark-text mt-20">
-    <!-- Accent Strip -->
-    <div class="h-1 bg-gradient-to-r from-indigo-500 via-pink-500 to-orange-400"></div>
-
-    <div class="container-custom py-14">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-
-            
-            <div>
-                <h3 class="font-rufina text-2xl font-bold tracking-wide mb-3">Pyin Mal</h3>
-                <p class="text-neutral-400 dark:text-neutral-500 text-sm leading-relaxed">
-                    Curated style. Smarter grooming. Confidence that lasts.
-                </p>
-
-                <!-- Social -->
-                <div class="flex gap-4 mt-5">
-                    <a href="https://www.instagram.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.twitter.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com" target="_blank" class="hover:text-indigo-400 transition"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-
-            <!-- Explore -->
-            <div>
-                <h4 class="font-semibold mb-4 text-indigo-400">Explore</h4>
-                <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
-                    <li><a href="about.html" class="hover:text-white transition">Who We Are</a></li>
-                    <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
-                    <li><a href="faq.html" class="hover:text-white transition">Help Center</a></li>
-                </ul>
-            </div>
-
-            
-            <div>
-                <h4 class="font-semibold mb-4 text-indigo-400">Feature</h4>
-                <ul class="space-y-2 text-sm text-neutral-400 dark:text-neutral-500">
-                    <li><a href="model-preview.html" class="hover:text-white transition">Outfit preview</a></li>
-                    <li><a href="haircut-recommendations.html" class="hover:text-white transition">HairStyle and Face-analysis</a></li>
-                </ul>
-            </div>
-
-            
-            <div>
-                <h4 class="font-semibold mb-4 text-indigo-400">Stay Sharp</h4>
-                <p class="text-sm text-neutral-400 dark:text-neutral-500 mb-3">
-                    Weekly style tips directly to your inbox.
-                </p>
-                <form class="flex">
-                    <input type="email" placeholder="Your email"
-                        class="w-full px-3 py-2 rounded-l bg-neutral-800 dark:bg-dark-card text-sm text-white outline-none">
-                    <a href="contact.html"><button
-                        class="bg-indigo-500 hover:bg-indigo-600 transition px-4 py-2 text-sm rounded-r font-semibold">
-                        Join
-                    </button></a>
-                </form>
-            </div>
-
-        </div>
-
-        <!-- Bottom -->
-        <div class="border-t border-neutral-800 dark:border-dark-border mt-10 pt-6 text-center text-sm text-neutral-500">
-            <p>© 2025 <span class="font-semibold text-white">Pyin Mal</span> — Designed for those who stand out.</p>
-        </div>
-    </div>
-</footer>
+    
     
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
